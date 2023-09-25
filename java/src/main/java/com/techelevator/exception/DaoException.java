@@ -1,7 +1,5 @@
 package com.techelevator.exception;
 
-public class DaoExceptionJava {
-
 
     public class DaoException extends RuntimeException {
         public DaoException() {
@@ -17,4 +15,4 @@ public class DaoExceptionJava {
         }
     }
 
-}
+

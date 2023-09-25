@@ -1,10 +1,14 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.util.ArrayList;
+import com.techelevator.model.Collection;
+import java.util.List;
 
 public class JdbcCollectionDao implements CollectionDao{
 
@@ -33,6 +37,27 @@ public class JdbcCollectionDao implements CollectionDao{
 
     }
 
+    public Collection createCollection(Collection collection, int id) {
+        Collection newCollection = new Collection();
+        String sql = "INSERT INTO collection (collection_name) " +
+                "VALUES (?) RETURNING collection_id";
+        try {
+            Integer newCollectionId = jdbcTemplate.queryForObject(sql,Integer.class,
+                    collection.g);
+
+            collection.setId(newCollectionId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+
+        return collection;
+
+    }
+
+
+
 
 
 
@@ -40,8 +65,7 @@ public class JdbcCollectionDao implements CollectionDao{
         Collection collection = new Collection();
         collection.setId(rowSet.getInt("collection_id"));
         collection.setName(rowSet.getString("collection_name"))
-        collection.setIsPublic(rowSet.getBoolean("is_public"));
-        collection.setRecordId(rowSet.getInt("record_id"));
+        collection.isPublic(rowSet.getBoolean("is_public"));
         return  collection;
     }
 
