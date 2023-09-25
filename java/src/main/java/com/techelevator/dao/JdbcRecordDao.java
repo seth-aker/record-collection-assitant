@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -51,6 +52,23 @@ public class JdbcRecordDao implements RecordDao {
             throw new DaoException("Unable to connect to server or database", e);
         }
         return userLib;
+    }
+
+    public void updateRecordNote(int id, String note) {
+        String sql = "UPDATE records SET user_note = ? WHERE record_id = ?;";
+
+        try {
+            int numberOfRows = this.jdbcTemplate.update(sql, note, id);
+
+            if (numberOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
     }
 
     private Record mapRowToRecord(SqlRowSet rowSet) {
