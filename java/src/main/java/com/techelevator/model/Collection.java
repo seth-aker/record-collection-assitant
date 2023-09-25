@@ -6,6 +6,9 @@ public class Collection {
     private String name;
     private boolean isPublic;
 
+    public Collection() {
+    }
+
     public Collection(int id, String name, boolean isPublic) {
         this.id = id;
         this.name = name;
