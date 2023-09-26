@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS collection_user, collection_record, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users;
+DROP TABLE IF EXISTS collection_record, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users;
 
 DROP SEQUENCE IF EXISTS seq_user_id, seq_collection_id, seq_label_id;
 
@@ -25,22 +25,17 @@ CREATE SEQUENCE seq_collection_id
 
 CREATE TABLE collections (
    collection_id int NOT NULL DEFAULT nextval('seq_collection_id'),
+   user_id int NOT NULL,
    collection_name varchar(50) NOT NULL,
    is_public boolean NOT NULL DEFAULT false,
-   CONSTRAINT PK_collection PRIMARY KEY (collection_id)
+   CONSTRAINT PK_collection_id PRIMARY KEY (collection_id),
+   CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE collection_user (
-	user_id int NOT NULL,
-	collection_id int NOT NULL,
-	CONSTRAINT PK_collection_id_user_id PRIMARY KEY (collection_id, user_id),
-	CONSTRAINT FK_user_id FOREIGN KEY(user_id) REFERENCES users (user_id),
-	CONSTRAINT FK_collection_id FOREIGN KEY(collection_id) REFERENCES collections(collection_id)
-);
 
 CREATE TABLE records (
 	record_id varChar(30) NOT NULL, --Not serial because it will be created by the API
-	user_note varChar(500),
+	record_title varChar(30) NOT NULL,
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)
 );
 
@@ -55,6 +50,7 @@ CREATE TABLE collection_record (
 CREATE TABLE user_record (
 	user_id int NOT NULL,
 	record_id varChar(30) NOT NULL,
+	user_note varChar(500),
 	CONSTRAINT PK_user_id_record_id PRIMARY KEY (user_id, record_id),
 	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
 	CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
