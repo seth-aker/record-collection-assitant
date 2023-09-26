@@ -21,6 +21,7 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public Record getRecordById(String recordId) {
+
         String sql = "SELECT r.record_id, r.record_title, " +
                     "FROM records " +
                     "WHERE record_id = ?";

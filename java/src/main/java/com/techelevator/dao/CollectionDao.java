@@ -12,7 +12,11 @@ public interface CollectionDao {
 
     List<Collection> getCollectionsByUserId(int id);
 
+
     List<Collection> getUserPublicCollection(int userId);
+
+    Collection getCollectionByCollectionId(int id);
+
 
     Collection createCollection(Collection collection, int id);
 

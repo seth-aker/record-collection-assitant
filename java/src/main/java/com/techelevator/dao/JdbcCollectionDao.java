@@ -87,6 +87,21 @@ public class JdbcCollectionDao implements CollectionDao{
         return collections;
     }
 
+    public Collection getCollectionByCollectionId(int id) {
+        Collection collection = null;
+        String sql = "SELECT collection_id, collection_name FROM collections WHERE collection_id =?";
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if(results.next()) {
+                collection = mapRowToCollection(results);
+            }
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return collection;
+
+    }
+
 
     @Override
     public Collection createCollection(Collection collection, int id) {
@@ -99,6 +114,7 @@ public class JdbcCollectionDao implements CollectionDao{
         try {
             collectionId = jdbcTemplate.queryForObject(sql,Integer.class, id, collection.getName());
             collection.isPublic();
+            collection.setId(collectionId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -106,6 +122,7 @@ public class JdbcCollectionDao implements CollectionDao{
         }
         return collection;
     }
+
 
     @Override
     public int deleteCollection(int id) {

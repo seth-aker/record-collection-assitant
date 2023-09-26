@@ -38,10 +38,18 @@ public class CollectionController {
         }
     }
 
+
     @RequestMapping(path = "/collections/user", method = RequestMethod.POST)
     public Collection addCollection(Principal principal, Collection collection){
         return this.collectionDao.createCollection(collection, userDao.findIdByUsername(principal.getName()));
     }
+
+//        @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
+//    public Collection addCollection(@RequestBody Collection collection, Principal principal){
+//            return this.collectionDao.createCollection(userDao.findIdByUsername(principal.getName()));
+//
+//        }
+
 
 
     }
