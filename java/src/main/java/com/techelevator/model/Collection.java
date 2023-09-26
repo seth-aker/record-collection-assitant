@@ -6,7 +6,6 @@ public class Collection {
     private int userId;
     private String name;
     private boolean isPublic;
-
     public Collection() {
     }
 
