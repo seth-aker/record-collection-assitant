@@ -27,9 +27,9 @@ public class CollectionController {
             this.collectionDao = collectionDao;
         }
 
-        @RequestMapping(path = "/home", method = RequestMethod.GET)
+        @RequestMapping(path = "/getCollections/public", method = RequestMethod.GET)
         public List<Collection> viewPublicCollections(){
-            return this.collectionDao.completeLibrary();
+            return this.collectionDao.getPublicCollections();
         }
 
         @RequestMapping(path = "/user", method = RequestMethod.GET)
@@ -37,7 +37,7 @@ public class CollectionController {
             return this.collectionDao.getCollectionsById(userDao.findIdByUsername(principal.getName()));
         }
 
-        @RequestMapping(path = "/user/addCollection", method = RequestMethod.POST)
+        @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
     public Collection addCollection(Principal principal, Collection collection){
             return this.collectionDao.createCollection(userDao.findIdByUsername(principal.getName()));
 
