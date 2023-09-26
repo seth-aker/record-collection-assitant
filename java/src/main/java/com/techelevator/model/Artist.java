@@ -6,7 +6,6 @@ public class Artist {
 
     private String id;
     private String name;
-    private List<String> genres;
 
     public String getArtistId() {
         return id;
@@ -22,13 +21,5 @@ public class Artist {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<String> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
     }
 }

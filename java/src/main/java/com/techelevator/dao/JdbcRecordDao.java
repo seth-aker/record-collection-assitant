@@ -22,7 +22,7 @@ public class JdbcRecordDao implements RecordDao {
 
     public Record getRecordById(String recordId) {
 
-        String sql = "SELECT r.record_id, r.record_title, " +
+        String sql = "SELECT r.record_id, r.record_title " +
                     "FROM records " +
                     "WHERE record_id = ?";
         try {
@@ -55,7 +55,7 @@ public class JdbcRecordDao implements RecordDao {
         return userLib;
     }
 
-    public void updateRecordNote(String recordId, int userId , String note) {
+    public boolean updateRecordNote(String recordId, int userId , String note) {
         String sql = "UPDATE user_record SET user_note = ? WHERE record_id = ? AND user_id = ?;";
 
         try {
@@ -70,6 +70,7 @@ public class JdbcRecordDao implements RecordDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+        return true;
     }
 
     public boolean createRecord(String recordId, String recordTitle) {

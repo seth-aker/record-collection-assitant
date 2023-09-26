@@ -1,38 +1,48 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.RecordDao;
-import com.techelevator.model.Record;
-import com.techelevator.model.RecordDTO;
+
+import com.techelevator.dao.UserDao;
+import com.techelevator.model.*;
+import com.techelevator.services.RecordDTOBuilder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+
+import java.security.Principal;
+import java.util.Objects;
+
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 public class RecordController {
 
-    private RecordDao recordDao;
+    private RecordDTOBuilder recordDTOBuilder;
+    private UserDao userDao;
 
 
-    public RecordController(RecordDao recordDao) {
-        this.recordDao = recordDao;
+
+
+    public RecordController(RecordDTOBuilder recordDTOBuilder, UserDao userDao){
+        this.recordDTOBuilder = recordDTOBuilder;
+        this.userDao = userDao;
     }
 
+
     @GetMapping(path = "/record/{id}")
-    public Record getRecordById(@PathVariable String id) {
-        Record returnRecord = new Record();
-        returnRecord = recordDao.getRecordById(id);
-        return returnRecord;
+    public RecordDTO getRecordById(@PathVariable String recordId) {
+       return recordDTOBuilder.getRecordById(recordId);
     }
 
     @PostMapping(path = "/record")
-    public String createNewRecord(RecordDTO record) {
-        String newId = "";
-        Record newRecord = new Record();
-
-        newRecord = record.getRecord();
-
-
-
-
+    public String createNewRecord(Principal principal, RecordDTO recordDTO) {
+        int userId = userDao.findIdByUsername(principal.getName());
+        if(recordDTO.getRecord().getId() == null || recordDTO.getRecord().getId().equals("")) {
+            recordDTOBuilder.addRecordToDb(recordDTO, String.valueOf(Objects.hash(recordDTO.getRecord(), recordDTO.getArtist())), userId );
+        } else {
+            recordDTOBuilder.addRecordToDb(recordDTO, userId);
+        }
+        Record newRecord = recordDTO.getRecord();
 
         return newRecord.getId();
     }
