@@ -10,7 +10,7 @@ public interface CollectionDao {
 
     List<Collection> getPublicCollections();
 
-    List<Collection> getCollectionsByUsername(String username);
+    List<Collection> getCollectionsByUserId(int id);
 
     Collection createCollection(Collection collection, int id);
 
