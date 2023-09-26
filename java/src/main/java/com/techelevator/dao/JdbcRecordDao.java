@@ -20,7 +20,7 @@ public class JdbcRecordDao implements RecordDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Record getRecordById(int recordId) {
+    public Record getRecordById(String recordId) {
         String sql = "SELECT record_id, user_note " +
                     "FROM records" +
                     "WHERE record_id = ?";

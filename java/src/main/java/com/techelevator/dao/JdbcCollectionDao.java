@@ -25,11 +25,26 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
+    public List<Collection> completeLibrary(){
+        List<Collection> library = new ArrayList<>();
+       String sql = "SELECT collections.collection_id, collection_name FROM collections;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()) {
+                library.add(mapRowToCollection(results));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return library;
+    }
+
+    @Override
     public List<Collection> getPublicCollections() {
         List<Collection> collections = new ArrayList<>();
         String sql = "SELECT collections.collection_id, collection_name FROM collections " +
                 "JOIN collection_user ON collections.collection_id = collection_user.collection_id " +
-                "JOIN users ON users.user_id = collection_user.user_id WHERE is_public = true";
+                "JOIN users ON users.user_id = collection_user.user_id WHERE is_public = true;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -42,13 +57,13 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public List<Collection> getCollectionsByUsername(String username) {
+    public List<Collection> getCollectionsById(int id) {
         List<Collection> collections = new ArrayList<>();
         String sql = "SELECT collections.collection_id, collection_name FROM collections " +
                 "JOIN collection_user ON collections.collection_id = collection_user.collection_id " +
-                "JOIN users ON collection_user.user_id = users.user_id WHERE users.user_id = ?";
+                "JOIN users ON collection_user.user_id = users.user_id WHERE users.user_id = ?;";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
             }
@@ -58,12 +73,10 @@ public class JdbcCollectionDao implements CollectionDao{
         return collections;
     }
 
-
     @Override
     public Collection createCollection(Collection collection, int id) {
-        Collection newCollection = new Collection();
         String sql = "INSERT INTO collections (collection_name) " +
-                "VALUES (?) RETURNING collection_id";
+                "VALUES (?) RETURNING collection_id;";
         Integer collectionId;
         try {
             collectionId = jdbcTemplate.queryForObject(sql,Integer.class,
@@ -77,7 +90,6 @@ public class JdbcCollectionDao implements CollectionDao{
         return collection;
     }
 
-
     @Override
     public int deleteCollection(int id) {
         int numberOfRows = 0;
@@ -90,10 +102,10 @@ public class JdbcCollectionDao implements CollectionDao{
             throw new DaoException("SQL syntax error", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
-
         }
         return numberOfRows;
     }
+
 
 
     private Collection mapRowToCollection(SqlRowSet rowSet) {
@@ -101,8 +113,6 @@ public class JdbcCollectionDao implements CollectionDao{
         collection.setId(rowSet.getInt("collection_id"));
         collection.setName(rowSet.getString("collection_name"));
         collection.setPublic(rowSet.getBoolean("is_public"));
-        return  collection;
+        return collection;
     }
-
-
 }

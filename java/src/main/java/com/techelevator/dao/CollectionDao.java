@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface CollectionDao {
 
+    List<Collection> completeLibrary();
+
     List<Collection> getPublicCollections();
 
-    List<Collection> getCollectionsByUsername(String username);
+    List<Collection> getCollectionsById(int id);
 
     Collection createCollection(Collection collection, int id);
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RecordDao {
 
-    public Record getRecordById(int recordId);
+    public Record getRecordById(String recordId);
 
     public List<Record> getUserLibrary(int userId);
 
