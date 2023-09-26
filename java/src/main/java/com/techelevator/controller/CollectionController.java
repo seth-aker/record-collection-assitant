@@ -5,12 +5,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.Collection;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -20,28 +15,33 @@ import java.util.List;
 @PreAuthorize("isAuthenticated()")
 
 public class CollectionController {
-        private CollectionDao collectionDao;
-        private UserDao userDao;
 
-        public CollectionController(CollectionDao collectionDao) {
+    private CollectionDao collectionDao;
+    private UserDao userDao;
+
+    public CollectionController(CollectionDao collectionDao) {
             this.collectionDao = collectionDao;
         }
 
-        @RequestMapping(path = "/getCollections/public", method = RequestMethod.GET)
-        public List<Collection> viewPublicCollections(){
+    @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
+    public List<Collection> viewPublicCollections(){
             return this.collectionDao.getPublicCollections();
         }
 
-        @RequestMapping(path = "/user", method = RequestMethod.GET)
-    public List<Collection> showMyCollections(Principal principal) {
+    @RequestMapping(path = "/collections/user", method = RequestMethod.GET)
+    public List<Collection> getUserCollections(Principal principal, @RequestParam(value= "name", required = false, defaultValue = "") String userName) {
+        //checks if requester is user, if not shows only public collections of specified user
+        if(userName.equals("") || userName.equals(principal.getName())) {
             return this.collectionDao.getCollectionsByUserId(userDao.findIdByUsername(principal.getName()));
+        } else {
+            return this.collectionDao.getUserPublicCollection(userDao.findIdByUsername(userName));
         }
+    }
 
-        @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
+    @RequestMapping(path = "/collections/user", method = RequestMethod.POST)
     public Collection addCollection(Principal principal, Collection collection){
-            return this.collectionDao.createCollection(userDao.findIdByUsername(principal.getName()));
-
-        }
+        return this.collectionDao.createCollection(collection, userDao.findIdByUsername(principal.getName()));
+    }
 
 
     }

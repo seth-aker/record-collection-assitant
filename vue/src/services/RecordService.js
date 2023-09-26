@@ -2,6 +2,10 @@ import axios from "axios";
 
 export default {
 
+    getRecordInfo(recordId) {
+        return axios.get(`/record/${recordId}`)
+    },
+
     addRecordToUserLib(record){
         return axios.post('/record', record);
     },
@@ -14,5 +18,5 @@ export default {
         return axios.put('/record', record);
     },
 
-    
+
 }

@@ -5,13 +5,22 @@ import java.util.List;
 public class RecordDTO {
 
     private Record record;
-    private Artist artist;
-    private Genre genre;
+    private List<Artist> artists;
+    private List<Genre> genres;
     private Label label;
     private Collection collection;
-    private List<Track> track;
+    private List<Track> tracks;
 
     public RecordDTO() {
+    }
+
+    public RecordDTO(Record record, List<Artist> artists, List<Genre> genres, Label label, Collection collection, List<Track> tracks) {
+        this.record = record;
+        this.artists = artists;
+        this.genres = genres;
+        this.label = label;
+        this.collection = collection;
+        this.tracks = tracks;
     }
 
     public Record getRecord() {
@@ -22,20 +31,20 @@ public class RecordDTO {
         this.record = record;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public List<Artist> getArtist() {
+        return artists;
     }
 
-    public void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setArtist(List<Artist> artists) {
+        this.artists = artists;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public List<Genre> getGenres() {
+        return genres;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenre(List<Genre> genres) {
+        this.genres = genres;
     }
 
     public Label getLabel() {
@@ -54,12 +63,12 @@ public class RecordDTO {
         this.collection = collection;
     }
 
-    public List<Track> getTrack() {
-        return track;
+    public List<Track> getTracks() {
+        return tracks;
     }
 
-    public void setTrack(List<Track> track) {
-        this.track = track;
+    public void setTrack(List<Track> tracks) {
+        this.tracks = tracks;
     }
 
 }
