@@ -12,6 +12,8 @@ public interface CollectionDao {
 
     List<Collection> getCollectionsByUserId(int id);
 
+    Collection getCollectionByCollectionId(int id);
+
     Collection createCollection(Collection collection, int id);
 
     int deleteCollection(int id);
