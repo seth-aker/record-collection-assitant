@@ -35,8 +35,8 @@ VALUES
 ('tteesstt6','Seven', 330000, 7);
 
 INSERT INTO collections
-(collection_id, user_id, collection_name,is_public)
+(user_id, collection_name,is_public)
 VALUES
-(101,1001,'The Test Collection', true);
+(1001,'The Test Collection', true);
 
 COMMIT TRANSACTION;

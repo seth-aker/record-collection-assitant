@@ -22,6 +22,8 @@ public class JdbcArtistDao implements ArtistDao{
     public Artist getArtistById (String id) {
         String sql = "SELECT artist_id, artist_name " +
                      "FROM artists WHERE artist_id = ?";
+        String sql2 = "SELECT genre_name " +
+                      "FROM artist_genre"
 
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
