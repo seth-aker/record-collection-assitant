@@ -5,12 +5,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.Collection;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -37,11 +32,11 @@ public class CollectionController {
             return this.collectionDao.getCollectionsByUserId(userDao.findIdByUsername(principal.getName()));
         }
 
-        @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
-    public Collection addCollection(Principal principal, Collection collection){
-            return this.collectionDao.createCollection(userDao.findIdByUsername(principal.getName()));
-
-        }
+//        @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
+//    public Collection addCollection(@RequestBody Collection collection, Principal principal){
+//            return this.collectionDao.createCollection(userDao.findIdByUsername(principal.getName()));
+//
+//        }
 
 
     }
