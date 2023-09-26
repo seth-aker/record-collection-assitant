@@ -10,6 +10,7 @@ public interface RecordDao {
 
     public List<Record> getUserLibrary(int userId);
 
-    public void updateRecordNote(int id, String note);
+    public void updateRecordNote(String recordId, int userId, String note);
 
+    public boolean createRecord(String recordId, String recordTitle);
 }
