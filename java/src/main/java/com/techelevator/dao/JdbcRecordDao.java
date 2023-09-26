@@ -54,11 +54,11 @@ public class JdbcRecordDao implements RecordDao {
         return userLib;
     }
 
-    public void updateRecordNote(int id, String note) {
-        String sql = "UPDATE records SET user_note = ? WHERE record_id = ?;";
+    public void updateRecordNote(String recordId, int userId , String note) {
+        String sql = "UPDATE user_record SET user_note = ? WHERE record_id = ? AND user_id = ?;";
 
         try {
-            int numberOfRows = this.jdbcTemplate.update(sql, note, id);
+            int numberOfRows = this.jdbcTemplate.update(sql, note, recordId, userId);
 
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
@@ -71,9 +71,23 @@ public class JdbcRecordDao implements RecordDao {
         }
     }
 
+    public boolean createRecord(String recordId, String recordTitle) {
+        String sql = "INSERT INTO records (record_id, record_title) " +
+                "VALUES (?, ?) ";
+        try {
+            return jdbcTemplate.update(sql, recordId, recordTitle) == 1;
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+
     private Record mapRowToRecord(SqlRowSet rowSet) {
         Record record = new Record();
-        record.setId(rowSet.getInt("record_id"));
+        record.setId(rowSet.getString("record_id"));
         record.setUserNote(rowSet.getString("user_note"));
     return record;
     }
