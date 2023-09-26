@@ -42,13 +42,13 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public List<Collection> getAllCollectionsByUserId(int id) {
+    public List<Collection> getCollectionsByUsername(String username) {
         List<Collection> collections = new ArrayList<>();
         String sql = "SELECT collections.collection_id, collection_name FROM collections " +
                 "JOIN collection_user ON collections.collection_id = collection_user.collection_id " +
                 "JOIN users ON collection_user.user_id = users.user_id WHERE users.user_id = ?";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
             while (results.next()) {
                 collections.add(mapRowToCollection(results));
             }

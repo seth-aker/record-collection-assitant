@@ -3,17 +3,16 @@ package com.techelevator.model;
 public class Record {
 
     private int id;
-    private String artist;
     private String title;
-    private String note;
-    private int year;
+    private String userNote;
 
-    public Record(int id, String artist, String title, String note, int year) {
+    public Record(){}
+
+    public Record(int id,String title, String note) {
         this.id = id;
-        this.artist = artist;
         this.title = title;
-        this.note = note;
-        this.year = year;
+        this.userNote = note;
+
     }
 
     public int getId() {
@@ -24,14 +23,6 @@ public class Record {
         this.id = id;
     }
 
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -40,20 +31,10 @@ public class Record {
         this.title = title;
     }
 
-    public String getNote() {
-        return note;
+    public String getUserNote() {
+        return userNote;
     }
-
-    public void setNote(String note) {
-        this.note = note;
+    public void setUserNote(String userNote) {
+        this.userNote = userNote;
     }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
 }

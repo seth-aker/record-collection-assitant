@@ -44,6 +44,14 @@ CREATE TABLE records (
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)
 );
 
+CREATE TABLE collection_record (
+    collection_id int NOT NULL,
+    record_id int NOT NULL,
+    CONSTRAINT PK_collection_id_record_id PRIMARY KEY (collection_id,record_id),
+    CONSTRAINT FK_collection_id FOREIGN KEY (collection_id) REFERENCES collections(collection_id),
+    CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
+);
+
 CREATE TABLE user_record (
 	user_id int NOT NULL,
 	record_id int NOT NULL,
