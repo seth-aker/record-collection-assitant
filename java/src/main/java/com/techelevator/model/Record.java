@@ -2,24 +2,17 @@ package com.techelevator.model;
 
 public class Record {
 
-    private int id;
+    private String id;
     private String title;
     private String userNote;
 
     public Record(){}
 
-    public Record(int id,String title, String note) {
-        this.id = id;
-        this.title = title;
-        this.userNote = note;
-
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
