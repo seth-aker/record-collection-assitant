@@ -18,7 +18,6 @@ public class JdbcCollectionDao implements CollectionDao{
 
     private JdbcTemplate jdbcTemplate;
 
-    private UserDao userDao;
 
     public JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -71,20 +70,15 @@ public class JdbcCollectionDao implements CollectionDao{
         return collections;
     }
 
-    public Collection chooseCollection(int id) {
-        Collection collection = new Collection();
-
-    }
-
-
 
     @Override
     public Collection createCollection(Collection collection, int id) {
-
-
         String sql = "INSERT INTO collections (user_id, collection_name, is_public) " +
                 "VALUES (?, ?, ?) RETURNING collection_id;";
         Integer collectionId;
+
+        // Inserting user id into query
+
         try {
             collectionId = jdbcTemplate.queryForObject(sql,Integer.class, id, collection.getName());
             collection.isPublic();

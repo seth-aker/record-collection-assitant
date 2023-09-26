@@ -34,7 +34,7 @@ public class CollectionController {
 
         @RequestMapping(path = "/user", method = RequestMethod.GET)
     public List<Collection> showMyCollections(Principal principal) {
-            return this.collectionDao.getCollectionsById(userDao.findIdByUsername(principal.getName()));
+            return this.collectionDao.getCollectionsByUserId(userDao.findIdByUsername(principal.getName()));
         }
 
         @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
