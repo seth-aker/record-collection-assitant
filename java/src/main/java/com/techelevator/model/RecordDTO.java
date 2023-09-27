@@ -6,24 +6,26 @@ public class RecordDTO {
 
     private Record record;
     private List<Artist> artists;
-    private List<Genre> genres;
-    private Label label;
-    private List<Track> tracks;
+    private List<String> genres;
+    private String label;
+    private Tracks tracks;
+    private String imageUrl;
 
     public RecordDTO() {
     }
 
     public RecordDTO(Record record,
                      List<Artist> artists,
-                     List<Genre> genres,
-                     Label label,
-                     List<Track> tracks)
+                     List<String> genres,
+                     String label,
+                     Tracks tracks)
     {
         this.record = record;
         this.artists = artists;
         this.genres = genres;
         this.label = label;
         this.tracks = tracks;
+
     }
 
     public Record getRecord() {
@@ -42,28 +44,35 @@ public class RecordDTO {
         this.artists = artists;
     }
 
-    public List<Genre> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void setGenre(List<Genre> genres) {
+    public void setGenre(List<String> genres) {
         this.genres = genres;
     }
 
-    public Label getLabel() {
+    public String getLabel() {
         return label;
     }
 
-    public void setLabel(Label label) {
+    public void setLabel(String label) {
         this.label = label;
     }
 
-    public List<Track> getTracks() {
+    public Tracks getTracks() {
         return tracks;
     }
 
-    public void setTrack(List<Track> tracks) {
+    public void setTracks(Tracks tracks) {
         this.tracks = tracks;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
