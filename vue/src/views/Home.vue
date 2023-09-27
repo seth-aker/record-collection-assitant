@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Include your Header component -->
+   
     <Header></Header>
 
 
@@ -14,11 +14,11 @@
     <div class="custom-content">
       
       <div class="genres">
-        <!-- Add genre buttons or content here -->
+       
       </div>
     </div>
 
-    <!-- Include your Footer component -->
+    
     <Footer></Footer>
   </div>
 </template>
@@ -28,7 +28,7 @@ import Header from "@/components/Header.vue";
 import NavBar from "@/components/NavBar.vue";
 import About from "@/components/About.vue";
 import Footer from "@/components/Footer.vue";
-import SearchBox from "@/components/SearchBox.vue"; // Corrected import path
+import SearchBox from "@/components/SearchBox.vue"; 
 
 export default {
   components: {
@@ -42,5 +42,5 @@ export default {
 </script>
 
 <style scoped>
-/* Your scoped styles here */
+
 </style>
