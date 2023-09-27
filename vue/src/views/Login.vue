@@ -11,11 +11,11 @@
       </div>
       <div class="input-block">
       <div class="form-input-group">
-        <label for="username">Username</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <label for="password">Password</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
       <div class="sign-in-button">
@@ -71,25 +71,6 @@ export default {
 <style scoped>
 @import url('https://fonts.cdnfonts.com/css/keep-on-truckin-2');
 
- #main-grid{
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 0.5fr;
-    grid-template-rows: 0.5fr 0.5fr 1fr;
-    column-gap: 50px;
-    row-gap: 20px;
-    grid-template-areas: 
-    ". title ."
-     ". form-input ."
-     ". . .";
-align-items: center;
- }
-
-#h1{
-  grid-area: title;
-}
-#input-block{
-  grid-area: form-input;
-}
 
 .form-input-group{
   display: flex;
@@ -110,7 +91,7 @@ h1{
   display: flex;
   font-family: 'Keep on Truckin', sans-serif;
   font-size:400%;
-  color: #9BDFFC;
+  color: #EA573B;
   justify-content: center;
 }
 
@@ -123,13 +104,17 @@ h2{
 display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 15px;
+  padding-top: 20px;
 }
 
 p{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+button{
+  padding-left: 22px;
+padding-right: 22px;
 }
 
 </style>

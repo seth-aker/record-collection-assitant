@@ -7,19 +7,22 @@
         {{ registrationErrorMsg }}
       </div>
       <div class="form-input-group">
-        <label for="username">Username</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <label for="password">Password</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
       <div class="form-input-group">
-        <label for="confirmPassword">Confirm Password</label>
+        <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
+      <div class="create-account-button">
       <button type="submit">Create Account</button>
+      </div>
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+
     </form>
   </div>
 </template>
@@ -78,18 +81,56 @@ export default {
 @import url('https://fonts.cdnfonts.com/css/keep-on-truckin-2');
 
 .form-input-group {
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
 }
 label {
   margin-right: 0.5rem;
 }
 
 h1{
+  display: flex;
+  justify-content: center;
   font-family: 'Keep on Truckin', sans-serif;
+  color: #EA573B;
+  font-size: 400%;
+}
+
+h2{
+  display: flex;
+  justify-content: center;
 }
 #register {
 display: flex;
 justify-content: center;
+align-items: center;
 }
+
+#form{
+  display: flex;
+  flex-direction:row;
+
+}
+
+#form-input{
+  justify-content: center;
+  display: flex; flex-flow: column nowrap;
+}
+
+.create-account-button{
+  display: flex;
+ justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 </style>
 
