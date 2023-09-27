@@ -13,6 +13,7 @@
 
 </script>
 
+
 <style scoped>
 .search-box {
     text-align: center;
