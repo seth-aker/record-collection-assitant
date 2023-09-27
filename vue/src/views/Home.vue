@@ -3,9 +3,7 @@
    
     <Header></Header>
 
-
     <NavBar></NavBar>
-
 
     <About></About>
 

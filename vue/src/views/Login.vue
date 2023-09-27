@@ -84,14 +84,14 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: EA573B;
+  color:  #F8E73B;
 }
 
 h1{
   display: flex;
   font-family: 'Keep on Truckin', sans-serif;
   font-size:400%;
-  color: #EA573B;
+  color:  #F8E73B;
   justify-content: center;
 }
 
@@ -115,6 +115,9 @@ p{
 button{
   padding-left: 22px;
 padding-right: 22px;
+}
+.username{
+  color:#F8E73B
 }
 
 </style>

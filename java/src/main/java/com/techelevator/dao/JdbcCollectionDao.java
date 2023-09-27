@@ -125,12 +125,6 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
 
-
-
-
-
-
-
     @Override
     public int deleteCollection(int id) {
         int numberOfRows = 0;
@@ -146,7 +140,6 @@ public class JdbcCollectionDao implements CollectionDao{
         }
         return numberOfRows;
     }
-
 
 
     private Collection mapRowToCollection(SqlRowSet rowSet) {

@@ -26,7 +26,6 @@ public class CollectionController {
     private UserDao userDao;
 
 
-
         public CollectionController(CollectionDao collectionDao, UserDao userDao) {
             this.collectionDao = collectionDao;
             this.userDao = userDao;
