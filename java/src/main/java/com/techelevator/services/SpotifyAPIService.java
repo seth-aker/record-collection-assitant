@@ -2,9 +2,8 @@ package com.techelevator.services;
 
 import com.techelevator.model.RecordDTO;
 import com.techelevator.model.SpotifyResponse;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.ResourceAccessException;
@@ -14,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-
+@Component
 public class SpotifyAPIService implements APIService {
 
     private static String API_BASE_URL = "https://api.spotify.com/v1/albums/";
@@ -40,7 +39,8 @@ public class SpotifyAPIService implements APIService {
         HttpEntity<Void> request = createSpotifyRequest();
 
         try {
-            spotifyResponse = restTemplate.postForObject(API_BASE_URL + recordId, request, SpotifyResponse.class);
+            ResponseEntity<SpotifyResponse> spotifyResponseEntity = restTemplate.exchange(API_BASE_URL + recordId, HttpMethod.GET, request, SpotifyResponse.class);
+            spotifyResponse = spotifyResponseEntity.getBody();
 
         } catch (RestClientResponseException e) {
             String errorMessage = "Return status: " + e.getRawStatusCode() + "\n" +

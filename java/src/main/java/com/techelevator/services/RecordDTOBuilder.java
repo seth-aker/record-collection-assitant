@@ -13,10 +13,11 @@ public class RecordDTOBuilder {
         RecordDTO recordDTO = new RecordDTO();
         recordDTO.setRecord(createRecord());
         recordDTO.setArtist(createArtists());
-        recordDTO.setGenre(createGenres());
+        recordDTO.setGenres(createGenres());
         recordDTO.setLabel(createLabel());
         recordDTO.setTracks(createTracks());
         recordDTO.setImageUrl(createImageUrl());
+        recordDTO.setPopularity(createPopularity());
         return recordDTO;
     }
 
@@ -28,13 +29,11 @@ public class RecordDTOBuilder {
     }
 
     private List<Artist> createArtists() {
-        List<Artist> artists = spotifyResponse.getArtists();
-        return artists;
+        return spotifyResponse.getArtists();
     }
 
     private List<String> createGenres() {
-        List<String> genres = spotifyResponse.getGenres();
-        return genres;
+        return spotifyResponse.getGenres();
     }
 
     private String createLabel() {
@@ -49,6 +48,8 @@ public class RecordDTOBuilder {
         return spotifyResponse.getImages().get(0).getUrl();
     }
 
-
+    private int createPopularity() {
+        return spotifyResponse.getPopularity();
+    }
 
 }
