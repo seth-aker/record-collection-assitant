@@ -20,31 +20,31 @@ public class RecordController {
     private RecordDTOBuilder recordDTOBuilder;
     private UserDao userDao;
 
-
-
-
-    public RecordController(RecordDTOBuilder recordDTOBuilder, UserDao userDao){
-        this.recordDTOBuilder = recordDTOBuilder;
-        this.userDao = userDao;
-    }
-
-
-    @GetMapping(path = "/record/{id}")
-    public RecordDTO getRecordById(@PathVariable String recordId) {
-       return recordDTOBuilder.getRecordById(recordId);
-    }
-
-    @PostMapping(path = "/record")
-    public String createNewRecord(Principal principal, RecordDTO recordDTO) {
-        int userId = userDao.findIdByUsername(principal.getName());
-        if(recordDTO.getRecord().getId() == null || recordDTO.getRecord().getId().equals("")) {
-            recordDTOBuilder.addRecordToDb(recordDTO, String.valueOf(Objects.hash(recordDTO.getRecord(), recordDTO.getArtist())), userId );
-        } else {
-            recordDTOBuilder.addRecordToDb(recordDTO, userId);
-        }
-        Record newRecord = recordDTO.getRecord();
-
-        return newRecord.getId();
-    }
-
 }
+
+
+//    public RecordController(RecordDTOBuilder recordDTOBuilder, UserDao userDao){
+//        this.recordDTOBuilder = recordDTOBuilder;
+//        this.userDao = userDao;
+//    }
+//
+//
+//    @GetMapping(path = "/record/{id}")
+//    public RecordDTO getRecordById(@PathVariable String recordId) {
+//       return recordDTOBuilder.getRecordById(recordId);
+//    }
+//
+//    @PostMapping(path = "/record")
+//    public String createNewRecord(Principal principal, RecordDTO recordDTO) {
+//        int userId = userDao.findIdByUsername(principal.getName());
+//        if(recordDTO.getRecord().getId() == null || recordDTO.getRecord().getId().equals("")) {
+//            recordDTOBuilder.addRecordToDb(recordDTO, String.valueOf(Objects.hash(recordDTO.getRecord(), recordDTO.getArtist())), userId );
+//        } else {
+//            recordDTOBuilder.addRecordToDb(recordDTO, userId);
+//        }
+//        Record newRecord = recordDTO.getRecord();
+//
+//        return newRecord.getId();
+//    }
+//
+//}

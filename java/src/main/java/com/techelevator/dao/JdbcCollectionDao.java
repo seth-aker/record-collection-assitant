@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -103,7 +104,27 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public
+    public Collection createCollection(Collection collection) {
+        Collection createdCollection = null;
+        String sql = "INSERT INTO collections (user_id, collection_name, is_public) " +
+                "VALUES (?, ?, ?);";
+        try {
+            int createdCollectionId = jdbcTemplate.update(sql, collection.getUserId(),
+                    collection.getName(), collection.isPublic());
+            createdCollection = getCollectionByCollectionId(createdCollectionId);
+            return createdCollection;
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("SQL syntax error", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }catch (DataAccessException e) {
+            throw new DaoException("Error while inserting a new collection", e);
+        }
+    }
+
+
 
 
 

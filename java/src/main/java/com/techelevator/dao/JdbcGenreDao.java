@@ -19,7 +19,6 @@ public class JdbcGenreDao {
 
     public Genre getGenreById(int id) {
         String sql = "SELECT genre_id, genre_name FROM genres WHERE genre_id = ?";
-
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
             if (result.next()) {

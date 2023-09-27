@@ -27,7 +27,6 @@ public class CollectionController {
 
 
 
-
         public CollectionController(CollectionDao collectionDao, UserDao userDao) {
             this.collectionDao = collectionDao;
             this.userDao = userDao;
@@ -38,7 +37,6 @@ public class CollectionController {
             return this.collectionDao.getPublicCollections();
         }
 
-
     @RequestMapping(path = "/collections/user", method = RequestMethod.GET)
     public List<Collection> getUserCollections(Principal principal, @RequestParam(value= "name", required = false, defaultValue = "") String userName) {
         //checks if requester is user, if not shows only public collections of specified user
@@ -47,7 +45,6 @@ public class CollectionController {
         } else {
             return this.collectionDao.getUserPublicCollection(userDao.findIdByUsername(userName));
         }
-
     }
 
         @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
@@ -57,10 +54,8 @@ public class CollectionController {
 
         @ResponseStatus(HttpStatus.CREATED)
         @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
-    public Collection addCollection(@Valid @RequestBody Collection collection, Principal principal){
+    public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal){
             collection.setUserId(userDao.findIdByUsername(principal.getName()));
-            return this.collectionDaocreateCollection(collection);
-
-
+            return this.collectionDao.createCollection(collection);
     }
 }
