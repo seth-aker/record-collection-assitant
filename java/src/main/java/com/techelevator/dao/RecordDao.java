@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Record;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface RecordDao {
@@ -17,4 +18,6 @@ public interface RecordDao {
     public boolean addRecordToUserLib(Record record, int userId);
 
     public boolean removeRecordFromUserLib(Record record, int userId);
+
+    public String getRecordNote(String recordId, Principal principal);
 }

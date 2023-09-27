@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 
+import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ public class RecordController {
     private UserDao userDao;
 
 }
+
 
 
 //    public RecordController(RecordDTOBuilder recordDTOBuilder, UserDao userDao){
