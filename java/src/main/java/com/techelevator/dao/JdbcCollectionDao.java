@@ -91,7 +91,7 @@ public class JdbcCollectionDao implements CollectionDao{
     @Override
     public Collection getCollectionByCollectionId(int id) {
         Collection collection = null;
-        String sql = "SELECT collection_id, collection_name FROM collections WHERE collection_id =?";
+        String sql = "SELECT collection_id, collection_name FROM collections WHERE collection_id = ?";
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()) {
@@ -151,8 +151,8 @@ public class JdbcCollectionDao implements CollectionDao{
 
     private Collection mapRowToCollection(SqlRowSet rowSet) {
         Collection collection = new Collection();
-        collection.setUserId(rowSet.getInt("user_id"));
         collection.setId(rowSet.getInt("collection_id"));
+        collection.setUserId(rowSet.getInt("user_id"));
         collection.setName(rowSet.getString("collection_name"));
         collection.setPublic(rowSet.getBoolean("is_public"));
         return collection;

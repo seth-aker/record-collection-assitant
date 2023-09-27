@@ -14,16 +14,28 @@ public class User {
    private String password;
    @JsonIgnore
    private boolean activated;
+
+   private boolean isPremium;
+
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
 
-   public User(int id, String username, String password, String authorities) {
+   public User(int id, String username, String password, String authorities, boolean isPremium) {
       this.id = id;
       this.username = username;
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
+      this.isPremium = false;
+   }
+
+   public boolean isPremium() {
+      return isPremium;
+   }
+
+   public void setPremium(boolean premium) {
+      isPremium = premium;
    }
 
    public int getId() {
