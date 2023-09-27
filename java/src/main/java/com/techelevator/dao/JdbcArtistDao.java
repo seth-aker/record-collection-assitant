@@ -76,7 +76,7 @@ public class JdbcArtistDao implements ArtistDao{
     }
 
     public void addArtist(Artist artist) {
-        String sql = "INSERT INTO artists (artist_id, artist_name " +
+        String sql = "INSERT INTO artists (artist_id, artist_name) " +
                      "VALUES (?, ?);";
 
         try {
