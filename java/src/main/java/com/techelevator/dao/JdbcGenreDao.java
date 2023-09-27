@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Artist;
 import com.techelevator.model.Genre;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -48,11 +47,11 @@ public class JdbcGenreDao {
         return id;
     }
 
-    public boolean updateGenre (Genre genreToUpate) {
+    public boolean updateGenre (Genre genreToUpdate) {
         String sql = "UPDATE genres SET genre_name = ?;";
 
         try {
-            int numberOfRows = jdbcTemplate.update(sql, genreToUpate.getName());
+            int numberOfRows = jdbcTemplate.update(sql, genreToUpdate.getName());
 
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
