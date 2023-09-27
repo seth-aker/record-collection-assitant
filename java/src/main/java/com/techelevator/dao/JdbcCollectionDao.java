@@ -87,23 +87,19 @@ public class JdbcCollectionDao implements CollectionDao{
 
 
     @Override
-    public Collection createCollection(Collection collection, int id) {
+    public Collection createCollection(Collection collection) {
+Collection createdCollection = null;
         String sql = "INSERT INTO collections (user_id, collection_name, is_public) " +
                 "VALUES (?, ?, ?) RETURNING collection_id;";
-        Integer collectionId;
-
-        // Inserting user id into query
-
         try {
-            collectionId = jdbcTemplate.queryForObject(sql,Integer.class, id, collection.getName());
-            collection.isPublic();
-            collection.setId(collectionId);
+           int collectionId = jdbcTemplate.queryForObject(sql, int.class, collection.getUserId(), collection.getName(), collection.isPublic());
+           createdCollection = getCollectionByCollectionId(collectionId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return collection;
+        return createdCollection;
     }
 
 
