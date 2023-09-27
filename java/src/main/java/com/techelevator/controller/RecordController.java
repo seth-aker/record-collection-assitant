@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 
+import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.*;
 import com.techelevator.services.RecordDTOBuilder;
@@ -21,6 +22,7 @@ public class RecordController {
     private UserDao userDao;
 
 }
+
 
 
 //    public RecordController(RecordDTOBuilder recordDTOBuilder, UserDao userDao){

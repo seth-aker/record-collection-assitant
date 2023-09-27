@@ -1,9 +1,11 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Track;
+import com.techelevator.model.Tracks;
+
+import javax.sound.midi.Track;
 
 public interface TrackDao {
-    Track getTrackById(String id);
+    Tracks getTrackById(String id);
     void addTrack(Track track);
     boolean updateTrack(Track track);
     int deleteTrackById(String id);
