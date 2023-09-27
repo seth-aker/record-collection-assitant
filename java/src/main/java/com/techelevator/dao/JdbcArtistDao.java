@@ -2,6 +2,8 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Artist;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -51,6 +53,57 @@ public class JdbcArtistDao implements ArtistDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return artists;
+    }
+
+    public boolean updateArtist(Artist artist) {
+        int id = Integer.parseInt(artist.getArtistId());
+        String sql = "UPDATE artists " +
+                     "SET artist_name = ?," +
+                     "WHERE artist_id = ?;";
+
+        try {
+            int numberOfRows = jdbcTemplate.update(sql, artist.getName(), id);
+
+            if (numberOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return true;
+    }
+
+    public void addArtist(Artist artist) {
+        String sql = "INSERT INTO artists (artist_id, artist_name " +
+                     "VALUES (?, ?);";
+
+        try {
+            jdbcTemplate.update(sql, artist.getArtistId(), artist.getName());
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+    public int deleteArtistById(int id) {
+        int numberOfRows;
+        String artistGenreSql = "DELETE FROM artist_genre WHERE artist_id = ?;";
+        String sql = "DELETE FROM artists WHERE artist_id = ?;";
+
+        try {
+            jdbcTemplate.update(artistGenreSql, id);
+            numberOfRows = jdbcTemplate.update(sql, id);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("SQL syntax error", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numberOfRows;
     }
 
     public Artist mapRowToArtist(SqlRowSet rowSet) {
