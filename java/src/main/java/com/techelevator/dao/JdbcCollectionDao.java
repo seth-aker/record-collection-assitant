@@ -47,7 +47,7 @@ public class JdbcCollectionDao implements CollectionDao{
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
-                collections.add(mapRowToCollection(results));
+                collections.add(mapRowToCollection(results, true));
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -95,7 +95,7 @@ public class JdbcCollectionDao implements CollectionDao{
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if(results.next()) {
-                collection = mapRowToCollection(results);
+                collection = mapRowToCollection(results, true);
             }
         }catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -125,12 +125,6 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
 
-
-
-
-
-
-
     @Override
     public int deleteCollection(int id) {
         int numberOfRows = 0;
@@ -155,6 +149,15 @@ public class JdbcCollectionDao implements CollectionDao{
         collection.setUserId(rowSet.getInt("user_id"));
         collection.setName(rowSet.getString("collection_name"));
         collection.setPublic(rowSet.getBoolean("is_public"));
+        return collection;
+    }
+
+    private Collection mapRowToCollection(SqlRowSet rowSet,boolean notAllColumns) {
+        Collection collection = new Collection();
+        if (notAllColumns == true) {
+            collection.setId(rowSet.getInt("collection_id"));
+            collection.setName(rowSet.getString("collection_name"));
+            }
         return collection;
     }
 }
