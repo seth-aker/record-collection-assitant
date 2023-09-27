@@ -7,14 +7,12 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class JdbcTrackDao implements TrackDao{
 
+
     private JdbcTemplate jdbcTemplate;
 
     public JdbcTrackDao (JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
-
-
 
     public Track mapRowToTrack(SqlRowSet rowSet) {
         Track track = new Track();
@@ -24,5 +22,4 @@ public class JdbcTrackDao implements TrackDao{
         track.setNumber(String.valueOf(rowSet.getInt("track_number")));
         return track;
     }
-
 }

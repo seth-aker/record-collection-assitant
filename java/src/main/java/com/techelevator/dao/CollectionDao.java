@@ -18,7 +18,8 @@ public interface CollectionDao {
     Collection getCollectionByCollectionId(int id);
 
 
-    Collection createCollection(Collection collection, int id);
+  Collection createCollection(Collection collection);
+
 
     int deleteCollection(int id);
 }

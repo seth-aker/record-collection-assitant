@@ -3,10 +3,15 @@ package com.techelevator.controller;
 import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Collection;
+import com.techelevator.model.Label;
 import com.techelevator.model.User;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.security.Principal;
 import java.util.List;
 
@@ -16,17 +21,23 @@ import java.util.List;
 
 public class CollectionController {
 
+
     private CollectionDao collectionDao;
     private UserDao userDao;
 
-    public CollectionController(CollectionDao collectionDao) {
+
+
+
+        public CollectionController(CollectionDao collectionDao, UserDao userDao) {
             this.collectionDao = collectionDao;
+            this.userDao = userDao;
         }
 
     @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
     public List<Collection> viewPublicCollections(){
             return this.collectionDao.getPublicCollections();
         }
+
 
     @RequestMapping(path = "/collections/user", method = RequestMethod.GET)
     public List<Collection> getUserCollections(Principal principal, @RequestParam(value= "name", required = false, defaultValue = "") String userName) {
@@ -36,20 +47,20 @@ public class CollectionController {
         } else {
             return this.collectionDao.getUserPublicCollection(userDao.findIdByUsername(userName));
         }
-    }
-
-
-    @RequestMapping(path = "/collections/user", method = RequestMethod.POST)
-    public Collection addCollection(Principal principal, Collection collection){
-        return this.collectionDao.createCollection(collection, userDao.findIdByUsername(principal.getName()));
-    }
-
-//        @RequestMapping(path = "/user/collections", method = RequestMethod.POST)
-//    public Collection addCollection(@RequestBody Collection collection, Principal principal){
-//            return this.collectionDao.createCollection(userDao.findIdByUsername(principal.getName()));
-//
-//        }
-
-
 
     }
+
+        @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
+            public Collection getCollection(@PathVariable int id) {
+            return collectionDao.getCollectionByCollectionId(id);
+        }
+
+        @ResponseStatus(HttpStatus.CREATED)
+        @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
+    public Collection addCollection(@RequestBody Collection collection, Principal principal){
+            collection.setUserId(userDao.findIdByUsername(principal.getName()));
+            return this.collectionDao.createCollection(collection);
+
+
+    }
+}
