@@ -6,11 +6,6 @@
 </template>
 
 <script>
-export default {
-  props: {
-    albumImageUrl: String, // Pass the URL of the album art as a prop
-  },
-};
 </script>
 
 <style scoped>

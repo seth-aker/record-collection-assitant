@@ -1,8 +1,11 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Genre {
 
     private int id;
+
     private String name;
 
     public int getId() {
