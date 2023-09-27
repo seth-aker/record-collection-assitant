@@ -22,8 +22,6 @@ public class JdbcArtistDao implements ArtistDao{
     public Artist getArtistById (String id) {
         String sql = "SELECT artist_id, artist_name " +
                      "FROM artists WHERE artist_id = ?";
-        String sql2 = "SELECT genre_name " +
-                      "FROM artist_genre"
 
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
@@ -37,7 +35,7 @@ public class JdbcArtistDao implements ArtistDao{
         }
     }
 
-    public List<Artist> getRecordArtists(String recordId ) {
+    public List<Artist> getRecordArtists(String recordId) {
         String sql = "SELECT ra.artist_id, a.artist_name " +
                 " FROM record_artist AS ra " +
                 "JOIN artists AS a ON ra.artist_id = a.artist_id " +
