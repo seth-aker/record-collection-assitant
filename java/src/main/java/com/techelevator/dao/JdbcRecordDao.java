@@ -20,9 +20,10 @@ public class JdbcRecordDao implements RecordDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Record getRecordById(int recordId) {
-        String sql = "SELECT record_id, user_note " +
-                    "FROM records" +
+    public Record getRecordById(String recordId) {
+
+        String sql = "SELECT r.record_id, r.record_title " +
+                    "FROM records " +
                     "WHERE record_id = ?";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
@@ -37,7 +38,7 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public List<Record> getUserLibrary(int userId) {
-        String sql = "SELECT record_id, user_note " +
+        String sql = "SELECT r.record_id, r.record_title, ur.user_note " +
                     "FROM records as r " +
                     "JOIN user_record AS ur ON r.record_id = ur.record_id " +
                     "WHERE ur.user_id = ?";
@@ -54,11 +55,11 @@ public class JdbcRecordDao implements RecordDao {
         return userLib;
     }
 
-    public void updateRecordNote(int id, String note) {
-        String sql = "UPDATE records SET user_note = ? WHERE record_id = ?;";
+    public boolean updateRecordNote(String recordId, int userId , String note) {
+        String sql = "UPDATE user_record SET user_note = ? WHERE record_id = ? AND user_id = ?;";
 
         try {
-            int numberOfRows = this.jdbcTemplate.update(sql, note, id);
+            int numberOfRows = this.jdbcTemplate.update(sql, note, recordId, userId);
 
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
@@ -69,12 +70,56 @@ public class JdbcRecordDao implements RecordDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+        return true;
     }
+
+    public boolean createRecord(String recordId, String recordTitle) {
+        String sql = "INSERT INTO records (record_id, record_title) " +
+                "VALUES (?, ?) ";
+        try {
+            return jdbcTemplate.update(sql, recordId, recordTitle) == 1;
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+    public boolean addRecordToUserLib(Record record, int userId) {
+        String sql = "INSERT INTO user_record (record_id, user_id, user_note " +
+                "VALUES (?, ?, ?);";
+
+        try {
+            return jdbcTemplate.update(sql, record.getId(), userId, record.getUserNote()) == 1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+    public boolean removeRecordFromUserLib(Record record, int userId) {
+        String sql = "DELETE FROM user_record " +
+                "WHERE user_id = ? AND record_id = ?;";
+
+        try {
+            return jdbcTemplate.update(sql, userId, record.getId()) == 1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
 
     private Record mapRowToRecord(SqlRowSet rowSet) {
         Record record = new Record();
-        record.setId(rowSet.getInt("record_id"));
-        record.setUserNote(rowSet.getString("user_note"));
+        record.setId(rowSet.getString("record_id"));
+        record.setTitle(rowSet.getString("record_title"));
+        if(rowSet.getString("user_note") != null) {
+            record.setUserNote(rowSet.getString("user_note"));
+        }
     return record;
     }
 }
