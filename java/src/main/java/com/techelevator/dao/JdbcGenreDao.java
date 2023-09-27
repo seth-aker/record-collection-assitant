@@ -1,7 +1,6 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Artist;
 import com.techelevator.model.Genre;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -47,11 +46,11 @@ public class JdbcGenreDao {
         return id;
     }
 
-    public boolean updateGenre (Genre genreToUpate) {
+    public boolean updateGenre (Genre genreToUpdate) {
         String sql = "UPDATE genres SET genre_name = ?;";
 
         try {
-            int numberOfRows = jdbcTemplate.update(sql, genreToUpate.getName());
+            int numberOfRows = jdbcTemplate.update(sql, genreToUpdate.getName());
 
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
@@ -64,6 +63,24 @@ public class JdbcGenreDao {
         }
 
         return true;
+    }
+
+    public int deleteGenreById(int id) {
+        int numberOfRows;
+        String artistGenreSql = "DELETE FROM artist_genre WHERE genre_id = ?;";
+        String sql = "DELETE FROM genres WHERE genre_id = ?;";
+
+        try {
+            jdbcTemplate.update(artistGenreSql, id);
+            numberOfRows = jdbcTemplate.update(sql, id);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("SQL syntax error", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numberOfRows;
     }
 
     public Genre mapRowToGenre(SqlRowSet rowSet) {
