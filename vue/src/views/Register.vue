@@ -1,5 +1,6 @@
 <template>
   <div id="register" class="text-center">
+    <header>Sleeves</header>
     <form @submit.prevent="register">
       <h1>Create Account</h1>
       <div role="alert" v-if="registrationErrors">
@@ -80,4 +81,10 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+
+#register {
+display: flex;
+justify-content: center;
+}
 </style>
+
