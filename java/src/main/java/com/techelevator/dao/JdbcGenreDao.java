@@ -67,6 +67,24 @@ public class JdbcGenreDao {
         return true;
     }
 
+    public int deleteGenreById(int id) {
+        int numberOfRows;
+        String artistGenreSql = "DELETE FROM artist_genre WHERE genre_id = ?;";
+        String sql = "DELETE FROM genres WHERE genre_id = ?;";
+
+        try {
+            jdbcTemplate.update(artistGenreSql, id);
+            numberOfRows = jdbcTemplate.update(sql, id);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("SQL syntax error", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return numberOfRows;
+    }
+
     public Genre mapRowToGenre(SqlRowSet rowSet) {
         Genre genre = new Genre();
         genre.setName(rowSet.getString("genre_name"));
