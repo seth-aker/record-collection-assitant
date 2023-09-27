@@ -56,7 +56,7 @@ public class JdbcArtistDao implements ArtistDao{
     }
 
     public boolean updateArtist(Artist artist) {
-        int id = Integer.parseInt(artist.getArtistId());
+        int id = Integer.parseInt(artist.getId());
         String sql = "UPDATE artists " +
                      "SET artist_name = ?," +
                      "WHERE artist_id = ?;";
@@ -80,7 +80,7 @@ public class JdbcArtistDao implements ArtistDao{
                      "VALUES (?, ?);";
 
         try {
-            jdbcTemplate.update(sql, artist.getArtistId(), artist.getName());
+            jdbcTemplate.update(sql, artist.getId(), artist.getName());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -108,7 +108,7 @@ public class JdbcArtistDao implements ArtistDao{
 
     public Artist mapRowToArtist(SqlRowSet rowSet) {
         Artist artist = new Artist();
-        artist.setArtistId(rowSet.getString("artist_id"));
+        artist.setId(rowSet.getString("artist_id"));
         artist.setName(rowSet.getString("artist_name"));
         return artist;
     }
