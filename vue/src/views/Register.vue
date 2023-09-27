@@ -1,8 +1,8 @@
 <template>
   <div id="register" class="text-center">
-    <header>Sleeves</header>
     <form @submit.prevent="register">
-      <h1>Create Account</h1>
+        <h1>Sleeves</h1>
+      <h2>Create Account</h2>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -75,6 +75,8 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.cdnfonts.com/css/keep-on-truckin-2');
+
 .form-input-group {
   margin-bottom: 1rem;
 }
@@ -82,6 +84,9 @@ label {
   margin-right: 0.5rem;
 }
 
+h1{
+  font-family: 'Keep on Truckin', sans-serif;
+}
 #register {
 display: flex;
 justify-content: center;

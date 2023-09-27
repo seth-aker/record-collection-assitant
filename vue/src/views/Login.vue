@@ -1,7 +1,8 @@
 <template>
   <div id="login">
     <form @submit.prevent="login">
-      <h1 >Sleeves</h1>
+      <h1>Sleeves</h1>
+      <h2> Login</h2>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password! Not groovy, man
       </div>
@@ -103,7 +104,6 @@ align-items: center;
   justify-content: center;
   align-items: center;
   color: EA573B;
-
 }
 
 h1{
@@ -112,8 +112,13 @@ h1{
   font-size:400%;
   color: #9BDFFC;
   justify-content: center;
-
 }
+
+h2{
+  display: flex;
+  justify-content: center;
+}
+
 .sign-in-button{
 display: flex;
   justify-content: center;
@@ -128,16 +133,5 @@ p{
 }
 
 </style>
-
-/**color: #9BDFFC; Sgt peppers sky
-
- #F8E73B; yellow
-
-#E00A86; purple
-
-#30B4CC; blue
-
-EA573B; orange
-**/
 
 
