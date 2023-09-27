@@ -3,31 +3,36 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.RecordDTO;
+import com.techelevator.services.APIService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @CrossOrigin
 @PreAuthorize("isAuthenticated()")
+@RequestMapping(value = "/records")
 public class RecordController {
 
     private UserDao userDao;
+    private RecordDao recordDao;
+    private APIService apiService;
+
+    public RecordController(RecordDao recordDao, UserDao userDao, APIService apiService){
+        this.recordDao = recordDao;
+        this.userDao = userDao;
+        this.apiService = apiService;
+    }
+
+
+    @GetMapping(path = "/{recordId}")
+    public RecordDTO getRecordById(@PathVariable String recordId) {
+       return apiService.getRecordInformation(recordId);
+    }
 
 }
 
 
-
-//    public RecordController(RecordDTOBuilder recordDTOBuilder, UserDao userDao){
-//        this.recordDTOBuilder = recordDTOBuilder;
-//        this.userDao = userDao;
-//    }
-//
-//
-//    @GetMapping(path = "/record/{id}")
-//    public RecordDTO getRecordById(@PathVariable String recordId) {
-//       return recordDTOBuilder.getRecordById(recordId);
-//    }
 //
 //    @PostMapping(path = "/record")
 //    public String createNewRecord(Principal principal, RecordDTO recordDTO) {

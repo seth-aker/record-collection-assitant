@@ -1,16 +1,17 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.util.List;
 
     public class Tracks {
 
         private String href;
         private int limit;
-        private String next;
-        private int offset;
-        private String previous;
         private int total;
-        private List<TrackInfo> tracks;
+
+        @JsonAlias(value = "items")
+        private List<TrackInfo> trackInfo;
 
         public String getHref() {
             return href;
@@ -28,30 +29,6 @@ import java.util.List;
             this.limit = limit;
         }
 
-        public String getNext() {
-            return next;
-        }
-
-        public void setNext(String next) {
-            this.next = next;
-        }
-
-        public int getOffset() {
-            return offset;
-        }
-
-        public void setOffset(int offset) {
-            this.offset = offset;
-        }
-
-        public String getPrevious() {
-            return previous;
-        }
-
-        public void setPrevious(String previous) {
-            this.previous = previous;
-        }
-
         public int getTotal() {
             return total;
         }
@@ -61,11 +38,11 @@ import java.util.List;
         }
 
         public List<TrackInfo> getTrackInfo() {
-            return tracks;
+            return trackInfo;
         }
 
         public void setItems(List<TrackInfo> trackInfo) {
-            this.tracks = tracks;
+            this.trackInfo = trackInfo;
         }
 
     }

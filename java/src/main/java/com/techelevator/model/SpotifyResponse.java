@@ -94,7 +94,6 @@ public class SpotifyResponse {
         this.releaseDatePrecision = releaseDatePrecision;
     }
 
-
     public String getType() {
         return type;
     }

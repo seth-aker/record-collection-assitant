@@ -10,22 +10,17 @@ public class RecordDTO {
     private String label;
     private Tracks tracks;
     private String imageUrl;
+    private int popularity;
 
     public RecordDTO() {
     }
 
-    public RecordDTO(Record record,
-                     List<Artist> artists,
-                     List<String> genres,
-                     String label,
-                     Tracks tracks)
-    {
-        this.record = record;
-        this.artists = artists;
-        this.genres = genres;
-        this.label = label;
-        this.tracks = tracks;
+    public List<String> getGenres() {
+        return genres;
+    }
 
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
     public Record getRecord() {
@@ -42,14 +37,6 @@ public class RecordDTO {
 
     public void setArtist(List<Artist> artists) {
         this.artists = artists;
-    }
-
-    public List<String> getGenres() {
-        return genres;
-    }
-
-    public void setGenre(List<String> genres) {
-        this.genres = genres;
     }
 
     public String getLabel() {
@@ -74,5 +61,13 @@ public class RecordDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
     }
 }
