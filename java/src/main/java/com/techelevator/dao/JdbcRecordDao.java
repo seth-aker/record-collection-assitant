@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class JdbcRecordDao implements RecordDao {
 
     private JdbcTemplate jdbcTemplate;
+    private UserDao userDao;
 
     public JdbcRecordDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -53,6 +55,24 @@ public class JdbcRecordDao implements RecordDao {
             throw new DaoException("Unable to connect to server or database", e);
         }
         return userLib;
+    }
+
+    public String getRecordNote(String recordId, Principal principal){
+        int userId = userDao.findIdByUsername(principal.getName());
+        String sql = "SELECT user_note FROM user_record WHERE user_id = ? AND record_id = ?;";
+        String note = "";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, recordId);
+            if (results.next()) {
+                note = results.getString("user_note");
+            }
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+
+        return note;
     }
 
     public boolean updateRecordNote(String recordId, int userId , String note) {
