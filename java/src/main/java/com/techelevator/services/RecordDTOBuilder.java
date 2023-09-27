@@ -1,64 +1,54 @@
 package com.techelevator.services;
 
-import com.techelevator.dao.*;
 import com.techelevator.model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecordDTOBuilder {
 
+    private SpotifyResponse spotifyResponse;
 
-    private RecordDao recordDao;
-    private ArtistDao artistDao;
-    private GenreDao genreDao;
-    private LabelDao labelDao;
-    private TrackDao trackDao;
-
-    public RecordDTOBuilder(RecordDao recordDao,
-                            ArtistDao artistDao,
-                            GenreDao genreDao,
-                            LabelDao labelDao,
-                            TrackDao trackDao)
-    {
-        this.recordDao = recordDao;
-        this.artistDao = artistDao;
-        this.genreDao = genreDao;
-        this.labelDao = labelDao;
-        this.trackDao = trackDao;
-
+    public RecordDTO createRecordDTO(SpotifyResponse spotifyResponse) {
+        this.spotifyResponse = spotifyResponse;
+        RecordDTO recordDTO = new RecordDTO();
+        recordDTO.setRecord(createRecord());
+        recordDTO.setArtist(createArtists());
+        recordDTO.setGenre(createGenres());
+        recordDTO.setLabel(createLabel());
+        recordDTO.setTracks(createTracks());
+        recordDTO.setImageUrl(createImageUrl());
+        return recordDTO;
     }
 
-    public RecordDTO getRecordById(String recordId) {
-        Record record = this.recordDao.getRecordById(recordId);
-        List<Artist> artists = this.artistDao.getRecordArtists(recordId);
-        List<Genre> genres = new ArrayList<>();
-        for (Artist artist : artists) {
-            genres.addAll(this.genreDao.getArtistGenres(artist.getArtistId()));
-        }
-//        Label recordLabel = this.labelDao.getRecordLabel(recordId);
-//        List<Track> tracks = this.trackDao.getRecordTracks(recordId);
-
-//        return new RecordDTO(record, artists, genres, recordLabel, tracks);
-        return null;
+    private Record createRecord() {
+        Record record = new Record();
+        record.setId(this.spotifyResponse.getId());
+        record.setTitle(this.spotifyResponse.getName());
+        return record;
     }
 
-    public boolean addRecordToDb(RecordDTO recordDTO, String recordId, int userId) {
-
-        boolean recordAdded = recordDao.createRecord(recordId, recordDTO.getRecord().getTitle());
-        boolean noteAdded;
-        if(recordAdded) {
-          noteAdded = recordDao.updateRecordNote(recordId, userId, recordDTO.getRecord().getUserNote());
-        }
-
-//        boolean artistsAdded = artistDao.addArtist
-        return false;
+    private List<Artist> createArtists() {
+        List<Artist> artists = spotifyResponse.getArtists();
+        return artists;
     }
 
-    public boolean addRecordToDb(RecordDTO recordDTO, int userId) {
-//       if(recordDao.addRecordToUserLib(recordDTO.getRecord(), userId)) {
-//
-//       }
-        return false;
+    private List<String> createGenres() {
+        List<String> genres = spotifyResponse.getGenres();
+        return genres;
     }
+
+    private String createLabel() {
+        return spotifyResponse.getLabel();
+    }
+
+    private Tracks createTracks() {
+        return spotifyResponse.getTracks();
+    }
+
+    private String createImageUrl() {
+        return spotifyResponse.getImages().get(0).getUrl();
+    }
+
+
+
 }
