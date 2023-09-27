@@ -72,10 +72,10 @@ public class JdbcCollectionDao implements CollectionDao{
 
     @Override
     public List<Collection> getUserPublicCollection(int userId) {
+        List<Collection> collections = new ArrayList<>();
         String sql = "SELECT collection_id, collection_name, user_id, is_public " +
                 "FROM collections " +
                 "WHERE user_id = ? AND is_public = true";
-        List<Collection> collections = new ArrayList<>();
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
             while (result.next()) {
@@ -87,6 +87,7 @@ public class JdbcCollectionDao implements CollectionDao{
         return collections;
     }
 
+    @Override
     public Collection getCollectionByCollectionId(int id) {
         Collection collection = null;
         String sql = "SELECT collection_id, collection_name FROM collections WHERE collection_id =?";
@@ -99,25 +100,14 @@ public class JdbcCollectionDao implements CollectionDao{
             throw new DaoException("Unable to connect to server or database", e);
         }
         return collection;
-
     }
-
 
     @Override
-    public Collection createCollection(Collection collection) {
-Collection createdCollection = null;
-        String sql = "INSERT INTO collections (user_id, collection_name, is_public) " +
-                "VALUES (?, ?, ?) RETURNING collection_id;";
-        try {
-           int collectionId = jdbcTemplate.queryForObject(sql, int.class, collection.getUserId(), collection.getName(), collection.isPublic());
-           createdCollection = getCollectionByCollectionId(collectionId);
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
-        }
-        return createdCollection;
-    }
+    public
+
+
+
+
 
 
     @Override
