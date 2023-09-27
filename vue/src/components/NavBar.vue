@@ -1,22 +1,62 @@
 <template>
-  <nav id="menu">
-    <ul>
-      <li><router-link to="/">HOME</router-link></li>
-      <li><router-link to="/about">ABOUT SLEEVES</router-link></li>
-      <li><router-link to="/collections">COLLECTIONS</router-link></li>
-      <li><router-link to="/register">REGISTER</router-link></li>
-      <li><router-link to="/genres">GENRES</router-link></li>
-      <li><router-link to="/new-releases">NEW RELEASES</router-link></li>
-    </ul>
-  </nav>
+  <header>
+    <!-- Left side menu section -->
+    <nav id="menu">
+      <ul>
+        <li><a href="#">HOME</a></li>
+
+      </ul>
+    </nav>
+  </header>
 </template>
 
 <script>
-export default {
-  name: 'NavBar'
-}
+
 </script>
 
 <style scoped>
+.left-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; 
+
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* navigation menu items */
+#menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#menu ul li {
+    margin-bottom: 40px;
+}
+
+#menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+#menu {
+    position: absolute;
+    left: 0;
+    top: 250px; 
+  
+    width: 200px; 
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    z-index: 1000;
+   
+ 
+}
 
 </style>
