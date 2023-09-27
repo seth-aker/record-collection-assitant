@@ -8,7 +8,7 @@ public class RecordDTO {
     private List<Artist> artists;
     private List<Genre> genres;
     private Label label;
-    private List<Track> tracks;
+    private List<Tracks> tracks;
 
     public RecordDTO() {
     }
@@ -17,7 +17,7 @@ public class RecordDTO {
                      List<Artist> artists,
                      List<Genre> genres,
                      Label label,
-                     List<Track> tracks)
+                     List<Tracks> tracks)
     {
         this.record = record;
         this.artists = artists;
@@ -58,11 +58,11 @@ public class RecordDTO {
         this.label = label;
     }
 
-    public List<Track> getTracks() {
+    public List<Tracks> getTracks() {
         return tracks;
     }
 
-    public void setTrack(List<Track> tracks) {
+    public void setTrack(List<Tracks> tracks) {
         this.tracks = tracks;
     }
 
