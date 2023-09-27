@@ -2,14 +2,8 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.*;
-import com.techelevator.services.RecordDTOBuilder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.security.Principal;
-import java.util.Objects;
 
 
 @RestController
@@ -17,7 +11,6 @@ import java.util.Objects;
 @PreAuthorize("isAuthenticated()")
 public class RecordController {
 
-    private RecordDTOBuilder recordDTOBuilder;
     private UserDao userDao;
 
 }
