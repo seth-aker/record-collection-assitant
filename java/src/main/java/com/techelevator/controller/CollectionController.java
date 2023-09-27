@@ -47,15 +47,21 @@ public class CollectionController {
         }
     }
 
-        @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
-            public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
-            return collectionDao.getCollectionByCollectionId(id);
-        }
+    @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
+    public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
+        return collectionDao.getCollectionByCollectionId(id);
+    }
 
-        @ResponseStatus(HttpStatus.CREATED)
-        @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
     public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal){
             collection.setUserId(userDao.findIdByUsername(principal.getName()));
             return this.collectionDao.createCollection(collection);
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping(path = "/user/collection/{id}")
+    public void deleteCollection(@PathVariable int id, @Valid Principal principal) {
+            collectionDao.deleteCollection(id);
     }
 }
