@@ -2,16 +2,45 @@
   <div class="search-box">
     <input type="text" id="search-input" placeholder="Search by genre, artist, or song...">
     <button id="search-button">Search</button>
+    <div class="upload-counter">
+      <p>2,783 active users!</p>
+      <p>7,623 albums uploaded in the last 24 hours!</p>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'SearchBox'
-}
+
 </script>
 
 
 <style scoped>
+.search-box {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#search-input {
+    padding: 10px;
+    width: 30%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#search-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#search-button:hover {
+    background-color: #555;
+}
+
 
 </style>
