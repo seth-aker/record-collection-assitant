@@ -1,4 +1,5 @@
 <template>
+
   <div class="nav-bar-buttons">
     <div class="registration-login">
       <router-link to="({/login})">
@@ -19,18 +20,21 @@
         <button id="contact" class="rounded-button">CONTACT</button>
       </router-link>
     </div>
-  </div>
+ 
+        <button class="dropdown"><router-link>Login</router-link></button>
+        <router-link :>Register</router-link>
+
+ </div>
 </template>
 
 <script> 
 
 export default {
 
-   name: "NavBar",
-  components: {
-  
-  
-  },
+
+
+  name: "NavBar",
+
   methods: {
  
   }
@@ -75,6 +79,10 @@ div{
 
 .rounded-button:hover {
   background-color: #1e8c72; /* Darker color on hover */
+}
+
+.dropdown:hover{
+
 }
 
 
