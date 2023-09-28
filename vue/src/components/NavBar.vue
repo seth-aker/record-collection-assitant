@@ -1,8 +1,8 @@
 <template>
 
-  <div class="nav-bar-buttons">
+  <nav class="nav-bar-buttons">
     <div class="registration-login">
-      <router-link to="({/login})">
+      <router-link to="login">
         <button id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</button>
       </router-link>
       <router-link to="/register">
@@ -11,7 +11,7 @@
     </div>
     <div class="general-information">
       <router-link to="/home">
-        <button id="home" class="rounded-button">HOME</button>
+        <button id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;</button>
       </router-link>
       <router-link to="/collections">
         <button id="collections" class="rounded-button">COLLECTIONS</button>
@@ -21,19 +21,15 @@
       </router-link>
     </div>
  
-        <button class="dropdown"><router-link>Login</router-link></button>
-        <router-link :>Register</router-link>
+  
 
- </div>
+ </nav>
 </template>
 
 <script> 
 
 export default {
-
-
-
-  name: "NavBar",
+name: "NavBar",
 
   methods: {
  
@@ -42,7 +38,7 @@ export default {
 </script>
 
 <style scoped>
-div{
+#nav-bar-buttons{
   display: flex;
   position: fixed;
 
