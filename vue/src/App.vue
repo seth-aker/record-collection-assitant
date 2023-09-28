@@ -2,22 +2,24 @@
   <div id="app">
     <div class="background"></div> <!-- New background element -->
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
+       
+      <nav-bar-vue />
       </div>
-    <div id = "login-registration">
-        <login-registration-button />
-  </div>
     <router-view />
   </div>
 </template>
 
 <script>
-import LoginRegistrationButton from "./components/LoginButton.vue"
+
+import NavBarVue from './components/NavBar.vue'
 
 export default {
+  name: 'MainApp',
+
   components: {
-    LoginRegistrationButton
+    NavBarVue,
+    
   }
 
 }
@@ -31,11 +33,6 @@ export default {
   background-repeat: no-repeat; 
    
 }
-.login-registration{
-  display: flex ;
-width: 100%;
-padding-top: 35px;
-padding-right: 10px;
-}
+
 
 </style>
