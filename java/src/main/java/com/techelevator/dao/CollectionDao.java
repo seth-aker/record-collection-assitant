@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Collection;
+import com.techelevator.model.Record;
 
 import java.util.List;
 
@@ -18,8 +19,11 @@ public interface CollectionDao {
     Collection getCollectionByCollectionId(int id);
 
 
-  Collection createCollection(Collection collection);
+    Collection createCollection(Collection collection);
 
 
     int deleteCollection(int id);
+
+    boolean addRecordToCollection(int collectionId, Record record);
+
 }

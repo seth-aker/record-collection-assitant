@@ -26,7 +26,6 @@ public class CollectionController {
     private UserDao userDao;
 
 
-
         public CollectionController(CollectionDao collectionDao, UserDao userDao) {
             this.collectionDao = collectionDao;
             this.userDao = userDao;
@@ -48,13 +47,13 @@ public class CollectionController {
         }
     }
 
-    @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/collections/user/{id}", method = RequestMethod.GET)
     public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
         return collectionDao.getCollectionByCollectionId(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
+    @RequestMapping(path = "/collections/user/create", method = RequestMethod.POST)
     public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal) {
         collection.setUserId(userDao.findIdByUsername(principal.getName()));
         return this.collectionDao.createCollection(collection);
@@ -62,8 +61,8 @@ public class CollectionController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @DeleteMapping(path = "/user/collection/{id}")
-    public void deleteCollection(@PathVariable int id, @Valid Principal principal) {
-            collectionDao.deleteCollection(id);
+    @DeleteMapping(path = "/collections/user/{collectionId}")
+    public void deleteCollection(@PathVariable int collectionId, @Valid Principal principal) {
+            collectionDao.deleteCollection(collectionId);
     }
 }

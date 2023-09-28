@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import com.techelevator.model.spotifyAPImodels.Tracks;
+
 import java.util.List;
 
 public class RecordDTO {

@@ -1,4 +1,4 @@
-package com.techelevator.services;
+package com.techelevator.model.spotifyAPImodels;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 

@@ -1,6 +1,7 @@
-package com.techelevator.model;
+package com.techelevator.model.spotifyAPImodels;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+
+import com.techelevator.model.Artist;
 
 import java.util.List;
 

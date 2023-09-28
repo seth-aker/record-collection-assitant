@@ -7,6 +7,8 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Collections from '../views/Collections.vue'
 import Contact from '../views/Contact.vue'
+import RecordView from '../views/RecordView.vue'
+
 
 
 Vue.use(Router)
@@ -72,6 +74,14 @@ const router = new Router({
       requiresAuth: false
     }
   },
+  {
+    path: "/records/:recordId",
+    name: "record-page",
+    component: RecordView,
+    meta: {
+      requiresAuth: false
+    }
+  }
 
   ]
 });
