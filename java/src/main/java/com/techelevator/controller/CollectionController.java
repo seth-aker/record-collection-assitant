@@ -26,10 +26,12 @@ public class CollectionController {
     private UserDao userDao;
 
 
-    public CollectionController(CollectionDao collectionDao, UserDao userDao) {
-        this.collectionDao = collectionDao;
-        this.userDao = userDao;
-    }
+
+        public CollectionController(CollectionDao collectionDao, UserDao userDao) {
+            this.collectionDao = collectionDao;
+            this.userDao = userDao;
+        }
+
 
     @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
     public List<Collection> viewPublicCollections() {

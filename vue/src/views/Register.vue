@@ -84,6 +84,7 @@ export default {
   justify-content: space-between;
   padding-top: 15px;
 }
+
 label {
   margin-right: 0.5rem;
 }
@@ -92,14 +93,16 @@ h1{
   display: flex;
   justify-content: center;
   font-family: 'Keep on Truckin', sans-serif;
-  color: #EA573B;
+  color:  #F8E73B;
   font-size: 400%;
 }
 
 h2{
   display: flex;
   justify-content: center;
+  color: #F8E73B;
 }
+
 #register {
 display: flex;
 justify-content: center;
@@ -109,7 +112,6 @@ align-items: center;
 #form{
   display: flex;
   flex-direction:row;
-
 }
 
 #form-input{
@@ -128,6 +130,10 @@ p{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.username{
+   color:#F8E73B;
 }
 
 
