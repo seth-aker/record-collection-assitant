@@ -2,7 +2,7 @@
   <nav>
     <section class="nav-bar-buttons nav-bar-left">
       <div id="home" class="rounded-button">
-          <router-link :to="{name: 'register'}">HOME </router-link>
+          <router-link :to="{name: 'home'}">HOME </router-link>
       </div>
       <div id="collections" class="rounded-button">
         <router-link :to="{name: 'collections'}">COLLECTIONS</router-link>
