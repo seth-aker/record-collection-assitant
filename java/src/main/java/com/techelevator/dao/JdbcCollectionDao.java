@@ -9,13 +9,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import java.util.ArrayList;
+
 import com.techelevator.model.Collection;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class JdbcCollectionDao implements CollectionDao{
+public class JdbcCollectionDao implements CollectionDao {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -25,9 +26,9 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
     @Override
-    public List<Collection> completeLibrary(){
+    public List<Collection> completeLibrary() {
         List<Collection> library = new ArrayList<>();
-       String sql = "SELECT FROM collections;";
+        String sql = "SELECT FROM collections;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
@@ -92,12 +93,12 @@ public class JdbcCollectionDao implements CollectionDao{
     public Collection getCollectionByCollectionId(int id) {
         Collection collection = null;
         String sql = "SELECT collection_id, collection_name FROM collections WHERE collection_id = ?";
-        try{
+        try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-            if(results.next()) {
+            if (results.next()) {
                 collection = mapRowToCollection(results, true);
             }
-        }catch (CannotGetJdbcConnectionException e) {
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
         return collection;
@@ -113,13 +114,13 @@ public class JdbcCollectionDao implements CollectionDao{
                     collection.getName(), collection.isPublic());
             createdCollection = getCollectionByCollectionId(createdCollectionId);
             return createdCollection;
-        }catch (CannotGetJdbcConnectionException e) {
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (BadSqlGrammarException e) {
             throw new DaoException("SQL syntax error", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
-        }catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new DaoException("Error while inserting a new collection", e);
         }
     }
@@ -144,7 +145,6 @@ public class JdbcCollectionDao implements CollectionDao{
     }
 
 
-
     private Collection mapRowToCollection(SqlRowSet rowSet) {
         Collection collection = new Collection();
         collection.setId(rowSet.getInt("collection_id"));
@@ -154,12 +154,12 @@ public class JdbcCollectionDao implements CollectionDao{
         return collection;
     }
 
-    private Collection mapRowToCollection(SqlRowSet rowSet,boolean notAllColumns) {
+    private Collection mapRowToCollection(SqlRowSet rowSet, boolean notAllColumns) {
         Collection collection = new Collection();
-        if (notAllColumns == true) {
+        if (notAllColumns) {
             collection.setId(rowSet.getInt("collection_id"));
             collection.setName(rowSet.getString("collection_name"));
-            }
+        }
         return collection;
     }
 }
