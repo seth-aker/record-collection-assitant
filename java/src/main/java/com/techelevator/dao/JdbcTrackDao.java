@@ -1,14 +1,5 @@
 package com.techelevator.dao;
 
-import com.techelevator.exception.DaoException;
-import com.techelevator.model.Tracks;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.jdbc.BadSqlGrammarException;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
-
-import javax.sound.midi.Track;
 //
 //public class JdbcTrackDao implements TrackDao{
 //

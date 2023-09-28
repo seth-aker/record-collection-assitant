@@ -1,6 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Tracks;
+import com.techelevator.model.spotifyAPImodels.Tracks;
 
 import javax.sound.midi.Track;
 

@@ -1,8 +1,9 @@
 package com.techelevator.services;
 
-import com.techelevator.model.AlbumSearchResponse;
+import com.techelevator.model.spotifyAPImodels.AlbumSearchResponse;
 import com.techelevator.model.RecordDTO;
-import com.techelevator.model.SpotifyResponse;
+import com.techelevator.model.spotifyAPImodels.SpotifyResponse;
+import com.techelevator.model.spotifyAPImodels.TokenResponse;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -57,8 +58,6 @@ public class SpotifyAPIService implements APIService {
         } catch (NullPointerException e) {
             System.out.println("Error, no response from Spotify.");
 
-        } catch (Exception e) {
-            System.out.println("Something went wrong. " + e.getMessage());
         }
         return createRecordDTO(spotifyResponse);
     }
@@ -90,14 +89,26 @@ public class SpotifyAPIService implements APIService {
 
         } catch (NullPointerException e) {
             System.out.println("Error, no response from Spotify.");
-
-        } catch (Exception e) {
-            System.out.println("Something went wrong. " + e.getMessage());
         }
+
         for(SpotifyResponse album : albums) {
             spotifyResponse.add(createRecordDTO(album));
         }
         return spotifyResponse;
+    }
+
+    @Override
+    public List<RecordDTO> getArtistSearch(String searchString) {
+        List<RecordDTO> searchResults = new ArrayList<>();
+
+        Duration duration = Duration.between(tokenLastUpdated, LocalDateTime.now());
+        if(duration.getSeconds() > 3600) {
+            setAccessToken();
+        }
+        HttpEntity<Void> request = createSpotifyRequest();
+
+
+        return searchResults;
     }
 
     private void setAccessToken(){

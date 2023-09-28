@@ -1,6 +1,9 @@
 package com.techelevator.model;
 
 
+import com.techelevator.model.spotifyAPImodels.Image;
+
+import java.util.List;
 
 public class Artist {
 
@@ -9,6 +12,9 @@ public class Artist {
     private String name;
     private String type;
     private String uri;
+    private List<String> genres;
+    private List<Image> images;
+    private String popularity;
 
     public String getHref() {
         return href;

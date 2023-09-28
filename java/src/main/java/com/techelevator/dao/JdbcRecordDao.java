@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -36,6 +37,8 @@ public class JdbcRecordDao implements RecordDao {
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("Record id does not exist");
         }
     }
 
@@ -93,11 +96,11 @@ public class JdbcRecordDao implements RecordDao {
         return true;
     }
 
-    public boolean createRecord(String recordId, String recordTitle) {
+    public boolean createRecord(Record record) {
         String sql = "INSERT INTO records (record_id, record_title) " +
                 "VALUES (?, ?) ";
         try {
-            return jdbcTemplate.update(sql, recordId, recordTitle) == 1;
+            return jdbcTemplate.update(sql, record.getId(), record.getTitle()) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);

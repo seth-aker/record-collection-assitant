@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.Record;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -129,7 +130,7 @@ public class JdbcCollectionDao implements CollectionDao {
     @Override
     public int deleteCollection(int id) {
         int numberOfRows = 0;
-        String collectionRecordSql = "DELETE FROM collection_record WHERE collection_id= ?;";
+        String collectionRecordSql = "DELETE FROM collection_record WHERE collection_id = ?;";
         String sql = "DELETE FROM collections WHERE collection_id = ?;";
         try {
             jdbcTemplate.update(collectionRecordSql, id);
@@ -142,6 +143,22 @@ public class JdbcCollectionDao implements CollectionDao {
             throw new DaoException("Data integrity violation", e);
         }
         return numberOfRows;
+    }
+
+    @Override
+    public boolean addRecordToCollection(int collectionId, Record record) {
+        String sql = "INSERT INTO collection_record (collection_id, record_id) " +
+                "VALUES (?, ?);";
+        try {
+            jdbcTemplate.update(sql, collectionId, record.getId());
+            return true;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("SQL syntax error", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
     }
 
 
