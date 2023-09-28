@@ -21,7 +21,7 @@ export default {
         const recordId = this.$route.params.recordId;
         recordService.getRecordInfo(recordId)
         .then(response => {
-          this.recordDTO = response;
+          this.recordDTO = response.data;
         });
     }
 }

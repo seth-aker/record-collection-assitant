@@ -1,21 +1,17 @@
 <template>
-
-<div>
-        <login-button-vue />
+<div class="nav">
+        
+        <button class="dropdown"><router-link>Login</router-link></button>
+        <router-link :>Register</router-link>
 </div>
 </template>
 
 <script> 
-import LoginButtonVue from '../components/LoginButton.vue';
 
 export default {
 
-   name: "NavBar",
-  components: {
- LoginButtonVue
-  
-  
-  },
+  name: "NavBar",
+
   methods: {
     showHome(){
       this.$router.push({name: 'home'});
@@ -29,6 +25,10 @@ export default {
 div{
   display: flex;
   position: fixed;
+
+}
+
+.dropdown:hover{
 
 }
 
