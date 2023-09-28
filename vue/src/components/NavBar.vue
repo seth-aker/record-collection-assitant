@@ -1,8 +1,15 @@
 <template>
-
-<div>
-        <login-button-vue />
-</div>
+<div class="nav-bar-buttons">
+    <div class="registration-login">
+    <button @click="showLoginPage" id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</button>
+   <button @click="showRegisterPage" id="registry" class="rounded-button">REGISTER</button>
+    </div>
+    <div class="general-information">
+        <button @click="showHomePage" id="home" class="rounded-button">HOME</button>
+    <button @click="showCollectionsPage" id="collections" class="rounded-button">COLLECTIONS</button>
+    <button @click="showContactPage" id="contact" class="rounded-button">CONTACT</button>
+    </div>
+  </div>
 </template>
 
 <script> 
