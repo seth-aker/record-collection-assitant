@@ -14,7 +14,7 @@ export default {
     
     data() {
       return {
-        recordDTO : {}
+        recordDTO : ''
       }
     },
     created() {

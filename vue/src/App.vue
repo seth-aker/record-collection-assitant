@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
+      <!-- <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link> -->
        
       <nav-bar-vue />
       </div>
@@ -11,15 +11,15 @@
 
 <script>
 
-import NavBarVue from './components/NavBar.vue'
+// import NavBarVue from './components/NavBar.vue'
 
 export default {
   name: 'MainApp',
 
-  components: {
-    NavBarVue,
+  // components: {
+  //   NavBarVue,
     
-  }
+  // }
 
 }
 </script>
