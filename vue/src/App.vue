@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+
     <div id="nav">
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
-       
-      <nav-bar-vue/>
-      </div>
+
+      <nav-bar-vue />
+      
+
     <router-view />
   </div>
 </template>
@@ -23,7 +25,10 @@ export default {
 
 }
 </script>
-<style scoped>
+<style>
+body {
+  margin: 0;
+}
 
 #app {
   background-image: url('../public/pinkYellow.jpg'); 

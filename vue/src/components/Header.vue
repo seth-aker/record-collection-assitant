@@ -1,8 +1,5 @@
 <template>
   <header class="right-section">
-  <div></div>
-    
-    
     <h1>SLEEVES</h1>
   </header>
 </template>

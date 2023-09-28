@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Null;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,9 @@ public class JdbcRecordDao implements RecordDao {
     private JdbcTemplate jdbcTemplate;
     private UserDao userDao;
 
-    public JdbcRecordDao(JdbcTemplate jdbcTemplate) {
+    public JdbcRecordDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userDao = userDao;
     }
 
     public Record getRecordById(String recordId) {
@@ -73,6 +75,8 @@ public class JdbcRecordDao implements RecordDao {
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
+        } catch (NullPointerException e) {
+            return "";
         }
 
         return note;
