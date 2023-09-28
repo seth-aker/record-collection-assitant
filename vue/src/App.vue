@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
        
-      <nav-bar-vue />
+      <nav-bar-vue/>
       </div>
     <router-view />
   </div>

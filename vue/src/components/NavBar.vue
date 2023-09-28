@@ -1,17 +1,17 @@
 <template>
 
-  <section class="nav-bar-buttons">
+  <section class="nav-bar-buttons ">
    
-      <router-link to="login">
+      <router-link :to="login">
         <div id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</div>
       </router-link>
-      <router-link to="/register">
+      <router-link to="register">
         <div id="registry" class="rounded-button">REGISTER</div>
       </router-link>
       <router-link to="/home">
-        <div id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;
+        <div id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;</div>
       </router-link>
-      <router-link to="/collections">
+      <router-link to="/collectinons">
         <div id="collections" class="rounded-button">COLLECTIONS</div>
       </router-link>
       <router-link to="/contact">
@@ -35,7 +35,7 @@ name: "NavBar",
 };
 </script>
 
-<style scoped>
+<style >
 #nav-bar-buttons{
   display: flex;
   position: fixed;
