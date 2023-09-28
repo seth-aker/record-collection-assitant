@@ -5,9 +5,13 @@ import Footer from "@/components/Footer.vue";
 
 <template>
   <div id="app">
-      <!-- <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link> -->
+
+    <div id="nav">
+      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
+
       <nav-bar-vue />
       
+
     <router-view />
 
      <Footer />

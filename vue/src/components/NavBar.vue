@@ -13,6 +13,8 @@
       </div>
     </section>
 
+  <section class="nav-bar-buttons ">
+   
     <h1>SLEEVES</h1>
 
     <section class="nav-bar-buttons nav-bar-right">
@@ -34,6 +36,7 @@ export default {
 name: "NavBar",
 };
 </script>
+
 
 <style scoped>
 nav {
