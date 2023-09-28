@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import Collections from '../views/Collections.vue'
+import Contact from '../views/Contact.vue'
 
 
 Vue.use(Router)
@@ -53,9 +55,26 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
+    },
+    {
+    path: "/collections",
+    name: "collections",
+    component: Collections,
+    meta: {
+      requiresAuth: false
     }
+    },
+    {
+    path: "/contact",
+    name: "contact",
+    component: Contact,
+    meta: {
+      requiresAuth: false
+    }
+  },
+
   ]
-})
+});
 
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
