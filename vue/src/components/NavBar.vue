@@ -1,82 +1,87 @@
 <template>
+  <nav>
+    <section class="nav-bar-buttons nav-bar-left">
+      <div id="home" class="rounded-button">
+          <router-link :to="{name: 'register'}">HOME </router-link>
+      </div>
+      <div id="collections" class="rounded-button">
+        <router-link :to="{name: 'collections'}">COLLECTIONS</router-link>
+      </div>
+      
+      <div id="contact" class="rounded-button">
+        <router-link :to="{name: 'contact'}">CONTACT</router-link>
+      </div>
+    </section>
 
-  <section class="nav-bar-buttons">
-   
-      <router-link to="login">
-        <div id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</div>
-      </router-link>
-      <router-link to="/register">
-        <div id="registry" class="rounded-button">REGISTER</div>
-      </router-link>
-      <router-link to="/home">
-        <div id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;
-      </router-link>
-      <router-link to="/collections">
-        <div id="collections" class="rounded-button">COLLECTIONS</div>
-      </router-link>
-      <router-link to="/contact">
-        <div id="contact" class="rounded-button">CONTACT</div>
-      </router-link>
- 
- 
-  
+    <h1>SLEEVES</h1>
 
- </section>
+    <section class="nav-bar-buttons nav-bar-right">
+    
+      <div id="login" class="rounded-button">
+        <router-link :to="{name: 'login'}">LOGIN</router-link>
+      </div>
+      
+      <div id="registry" class="rounded-button">
+          <router-link :to="{name: 'register'}">REGISTER</router-link>
+      </div>
+  </section>
+ </nav>
 </template>
 
 <script> 
 
 export default {
 name: "NavBar",
-
-  methods: {
- 
-  }
 };
 </script>
 
 <style scoped>
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
 #nav-bar-buttons{
   display: flex;
-  position: fixed;
-
 }
 .nav-bar-buttons {
   display: flex;
-  align-items: space;
-
- 
-
 }
 .registration-login{
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
-}
-
-.general-information{
-  display: flex;
-  justify-content: flex-start;
 }
 
 .rounded-button {
   display: flex;
   border-radius: 20px; /* Rounded corners */
-  
   background-color: #40c5a4; /* Background color */
   color: #fff; /* Text color */
-  padding: 15px 30px; /* Padding for a bigger button */
+  padding: 15px; /* Padding for a bigger button */
   border: none;
   cursor: pointer;
-  padding: -25px;
+  height: 15px;
+  z-index: 1;
 }
 
 .rounded-button:hover {
   background-color: #1e8c72; /* Darker color on hover */
 }
 
-.dropdown:hover{
+h1 {
+    font-size: 130px;
+    font-family: "KEEPT___", Arial, sans-serif;
+    color: #eff13f;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    text-align: center;
+}
 
+@font-face {
+  font-family: 'KEEPT___'; 
+  src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
 }
 
 
