@@ -5,17 +5,18 @@
     <button class="rounded-button">CONTACT</button>
 
     
-    <LoginButton />
+    <login-button />
   </header>
 </template>
 
-<script>
-import LoginButton from "@/components/LoginButton.vue"; 
+<script> 
+
 
 export default {
   name: "NavBar",
   components: {
-    LoginButton, 
+  
+
   },
 };
 </script>
