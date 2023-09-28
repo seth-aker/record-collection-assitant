@@ -1,62 +1,62 @@
 <template>
 
-  <nav class="nav-bar-buttons">
-    <div class="registration-login">
+  <div class="nav-bar-buttons">
+    <div class="registration-login rounded-button">
+       <div id="login">
       <router-link to="login">
-        <button id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</button>
+      &nbsp;&nbsp;LOGIN&nbsp;&nbsp;
       </router-link>
+       </div>
+        <div id="register">
       <router-link to="/register">
-        <button id="registry" class="rounded-button">REGISTER</button>
+        REGISTER
       </router-link>
     </div>
-    <div class="general-information">
+    <div class="general-information rounded-button">
+      <div id="home">
       <router-link to="/home">
-        <button id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;</button>
-      </router-link>
+       &nbsp;&nbsp;HOME&nbsp;&nbsp;
+      </router-link></div>
+        <div id="collections" >
       <router-link to="/collections">
-        <button id="collections" class="rounded-button">COLLECTIONS</button>
+       COLLECTION
       </router-link>
+       </div>
+       <div id="contact">
       <router-link to="/contact">
-        <button id="contact" class="rounded-button">CONTACT</button>
+      CONTACT
       </router-link>
     </div>
  
   
 
- </nav>
+ </div>
 </template>
 
-<script> 
-
+<script>
 export default {
-name: "NavBar",
+  name: "NavBar",
 
-  methods: {
- 
-  }
+  methods: {},
 };
 </script>
 
 <style scoped>
-#nav-bar-buttons{
+#nav-bar-buttons {
   display: flex;
   position: fixed;
-
 }
 .nav-bar-buttons {
   display: flex;
   align-items: space;
-
- 
-
 }
-.registration-login{
+.registration-login {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
 }
 
-.general-information{
+.general-information {
   display: flex;
   justify-content: flex-start;
 }
@@ -64,7 +64,7 @@ name: "NavBar",
 .rounded-button {
   display: flex;
   border-radius: 20px; /* Rounded corners */
-  
+
   background-color: #40c5a4; /* Background color */
   color: #fff; /* Text color */
   padding: 15px 30px; /* Padding for a bigger button */
@@ -77,9 +77,6 @@ name: "NavBar",
   background-color: #1e8c72; /* Darker color on hover */
 }
 
-.dropdown:hover{
-
+.dropdown:hover {
 }
-
-
 </style>
