@@ -1,5 +1,6 @@
 package com.techelevator.services;
 
+import com.techelevator.model.AlbumSearchResponse;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.model.SpotifyResponse;
 import org.springframework.http.*;
@@ -12,11 +13,13 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SpotifyAPIService implements APIService {
 
-    private static String API_BASE_URL = "https://api.spotify.com/v1/albums/";
+    private static String API_BASE_URL = "https://api.spotify.com/v1";
     private final RestTemplate restTemplate = new RestTemplate();
     private String token;
     private static String API_TOKEN_URL = "https://accounts.spotify.com/api/token";
@@ -39,7 +42,7 @@ public class SpotifyAPIService implements APIService {
         HttpEntity<Void> request = createSpotifyRequest();
 
         try {
-            ResponseEntity<SpotifyResponse> spotifyResponseEntity = restTemplate.exchange(API_BASE_URL + recordId, HttpMethod.GET, request, SpotifyResponse.class);
+            ResponseEntity<SpotifyResponse> spotifyResponseEntity = restTemplate.exchange(API_BASE_URL + "/albums/"+ recordId, HttpMethod.GET, request, SpotifyResponse.class);
             spotifyResponse = spotifyResponseEntity.getBody();
 
         } catch (RestClientResponseException e) {
@@ -60,9 +63,42 @@ public class SpotifyAPIService implements APIService {
         return createRecordDTO(spotifyResponse);
     }
 
+    @Override
+    public List<RecordDTO> getAlbumSearch(String searchString) {
+        List<RecordDTO> spotifyResponse = new ArrayList<>();
 
+        //Checks if the access token for spotify has been updated within the last hour. If not, then updates the token.
+        Duration duration = Duration.between(tokenLastUpdated, LocalDateTime.now());
+        if(duration.getSeconds() > 3600) {
+            setAccessToken();
+        }
 
+        HttpEntity<Void> request = createSpotifyRequest();
+        List<SpotifyResponse> albums = new ArrayList<>();
+        try {
+            ResponseEntity<AlbumSearchResponse> response = restTemplate.exchange(API_BASE_URL +"/search?q=" + searchString, HttpMethod.GET, request, AlbumSearchResponse.class);
+            AlbumSearchResponse albumSearchResponse = response.getBody();
+            albums = albumSearchResponse.getSpotifyResponses();
+        }catch (RestClientResponseException e) {
+            String errorMessage = "Return status: " + e.getRawStatusCode() + "\n" +
+                    "Status message: " + e.getMessage();
+            System.out.println(errorMessage);
 
+        } catch (ResourceAccessException e) {
+            String errorMessage = e.getMessage();
+            System.out.println(errorMessage);
+
+        } catch (NullPointerException e) {
+            System.out.println("Error, no response from Spotify.");
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong. " + e.getMessage());
+        }
+        for(SpotifyResponse album : albums) {
+            spotifyResponse.add(createRecordDTO(album));
+        }
+        return spotifyResponse;
+    }
 
     private void setAccessToken(){
         HttpHeaders headers = new HttpHeaders();

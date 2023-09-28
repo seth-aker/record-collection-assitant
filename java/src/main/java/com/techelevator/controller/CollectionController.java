@@ -26,35 +26,44 @@ public class CollectionController {
     private UserDao userDao;
 
 
+
         public CollectionController(CollectionDao collectionDao, UserDao userDao) {
             this.collectionDao = collectionDao;
             this.userDao = userDao;
         }
 
+
     @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
-    public List<Collection> viewPublicCollections(){
-            return this.collectionDao.getPublicCollections();
-        }
+    public List<Collection> viewPublicCollections() {
+        return this.collectionDao.getPublicCollections();
+    }
 
     @RequestMapping(path = "/collections/user", method = RequestMethod.GET)
-    public List<Collection> getUserCollections(Principal principal, @RequestParam(value= "name", required = false, defaultValue = "") String userName) {
+    public List<Collection> getUserCollections(Principal principal, @RequestParam(value = "name", required = false, defaultValue = "") String userName) {
         //checks if requester is user, if not shows only public collections of specified user
-        if(userName.equals("") || userName.equals(principal.getName())) {
+        if (userName.equals("") || userName.equals(principal.getName())) {
             return this.collectionDao.getCollectionsByUserId(userDao.findIdByUsername(principal.getName()));
         } else {
             return this.collectionDao.getUserPublicCollection(userDao.findIdByUsername(userName));
         }
     }
 
-        @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
-            public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
-            return collectionDao.getCollectionByCollectionId(id);
-        }
+    @RequestMapping(path = "/user/collection/{id}", method = RequestMethod.GET)
+    public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
+        return collectionDao.getCollectionByCollectionId(id);
+    }
 
-        @ResponseStatus(HttpStatus.CREATED)
-        @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
-    public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal){
-            collection.setUserId(userDao.findIdByUsername(principal.getName()));
-            return this.collectionDao.createCollection(collection);
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/user/collection/create", method = RequestMethod.POST)
+    public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal) {
+        collection.setUserId(userDao.findIdByUsername(principal.getName()));
+        return this.collectionDao.createCollection(collection);
+
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping(path = "/user/collection/{id}")
+    public void deleteCollection(@PathVariable int id, @Valid Principal principal) {
+            collectionDao.deleteCollection(id);
     }
 }
