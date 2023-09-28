@@ -1,29 +1,27 @@
 <template>
 
-  <nav class="nav-bar-buttons">
-    <div class="registration-login">
+  <section class="nav-bar-buttons">
+   
       <router-link to="login">
-        <button id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</button>
+        <div id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</div>
       </router-link>
       <router-link to="/register">
-        <button id="registry" class="rounded-button">REGISTER</button>
+        <div id="registry" class="rounded-button">REGISTER</div>
       </router-link>
-    </div>
-    <div class="general-information">
       <router-link to="/home">
-        <button id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;</button>
+        <div id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;
       </router-link>
       <router-link to="/collections">
-        <button id="collections" class="rounded-button">COLLECTIONS</button>
+        <div id="collections" class="rounded-button">COLLECTIONS</div>
       </router-link>
       <router-link to="/contact">
-        <button id="contact" class="rounded-button">CONTACT</button>
+        <div id="contact" class="rounded-button">CONTACT</div>
       </router-link>
-    </div>
+ 
  
   
 
- </nav>
+ </section>
 </template>
 
 <script> 
