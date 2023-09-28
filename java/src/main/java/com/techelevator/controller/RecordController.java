@@ -58,7 +58,7 @@ public class RecordController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path = "/records/{collectionId}")
+    @PostMapping(path = "/{collectionId}")
     public void addRecordToCollection(@Valid Principal principal,
                                       @RequestBody RecordDTO recordDTO,
                                       @PathVariable int collectionId) {

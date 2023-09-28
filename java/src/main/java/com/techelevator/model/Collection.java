@@ -1,11 +1,14 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Collection {
 
     private int id;
     private int userId;
     private String name;
     private boolean isPublic;
+    private List<String> recordIds;
     public Collection() {
     }
 
@@ -46,5 +49,13 @@ public class Collection {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public List<String> getRecordIds() {
+        return recordIds;
+    }
+
+    public void setRecordIds(List<String> recordIds) {
+        this.recordIds = recordIds;
     }
 }
