@@ -15,7 +15,8 @@
 export default {
   name: "NavBar",
   components: {
-  
+
+  // I took the login button off the nav temporarily!
 
   },
 };

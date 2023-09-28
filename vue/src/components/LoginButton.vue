@@ -11,7 +11,7 @@ export default {
   
   methods: {
     showLoginPage(){
-      this.$router.push('/login');
+      this.$router.push({name: 'login'});
     },
     showRegisterPage(){
       this.$router.push({name: 'register'});
