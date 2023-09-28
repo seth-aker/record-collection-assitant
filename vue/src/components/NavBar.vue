@@ -1,62 +1,60 @@
 <template>
 
-  <div class="nav-bar-buttons">
-    <div class="registration-login rounded-button">
-       <div id="login">
+  <section class="nav-bar-buttons">
+   
       <router-link to="login">
-      &nbsp;&nbsp;LOGIN&nbsp;&nbsp;
+        <div id="login" class="rounded-button">&nbsp;&nbsp;LOGIN&nbsp;&nbsp;</div>
       </router-link>
-       </div>
-        <div id="register">
       <router-link to="/register">
-        REGISTER
+        <div id="registry" class="rounded-button">REGISTER</div>
       </router-link>
-    </div>
-    <div class="general-information rounded-button">
-      <div id="home">
       <router-link to="/home">
-       &nbsp;&nbsp;HOME&nbsp;&nbsp;
-      </router-link></div>
-        <div id="collections" >
+        <div id="home" class="rounded-button">&nbsp;&nbsp;HOME&nbsp;&nbsp;
+      </router-link>
       <router-link to="/collections">
-       COLLECTION
+        <div id="collections" class="rounded-button">COLLECTIONS</div>
       </router-link>
-       </div>
-       <div id="contact">
       <router-link to="/contact">
-      CONTACT
+        <div id="contact" class="rounded-button">CONTACT</div>
       </router-link>
-    </div>
+ 
  
   
 
- </div>
+ </section>
 </template>
 
-<script>
-export default {
-  name: "NavBar",
+<script> 
 
-  methods: {},
+export default {
+name: "NavBar",
+
+  methods: {
+ 
+  }
 };
 </script>
 
 <style scoped>
-#nav-bar-buttons {
+#nav-bar-buttons{
   display: flex;
   position: fixed;
+
 }
 .nav-bar-buttons {
   display: flex;
   align-items: space;
+
+ 
+
 }
-.registration-login {
+.registration-login{
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
 }
 
-.general-information {
+.general-information{
   display: flex;
   justify-content: flex-start;
 }
@@ -64,7 +62,7 @@ export default {
 .rounded-button {
   display: flex;
   border-radius: 20px; /* Rounded corners */
-
+  
   background-color: #40c5a4; /* Background color */
   color: #fff; /* Text color */
   padding: 15px 30px; /* Padding for a bigger button */
@@ -77,6 +75,9 @@ export default {
   background-color: #1e8c72; /* Darker color on hover */
 }
 
-.dropdown:hover {
+.dropdown:hover{
+
 }
+
+
 </style>
