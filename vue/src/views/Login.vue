@@ -18,6 +18,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
+
       <div class="sign-in-button">
       <button id="sign-in-button" type="submit">Sign in</button>
       </div>
@@ -94,6 +95,7 @@ h1{
   color:  #F8E73B;
   justify-content: center;
 }
+
 
 h2{
   display: flex;
