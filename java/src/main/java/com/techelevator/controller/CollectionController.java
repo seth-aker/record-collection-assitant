@@ -56,5 +56,12 @@ public class CollectionController {
     public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal) {
         collection.setUserId(userDao.findIdByUsername(principal.getName()));
         return this.collectionDao.createCollection(collection);
+
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @DeleteMapping(path = "/user/collection/{id}")
+    public void deleteCollection(@PathVariable int id, @Valid Principal principal) {
+            collectionDao.deleteCollection(id);
     }
 }

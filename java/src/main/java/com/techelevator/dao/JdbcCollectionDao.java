@@ -129,8 +129,10 @@ public class JdbcCollectionDao implements CollectionDao {
     @Override
     public int deleteCollection(int id) {
         int numberOfRows = 0;
-        String sql = "DELETE FROM collection WHERE collection_id = ?;";
+        String collectionRecordSql = "DELETE FROM collection_record WHERE collection_id= ?;";
+        String sql = "DELETE FROM collections WHERE collection_id = ?;";
         try {
+            jdbcTemplate.update(collectionRecordSql, id);
             numberOfRows = jdbcTemplate.update(sql, id);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
