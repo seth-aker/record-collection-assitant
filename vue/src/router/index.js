@@ -59,7 +59,7 @@ const router = new Router({
       }
     },
     {
-    path: "/collections",
+    path: "/collections/:collectionId",
     name: "collections",
     component: Collections,
     meta: {

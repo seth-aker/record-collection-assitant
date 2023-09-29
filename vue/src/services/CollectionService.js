@@ -7,7 +7,7 @@ export default {
     },
 
     getPublicCollections() {
-        return axios.get('/collections')
+        return axios.get('/collections/public')
     },
 
     getUserCollections(userName) {

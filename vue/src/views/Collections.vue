@@ -1,13 +1,40 @@
 <template>
-  <div>
-
-      
+  <div class="record-collection">
+    <div class="container" v-for="recordId in recordIds" :key="recordId" >
+      <record-info-thin :recordId="recordId"/>
+    </div>
   </div>
 </template>
 
 <script>
+import collectionService from '../services/CollectionService.js'
+
+import RecordInfoThin from '../components/RecordInfoThin.vue'
+
 export default {
-    name: 'Collections',
+  components: { RecordInfoThin },
+  name: 'Collections',
+  data() {
+    return {
+      collectionDTO: [],
+      isLoading: true,
+      recordIds: []
+    }
+  },
+  computed: {
+    
+  },
+  created() {
+    // const collectionId = this.$route.params.collectionId;
+    // collectionService.getCollection(collectionId)
+    collectionService.getPublicCollections()
+      .then(response => {
+        this.collectionDTO = response.data
+        this.isLoading = false;
+        this.recordIds = this.collectionDTO[0].recordIds;
+      })
+
+  }
 
 }
 </script>

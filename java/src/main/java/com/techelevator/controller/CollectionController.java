@@ -48,7 +48,7 @@ public class CollectionController {
         }
     }
 
-    @RequestMapping(path = "/collections/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/collections/{id}", method = RequestMethod.GET)
     public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
         return collectionDao.getCollectionByCollectionId(id);
     }
