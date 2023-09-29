@@ -1,7 +1,7 @@
 <template>
 
    <b-modal v-model="showPopup" title="Sleeves Premium Just for You!">
-   <p> Would ypu like to try 1 free month of Sleeves?</p>
+   <p> Would you like to try 1 free month of Sleeves?</p>
     <button @click="isPremium(true)">Yes</button>
     <button @click="isPremium(false)">No</button>
    </b-modal>

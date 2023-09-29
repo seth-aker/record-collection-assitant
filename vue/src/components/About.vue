@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .container {
   margin-top: 200px;
-  padding: 20px;
+  padding: 0px;
 
   text-align: center;
 }
@@ -114,7 +114,7 @@ h2 {
 
 .right-section {
   padding: 100px;
-  padding-top: 70px;
+  padding-top: 0px;
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;

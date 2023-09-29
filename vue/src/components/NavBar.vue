@@ -89,6 +89,8 @@ h1 {
 .rounded-button a {
   color: #eff13f;
   text-decoration: none;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  ;
 
 }
 
