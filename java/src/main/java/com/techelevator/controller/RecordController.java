@@ -6,6 +6,7 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 
+import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
 
@@ -64,9 +65,12 @@ public class RecordController {
     }
 
     @RequestMapping(path = "/set-condition", method = RequestMethod.PUT)
-    public ResponseEntity setRecordCondition(@RequestParam String condition, Principal principal, @RequestParam int recordId) {
-        boolean updatedRecord = recordDao.updateCondition(condition,
-                userDao.findIdByUsername(principal.getName()), recordId);
+    public ResponseEntity updateCondition(@RequestParam String condition, Principal principal, @RequestParam String recordId) {
+        int userId = userDao.findIdByUsername(principal.getName());
+         String recordToUpdate = recordDao.getRecordById(recordId);
+        boolean updatedRecord = recordDao.updateCondition(recordToUpdate, condition, userId);
+
+
         if (updatedRecord) {
             return ResponseEntity.ok("Record condition updated.");
         } else {
@@ -76,11 +80,11 @@ public class RecordController {
     }
 
 
-    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
-    public ResponseEntity addRecordTag(@RequestParam String tag, ) {
-
-
-    }
+//    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
+//    public ResponseEntity addRecordTag(@RequestParam String tag, Principal principal, @RequestParam int recordId) {
+//
+//
+//    }
 
 }
 
