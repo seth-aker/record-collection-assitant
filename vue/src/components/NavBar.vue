@@ -1,80 +1,105 @@
 <template>
+  <nav>
+    <section class="nav-bar-buttons nav-bar-left">
+      <div id="home" class="rounded-button">
+          <router-link :to="{name: 'home'}">HOME </router-link>
+      </div>
+      <div id="collections" class="rounded-button">
+        <router-link :to="{name: 'collections'}">COLLECTIONS</router-link>
+      </div>
+      
+      <div id="contact" class="rounded-button">
+        <router-link :to="{name: 'contact'}">CONTACT</router-link>
+      </div>
+    </section>
 
-  <div class="nav-bar-buttons">
-    <div class="registration-login rounded-button">
-       <div id="login">
-      <router-link to="/login">
-      &nbsp;&nbsp;LOGIN&nbsp;&nbsp;
-      </router-link>
-       </div>
-        <div id="register">
-      <router-link to="/register">
-        REGISTER
-      </router-link>
+    <h1>SLEEVES</h1>
+
+    <section class="nav-bar-buttons nav-bar-right">
+
+      <div id="login" class="rounded-button">
+        <router-link :to="{name: 'login'}">LOGIN</router-link>
       </div>
-    </div>
-    <div class="general-information rounded-button">
-      <div id="home">
-      <router-link to="/home">
-       &nbsp;&nbsp;HOME&nbsp;&nbsp;
-      </router-link>
+      <div id="registry" class="rounded-button">
+          <router-link :to="{name: 'register'}">REGISTER</router-link>
       </div>
-        <div id="collections" >
-      <router-link to="/collections">
-       COLLECTIONs
-      </router-link>
-       </div>
-       <div id="contact">
-      <router-link to="/contact">
-      CONTACT
-      </router-link>
-    </div>
-  
- </div>
-</div>
+  </section>
+ </nav>
+
 </template>
 
-<script>
-export default {
-  name: "NavBar",
+<script> 
 
-  methods: {},
+
+export default {
+name: "NavBar",
 };
 </script>
 
+
 <style scoped>
+ .nav-bar-left{
+   display: flex;
+   align-items: space-between;
+ }
 
 .nav-bar-buttons {
   display: flex;
-  align-items: space;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+   padding: 10px 20px;
 }
-.registration-login {
+.registration-login{
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
-}
-
-.general-information {
-  display: flex;
-  justify-content: flex-start;
 }
 
 .rounded-button {
   display: flex;
   border-radius: 20px; /* Rounded corners */
-
   background-color: #40c5a4; /* Background color */
-  color: #fff; /* Text color */
-  padding: 15px 30px; /* Padding for a bigger button */
+  padding: 15px; /* Padding for a bigger button */
   border: none;
   cursor: pointer;
-  padding: -25px;
+  height: 15px;
+  z-index: 1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  
 }
 
 .rounded-button:hover {
   background-color: #1e8c72; /* Darker color on hover */
 }
 
-.dropdown:hover {
+h1 {
+    font-size: 130px;
+    font-family: "KEEPT___", Arial, sans-serif;
+    color: #eff13f;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    text-align: center;
+
+    margin-top: 20px;
+
 }
+.rounded-button a {
+  color: #eff13f;
+  text-decoration: none;
+
+
+}
+
+@font-face {
+  font-family: 'KEEPT___'; 
+  src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
+}
+
+
+
 </style>

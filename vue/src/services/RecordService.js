@@ -3,19 +3,19 @@ import axios from "axios";
 export default {
 
     getRecordInfo(recordId) {
-        return axios.get(`/record/${recordId}`)
+        return axios.get(`/records/${recordId}`)
     },
 
     addRecordToUserLib(record){
-        return axios.post('/record', record);
+        return axios.post('/records', record);
     },
 
     deleteRecordFromUserLib(record) {
-        return axios.delete('/record', record);
+        return axios.delete('/records', record);
     },
 
     updateRecordInfo(record) {
-        return axios.put('/record', record);
+        return axios.put('/records', record);
     },
 
 

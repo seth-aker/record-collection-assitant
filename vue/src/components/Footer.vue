@@ -19,6 +19,7 @@
 
 <style scoped>
 .footer-wrapper {
+  position: fixed;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -53,5 +54,8 @@ footer {
 .footer-links a {
   color: #fff;
   text-decoration: none;
+
 }
+
+
 </style>

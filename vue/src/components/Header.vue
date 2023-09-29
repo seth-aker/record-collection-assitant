@@ -1,8 +1,5 @@
 <template>
   <header class="right-section">
-  <div></div>
-    
-    
     <h1>SLEEVES</h1>
   </header>
 </template>
@@ -33,6 +30,7 @@ h1 {
     font-size: 130px;
     font-family: "KEEPT___", Arial, sans-serif;
     color: #eff13f;
+    margin-top: 20px;
 }
 
 @font-face {
