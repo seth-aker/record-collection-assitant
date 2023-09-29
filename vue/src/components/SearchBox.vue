@@ -16,8 +16,8 @@
 .search-box {
     text-align: center;
     margin-top: 20px;
-    padding-bottom: 100px;
-    padding-top: 100px;
+    padding-bottom: 70px;
+    padding-top: 70px;
 }
 
 #search-input {

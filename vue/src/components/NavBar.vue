@@ -94,7 +94,7 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 50px;
 
 }
 .rounded-button a {
