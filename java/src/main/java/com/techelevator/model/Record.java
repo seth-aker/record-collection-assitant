@@ -1,10 +1,14 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Record {
 
     private String id;
     private String title;
     private String userNote;
+    private String condition;
+
 
     public Record(){}
 
@@ -29,5 +33,13 @@ public class Record {
     }
     public void setUserNote(String userNote) {
         this.userNote = userNote;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 }
