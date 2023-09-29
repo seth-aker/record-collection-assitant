@@ -12,8 +12,6 @@
         <router-link :to="{name: 'contact'}">CONTACT</router-link>
       </div>
     </section>
-
-  <section class="nav-bar-buttons ">
    
     <h1>SLEEVES</h1>
 
