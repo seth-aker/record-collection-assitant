@@ -1,13 +1,11 @@
 <template>
 
-   <div class="modal" v-if="showPopup">
-    <div class="modal-content">
+    <div class="subscribe-premium-serve">
       <span class="close" @click="closePopup">&times;</span>
       <p>Would you like to to enjoy 1 free month of Sleeves Premium?</p>
       <button @click="becomePremium(true)">Yes</button>
       <button @click="becomePremium(false)">No</button>
     </div>
-  </div>
 </template>
 
 <script>
