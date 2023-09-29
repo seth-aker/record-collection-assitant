@@ -17,6 +17,8 @@ public interface RecordDao {
 
     boolean updateCondition(String condition, int userId, int recordID);
 
+    boolean updateCondition(Record record);
+
     public boolean updateRecordNote(String recordId, int userId, String note);
 
     public boolean createRecord(Record record);
