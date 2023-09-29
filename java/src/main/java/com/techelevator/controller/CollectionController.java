@@ -48,9 +48,14 @@ public class CollectionController {
         }
     }
 
-    @RequestMapping(path = "/collections/{id}", method = RequestMethod.GET)
-    public Collection getCollection(@PathVariable int id, @Valid Principal principal) {
-        return collectionDao.getCollectionByCollectionId(id);
+    @RequestMapping(path = "/collections/user/{collectionId}", method = RequestMethod.GET)
+    public Collection getCollection(@PathVariable int collectionId, @Valid Principal principal) {
+            Collection collection = collectionDao.getCollectionByCollectionId(collectionId);
+            if (collection.isPublic() || collection.getUserId() == userDao.findIdByUsername(principal.getName())){
+                return collection;
+            } else {
+                return null;
+            }
     }
 
     @ResponseStatus(HttpStatus.CREATED)
