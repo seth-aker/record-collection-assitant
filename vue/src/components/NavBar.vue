@@ -91,7 +91,7 @@ h1 {
   text-decoration: none;
 
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  ;
+}
 
 
 @font-face {
