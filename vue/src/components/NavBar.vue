@@ -2,7 +2,7 @@
   <nav>
     <section class="nav-bar-buttons nav-bar-left">
       <div id="home" class="rounded-button">
-          <router-link :to="{name: 'register'}">HOME </router-link>
+          <router-link :to="{name: 'home'}">HOME </router-link>
       </div>
       <div id="collections" class="rounded-button">
         <router-link :to="{name: 'collections'}">COLLECTIONS</router-link>
@@ -62,6 +62,7 @@ nav {
   cursor: pointer;
   height: 15px;
   z-index: 1;
+  margin: 5px;
 }
 
 .rounded-button:hover {
@@ -82,6 +83,12 @@ h1 {
 @font-face {
   font-family: 'KEEPT___'; 
   src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
+}
+
+a {
+  color: #eff13f;
+  font-family: "KEEPT___", Arial, sans-serif;
+
 }
 
 
