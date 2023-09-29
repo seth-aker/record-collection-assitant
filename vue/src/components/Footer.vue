@@ -19,10 +19,8 @@
 
 <style scoped>
 .footer-wrapper {
-  position: fixed;
-  display: flex;
+  display:flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 footer {
