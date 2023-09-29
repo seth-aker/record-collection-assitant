@@ -1,33 +1,26 @@
 <template>
   <div>
-    <About></About>
-
+    <SlideShow></SlideShow>
     <SearchBox></SearchBox>
-
+    <PopularArtist></PopularArtist>
     <div class="custom-content">
-      
       <div class="genres">
-       
-
+        
       </div>
     </div>
-
-
   </div>
 </template>
 
 <script>
-import About from "@/components/About.vue";
-
-import SearchBox from "@/components/SearchBox.vue"; 
-
+import SearchBox from "@/components/SearchBox.vue";
+import SlideShow from "@/components/SlideShow.vue";
+import PopularArtist from '../components/PopularArtist.vue';
 
 export default {
   components: {
-   
-    About,
     SearchBox,
-
+    SlideShow,
+    PopularArtist,
   },
 };
 </script>

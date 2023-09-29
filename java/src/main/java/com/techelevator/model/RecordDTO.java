@@ -3,12 +3,11 @@ package com.techelevator.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.techelevator.model.discogs.*;
 import com.techelevator.model.discogs.Artist;
-import com.techelevator.model.spotifyAPImodels.Image;
 
 
 import java.util.List;
 
-public class RecordDTO extends Release{
+public class RecordDTO {
 
     //Added from our database
     private List<String> tags;
@@ -18,7 +17,7 @@ public class RecordDTO extends Release{
     // From discogs
     private String title;
     private int id;
-    private List<com.techelevator.model.discogs.Artist> artists;
+    private List<Artist> artists;
     private String thumb;
     private List<Company> companies;
     private String country;
@@ -26,7 +25,7 @@ public class RecordDTO extends Release{
     private String dateChanged;
     private int estimatedWeight;
     @JsonAlias(value = "extraartists")
-    private List<com.techelevator.model.discogs.Artist> extraArtists;
+    private List<Artist> extraArtists;
     private int formatQuantity;
     private List<Format> formats;
     private List<String> genres;

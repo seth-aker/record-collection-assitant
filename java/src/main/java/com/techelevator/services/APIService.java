@@ -1,6 +1,5 @@
 package com.techelevator.services;
 
-import com.techelevator.model.Artist;
 import com.techelevator.model.RecordDTO;
 
 import java.util.List;
