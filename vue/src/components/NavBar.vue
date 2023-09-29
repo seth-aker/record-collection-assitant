@@ -17,12 +17,13 @@
 
     <section class="nav-bar-buttons nav-bar-right">
 
-      <div id="login" class="rounded-button">
+      <div id="login" v-if="!loggedIn" class="rounded-button">
         <router-link :to="{name: 'login'}">LOGIN</router-link>
       </div>
-      <div id="registry" class="rounded-button">
+      <div id="registry" v-if="!loggedIn" class="rounded-button">
           <router-link :to="{name: 'register'}">REGISTER</router-link>
       </div>
+      <button v-else @click="myProfile">My Profile</button>
   </section>
  </nav>
 
@@ -30,10 +31,32 @@
 
 <script> 
 
+import Login from "../views/Login.vue"
 
 export default {
+
+
+
 name: "NavBar",
+data(){
+
+return{
+  loggedIn: false,
 };
+},
+components: {
+  Login,
+
+},
+methods: {
+
+}
+
+
+
+
+}
+
 </script>
 
 

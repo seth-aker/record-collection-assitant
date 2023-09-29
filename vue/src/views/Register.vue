@@ -26,7 +26,6 @@
     <button class="premium" @click="isPremium(true)">Yes</button>
     <button class="premium" @click="isPremium(false)">No</button>
    </b-modal>
-
       <div class="create-account-button">
       <button @click="showPopup = true" type="submit">Create Account</button>
 
@@ -166,6 +165,23 @@ p{
 
 .username{
    color:#F8E73B;
+}
+
+
+
+
+
+
+
+
+
+
+button{
+  display: inline-flex;
+}
+premium{
+  display: flex;
+align-items: center;
 }
 
 
