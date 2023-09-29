@@ -1,7 +1,9 @@
 <template>
   <div id="register" class="text-center">
     <form @submit.prevent="register">
-        <h1>Sleeves</h1>
+    <div>
+
+    </div>
       <h2>Create Account</h2>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
@@ -113,11 +115,13 @@ h2{
 display: flex;
 justify-content: center;
 align-items: center;
+padding-top: 70px;
 }
 
 #form{
   display: flex;
   flex-direction:row;
+  
 }
 
 #form-input{
@@ -126,7 +130,7 @@ align-items: center;
 }
 
 .create-account-button{
-  display: flex;
+  display: flex 1;
  justify-content: center;
   align-items: center;
   padding-top: 20px;

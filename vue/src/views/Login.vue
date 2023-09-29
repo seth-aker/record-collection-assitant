@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <form @submit.prevent="login">
-      <h1>Sleeves</h1>
+      
       <h2> Login</h2>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password! Not groovy, man
@@ -86,15 +86,10 @@ export default {
   justify-content: center;
   align-items: center;
   color:  #F8E73B;
+  padding-top: 70px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h1{
-  display: flex;
-  font-family: 'Keep on Truckin', sans-serif;
-  font-size:400%;
-  color:  #F8E73B;
-  justify-content: center;
-}
 
 
 h2{
@@ -113,6 +108,7 @@ p{
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 button{
   padding-left: 22px;
