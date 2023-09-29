@@ -142,10 +142,10 @@ export default {
 
 .arrow {
   /* Style for navigation arrow buttons */
-  font-size: 24px;
+  font-size: 70px;
   background-color: transparent;
   border: none;
-  color: #333;
+  color: white;
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -157,15 +157,18 @@ export default {
 .left-arrow {
   /* Style for the left arrow button */
   left: 10px;
+ 
 }
 
 .right-arrow {
   /* Style for the right arrow button */
   right: 10px;
+  color: white;
 }
 h2 {
       font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 50px;
   color: #40c5a4;
+  margin-top: 230px;
 }
 </style>

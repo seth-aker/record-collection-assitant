@@ -12,7 +12,8 @@
         <h2>THE BEATLES</h2>
         <p>IN 15987 COLLECTIONS</p>
         <p>17 DIFFERENT ALBUMS</p>
-        <p>-VIEW COLLECTIONS-</p>
+        <!-- Link to Collections.vue -->
+        <a href="/collections.vue" class="view-collections-link">-VIEW COLLECTIONS-</a>
       </div>
     </div>
 
@@ -25,7 +26,8 @@
         <h2>THE WHO</h2>
         <p>IN 12794 COLLECTIONS</p>
         <p>12 DIFFERENT ALBUMS</p>
-        <p>-VIEW COLLECTIONS-</p>
+        <!-- Link to Collections.vue -->
+        <a href="/collections.vue" class="view-collections-link">-VIEW COLLECTIONS-</a>
       </div>
     </div>
   </div>
@@ -45,7 +47,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 h1 {
@@ -116,4 +118,23 @@ h2 {
 p {
   font-size: 25px;
 }
+.view-collections-link {
+  text-decoration: none; 
+  color: #40c5a4; 
+  font-weight: bold; 
+  font-size: 20px; 
+  transition: color 0.3s; 
+
+ 
+  padding: 5px 10px;
+  background-color: #eff13f;
+  border-radius: 5px;
+}
+
+.view-collections-link:hover {
+  color: white; 
+  background-color: #40c5a4; 
+}
+
+
 </style>
