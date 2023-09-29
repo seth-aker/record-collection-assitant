@@ -14,13 +14,13 @@
     </section>
 
     <h1>SLEEVES</h1>
-
     <section class="nav-bar-buttons nav-bar-right">
+
     
+
       <div id="login" class="rounded-button">
         <router-link :to="{name: 'login'}">LOGIN</router-link>
       </div>
-      
       <div id="registry" class="rounded-button">
           <router-link :to="{name: 'register'}">REGISTER</router-link>
       </div>
@@ -35,6 +35,7 @@ name: "NavBar",
 };
 </script>
 
+
 <style scoped>
 nav {
   display: flex;
@@ -43,9 +44,11 @@ nav {
 
 #nav-bar-buttons{
   display: flex;
+  
 }
 .nav-bar-buttons {
   display: flex;
+  
 }
 .registration-login{
   display: flex;
@@ -56,13 +59,18 @@ nav {
   display: flex;
   border-radius: 20px; /* Rounded corners */
   background-color: #40c5a4; /* Background color */
-  color: #fff; /* Text color */
   padding: 15px; /* Padding for a bigger button */
   border: none;
   cursor: pointer;
   height: 15px;
   z-index: 1;
+<<<<<<< HEAD
   margin: 5px;
+=======
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  
+>>>>>>> 0322be507003507e3e4407d7869ad6d9f253c97d
 }
 
 .rounded-button:hover {
@@ -78,6 +86,15 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
+
+    margin-top: 20px;
+
+}
+.rounded-button a {
+  color: #eff13f;
+  text-decoration: none;
+
+
 }
 
 @font-face {
@@ -90,6 +107,7 @@ a {
   font-family: "KEEPT___", Arial, sans-serif;
 
 }
+
 
 
 </style>

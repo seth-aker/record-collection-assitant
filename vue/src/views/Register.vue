@@ -19,7 +19,8 @@
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
       <div class="create-account-button">
-      <button type="submit">Create Account</button>
+      <button @click="showPopup = true" type="submit">Create Account</button>
+<subscribe-premium-vue />
       </div>
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
@@ -27,10 +28,15 @@
 </template>
 
 <script>
+import SubscribePremiumVue from '../components/SubscribePremium.vue';
 import authService from '../services/AuthService';
+
 
 export default {
   name: 'register',
+  components: {
+SubscribePremiumVue,
+  },
   data() {
     return {
       user: {
