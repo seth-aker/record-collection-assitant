@@ -1,13 +1,15 @@
 <template>
   <div>
-    <h2>CONTACT THE SLEEVES TEAM!</h2>
-    
+    <h2>MEET THE SLEEVES TEAM!</h2>
     
     <div class="linkedin-profiles">
+
       <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a><br>
-      <a href=" " target="_blank">LinkedIn Profile 2</a><br>
-      <a href=" " target="_blank">LinkedIn Profile 3</a><br>
-      <a href=" " target="_blank">Linkedin Profilek</a><br>
+
+      <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a><br>
+      <a href="https://www.linkedin.com/in/johnjoyc/" target="_blank">John Joyce</a><br>
+      <a href="https://www.linkedin.com/in/joshuajanosek" target="_blank">Joshua Janosek</a><br>
+
     </div>
   </div>
 </template>
@@ -18,25 +20,35 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h2 {
   font-size: 30px;
   font-family: "KEEPT___", Arial, sans-serif;
   color: #eff13f;
-  margin-top: 20px;
+  margin-top: 200px;
+  text-align: center; /* Center the text */
   display: flex;
-  align-content: center;
   justify-content: center;
-  padding-top: 200px;
 }
 
 .linkedin-profiles {
-  font-size: 16px;
   display: flex;
-  align-content: top;
+  flex-wrap: wrap; /* Allow profiles to wrap to the next line if there's not enough space */
   justify-content: center;
-  padding-top: 200px;
+  margin-top: 100px;
   min-height: 100vh;
+}
+
+.profile {
+  text-align: center; /* Center the profile image and name */
+  margin: 20px; /* Add spacing between profiles */
+}
+
+.profile img {
+  width: 160px; /* Set a fixed width for the profile images */
+  height: 160px; /* Set a fixed height for the profile images */
+  border-radius: 50%; /* Make the images round */
+  display: flex;
 }
 
 .linkedin-profiles a {
@@ -44,6 +56,7 @@ h2 {
   color: #40c5a4;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 25px;
+
 }
 
 .linkedin-profiles a:hover {

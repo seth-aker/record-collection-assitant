@@ -10,12 +10,25 @@ INSERT INTO records (record_id, record_title) VALUES ('372778','Sgt. Peppers Lon
 INSERT INTO records (record_id, record_title) VALUES ('168314','Songs In The Key Of Life');
 
 INSERT INTO collections (user_id, collection_name,is_public) VALUES (1001,'The Test Collection', true);
+INSERT INTO collections (user_id, collection_name,is_public) VALUES (1001,'Collection Cool', true);
+INSERT INTO collections (user_id, collection_name,is_public) VALUES (1001,'Private Collection', false);
 
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, 1353040);
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, 498868);
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, 1486272);
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, 372778);
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, 168314);
+
+INSERT INTO collection_record (collection_id, record_id) VALUES (102, 1353040);
+INSERT INTO collection_record (collection_id, record_id) VALUES (102, 498868);
+INSERT INTO collection_record (collection_id, record_id) VALUES (102, 1486272);
+INSERT INTO collection_record (collection_id, record_id) VALUES (102, 372778);
+INSERT INTO collection_record (collection_id, record_id) VALUES (102, 168314);
+
+INSERT INTO collection_record (collection_id, record_id) VALUES (103, 1353040);
+INSERT INTO collection_record (collection_id, record_id) VALUES (103, 498868);
+INSERT INTO collection_record (collection_id, record_id) VALUES (103, 1486272);
+
 
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, 1353040, 'I like this', 'Good');
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, 498868, 'I like this', 'Good');

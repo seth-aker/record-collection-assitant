@@ -9,6 +9,7 @@ import Collections from '../views/Collections.vue'
 import Contact from '../views/Contact.vue'
 import RecordView from '../views/RecordView.vue'
 import UserHome from '../views/UserHome.vue'
+import CollectionView from '../views/CollectionView.vue'
 
 
 Vue.use(Router)
@@ -59,12 +60,20 @@ const router = new Router({
       }
     },
     {
-    path: "/collections",
+    path: "/collections/public",
     name: "collections",
     component: Collections,
     meta: {
       requiresAuth: false
     }
+    },
+    {
+      path: "/collections/user/:collectionId",
+      name: "collection-view",
+      component: CollectionView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/',

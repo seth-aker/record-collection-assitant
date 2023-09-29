@@ -1,28 +1,45 @@
 <template>
-  <collection-view
-  v-for="curCollection in filteredCollections"
-  />
+  <div>
+        <image-spinner v-show="showSpinner"/>
+        <div v-show="userCollections.length != 0 && !showSpinner">
+            <div id="collection-row" 
+                v-for="curRecord in userCollections"
+                :key="curRecord.id"
+                :record="curRecord">
+                <div id="collection-container">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="no-items-msg" v-show="userCollections.length === 0 && !showSpinner">
+            No collections found.
+        </div>
+    </div> 
 </template>
 
 <script>
-import CollectionView from "./CollectionView";
 
 export default {
     name: 'collection-list',
     components: {
-        CollectionView
     },
     data() {
         return {
-
+            showSpinner: true
         }
-
     },
     computed: {
-        filteredCollections() {
-            return null;
+        userCollections() {
+            return this.$store.state.userCollections;
         }
+    },
+    methods: {
+        
+    },
+    created() {
+        
     }
+
 }
 
 </script>
