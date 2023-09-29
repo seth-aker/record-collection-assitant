@@ -65,7 +65,8 @@ nav {
   height: 15px;
   z-index: 1;
   margin: 5px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+  align-items: center;
 
 }
 
@@ -88,8 +89,6 @@ h1 {
 .rounded-button a {
   color: #eff13f;
   text-decoration: none;
-
-
 }
 
 @font-face {
