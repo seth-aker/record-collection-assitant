@@ -83,11 +83,11 @@ export default {
 #login{
  display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: top;
   align-items: center;
   color:  #F8E73B;
-  padding-top: 70px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  min-height: 100vh;
 }
 
 

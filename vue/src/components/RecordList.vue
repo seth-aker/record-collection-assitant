@@ -7,7 +7,7 @@
                 :key="curRecord.id"
                 :record="curRecord">
                 <div id="record-container">
-                    <album-art id="record-list-panel" :albumImageUrl="curRecord." :albumName="">
+                    <album-art id="record-list-panel" :albumImageUrl="curRecord.thumb" :albumName="curRecord.title">
                 </div>
             </div>
         </div>

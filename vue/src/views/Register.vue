@@ -135,8 +135,9 @@ h2{
 #register {
 display: flex;
 justify-content: center;
-align-items: center;
-padding-top: 70px;
+align-items: top;
+min-height: 100vh;
+
 }
 
 #form{

@@ -31,29 +31,15 @@
 
 <script> 
 
-import Login from "../views/Login.vue"
+
 
 export default {
-
-
-
-name: "NavBar",
-data(){
-
-return{
-  loggedIn: false,
-},
-},
-components: {
-Login,
-
-},
-methods: {
-
-}
-
-
-
+  name: "NavBar",
+  data(){
+    return{
+      loggedIn: false
+    }
+  },
 
 }
 
@@ -114,12 +100,7 @@ h1 {
 .rounded-button a {
   color: #eff13f;
   text-decoration: none;
-<<<<<<< HEAD
-
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-=======
-font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
->>>>>>> b0e9588be4ee0b449f405b7022c327f7a87febbd
 }
 
 
