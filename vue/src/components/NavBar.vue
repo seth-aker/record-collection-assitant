@@ -45,7 +45,7 @@ return{
 };
 },
 components: {
-  Login,
+Login,
 
 },
 methods: {
