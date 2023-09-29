@@ -43,11 +43,6 @@ body {
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-<<<<<<< HEAD
-  
-   
-=======
->>>>>>> 0322be507003507e3e4407d7869ad6d9f253c97d
 }
 
 </style>

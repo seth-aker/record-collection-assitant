@@ -64,13 +64,9 @@ nav {
   cursor: pointer;
   height: 15px;
   z-index: 1;
-<<<<<<< HEAD
   margin: 5px;
-=======
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  
-  
->>>>>>> 0322be507003507e3e4407d7869ad6d9f253c97d
+
 }
 
 .rounded-button:hover {
@@ -86,7 +82,6 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
-
     margin-top: 20px;
 
 }
@@ -102,11 +97,11 @@ h1 {
   src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
 }
 
-a {
+/* a {
   color: #eff13f;
   font-family: "KEEPT___", Arial, sans-serif;
 
-}
+} */
 
 
 
