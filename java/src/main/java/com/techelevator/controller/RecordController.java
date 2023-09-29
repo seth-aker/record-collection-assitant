@@ -9,6 +9,8 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +52,6 @@ public class RecordController {
 
     }
 
-
     @GetMapping(path = "/search")
     public List<RecordDTO> getRecordSearchResults(@RequestParam(defaultValue = "") String q,
                                             @RequestParam(defaultValue = "") String type) {
@@ -61,6 +62,21 @@ public class RecordController {
             return null;
         }
     }
+
+    @RequestMapping(path="/set-condition", method = RequestMethod.PUT)
+    public ResponseEntity<String> setRecordCondition(@RequestParam String condition, Principal principal, @RequestParam int recordId){
+       boolean updatedRecord = recordDao.updateCondition(condition,
+                userDao.findIdByUsername(principal.getName()), recordId);
+        if (updatedRecord) {
+            return ResponseEntity.ok("Record condition updated.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update record condition");
+        }
+   }
+    }
+
+
 
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @PostMapping(path = "/{collectionId}")
@@ -78,7 +94,7 @@ public class RecordController {
 //        }
 //        collectionDao.addRecordToCollection(collectionId, record);
 //    }
-}
+
 
 
 //
