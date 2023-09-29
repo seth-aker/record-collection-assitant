@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS collection_record, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users;
+DROP TABLE IF EXISTS collection_record, user_record_tag, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users;
 
 DROP SEQUENCE IF EXISTS seq_user_id, seq_collection_id, seq_label_id;
 
@@ -36,7 +36,7 @@ CREATE TABLE collections (
 
 CREATE TABLE records (
 	record_id varChar(30) NOT NULL, --Not serial because it will be created by the API
-	record_title varChar(30) NOT NULL,
+	record_title varChar(50) NOT NULL,
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)
 );
 
