@@ -5,10 +5,10 @@ import com.techelevator.businessLogic.RecordLogic;
 import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Record;
+
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
