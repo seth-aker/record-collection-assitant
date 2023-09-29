@@ -121,7 +121,7 @@ public class JdbcRecordDao implements RecordDao {
 
 
     @Override
-    public boolean updateTags(String tagName, int recordId, int userId){
+    public boolean updateTags(String tagName, String recordId, int userId){
         String sql= "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
         try{
            int numberOfRows = this.jdbcTemplate.update(sql, recordId, userId);
@@ -152,11 +152,13 @@ public class JdbcRecordDao implements RecordDao {
         }
     }
 
+
+
     @Override
-    public boolean updateCondition(Record record){
+    public boolean updateCondition(String recordId, String condition, int userId){
         String sql= "UPDATE user_record_tag SET record_condition = ? WHERE user_id = ? AND record_id =?";
         try{
-            int numberOfRows = this.jdbcTemplate.update(sql, record.getId(), record.);
+            int numberOfRows = this.jdbcTemplate.update(sql, condition, userId, id);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
             }
