@@ -1,0 +1,171 @@
+<template>
+  <!-- Container for the entire slideshow -->
+  <div class="slideshow">
+    <!-- Heading for the slideshow -->
+    <h2>TRENDING COLLECTIONS</h2>
+    <!-- Container for the carousel and navigation buttons -->
+    <div class="carousel-container">
+      <!-- Left arrow button for navigating to previous images -->
+      <button @click="slideLeft" class="arrow left-arrow">&lt;</button>
+      <!-- Container for the slides -->
+      <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
+        <!-- Iterate through items to display each image and title -->
+        <div class="slide" v-for="(item, index) in items" :key="index">
+          <!-- Display the image with its source and alt text -->
+          <img :src="item.image" :alt="item.title" class="image" />
+          <!-- Container for the album title text -->
+          <div class="album-title">
+            <!-- Display the album title text -->
+            <div class="album-title-text">{{ item.title }}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right arrow button for navigating to next images -->
+      <button @click="slideRight" class="arrow right-arrow">&gt;</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'SlideShow',
+  data() {
+    return {
+      // An array of objects representing items with images and titles
+      items: [
+        { image: '/theWho.jpg', title: '' },
+        { image: '/neilYoung.jpg', title: '' },
+        { image: '/sgtPepper.jpg', title: '' },
+        { image: '/foals.jpg', title: '' },
+        { image: '/funk.jpg', title: '' },
+        { image: '/steveMiller.jpg', title: '' },
+        { image: '/rem.jpg', title: '' },
+        { image: '/theWho.jpg', title: '' },
+        { image: '/neilYoung.jpg', title: '' },
+        { image: '/sgtPepper.jpg', title: '' },
+        { image: '/foals.jpg', title: '' },
+        { image: '/funk.jpg', title: '' },
+        { image: '/steveMiller.jpg', title: '' },
+        { image: '/rem.jpg', title: '' },
+        { image: '/theWho.jpg', title: '' },
+        { image: '/neilYoung.jpg', title: '' },
+        { image: '/sgtPepper.jpg', title: '' },
+        { image: '/foals.jpg', title: '' },
+        { image: '/funk.jpg', title: '' },
+        { image: '/steveMiller.jpg', title: '' },
+        { image: '/rem.jpg', title: '' },
+        { image: '/theWho.jpg', title: '' },
+        { image: '/neilYoung.jpg', title: '' },
+        { image: '/sgtPepper.jpg', title: '' },
+        { image: '/foals.jpg', title: '' },
+        { image: '/funk.jpg', title: '' },
+        { image: '/steveMiller.jpg', title: '' },
+        { image: '/rem.jpg', title: '' },
+        { image: '/theWho.jpg', title: '' },
+        { image: '/neilYoung.jpg', title: '' },
+        { image: '/sgtPepper.jpg', title: '' },
+        { image: '/foals.jpg', title: '' },
+        { image: '/funk.jpg', title: '' },
+        { image: '/steveMiller.jpg', title: '' },
+        { image: '/rem.jpg', title: '' },
+
+      ],
+      // Current index to keep track of which images are displayed
+      currentIndex: 0,
+    };
+  },
+  computed: {
+    // Calculate the maximum index based on the number of items
+    maxIndex() {
+      return this.items.length - 1;
+    },
+  },
+   methods: {
+    // Method to slide to the left and display previous images
+    slideLeft() {
+      if (this.currentIndex > 0) {
+        this.currentIndex--;
+      } else {
+        // Wrap around to the end if at the beginning
+        this.currentIndex = this.maxIndex;
+      }
+    },
+    // Method to slide to the right and display next images
+    slideRight() {
+      if (this.currentIndex < this.maxIndex) {
+        this.currentIndex++;
+      } else {
+        // Wrap around to the beginning if at the end
+        this.currentIndex = 0;
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+/* Your existing styles for the slideshow go here */
+
+.carousel-container {
+  /* Flex container to center and hide overflowing content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.slides {
+  /* Flex container for sliding images with a transition effect */
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  /* Style for each individual slide */
+  flex: 0 0 20%; /* Adjust the width to display 5 images at a time */
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden; /* Hide overflowing content */
+  position: relative;
+  transition: transform 0.5s ease-in-out; /* Add sliding transition */
+}
+
+.image {
+  /* Style for images within slides */
+  width: 100%; /* Ensure all images have the same width */
+  max-height: 100%; /* Maintain aspect ratio */
+  object-fit: cover; /* Cover the container */
+  transition: transform 0.5s ease-in-out; /* Add sliding transition */
+}
+
+.arrow {
+  /* Style for navigation arrow buttons */
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px;
+  z-index: 1;
+}
+
+.left-arrow {
+  /* Style for the left arrow button */
+  left: 10px;
+}
+
+.right-arrow {
+  /* Style for the right arrow button */
+  right: 10px;
+}
+h2 {
+      font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 50px;
+  color: #40c5a4;
+}
+</style>
