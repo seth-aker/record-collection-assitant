@@ -26,6 +26,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+span {
+    display: flex;
+    align-items: center;
+}
 </style>

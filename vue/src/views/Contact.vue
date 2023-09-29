@@ -5,7 +5,7 @@
     
     <div class="linkedin-profiles">
       <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a><br>
-      <a href=" " target="_blank">LinkedIn Profile 2</a><br>
+      <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a><br>
       <a href=" " target="_blank">LinkedIn Profile 3</a><br>
       <a href=" " target="_blank">LinkedIn Profile 4</a><br>
     </div>
