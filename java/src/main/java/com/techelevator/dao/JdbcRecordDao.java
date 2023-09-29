@@ -91,7 +91,6 @@ public class JdbcRecordDao implements RecordDao {
         String sql = "SELECT tag_name " +
                 "FROM user_record_tag " +
                 "WHERE record_id = ? AND user_id = ?;";
-
         try {
 
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recordId, userId);
@@ -103,16 +102,63 @@ public class JdbcRecordDao implements RecordDao {
         } catch (NullPointerException e) {
             return tags;
         }
-
         return tags;
     }
 
-    public boolean updateRecordNote(String recordId, int userId , String note) {
-        String sql = "UPDATE user_record SET user_note = ? WHERE record_id = ? AND user_id = ?;";
+    @Override
+    public boolean updateTags(String tagName, int recordId, int userId){
+        String sql= "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
+        try{
+           int numberOfRows = this.jdbcTemplate.update(sql, recordId, userId);
+
+            if (numberOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteTags(int userId, int recordId) {
+        String sql = "DELETE FROM user_record_tag WHERE user_id = ? AND record_id = ?;";
 
         try {
-            int numberOfRows = this.jdbcTemplate.update(sql, note, recordId, userId);
+         return jdbcTemplate.update(sql, userId, recordId)==1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (BadSqlGrammarException e) {
+            throw new DaoException("SQL syntax error", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
 
+    @Override
+    public boolean updateCondition(String condition, int userId, int recordID){
+        String sql= "UPDATE user_record SET record_condition = ? WHERE user_id = ? AND record_id =?";
+        try{
+            int numberOfRows = this.jdbcTemplate.update(sql, userId, recordID);
+            if (numberOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+        return true;
+    }
+
+
+
+    public boolean updateRecordNote(String recordId, int userId , String note) {
+        String sql = "UPDATE user_record SET user_note = ? WHERE record_id = ? AND user_id = ?;";
+        try {
+            int numberOfRows = this.jdbcTemplate.update(sql, note, recordId, userId);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
 
@@ -154,7 +200,6 @@ public class JdbcRecordDao implements RecordDao {
     public boolean removeRecordFromUserLib(Record record, int userId) {
         String sql = "DELETE FROM user_record " +
                 "WHERE user_id = ? AND record_id = ?;";
-
         try {
             return jdbcTemplate.update(sql, userId, record.getId()) == 1;
         } catch (CannotGetJdbcConnectionException e) {
@@ -164,6 +209,10 @@ public class JdbcRecordDao implements RecordDao {
         }
     }
 
+    @Override
+    public String getRecordNote(String recordId, Principal principal) {
+        return null;
+    }
 
 
     private Record mapRowToRecord(SqlRowSet rowSet) {
@@ -173,6 +222,8 @@ public class JdbcRecordDao implements RecordDao {
         if(rowSet.getString("user_note") != null) {
             record.setUserNote(rowSet.getString("user_note"));
         }
+
+
     return record;
     }
 }

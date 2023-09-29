@@ -1,5 +1,7 @@
 <template>
 
+
+
    <b-modal v-model="showPopup" title="Sleeves Premium Just for You!">
    <p> Would you like to try 1 free month of Sleeves?</p>
     <button @click="isPremium(true)">Yes</button>
@@ -16,14 +18,8 @@ return {
     showPopup: false,
 }
     },
-    methods: {
-openPopup(){
-  this.showPopup = true;
-},
-closePopup(){
-  this.showPopup = false;
-}
-},
+
+
     
 
 // TODO: fix this method to submit isPremium status

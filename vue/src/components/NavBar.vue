@@ -14,41 +14,58 @@
     </section>
 
     <h1>SLEEVES</h1>
+
     <section class="nav-bar-buttons nav-bar-right">
 
-    
-
-      <div id="login" class="rounded-button">
+      <div id="login" v-if="!loggedIn" class="rounded-button">
         <router-link :to="{name: 'login'}">LOGIN</router-link>
       </div>
-      <div id="registry" class="rounded-button">
+      <div id="registry" v-if="!loggedIn" class="rounded-button">
           <router-link :to="{name: 'register'}">REGISTER</router-link>
       </div>
+      <button v-else @click="myProfile">My Profile</button>
   </section>
  </nav>
+
 </template>
 
 <script> 
 
+
+
 export default {
-name: "NavBar",
-};
+  name: "NavBar",
+  data() {
+    return {
+      loggedIn: false,
+    };
+  },
+  methods: {
+
+}
+
+
+
+
+}
+
 </script>
 
 
 <style scoped>
-nav {
-  display: flex;
-  justify-content: space-between;
-}
+ .nav-bar-left{
+   display: flex;
+   align-items: space-between;
+ }
 
-#nav-bar-buttons{
-  display: flex;
-  
-}
 .nav-bar-buttons {
   display: flex;
-  
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+   padding: 10px 20px;
 }
 .registration-login{
   display: flex;
@@ -98,12 +115,6 @@ h1 {
   font-family: 'KEEPT___'; 
   src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
 }
-
-/* a {
-  color: #eff13f;
-  font-family: "KEEPT___", Arial, sans-serif;
-
-} */
 
 
 

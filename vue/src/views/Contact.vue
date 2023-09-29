@@ -32,12 +32,11 @@ h2 {
 
 .linkedin-profiles {
   font-size: 16px;
-  margin-top: 20px;
-    margin-top: 20px;
   display: flex;
-  align-content: center;
+  align-content: top;
   justify-content: center;
   padding-top: 200px;
+  min-height: 100vh;
 }
 
 .linkedin-profiles a {

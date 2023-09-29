@@ -19,17 +19,17 @@
 
 <style scoped>
 .footer-wrapper {
-  position: fixed;
+
+  
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
+
+
 footer {
-  margin-top: auto;
   background-color: #333;
   color: #fff;
-  padding: 10px;
   text-align: center;
   width: 100%;
 }

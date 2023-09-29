@@ -6,7 +6,7 @@
     </div>
     <div class="artist-section">
       <div class="album-cover">
-        <img src="beatles2.jpg" alt="Album Cover" />
+        <img src="sgtPepper.jpg" alt="Album Cover" />
       </div>
       <div class="artist-info">
         <h2>THE BEATLES</h2>
@@ -45,7 +45,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 150px;
+  margin-top: 80px;
 }
 
 h1 {
@@ -65,11 +65,11 @@ h1 {
   flex: 1;
   text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .album-cover img {
-  width: 60%;
+  width: 50%;
   display: flex;
   justify-content: space-around;
 }
@@ -80,17 +80,22 @@ h1 {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: #40c5a4;
   text-align: center;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  
+  
 }
 
-/* Add thin bars above and below the artist info */
+/*  thin bars above and below the artist info */
 .artist-info::before,
 .artist-info::after {
   content: '';
   display: block;
   height: 2px;
   background-color: #40c5a4;
-  position: absolute;
+  margin-bottom: 40px;
+  
   left: 0;
   right: 0;
 }

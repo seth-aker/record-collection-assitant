@@ -8,7 +8,7 @@ import store from '../store/index'
 import Collections from '../views/Collections.vue'
 import Contact from '../views/Contact.vue'
 import RecordView from '../views/RecordView.vue'
-
+import UserHome from '../views/UserHome.vue'
 
 
 Vue.use(Router)
@@ -65,6 +65,14 @@ const router = new Router({
     meta: {
       requiresAuth: false
     }
+    },
+    {
+      path: '/',
+      name: 'userhome',
+      component: UserHome,
+      meta: {
+        requiresAuth: false
+      }
     },
     {
     path: "/contact",
