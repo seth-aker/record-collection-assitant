@@ -3,6 +3,12 @@
     <h2>MEET THE SLEEVES TEAM!</h2>
     
     <div class="linkedin-profiles">
+<<<<<<< HEAD
+      <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a><br>
+      <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a><br>
+      <a href=" " target="_blank">LinkedIn Profile 3</a><br>
+      <a href=" " target="_blank">LinkedIn Profile 4</a><br>
+=======
       <div class="profile">
         <img src="image.jpg" alt="Profile Image 1">
         <a href="" target="_blank">Name</a>
@@ -22,6 +28,7 @@
         <img src="kirby.jpg" alt="Profile Image 4">
         <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a>
       </div>
+>>>>>>> f334d8de21cf323cb805aa08808d61ef5a0a1aba
     </div>
   </div>
 </template>
