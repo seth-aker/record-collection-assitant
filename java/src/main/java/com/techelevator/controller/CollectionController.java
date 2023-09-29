@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.CollectionDao;
+import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Collection;
 import com.techelevator.model.Label;

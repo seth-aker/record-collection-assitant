@@ -1,7 +1,7 @@
-package com.techelevator.model;
+package com.techelevator.model.spotifyAPImodels;
 
 
-import com.techelevator.model.spotifyAPImodels.Image;
+import com.techelevator.model.Image;
 
 import java.util.List;
 

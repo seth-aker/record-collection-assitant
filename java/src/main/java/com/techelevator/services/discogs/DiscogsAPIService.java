@@ -1,6 +1,7 @@
 package com.techelevator.services.discogs;
 
 
+
 import com.techelevator.model.RecordDTO;
 import com.techelevator.model.discogs.Release;
 import com.techelevator.services.APIService;
@@ -35,7 +36,8 @@ public class DiscogsAPIService implements APIService {
             String errorMessage = e.getMessage();
             System.out.println(errorMessage);
         }
-        return (RecordDTO) discogsResponse;
+
+        return  mapToRecordDTO(discogsResponse);
 
         }
 
@@ -50,12 +52,45 @@ public class DiscogsAPIService implements APIService {
     }
 
     private HttpEntity<Void> createDiscogsRequest() {
-        final String authHeaderValue = "Discogs: key=" + System.getenv("DISCOGS_KEY") + ", secret=" + System.getenv("DISCOGS_SECRET");
+        final String authHeaderValue = "Discogs key=" + System.getenv("DISCOGS_KEY") + ", secret=" + System.getenv("DISCOGS_SECRET");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.add("Authorization", authHeaderValue );
         return new HttpEntity<>(null, headers);
     }
 
+    private RecordDTO mapToRecordDTO(Release release) {
+        RecordDTO recordDTO = new RecordDTO();
+        recordDTO.setTitle(release.getTitle());
+        recordDTO.setId(release.getId());
+        recordDTO.setArtists(release.getArtists());
+        recordDTO.setThumb(release.getThumb());
+        recordDTO.setCompanies(release.getCompanies());
+        recordDTO.setCountry(release.getCountry());
+        recordDTO.setDateAdded(release.getDateAdded());
+        recordDTO.setDateChanged(release.getDateChanged());
+        recordDTO.setEstimatedWeight(release.getEstimatedWeight());
+        recordDTO.setExtraArtists(release.getExtraArtists());
+        recordDTO.setFormatQuantity(release.getFormatQuantity());
+        recordDTO.setFormats(release.getFormats());
+        recordDTO.setGenres(release.getGenres());
+        recordDTO.setIdentifiers(release.getIdentifiers());
+        recordDTO.setImages(release.getImages());
+        recordDTO.setLabels(release.getLabels());
+        recordDTO.setLowestPrice(release.getLowestPrice());
+        recordDTO.setMasterId(release.getMasterId());
+        recordDTO.setMasterUrl(release.getMasterUrl());
+        recordDTO.setNotes(release.getNotes());
+        recordDTO.setReleased(release.getReleased());
+        recordDTO.setReleasedFormatted(release.getReleasedFormatted());
+        recordDTO.setSeries(release.getSeries());
+        recordDTO.setStyles(release.getStyles());
+        recordDTO.setTrackList(release.getTrackList());
+        recordDTO.setUri(release.getUri());
+        recordDTO.setVideos(release.getVideos());
+        recordDTO.setYear(release.getYear());
+
+        return recordDTO;
+    }
 
 }
