@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h2 {
   font-size: 30px;
   font-family: "KEEPT___", Arial, sans-serif;
