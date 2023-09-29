@@ -19,11 +19,13 @@
 
 <style scoped>
 .footer-wrapper {
+
   
   display: flex;
   flex-direction: column;
-  
 }
+
+
 
 footer {
   background-color: #333;

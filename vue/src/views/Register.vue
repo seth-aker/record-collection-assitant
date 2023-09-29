@@ -20,9 +20,15 @@
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
+   
+   <b-modal title="Sleeves Premium Just for You!">
+   <p> Would you like to try 1 free month of Sleeves?</p>
+    <button class="premium" @click="isPremium(true)">Yes</button>
+    <button class="premium" @click="isPremium(false)">No</button>
+   </b-modal>
       <div class="create-account-button">
       <button @click="showPopup = true" type="submit">Create Account</button>
-<subscribe-premium-vue />
+
       </div>
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
     </form>
@@ -30,17 +36,18 @@
 </template>
 
 <script>
-import SubscribePremiumVue from '../components/SubscribePremium.vue';
+
 import authService from '../services/AuthService';
 
 
 export default {
   name: 'register',
   components: {
-SubscribePremiumVue,
+
   },
   data() {
     return {
+       showPopup: false,
       user: {
         username: '',
         password: '',
@@ -52,6 +59,20 @@ SubscribePremiumVue,
     };
   },
   methods: {
+
+// TODO: fix this method to submit isPremium status
+
+    becomePremium(){
+        this.closePopup;
+        return this.user.isPremium;
+        },
+
+        // saveChoice(){
+        //   axios.post~
+        // },
+
+
+
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
@@ -145,6 +166,23 @@ p{
 
 .username{
    color:#F8E73B;
+}
+
+
+
+
+
+
+
+
+
+
+button{
+  display: inline-flex;
+}
+premium{
+  display: flex;
+align-items: center;
 }
 
 
