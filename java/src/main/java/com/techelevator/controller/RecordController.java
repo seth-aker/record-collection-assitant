@@ -50,7 +50,6 @@ public class RecordController {
         recordDTO.setCondition(recordNotesAndCondition[1]);
         recordDTO.setTags(tags);
         return recordDTO;
-
     }
 
     @GetMapping(path = "/search")
@@ -64,19 +63,19 @@ public class RecordController {
         }
     }
 
-    @RequestMapping(path = "/set-condition", method = RequestMethod.PUT)
-    public ResponseEntity updateCondition(@RequestParam String condition, Principal principal, @RequestParam String recordId) {
+    @RequestMapping(path = "/records/{id}", method = RequestMethod.PUT)
+    public RecordDTO updateRecord(@RequestParam String condition, @RequestBody RecordDTO recordDTO, Principal principal, @PathVariable String recordId) {
         int userId = userDao.findIdByUsername(principal.getName());
-         String recordToUpdate = recordDao.getRecordById(recordId);
+         String recordToUpdate = recordDao.getRecordById(recordId).getId();
         boolean updatedRecord = recordDao.updateCondition(recordToUpdate, condition, userId);
-
-
         if (updatedRecord) {
             return ResponseEntity.ok("Record condition updated.");
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
                     .body("Failed to update record condition");
         }
+
+
     }
 
 

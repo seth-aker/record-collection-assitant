@@ -7,7 +7,7 @@
       <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a><br>
       <a href=" " target="_blank">LinkedIn Profile 2</a><br>
       <a href=" " target="_blank">LinkedIn Profile 3</a><br>
-      <a href=" " target="_blank">LinkedIn Profile 4</a><br>
+      <a href=" " target="_blank">Linkedin Profilek</a><br>
     </div>
   </div>
 </template>

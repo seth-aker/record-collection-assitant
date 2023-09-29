@@ -16,7 +16,6 @@ import java.util.List;
 
 @Component
 public class JdbcRecordDao implements RecordDao {
-
     private JdbcTemplate jdbcTemplate;
     private UserDao userDao;
 
@@ -158,7 +157,7 @@ public class JdbcRecordDao implements RecordDao {
     public boolean updateCondition(String recordId, String condition, int userId){
         String sql= "UPDATE user_record_tag SET record_condition = ? WHERE user_id = ? AND record_id =?";
         try{
-            int numberOfRows = this.jdbcTemplate.update(sql, condition, userId, id);
+            int numberOfRows = this.jdbcTemplate.update(sql, condition, userId, recordId);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
             }

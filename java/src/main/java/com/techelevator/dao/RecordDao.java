@@ -18,7 +18,6 @@ public interface RecordDao {
 
     boolean deleteTags(int userId, int recordId);
 
-
     boolean updateCondition(String recordId, String condition, int userId);
 
     public boolean updateRecordNote(String recordId, int userId, String note);
