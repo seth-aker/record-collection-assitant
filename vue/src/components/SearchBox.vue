@@ -3,8 +3,6 @@
     <input type="text" id="search-input" placeholder="Search by genre, artist, or song...">
     <button id="search-button">Search</button>
     <div class="upload-counter">
-      <p>2,783 active users!</p>
-      <p>7,623 albums uploaded in the last 24 hours!</p>
     </div>
   </div>
 </template>

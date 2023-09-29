@@ -8,6 +8,7 @@ import Footer from "@/components/Footer.vue";
 
     <div id="nav">
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token !== ''">Logout</router-link>
+      </div>
 
       <nav-bar-vue />
       
@@ -46,6 +47,5 @@ body {
   background-repeat: no-repeat; 
    
 }
-
 
 </style>
