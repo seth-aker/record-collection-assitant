@@ -1,9 +1,11 @@
-package com.techelevator.services;
+package com.techelevator.services.spotifyAPI;
 
 import com.techelevator.model.spotifyAPImodels.AlbumSearchResponse;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.model.spotifyAPImodels.SpotifyResponse;
 import com.techelevator.model.spotifyAPImodels.TokenResponse;
+import com.techelevator.services.APIService;
+import com.techelevator.services.RecordDTOBuilder;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -17,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
 public class SpotifyAPIService implements APIService {
 
     private static String API_BASE_URL = "https://api.spotify.com/v1";
@@ -151,6 +153,7 @@ public class SpotifyAPIService implements APIService {
         return new HttpEntity<>(null, headers);
     }
 
+    //The record DTO builder is no longer in use. If we want to get the spotify API working again it needs major changes
     private RecordDTO createRecordDTO(SpotifyResponse spotifyResponse) {
         RecordDTOBuilder recordDTOBuilder = new RecordDTOBuilder();
         return recordDTOBuilder.createRecordDTO(spotifyResponse);

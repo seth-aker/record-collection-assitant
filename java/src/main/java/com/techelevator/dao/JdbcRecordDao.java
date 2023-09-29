@@ -62,24 +62,49 @@ public class JdbcRecordDao implements RecordDao {
         return userLib;
     }
 
-    public String getRecordNote(String recordId, Principal principal){
+    public String[] getRecordNoteAndCondition(String recordId, Principal principal){
+        String[] noteAndCondition = new String[2];
         int userId = userDao.findIdByUsername(principal.getName());
-        String sql = "SELECT user_note FROM user_record WHERE user_id = ? AND record_id = ?;";
-        String note = "";
+        String sql = "SELECT user_note, record_condition FROM user_record WHERE user_id = ? AND record_id = ?;";
+
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, recordId);
             if (results.next()) {
-                note = results.getString("user_note");
+                noteAndCondition[0] = results.getString("user_note");
+                noteAndCondition[1] = results.getString("record_condition");
             }
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (NullPointerException e) {
-            return "";
+            return noteAndCondition;
         }
 
-        return note;
+        return noteAndCondition;
+    }
+
+    @Override
+    public List<String> getRecordTags(String recordId, Principal principal) {
+        List<String> tags = new ArrayList<>();
+        int userId = userDao.findIdByUsername(principal.getName());
+        String sql = "SELECT tag_name " +
+                "FROM user_record_tag " +
+                "WHERE record_id = ? AND user_id = ?;";
+
+        try {
+
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recordId, userId);
+            while (results.next()) {
+                tags.add(results.getString("tag_name"));
+            }
+        }catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (NullPointerException e) {
+            return tags;
+        }
+
+        return tags;
     }
 
     public boolean updateRecordNote(String recordId, int userId , String note) {
@@ -138,6 +163,7 @@ public class JdbcRecordDao implements RecordDao {
             throw new DaoException("Data integrity violation", e);
         }
     }
+
 
 
     private Record mapRowToRecord(SqlRowSet rowSet) {

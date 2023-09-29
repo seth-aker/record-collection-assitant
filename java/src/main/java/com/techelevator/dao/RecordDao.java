@@ -19,5 +19,7 @@ public interface RecordDao {
 
     public boolean removeRecordFromUserLib(Record record, int userId);
 
-    public String getRecordNote(String recordId, Principal principal);
+    public String[] getRecordNoteAndCondition(String recordId, Principal principal);
+
+    public List<String> getRecordTags(String recordId, Principal principal);
 }

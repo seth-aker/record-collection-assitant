@@ -40,7 +40,12 @@ public class RecordController {
     @GetMapping(path = "/{recordId}")
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
-        recordDTO.getRecord().setUserNote(recordDao.getRecordNote(recordId, principal));
+        String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, principal));
+        List<String> tags = recordDao.getRecordTags(recordId, principal);
+
+        recordDTO.setUserNotes(recordNotesAndCondition[0]);
+        recordDTO.setCondition(recordNotesAndCondition[1]);
+        recordDTO.setTags(tags);
         return recordDTO;
 
     }
@@ -57,22 +62,22 @@ public class RecordController {
         }
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path = "/{collectionId}")
-    public void addRecordToCollection(@Valid Principal principal,
-                                      @RequestBody RecordDTO recordDTO,
-                                      @PathVariable int collectionId) {
-
-        Record record = recordDTO.getRecord();
-        int userId = userDao.findIdByUsername(principal.getName());
-        if(!recordLogic.doesRecordExist(record)) {
-            recordDao.createRecord(record);
-        }
-        if(!recordLogic.isRecordInUserLib(record, userId)){
-            recordDao.addRecordToUserLib(record, userId);
-        }
-        collectionDao.addRecordToCollection(collectionId, record);
-    }
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping(path = "/{collectionId}")
+//    public void addRecordToCollection(@Valid Principal principal,
+//                                      @RequestBody RecordDTO recordDTO,
+//                                      @PathVariable int collectionId) {
+//
+//        Record record = recordDTO.getRecord();
+//        int userId = userDao.findIdByUsername(principal.getName());
+//        if(!recordLogic.doesRecordExist(record)) {
+//            recordDao.createRecord(record);
+//        }
+//        if(!recordLogic.isRecordInUserLib(record, userId)){
+//            recordDao.addRecordToUserLib(record, userId);
+//        }
+//        collectionDao.addRecordToCollection(collectionId, record);
+//    }
 }
 
 

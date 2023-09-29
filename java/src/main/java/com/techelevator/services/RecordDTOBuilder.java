@@ -13,13 +13,6 @@ public class RecordDTOBuilder {
     public RecordDTO createRecordDTO(SpotifyResponse spotifyResponse) {
         this.spotifyResponse = spotifyResponse;
         RecordDTO recordDTO = new RecordDTO();
-        recordDTO.setRecord(createRecord());
-        recordDTO.setArtist(createArtists());
-        recordDTO.setGenres(createGenres());
-        recordDTO.setLabel(createLabel());
-        recordDTO.setTracks(createTracks());
-        recordDTO.setImageUrl(createImageUrl());
-        recordDTO.setPopularity(createPopularity());
         return recordDTO;
     }
 
@@ -47,7 +40,7 @@ public class RecordDTOBuilder {
     }
 
     private String createImageUrl() {
-        return spotifyResponse.getImages().get(0).getUrl();
+        return spotifyResponse.getImages().get(0).getUri();
     }
 
     private int createPopularity() {
