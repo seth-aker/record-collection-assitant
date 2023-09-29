@@ -47,25 +47,25 @@ export default {
 
 
 <style scoped>
- .nav-bar-left{
-   display: flex;
-   align-items: space-between;
- }
 
-.nav-bar-buttons {
+nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  width: 100%;
-   padding: 10px 20px;
+  
 }
-.registration-login{
+.nav-bar-buttons {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
 }
 
+ .nav-bar-left{
+   display: flex;
+ }
+
+ .nav-bar-right {
+   display: flex;
+ }
 .rounded-button {
   display: flex;
   border-radius: 20px; /* Rounded corners */
