@@ -16,8 +16,16 @@ export default {
     components: {
         RecordView
     },
+    data() {
+        return {
+
+        }
+    },
     computed: {
         filteredRecords() {
+            return null;
+        },
+        newReleaseFilter() {
             return null;
         }
     }

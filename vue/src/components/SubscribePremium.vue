@@ -1,13 +1,11 @@
 <template>
 
-   <div class="modal" v-if="showPopup">
-    <div class="modal-content">
-      <span class="close" @click="closePopup">&times;</span>
-      <p>Would you like to to enjoy 1 free month of Sleeves Premium?</p>
-      <button @click="becomePremium(true)">Yes</button>
-      <button @click="becomePremium(false)">No</button>
-    </div>
-  </div>
+   <b-modal v-model="showPopup" title="Sleeves Premium Just for You!">
+   <p> Would you like to try 1 free month of Sleeves?</p>
+    <button @click="isPremium(true)">Yes</button>
+    <button @click="isPremium(false)">No</button>
+   </b-modal>
+  
 </template>
 
 <script>
