@@ -92,7 +92,7 @@ h1 {
 
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   ;
-
+}
 
 @font-face {
   font-family: 'KEEPT___'; 
