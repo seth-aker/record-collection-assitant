@@ -11,11 +11,15 @@ public interface RecordDao {
 
     public List<Record> getUserLibrary(int userId);
 
-    boolean updateTags(String tagName, int recordId, int userId);
+    boolean createTags(Record record, String tagName);
+
+
+    boolean updateTags(String tagName, String recordId, int userId);
 
     boolean deleteTags(int userId, int recordId);
 
-    boolean updateCondition(String condition, int userId, int recordID);
+
+    boolean updateCondition(String recordId, String condition, int userId);
 
     public boolean updateRecordNote(String recordId, int userId, String note);
 
