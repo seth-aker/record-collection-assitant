@@ -3,7 +3,7 @@
   <div class="nav-bar-buttons">
     <div class="registration-login rounded-button">
        <div id="login">
-      <router-link to="login">
+      <router-link to="/login">
       &nbsp;&nbsp;LOGIN&nbsp;&nbsp;
       </router-link>
        </div>
@@ -11,15 +11,17 @@
       <router-link to="/register">
         REGISTER
       </router-link>
+      </div>
     </div>
     <div class="general-information rounded-button">
       <div id="home">
       <router-link to="/home">
        &nbsp;&nbsp;HOME&nbsp;&nbsp;
-      </router-link></div>
+      </router-link>
+      </div>
         <div id="collections" >
       <router-link to="/collections">
-       COLLECTION
+       COLLECTIONs
       </router-link>
        </div>
        <div id="contact">
@@ -27,10 +29,9 @@
       CONTACT
       </router-link>
     </div>
- 
   
-
  </div>
+</div>
 </template>
 
 <script>
@@ -42,10 +43,7 @@ export default {
 </script>
 
 <style scoped>
-#nav-bar-buttons {
-  display: flex;
-  position: fixed;
-}
+
 .nav-bar-buttons {
   display: flex;
   align-items: space;
