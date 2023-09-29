@@ -21,7 +21,7 @@
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
       <div class="create-account-button">
-      <button @click="showModal = true" type="submit">Create Account</button>
+      <button @click="showPopup = true" type="submit">Create Account</button>
 <subscribe-premium-vue />
       </div>
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>

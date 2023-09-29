@@ -1,7 +1,3 @@
-import Footer from "@/components/Footer.vue"; 
-
-
-
 
 <template>
   <div id="app">
@@ -12,29 +8,31 @@ import Footer from "@/components/Footer.vue";
 
       <nav-bar-vue />
       
-
+<footer-vue />
     <router-view />
 
-     <Footer />
+
+
+  
+
   </div>
+  
 </template>
 
 <script>
-
+import FooterVue from './components/Footer.vue'
 import NavBarVue from './components/NavBar.vue'
-import Footer from './components/Footer.vue';
 
 export default {
   name: 'MainApp',
 
   components: {
     NavBarVue,
-    Footer,
-    
+    FooterVue,
   }
-
 }
 </script>
+
 <style>
 body {
   margin: 0;
@@ -45,7 +43,6 @@ body {
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-   
 }
 
 </style>

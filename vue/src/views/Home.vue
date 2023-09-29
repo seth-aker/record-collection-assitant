@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    
+
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
    
     About,
     SearchBox,
-   
+
   },
 };
 </script>
