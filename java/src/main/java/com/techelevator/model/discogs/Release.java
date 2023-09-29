@@ -1,24 +1,16 @@
-package com.techelevator.model;
+package com.techelevator.model.discogs;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.techelevator.model.discogs.*;
-import com.techelevator.model.discogs.Artist;
+import com.techelevator.model.Label;
 import com.techelevator.model.spotifyAPImodels.Image;
-
 
 import java.util.List;
 
-public class RecordDTO extends Release{
+public class Release {
 
-    //Added from our database
-    private List<String> tags;
-    private String condition;
-    private String userNotes;
-
-    // From discogs
     private String title;
     private int id;
-    private List<com.techelevator.model.discogs.Artist> artists;
+    private List<Artist> artists;
     private String thumb;
     private List<Company> companies;
     private String country;
@@ -26,7 +18,7 @@ public class RecordDTO extends Release{
     private String dateChanged;
     private int estimatedWeight;
     @JsonAlias(value = "extraartists")
-    private List<com.techelevator.model.discogs.Artist> extraArtists;
+    private List<Artist> extraArtists;
     private int formatQuantity;
     private List<Format> formats;
     private List<String> genres;
@@ -49,31 +41,6 @@ public class RecordDTO extends Release{
     private List<Video> videos;
     private int year;
 
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-    public String getUserNotes() {
-        return userNotes;
-    }
-
-    public void setUserNotes(String userNotes) {
-        this.userNotes = userNotes;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -90,11 +57,11 @@ public class RecordDTO extends Release{
         this.id = id;
     }
 
-    public List<com.techelevator.model.discogs.Artist> getArtists() {
+    public List<Artist> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<com.techelevator.model.discogs.Artist> artists) {
+    public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
 
@@ -146,7 +113,7 @@ public class RecordDTO extends Release{
         this.estimatedWeight = estimatedWeight;
     }
 
-    public List<com.techelevator.model.discogs.Artist> getExtraArtists() {
+    public List<Artist> getExtraArtists() {
         return extraArtists;
     }
 
@@ -233,6 +200,7 @@ public class RecordDTO extends Release{
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
 
     public String getReleased() {
         return released;

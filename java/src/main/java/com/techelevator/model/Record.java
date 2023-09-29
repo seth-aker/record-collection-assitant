@@ -1,10 +1,13 @@
 package com.techelevator.model;
 
+import java.util.List;
+
 public class Record {
 
     private String id;
     private String title;
     private String userNote;
+
 
     public Record(){}
 

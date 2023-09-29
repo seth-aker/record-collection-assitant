@@ -1,9 +1,10 @@
-package com.techelevator.model;
+package com.techelevator.model.discogs;
 
-public class Label {
+public class Company {
 
     private String catno;
     private String entityType;
+    private String entityTypeName;
     private int id;
     private String name;
     private String resourceUrl;
@@ -22,6 +23,14 @@ public class Label {
 
     public void setEntityType(String entityType) {
         this.entityType = entityType;
+    }
+
+    public String getEntityTypeName() {
+        return entityTypeName;
+    }
+
+    public void setEntityTypeName(String entityTypeName) {
+        this.entityTypeName = entityTypeName;
     }
 
     public int getId() {
