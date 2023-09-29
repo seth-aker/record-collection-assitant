@@ -9,6 +9,8 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +30,7 @@ public class RecordController {
     private APIService apiService;
     private RecordLogic recordLogic;
 
-    public RecordController(RecordDao recordDao, UserDao userDao, CollectionDao collectionDao, APIService apiService){
+    public RecordController(RecordDao recordDao, UserDao userDao, CollectionDao collectionDao, APIService apiService) {
         this.recordDao = recordDao;
         this.userDao = userDao;
         this.collectionDao = collectionDao;
@@ -50,17 +52,39 @@ public class RecordController {
 
     }
 
-
     @GetMapping(path = "/search")
     public List<RecordDTO> getRecordSearchResults(@RequestParam(defaultValue = "") String q,
-                                            @RequestParam(defaultValue = "") String type) {
+                                                  @RequestParam(defaultValue = "") String type) {
 
-        if(!q.equals("") && type.equals("album")) {
+        if (!q.equals("") && type.equals("album")) {
             return apiService.getAlbumSearch(q);
         } else {
             return null;
         }
     }
+
+    @RequestMapping(path = "/set-condition", method = RequestMethod.PUT)
+    public ResponseEntity setRecordCondition(@RequestParam String condition, Principal principal, @RequestParam int recordId) {
+        boolean updatedRecord = recordDao.updateCondition(condition,
+                userDao.findIdByUsername(principal.getName()), recordId);
+        if (updatedRecord) {
+            return ResponseEntity.ok("Record condition updated.");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update record condition");
+        }
+    }
+
+
+    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
+    public ResponseEntity addRecordTag(@RequestParam String tag, ) {
+
+
+    }
+
+}
+
+
 
 //    @ResponseStatus(HttpStatus.CREATED)
 //    @PostMapping(path = "/{collectionId}")
@@ -78,7 +102,7 @@ public class RecordController {
 //        }
 //        collectionDao.addRecordToCollection(collectionId, record);
 //    }
-}
+
 
 
 //

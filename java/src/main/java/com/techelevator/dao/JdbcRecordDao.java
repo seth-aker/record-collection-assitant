@@ -106,6 +106,21 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     @Override
+    public boolean createTags(Record record, String tagName){
+        String sql = "INSERT INTO user_record_tag (tag_name) VALUES (?) WHERE user_id = ? AND record_id = ?;";
+        try {
+            return jdbcTemplate.update(sql, tagName, record.getId(), record.getTitle()) == 1;
+
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+
+
+    @Override
     public boolean updateTags(String tagName, int recordId, int userId){
         String sql= "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
         try{
@@ -138,10 +153,10 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     @Override
-    public boolean updateCondition(String condition, int userId, int recordID){
-        String sql= "UPDATE user_record SET record_condition = ? WHERE user_id = ? AND record_id =?";
+    public boolean updateCondition(Record record){
+        String sql= "UPDATE user_record_tag SET record_condition = ? WHERE user_id = ? AND record_id =?";
         try{
-            int numberOfRows = this.jdbcTemplate.update(sql, userId, recordID);
+            int numberOfRows = this.jdbcTemplate.update(sql, record.getId(), record.);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
             }
@@ -219,6 +234,7 @@ public class JdbcRecordDao implements RecordDao {
         Record record = new Record();
         record.setId(rowSet.getString("record_id"));
         record.setTitle(rowSet.getString("record_title"));
+        record.setCondition(rowSet.getString("record_condition"));
         if(rowSet.getString("user_note") != null) {
             record.setUserNote(rowSet.getString("user_note"));
         }
