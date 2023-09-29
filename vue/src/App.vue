@@ -2,12 +2,13 @@
 <template>
   <div id="app">
 
-  
+
 
       <nav-bar-vue />
       
-<footer-vue />
+
     <router-view />
+    <footer-vue />
 
   </div>
   

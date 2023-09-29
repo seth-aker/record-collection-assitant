@@ -1,4 +1,4 @@
-package com.techelevator.model.spotifyAPImodels;
+package com.techelevator.model;
 
 public class Image {
 

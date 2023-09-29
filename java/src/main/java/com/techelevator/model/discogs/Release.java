@@ -2,7 +2,7 @@ package com.techelevator.model.discogs;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.techelevator.model.Label;
-import com.techelevator.model.spotifyAPImodels.Image;
+import com.techelevator.model.Image;
 
 import java.util.List;
 

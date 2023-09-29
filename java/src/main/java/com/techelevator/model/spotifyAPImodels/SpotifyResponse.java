@@ -1,8 +1,7 @@
 package com.techelevator.model.spotifyAPImodels;
 
 
-import com.techelevator.model.Artist;
-
+import com.techelevator.model.Image;
 
 import java.util.List;
 
