@@ -12,13 +12,13 @@
       </div>
     </div>
 
-    <Footer></Footer>
+   
   </div>
 </template>
 
 <script>
 import About from "@/components/About.vue";
-import Footer from "@/components/Footer.vue";
+
 import SearchBox from "@/components/SearchBox.vue"; 
 
 
@@ -27,7 +27,7 @@ export default {
    
     About,
     SearchBox,
-    Footer,
+
   },
 };
 </script>

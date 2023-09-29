@@ -6,21 +6,26 @@
 
       <nav-bar-vue />
       
-
+<footer-vue />
     <router-view />
     </div>
   </div>
+  
 </template>
 
 <script>
+import FooterVue from './components/Footer.vue'
 
 import NavBarVue from './components/NavBar.vue'
+
+
 
 export default {
   name: 'MainApp',
 
   components: {
     NavBarVue,
+    FooterVue,
     
   }
 

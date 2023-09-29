@@ -12,15 +12,11 @@
         <router-link :to="{name: 'contact'}">CONTACT</router-link>
       </div>
     </section>
-   
     <h1>SLEEVES</h1>
-
     <section class="nav-bar-buttons nav-bar-right">
-    
       <div id="login" class="rounded-button">
         <router-link :to="{name: 'login'}">LOGIN</router-link>
       </div>
-      
       <div id="registry" class="rounded-button">
           <router-link :to="{name: 'register'}">REGISTER</router-link>
       </div>
@@ -78,6 +74,7 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
+    margin-top: 20px;
 }
 
 @font-face {
