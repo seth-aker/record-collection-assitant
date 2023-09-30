@@ -1,19 +1,22 @@
 <template>
   <form class="search-box" @submit.prevent="search(searchInput)">
     <input type="text" id="search-input" placeholder="Search by genre, artist, or song..." :v-model="searchInput">
-    <button id="search-button">Search</button>
+    <button id="search-button" type="submit">Search</button>
     <div class="upload-counter">
     </div>
   </form>
 </template>
 
 <script>
-import recordService from '../services/RecordService'
+// import recordService from '../services/RecordService'
 
 export default {
   data() {
     return {
       searchInput: '',
+      searchType: 'release', //options include release, artist or label, however, we don't have java objects for artists or labels that are compatible with discogs response. Be wary of changing this.
+      searchBy: '', // options include by: title, artist, genre, style, label, year, format, release title
+      perPage: 20
     }
   },
   methods: {
