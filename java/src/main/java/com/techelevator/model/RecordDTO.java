@@ -14,7 +14,7 @@ import java.util.List;
 public class RecordDTO {
 
     //Added from our database
-    private List<String> tags = new ArrayList<>();
+    private List<String> tags;
     private String condition;
     private String userNotes;
 
@@ -60,12 +60,10 @@ public class RecordDTO {
         return tags;
     }
 
-    public void setTags(String tag) {
-       if(tags != null && !tags.isEmpty()) {
-           tags.add(tag);
+    public void setTags(List<String> tags) {
+ this.tags = tags;
 
 
-       }
     }
 
     public String getCondition() {

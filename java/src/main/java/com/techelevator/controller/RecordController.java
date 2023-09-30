@@ -12,6 +12,7 @@ import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -66,29 +67,53 @@ public class RecordController {
     }
 
     @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
-    public RecordDTO updateRecord(@RequestParam String condition, @RequestParam String tagName, Principal principal,
-                                  @RequestParam String notes, @PathVariable String recordId) {
-        int userId = userDao.findIdByUsername(principal.getName());
+    public RecordDTO updateRecord(@RequestParam String condition, @RequestParam String tagName,
+                                  Principal principal, @RequestParam String notes, @PathVariable String recordId) {
+        // choose record to update
         Record recordToUpdate = recordDao.getRecordById(recordId);
         try {
-            recordLogic.isRecordInUserLib(recordToUpdate, userId);
-        }catch (DaoException e) {
+            // see if records in users library ?
+            recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()));
+            RecordDTO updatedRecord = mapRowRecordDTO(recordToUpdate, principal);
+        } catch (DaoException e) {
             throw new DaoException("Record not in library.", e);
         }
-        RecordDTO updatedRecord = new RecordDTO();
-        updatedRecord.
 
 
     }
 
 
+    // This will add a single tag into the tags array vs the whole array @once
+        //    (We can fill it with tags but should we do it one at a time or all at once?
+
+//    public void setTags(String tag) {
+//        if(tags != null && !tags.isEmpty()) {
+//            tags.add(tag);
+//
+//
+//        }
+//    }
 
 
 
 
 
 
-
+    public RecordDTO mapRowRecordDTO (Record record, Principal principal){
+        RecordDTO recordDTO = new RecordDTO();
+        try {
+            Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), principal);
+            String note = (noteAndCondition != null && noteAndCondition.length > 0) ? noteAndCondition[0].toString() : null;
+            String condition = (noteAndCondition != null && noteAndCondition.length > 1) ? noteAndCondition[1].toString() : null;
+            List<String> tags = recordDao.getRecordTags(record.getId(), principal);
+            recordDTO.setUserNotes(note);
+            recordDTO.setTags(tags);
+            recordDTO.setCondition(condition);
+        }catch (DaoException e){
+            throw new DaoException("Needs some better handling here", e);
+        }
+        return recordDTO;
+    }
 
 
 //    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
