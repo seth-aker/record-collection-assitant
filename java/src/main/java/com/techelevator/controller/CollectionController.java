@@ -48,8 +48,9 @@ public class CollectionController {
         }
     }
 
-    @RequestMapping(path = "/collections/user/{collectionId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/collections/{collectionId}", method = RequestMethod.GET)
     public Collection getCollection(@PathVariable int collectionId, @Valid Principal principal) {
+            //record Ids are added to collection in the dao
             Collection collection = collectionDao.getCollectionByCollectionId(collectionId);
             if (collection.isPublic() || collection.getUserId() == userDao.findIdByUsername(principal.getName())){
                 return collection;
@@ -67,7 +68,7 @@ public class CollectionController {
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @DeleteMapping(path = "/collections/user/{collectionId}")
+    @DeleteMapping(path = "/collections/{collectionId}")
     public void deleteCollection(@PathVariable int collectionId, @Valid Principal principal) {
             collectionDao.deleteCollection(collectionId);
     }

@@ -2,10 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-
 import Register from '../views/Register.vue'
 import store from '../store/index'
-
 import Contact from '../views/Contact.vue'
 import RecordView from '../views/RecordView.vue'
 import UserHome from '../views/UserHome.vue'
@@ -43,14 +41,6 @@ const router = new Router({
         requiresAuth: false
       }
     },
-    // {
-    //   path: "/logout",
-    //   name: "logout",
-    //   component: Logout,
-    //   meta: {
-    //     requiresAuth: false
-    //   }
-    // },
     {
       path: "/register",
       name: "register",
@@ -59,16 +49,8 @@ const router = new Router({
         requiresAuth: false
       }
     },
-    // {
-    // path: "/collections/public",
-    // name: "collections",
-    // component: Collections,
-    // meta: {
-    //   requiresAuth: false
-    // }
-    // },
     {
-      path: "/collections/user/:collectionId",
+      path: "/collections/:collectionId",
       name: "collection-view",
       component: CollectionView,
       meta: {

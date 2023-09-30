@@ -19,7 +19,7 @@ export default {
     },
 
     searchRecords(searchQuery) {
-        return axios.get(`/records/search?q=${searchQuery}`);
+        return axios.get(`/records/search?${searchQuery}`);
     }
 
 }

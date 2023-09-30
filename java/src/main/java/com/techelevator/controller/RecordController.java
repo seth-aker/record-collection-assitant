@@ -7,14 +7,12 @@ import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 
 import com.techelevator.exception.DaoException;
-import com.techelevator.model.Collection;
 import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
+import com.techelevator.model.discogs.SearchResponse;
 import com.techelevator.services.APIService;
 
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,6 @@ public class RecordController {
     private CollectionDao collectionDao;
     private APIService apiService;
     private RecordLogic recordLogic;
-
 
 
     public RecordController(RecordDao recordDao, UserDao userDao, CollectionDao collectionDao, APIService apiService) {
@@ -58,14 +55,10 @@ public class RecordController {
     }
 
     @GetMapping(path = "/search")
-    public List<RecordDTO> getRecordSearchResults(@RequestParam(defaultValue = "") String q,
-                                                  @RequestParam(defaultValue = "") String type) {
-
-        if (!q.equals("") && type.equals("album")) {
-            return apiService.getAlbumSearch(q);
-        } else {
-            return null;
-        }
+    public SearchResponse getRecordSearchResults(@RequestParam(defaultValue = "") String q,
+                                                 @RequestParam (defaultValue = "25" ) int per_page,
+                                                 @RequestParam (defaultValue = "release") String type) {
+            return apiService.getAlbumSearch(q, per_page, type);
     }
 
     @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
@@ -74,21 +67,21 @@ public class RecordController {
 
         try {
             Record recordToUpdate = recordDao.getRecordById(String.valueOf(recordDTO.getId()));
-            if(recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()))){
-       recordDao.updateTags(recordDTO.getTags(),String.valueOf(recordDTO.getId()),userId);
-       recordDao.updateRecordNote(String.valueOf(recordDTO.getId()),userId,recordDTO.getUserNotes());
-       recordDao.updateCondition(String.valueOf(recordDTO.getId()),recordDTO.getCondition(), userId);
+            if (recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()))) {
+                recordDao.updateTags(recordDTO.getTags(), String.valueOf(recordDTO.getId()), userId);
+                recordDao.updateRecordNote(String.valueOf(recordDTO.getId()), userId, recordDTO.getUserNotes());
+                recordDao.updateCondition(String.valueOf(recordDTO.getId()), recordDTO.getCondition(), userId);
             }
         } catch (DaoException e) {
             throw new DaoException("Record not in library.", e);
         }
-return recordDTO;
+        return recordDTO;
 
     }
 
 
     // This will add a single tag into the tags array vs the whole array @once
-        //    (We can fill it with tags but should we do it one at a time or all at once?
+    //    (We can fill it with tags but should we do it one at a time or all at once?
 
 //    public void setTags(String tag) {
 //        if(tags != null && !tags.isEmpty()) {
@@ -99,11 +92,7 @@ return recordDTO;
 //    }
 
 
-
-
-
-
-    public RecordDTO mapRowRecordDTO (Record record, Principal principal){
+    public RecordDTO mapRowRecordDTO(Record record, Principal principal) {
         RecordDTO recordDTO = new RecordDTO();
         try {
             Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), principal);
@@ -113,7 +102,7 @@ return recordDTO;
             recordDTO.setUserNotes(note);
             recordDTO.setTags(tags);
             recordDTO.setCondition(condition);
-        }catch (DaoException e){
+        } catch (DaoException e) {
             throw new DaoException("Needs some better handling error here", e);
         }
         return recordDTO;
@@ -127,7 +116,6 @@ return recordDTO;
 //    }
 
 }
-
 
 
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -146,7 +134,6 @@ return recordDTO;
 //        }
 //        collectionDao.addRecordToCollection(collectionId, record);
 //    }
-
 
 
 //

@@ -13,7 +13,7 @@ import RecordInfoThin from '../components/RecordInfoThin.vue'
 
 export default {
   components: { RecordInfoThin },
-  name: 'Collections',
+  name: 'Collection-View',
   data() {
     return {
       collectionDTO: [],

@@ -1,5 +1,6 @@
 package com.techelevator.services.spotifyAPI;
 
+import com.techelevator.model.discogs.SearchResponse;
 import com.techelevator.model.spotifyAPImodels.AlbumSearchResponse;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.model.spotifyAPImodels.SpotifyResponse;
@@ -7,7 +8,6 @@ import com.techelevator.model.spotifyAPImodels.TokenResponse;
 import com.techelevator.services.APIService;
 import com.techelevator.services.RecordDTOBuilder;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.ResourceAccessException;
@@ -65,7 +65,7 @@ public class SpotifyAPIService implements APIService {
     }
 
     @Override
-    public List<RecordDTO> getAlbumSearch(String searchString) {
+    public SearchResponse getAlbumSearch(String query, int perPage, String type) {
         List<RecordDTO> spotifyResponse = new ArrayList<>();
 
         //Checks if the access token for spotify has been updated within the last hour. If not, then updates the token.
@@ -77,7 +77,7 @@ public class SpotifyAPIService implements APIService {
         HttpEntity<Void> request = createSpotifyRequest();
         List<SpotifyResponse> albums = new ArrayList<>();
         try {
-            ResponseEntity<AlbumSearchResponse> response = restTemplate.exchange(API_BASE_URL +"/search?q=" + searchString, HttpMethod.GET, request, AlbumSearchResponse.class);
+            ResponseEntity<AlbumSearchResponse> response = restTemplate.exchange(API_BASE_URL +"/search?q=" + query, HttpMethod.GET, request, AlbumSearchResponse.class);
             AlbumSearchResponse albumSearchResponse = response.getBody();
             albums = albumSearchResponse.getSpotifyResponses();
         }catch (RestClientResponseException e) {
@@ -96,11 +96,11 @@ public class SpotifyAPIService implements APIService {
         for(SpotifyResponse album : albums) {
             spotifyResponse.add(createRecordDTO(album));
         }
-        return spotifyResponse;
+        return null;
     }
 
     @Override
-    public List<RecordDTO> getArtistSearch(String searchString) {
+    public SearchResponse getArtistSearch(String searchString) {
         List<RecordDTO> searchResults = new ArrayList<>();
 
         Duration duration = Duration.between(tokenLastUpdated, LocalDateTime.now());
@@ -110,7 +110,7 @@ public class SpotifyAPIService implements APIService {
         HttpEntity<Void> request = createSpotifyRequest();
 
 
-        return searchResults;
+        return null;
     }
 
     private void setAccessToken(){

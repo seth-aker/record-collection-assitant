@@ -1,6 +1,7 @@
 package com.techelevator.services;
 
 import com.techelevator.model.RecordDTO;
+import com.techelevator.model.discogs.SearchResponse;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface APIService {
 
     RecordDTO getRecordInformation(String recordId);
 
-    List<RecordDTO> getAlbumSearch(String searchString);
+    SearchResponse getAlbumSearch(String query, int perPage, String type);
 
-    List<RecordDTO> getArtistSearch(String searchString);
+    SearchResponse getArtistSearch(String searchString);
 }
