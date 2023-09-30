@@ -34,6 +34,8 @@ public class RecordController {
     private APIService apiService;
     private RecordLogic recordLogic;
 
+
+
     public RecordController(RecordDao recordDao, UserDao userDao, CollectionDao collectionDao, APIService apiService) {
         this.recordDao = recordDao;
         this.userDao = userDao;
@@ -67,18 +69,20 @@ public class RecordController {
     }
 
     @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
-    public RecordDTO updateRecord(@RequestParam String condition, @RequestParam String tagName,
-                                  Principal principal, @RequestParam String notes, @PathVariable String recordId) {
-        // choose record to update
-        Record recordToUpdate = recordDao.getRecordById(recordId);
+    public RecordDTO updateRecord(@RequestBody RecordDTO recordDTO, Principal principal) {
+        int userId = userDao.findIdByUsername(principal.getName());
+
         try {
-            // see if records in users library ?
-            recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()));
-            RecordDTO updatedRecord = mapRowRecordDTO(recordToUpdate, principal);
+            Record recordToUpdate = recordDao.getRecordById(String.valueOf(recordDTO.getId()));
+            if(recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()))){
+       recordDao.updateTags(recordDTO.getTags(),String.valueOf(recordDTO.getId()),userId);
+       recordDao.updateRecordNote(String.valueOf(recordDTO.getId()),userId,recordDTO.getUserNotes());
+       recordDao.updateCondition(String.valueOf(recordDTO.getId()),recordDTO.getCondition(), userId);
+            }
         } catch (DaoException e) {
             throw new DaoException("Record not in library.", e);
         }
-
+return recordDTO;
 
     }
 
@@ -110,7 +114,7 @@ public class RecordController {
             recordDTO.setTags(tags);
             recordDTO.setCondition(condition);
         }catch (DaoException e){
-            throw new DaoException("Needs some better handling here", e);
+            throw new DaoException("Needs some better handling error here", e);
         }
         return recordDTO;
     }

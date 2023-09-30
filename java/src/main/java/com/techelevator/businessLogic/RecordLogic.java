@@ -36,7 +36,7 @@ public class RecordLogic {
     public boolean isRecordInUserLib(Record record, int userId) {
         List<Record> lib = recordDao.getUserLibrary(userId);
 
-        //maps the library to a list if recordIds and then checks if that list already contains the record in question
+        //maps the library to a list of recordIds and then checks if that list already contains the record in question
         return lib.stream().map(Record::getId).collect(Collectors.toList()).contains(record.getId());
     }
 

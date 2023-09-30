@@ -13,7 +13,9 @@ public interface RecordDao {
 
     boolean createTags(Record record, String tagName);
 
-    boolean updateTags(String tagName, String recordId, int userId);
+
+
+    boolean updateTags(List<String> tagName, String recordId, int userId);
 
     boolean deleteTags(int userId, String recordId);
 

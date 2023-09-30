@@ -122,13 +122,17 @@ public class JdbcRecordDao implements RecordDao {
 
 
     @Override
-    public boolean updateTags(String tagName, String recordId, int userId){
+    public boolean updateTags(List<String> tags, String recordId, int userId){
+
         try{
-        String sql= "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
-           int numberOfRows = this.jdbcTemplate.update(sql, tagName, recordId, userId);
-            if (numberOfRows == 0) {
-                throw new DaoException("Zero rows affected, expected at least one");
-            }  return true;
+            for(String tag : tags) {
+                String sql = "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
+                int numberOfRows = this.jdbcTemplate.update(sql, tag, recordId, userId);
+                if (numberOfRows == 0) {
+                    throw new DaoException("Zero rows affected, expected at least one");
+                }
+            }
+            return true;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
