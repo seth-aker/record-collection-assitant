@@ -1,10 +1,14 @@
 package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.techelevator.dao.RecordDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.discogs.*;
 import com.techelevator.model.discogs.Artist;
 
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecordDTO {
@@ -48,13 +52,18 @@ public class RecordDTO {
     private List<Video> videos;
     private int year;
 
+    public RecordDTO() {
+    }
+
 
     public List<String> getTags() {
         return tags;
     }
 
     public void setTags(List<String> tags) {
-        this.tags = tags;
+ this.tags = tags;
+
+
     }
 
     public String getCondition() {
@@ -312,5 +321,6 @@ public class RecordDTO {
     public void setYear(int year) {
         this.year = year;
     }
+
 
 }

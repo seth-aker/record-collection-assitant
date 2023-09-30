@@ -6,10 +6,13 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 
+import com.techelevator.exception.DaoException;
+import com.techelevator.model.Collection;
 import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +33,8 @@ public class RecordController {
     private CollectionDao collectionDao;
     private APIService apiService;
     private RecordLogic recordLogic;
+
+
 
     public RecordController(RecordDao recordDao, UserDao userDao, CollectionDao collectionDao, APIService apiService) {
         this.recordDao = recordDao;
@@ -63,19 +68,55 @@ public class RecordController {
         }
     }
 
-    @RequestMapping(path = "/records/{id}", method = RequestMethod.PUT)
-    public RecordDTO updateRecord(@RequestParam String condition, @RequestBody RecordDTO recordDTO, Principal principal, @PathVariable String recordId) {
+    @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
+    public RecordDTO updateRecord(@RequestBody RecordDTO recordDTO, Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
-         String recordToUpdate = recordDao.getRecordById(recordId).getId();
-        boolean updatedRecord = recordDao.updateCondition(recordToUpdate, condition, userId);
-        if (updatedRecord) {
-            return ResponseEntity.ok("Record condition updated.");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-                    .body("Failed to update record condition");
+
+        try {
+            Record recordToUpdate = recordDao.getRecordById(String.valueOf(recordDTO.getId()));
+            if(recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()))){
+       recordDao.updateTags(recordDTO.getTags(),String.valueOf(recordDTO.getId()),userId);
+       recordDao.updateRecordNote(String.valueOf(recordDTO.getId()),userId,recordDTO.getUserNotes());
+       recordDao.updateCondition(String.valueOf(recordDTO.getId()),recordDTO.getCondition(), userId);
+            }
+        } catch (DaoException e) {
+            throw new DaoException("Record not in library.", e);
         }
+return recordDTO;
+
+    }
 
 
+    // This will add a single tag into the tags array vs the whole array @once
+        //    (We can fill it with tags but should we do it one at a time or all at once?
+
+//    public void setTags(String tag) {
+//        if(tags != null && !tags.isEmpty()) {
+//            tags.add(tag);
+//
+//
+//        }
+//    }
+
+
+
+
+
+
+    public RecordDTO mapRowRecordDTO (Record record, Principal principal){
+        RecordDTO recordDTO = new RecordDTO();
+        try {
+            Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), principal);
+            String note = (noteAndCondition != null && noteAndCondition.length > 0) ? noteAndCondition[0].toString() : null;
+            String condition = (noteAndCondition != null && noteAndCondition.length > 1) ? noteAndCondition[1].toString() : null;
+            List<String> tags = recordDao.getRecordTags(record.getId(), principal);
+            recordDTO.setUserNotes(note);
+            recordDTO.setTags(tags);
+            recordDTO.setCondition(condition);
+        }catch (DaoException e){
+            throw new DaoException("Needs some better handling error here", e);
+        }
+        return recordDTO;
     }
 
 

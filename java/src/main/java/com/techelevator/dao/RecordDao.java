@@ -14,9 +14,10 @@ public interface RecordDao {
     boolean createTags(Record record, String tagName);
 
 
-    boolean updateTags(String tagName, String recordId, int userId);
 
-    boolean deleteTags(int userId, int recordId);
+    boolean updateTags(List<String> tagName, String recordId, int userId);
+
+    boolean deleteTags(int userId, String recordId);
 
     boolean updateCondition(String recordId, String condition, int userId);
 
@@ -27,9 +28,6 @@ public interface RecordDao {
     public boolean addRecordToUserLib(Record record, int userId);
 
     public boolean removeRecordFromUserLib(Record record, int userId);
-
-
-    public String getRecordNote(String recordId, Principal principal);
 
 
     public String[] getRecordNoteAndCondition(String recordId, Principal principal);
