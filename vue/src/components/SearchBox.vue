@@ -1,5 +1,5 @@
 <template>
-  <form class="search-box" @submit.prevent="search(searchInput)">
+  <form class="search-box" @submit.prevent="search(search)">
     <input type="text" id="search-input" placeholder="Search by genre, artist, or song..." :v-model="searchInput">
     <button id="search-button" type="submit">Search</button>
     <div class="upload-counter">
@@ -16,12 +16,17 @@ export default {
       searchInput: '',
       searchType: 'release', //options include release, artist or label, however, we don't have java objects for artists or labels that are compatible with discogs response. Be wary of changing this.
       searchBy: '', // options include by: title, artist, genre, style, label, year, format, release title
-      perPage: 20
+      perPage: 25
     }
   },
   methods: {
-    search(searchText) {
+    updateSearch(searchText) {
      this.$store.commit("UPDATE_SEARCH", searchText)
+    }
+  },
+  computed: {
+    search() {
+      return `?q=${this.searchInput}&per_page=${this.perPage}&type=${this.searchType}`;
     }
   }
 }

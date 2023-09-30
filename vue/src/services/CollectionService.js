@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
 
     getCollection(collectionId) {
-        return axios.get(`/collections/user/${collectionId}`)
+        return axios.get(`/collections/${collectionId}`)
     },
 
     getPublicCollections() {

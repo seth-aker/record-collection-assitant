@@ -4,6 +4,7 @@ package com.techelevator.services.discogs;
 
 import com.techelevator.model.RecordDTO;
 import com.techelevator.model.discogs.Release;
+import com.techelevator.model.discogs.SearchResponse;
 import com.techelevator.services.APIService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -42,12 +44,28 @@ public class DiscogsAPIService implements APIService {
         }
 
     @Override
-    public List<RecordDTO> getAlbumSearch(String searchString) {
-        return null;
+    public SearchResponse getAlbumSearch(String query, int perPage, String type) {
+        SearchResponse response = new SearchResponse();
+
+
+        String searchUrl = API_BASE_URL + "/database/search?q=" + query + "&per_page=" + perPage + "&type=" + type;
+        HttpEntity<Void> entity = createDiscogsRequest();
+        try {
+            ResponseEntity<SearchResponse> responseEntity = restTemplate.exchange(searchUrl, HttpMethod.GET, entity, SearchResponse.class);
+            response = responseEntity.getBody();
+        } catch (RestClientResponseException e) {
+            String errorMessage = "Return status: " + e.getRawStatusCode() + "\n" +
+                    "Status message: " + e.getMessage();
+            System.out.println(errorMessage);
+        } catch (ResourceAccessException e) {
+            String errorMessage = e.getMessage();
+            System.out.println(errorMessage);
+        }
+        return response;
     }
 
     @Override
-    public List<RecordDTO> getArtistSearch(String searchString) {
+    public SearchResponse getArtistSearch(String searchString) {
         return null;
     }
 
