@@ -1,7 +1,7 @@
 <template>
   <div>
     <SlideShow></SlideShow>
-    <SearchBox></SearchBox>
+    <record-search />
     <PopularArtist></PopularArtist>
     <div class="custom-content">
       <div class="genres">
@@ -12,15 +12,17 @@
 </template>
 
 <script>
-import SearchBox from "@/components/SearchBox.vue";
+import RecordSearch from "@/components/RecordSearch.vue";
 import SlideShow from "@/components/SlideShow.vue";
 import PopularArtist from '../components/PopularArtist.vue';
 
+
 export default {
   components: {
-    SearchBox,
+    RecordSearch,
     SlideShow,
     PopularArtist,
+    
   },
 };
 </script>

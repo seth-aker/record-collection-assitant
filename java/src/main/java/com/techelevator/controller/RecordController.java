@@ -54,13 +54,6 @@ public class RecordController {
         return recordDTO;
     }
 
-    @GetMapping(path = "/search")
-    public SearchResponse getRecordSearchResults(@RequestParam(defaultValue = "") String q,
-                                                 @RequestParam (defaultValue = "25" ) int per_page,
-                                                 @RequestParam (defaultValue = "release") String type) {
-            return apiService.getAlbumSearch(q, per_page, type);
-    }
-
     @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
     public RecordDTO updateRecord(@RequestBody RecordDTO recordDTO, Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
