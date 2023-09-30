@@ -8,7 +8,7 @@
                 :record="curRecord">
                 <div id="record-container">
                     <album-art id="record-list-panel" :albumImageUrl="curRecord.thumb" 
-                    :albumName="curRecord.title">
+                    :albumName="curRecord.title" />
                 </div>
             </div>
         </div>

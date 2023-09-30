@@ -1,6 +1,10 @@
 <template>
   <div class="search-bar">
-    <input type="text" id="search-input" placeholder="Search by genre, artist, or song..." :v-model="searchInput" @keyup="updateSearch">
+    <input type="text" id="search-input" placeholder="Search by genre, artist, or song..." 
+      v-model="searchInput" 
+      @keyup="updateSearch" 
+      @keypress.enter="goToSearchPage">
+
     <button id="search-button" @click.prevent="goToSearchPage">Search</button>
   </div>
 </template>
@@ -12,7 +16,7 @@ export default {
   name: "search-bar",
   data() {
     return {
-      searchInput: '',
+      searchInput: ''
     }
   },
   methods: {
@@ -22,7 +26,7 @@ export default {
      this.$emit('updateSearchResults');
     },
     goToSearchPage() {
-      this.$router.push({name: 'search-page'})
+      this.$router.push({name: 'search-page', query: { q: this.searchInput}})
     }
   }
   

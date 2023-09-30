@@ -1,6 +1,6 @@
 <template>
   <div class="search-page">
-    <record-search />
+    <search-box />
     <collection-list />
     <record-list />
   </div>
@@ -10,18 +10,19 @@
 <script>
 import CollectionList from '../components/CollectionList.vue';
 import RecordList from '../components/RecordList.vue';
-import RecordSearch from '../components/RecordSearch.vue';
+import SearchBox from '../components/SearchBox.vue';
 import searchService from '../services/SearchService.js';
 
 export default {
   name: 'searchPage',
-  components: { CollectionList, RecordList, RecordSearch },
+  components: { CollectionList, RecordList, SearchBox },
   created() {
-      this.search();
+    //   this.search();
   },
   methods: {
       search() {
-        searchService.searchRecords(this.$store.state.search)
+        const searchString = `q=${this.$route.query.q}`
+        searchService.searchRecords(searchString)
             // .then(response => {
             //     this.$store.commit("")
 

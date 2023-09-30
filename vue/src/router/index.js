@@ -83,7 +83,7 @@ const router = new Router({
     }
   },
   {
-    path: "/search/",
+    path: "/search",
     name: "search-page",
     component: SearchPage,
     meta: {
