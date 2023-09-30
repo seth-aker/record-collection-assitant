@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import SearchResults from './modules/searchResults.js'
 Vue.use(Vuex)
 
 /*
@@ -17,6 +17,9 @@ if(currentToken != null) {
 }
 
 export default new Vuex.Store({
+  modules: {
+    sr: SearchResults
+  },
   state: {
     token: currentToken || '',
     user: currentUser || {},
@@ -25,11 +28,9 @@ export default new Vuex.Store({
     userLibrary: [],
     userCollections: [],
     totalReleases: 0,
-    curPage: 1,
     curPageReleases: [],
     totalCollections: 0,
-    curPageCollections: [],
-    search:'',
+    curPageCollections: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -63,9 +64,7 @@ export default new Vuex.Store({
     SET_TOTAL_RELEASES(state, count) {
       state.totalReleases = count;
     },
-    SET_CUR_PAGE(state, pageNum) {
-      state.curPage = pageNum;
-    },
+   
     SET_CUR_PAGE_RELEASES(state, releases) {
       state.curPageReleases = releases;
     },
@@ -74,10 +73,7 @@ export default new Vuex.Store({
     },
     SET_CUR_PAGE_COLLECTIONS(state, collections) {
       state.curPageCollections = collections;
-    },
-    UPDATE_SEARCH(state, term) {
-      state.search = term;
-      state.curPage = 1;
     }
+   
   }
 })
