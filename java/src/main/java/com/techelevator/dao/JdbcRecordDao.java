@@ -137,7 +137,7 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     @Override
-    public boolean deleteTags(int userId, int recordId) {
+    public boolean deleteTags(int userId, String recordId) {
         String sql = "DELETE FROM user_record_tag WHERE user_id = ? AND record_id = ?;";
         try {
          return jdbcTemplate.update(sql, userId, recordId)==1;
@@ -226,10 +226,6 @@ public class JdbcRecordDao implements RecordDao {
         }
     }
 
-    @Override
-    public String getRecordNote(String recordId, Principal principal) {
-        return null;
-    }
 
 
     private Record mapRowToRecord(SqlRowSet rowSet) {
@@ -240,8 +236,6 @@ public class JdbcRecordDao implements RecordDao {
         if(rowSet.getString("user_note") != null) {
             record.setUserNote(rowSet.getString("user_note"));
         }
-
-
     return record;
     }
 }

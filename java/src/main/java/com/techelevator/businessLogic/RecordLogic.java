@@ -35,4 +35,9 @@ public class RecordLogic {
         //maps the library to a list if recordIds and then checks if that list already contains the record in question
         return lib.stream().map(Record::getId).collect(Collectors.toList()).contains(record.getId());
     }
+
+
+
+
+
 }

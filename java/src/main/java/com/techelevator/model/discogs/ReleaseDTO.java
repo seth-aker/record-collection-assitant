@@ -52,7 +52,7 @@ public class ReleaseDTO extends Release{
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(String tag) {
         this.tags = tags;
     }
 

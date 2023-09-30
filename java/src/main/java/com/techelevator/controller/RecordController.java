@@ -6,6 +6,7 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Collection;
 import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
@@ -64,24 +65,30 @@ public class RecordController {
         }
     }
 
-    @RequestMapping(path = "/records/{id}", method = RequestMethod.PUT)
-    public RecordDTO updateRecord(@RequestParam String condition, @RequestBody RecordDTO recordDTO, Principal principal, @PathVariable String recordId) {
+    @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
+    public RecordDTO updateRecord(@RequestParam String condition, @RequestParam String tagName, Principal principal,
+                                  @RequestParam String notes, @PathVariable String recordId) {
         int userId = userDao.findIdByUsername(principal.getName());
-        Collection collection = collectionDao.
         Record recordToUpdate = recordDao.getRecordById(recordId);
-        recordToUpdate.
-       RecordDTO updatedRecord
-
-
-
-
-         String recordToUpdate = recordDao.getRecordById(recordId).getId();
-
-        boolean updatedRecord = recordDao.updateCondition(recordToUpdate, condition, userId);
-
+        try {
+            recordLogic.isRecordInUserLib(recordToUpdate, userId);
+        }catch (DaoException e) {
+            throw new DaoException("Record not in library.", e);
+        }
+        RecordDTO updatedRecord = new RecordDTO();
+        updatedRecord.
 
 
     }
+
+
+
+
+
+
+
+
+
 
 
 //    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)

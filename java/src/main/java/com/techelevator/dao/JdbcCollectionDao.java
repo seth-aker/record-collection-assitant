@@ -61,7 +61,7 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
-    public List<Collection> getAllCollectionsByUserId(int id) {
+    public List<Collection> getCollectionsByUserId(int id) {
         List<Collection> collections = new ArrayList<>();
         String sql = "SELECT collection_id, collection_name, user_id, is_public " +
                 "FROM collections " +
@@ -78,24 +78,23 @@ public class JdbcCollectionDao implements CollectionDao {
     }
 
     @Override
-    public List<Collection> getSingleCollectionByUserId(int id) {
-        List<Collection> collections = new ArrayList<>();
+    public Collection getSingleCollectionByUserId(int userId, int collectionId) {
+        Collection collection = null;
         String sql = "SELECT collection_id, collection_name, user_id, is_public " +
                 "FROM collections " +
-                "WHERE user_id = ?;";
+                "WHERE collection_id = ? AND user_id = ?";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-            while (results.next()) {
-                collections.add(mapRecordIdsToCollection(mapRowToCollection(results)));
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, collectionId, userId);
+            if (results.next()) {
+                collection = mapRowToCollection(results);
             }
+            return mapRecordIdsToCollection(collection);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
+        } catch (NullPointerException e) {
+            throw new DaoException("No collection found for collection id: "+collectionId, e);
         }
-        return collections;
     }
-
-
-
 
     @Override
     public List<Collection> getUserPublicCollection(int userId) {
@@ -114,24 +113,7 @@ public class JdbcCollectionDao implements CollectionDao {
         return collections;
     }
 
-    @Override
-    public Collection getCollectionByCollectionId(int id) {
-        Collection collection = null;
-        String sql = "SELECT collection_id, collection_name, user_id, is_public " +
-                "FROM collections " +
-                "WHERE collection_id = ?";
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-            if (results.next()) {
-                collection = mapRowToCollection(results);
-            }
-            return mapRecordIdsToCollection(collection);
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (NullPointerException e) {
-            throw new DaoException("No collection found for collection id: "+id, e);
-        }
-    }
+
 
     @Override
     public Collection createCollection(Collection collection) {
@@ -187,6 +169,22 @@ public class JdbcCollectionDao implements CollectionDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+    }
+    @Override
+    public Collection getCollectionByCollectionId(int id) {
+        Collection collection = null;
+        String sql = "SELECT collection_id, collection_name, user_id, is_public " +
+                "FROM collections " +
+                "WHERE collection_id= ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            if (results.next()) {
+                collection = mapRowToCollection(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return collection;
     }
 
 
