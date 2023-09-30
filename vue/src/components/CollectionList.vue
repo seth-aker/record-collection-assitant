@@ -4,10 +4,9 @@
         <div v-show="userCollections.length != 0 && !showSpinner">
             <div id="collection-row" 
                 v-for="curCollection in userCollections"
-                :key="curCollection.id"
-                :collectionId="curCollection.id">
+                :key="curCollection.id">
                 <div id="collection-container">
-                    
+                    <collection-card :collectionId="curCollection.id"/>
                 </div>
             </div>
         </div>
@@ -18,10 +17,12 @@
 </template>
 
 <script>
+import CollectionCard from './CollectionCard.vue';
 
 export default {
     name: 'collection-list',
     components: {
+        CollectionCard
     },
     data() {
         return {

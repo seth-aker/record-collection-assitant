@@ -4,8 +4,7 @@
         <div v-show="userLibrary.length != 0 && !showSpinner">
             <div id="record-row" 
                 v-for="curRecord in userLibrary"
-                :key="curRecord.id"
-                :record="curRecord">
+                :key="curRecord.id">
                 <record-info-thin :recordId="curRecord.id"/>
             </div>
         </div>
