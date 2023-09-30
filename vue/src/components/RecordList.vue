@@ -4,12 +4,8 @@
         <div v-show="userLibrary.length != 0 && !showSpinner">
             <div id="record-row" 
                 v-for="curRecord in userLibrary"
-                :key="curRecord.id"
-                :record="curRecord">
-                <div id="record-container">
-                    <album-art id="record-list-panel" :albumImageUrl="curRecord.thumb" 
-                    :albumName="curRecord.title" />
-                </div>
+                :key="curRecord.id">
+                <record-info-thin :recordId="curRecord.id"/>
             </div>
         </div>
         <div class="no-items-msg" v-show="userLibrary.length === 0 && !showSpinner">
@@ -19,13 +15,12 @@
 </template>
 
 <script>
-import AlbumArt from './AlbumArt.vue';
+import RecordInfoThin from './RecordInfoThin.vue';
 
 export default {
     name: "record-list",
     components: {
-
-        AlbumArt
+        RecordInfoThin
     },
     data() {
         return {

@@ -19,14 +19,12 @@
 <script>
 import About from "@/components/About.vue";
 
-import SearchBox from "@/components/SearchBox.vue"; 
 
 
 export default {
   components: {
    
-    About,
-    SearchBox,
+    About
 
   },
 };

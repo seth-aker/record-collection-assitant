@@ -64,13 +64,15 @@ public class RecordDTO {
  this.tags = tags;
 
 
+
     }
 
     public String getCondition() {
         return condition;
     }
 
-    public void setCondition(String condition) {
+
+    public  void setCondition(String condition) {
         this.condition = condition;
     }
 
