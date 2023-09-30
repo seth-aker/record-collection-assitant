@@ -8,6 +8,7 @@ import Contact from '../views/Contact.vue'
 import RecordView from '../views/RecordView.vue'
 import UserHome from '../views/UserHome.vue'
 import CollectionView from '../views/CollectionView.vue'
+import SearchPage from '../views/SearchPage.vue'
 
 
 Vue.use(Router)
@@ -80,6 +81,15 @@ const router = new Router({
     meta: {
       requiresAuth: false
     }
+  },
+  {
+    path: "/search/",
+    name: "search-page",
+    component: SearchPage,
+    meta: {
+      requiresAuth: false
+    }
+
   }
 
   ]
