@@ -1,14 +1,27 @@
 <template>
-  <div class="search-box">
-    <input type="text" id="search-input" placeholder="Search by genre, artist, or song...">
+  <form class="search-box" @submit.prevent="search(searchInput)">
+    <input type="text" id="search-input" placeholder="Search by genre, artist, or song..." :v-model="searchInput">
     <button id="search-button">Search</button>
     <div class="upload-counter">
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
+import recordService from '../services/RecordService'
 
+export default {
+  data() {
+    return {
+      searchInput: '',
+    }
+  },
+  methods: {
+    search(searchText) {
+     this.$store.commit("UPDATE_SEARCH", searchText)
+    }
+  }
+}
 </script>
 
 
@@ -16,8 +29,8 @@
 .search-box {
     text-align: center;
     margin-top: 20px;
-    padding-bottom: 70px;
-    padding-top: 70px;
+    padding-bottom: 100px;
+    padding-top: 100px;
 }
 
 #search-input {

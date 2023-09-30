@@ -18,5 +18,8 @@ export default {
         return axios.put('/records', record);
     },
 
+    searchRecords(searchQuery) {
+        return axios.get(`/records/search?q=${searchQuery}`);
+    }
 
 }

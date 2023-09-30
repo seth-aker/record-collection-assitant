@@ -3,13 +3,25 @@
     <h2>MEET THE SLEEVES TEAM!</h2>
     
     <div class="linkedin-profiles">
-
-      <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a><br>
-
-      <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a><br>
-      <a href="https://www.linkedin.com/in/johnjoyc/" target="_blank">John Joyce</a><br>
-      <a href="https://www.linkedin.com/in/joshuajanosek" target="_blank">Joshua Janosek</a><br>
-
+      <div class="profile">
+        <img src="kirby.jpg" alt="Kirby Moore">
+        <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a>
+      </div>
+      
+      <div class="profile">
+        <img src="image.jpg" alt="Seth Aker">
+        <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a>
+      </div>
+      
+      <div class="profile">
+        <img src="image.jpg" alt="John Joyce">
+        <a href="https://www.linkedin.com/in/johnjoyc/" target="_blank">John Joyce</a>
+      </div>
+      
+      <div class="profile">
+        <img src="image.jpg" alt="Joshua Janosek">
+        <a href="https://www.linkedin.com/in/joshuajanosek" target="_blank">Joshua Janosek</a>
+      </div>
     </div>
   </div>
 </template>
