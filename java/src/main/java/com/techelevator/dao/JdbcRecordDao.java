@@ -20,10 +20,11 @@ public class JdbcRecordDao implements RecordDao {
     private JdbcTemplate jdbcTemplate;
     private UserDao userDao;
 
-    public JdbcRecordDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
+    public JdbcRecordDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.userDao = userDao;
+
     }
+
 
     public Record getRecordById(String recordId) {
 
@@ -107,7 +108,6 @@ public class JdbcRecordDao implements RecordDao {
 
     @Override
     public boolean createTags(Record record, String tagName){
-
         try {
             String sql = "INSERT INTO user_record_tag (tag_name) VALUES (?) WHERE user_id = ? AND record_id = ?;";
             return jdbcTemplate.update(sql, tagName, record.getId(), record.getTitle()) == 1;
@@ -123,7 +123,6 @@ public class JdbcRecordDao implements RecordDao {
 
     @Override
     public boolean updateTags(List<String> tags, String recordId, int userId){
-
         try{
             for(String tag : tags) {
                 String sql = "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
