@@ -12,6 +12,13 @@ public class Record {
 
     public Record(){}
 
+    public Record(String id, String title, String userNote, String condition) {
+        this.id = id;
+        this.title = title;
+        this.userNote = userNote;
+        this.condition = condition;
+    }
+
     public String getId() {
         return id;
     }

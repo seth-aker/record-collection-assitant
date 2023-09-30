@@ -19,6 +19,14 @@ public class Collection {
         this.userId = userId;
     }
 
+    public Collection(int id, int userId, String name, boolean isPublic, List<String> recordIds) {
+        this.id = id;
+        this.userId = userId;
+        this.name = name;
+        this.isPublic = isPublic;
+        this.recordIds = recordIds;
+    }
+
     public int getId() {
         return id;
     }
