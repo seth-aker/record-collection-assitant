@@ -61,7 +61,7 @@ public class RecordDTO {
         return condition;
     }
 
-    public void setCondition(String condition) {
+    public Record setCondition(String condition) {
         this.condition = condition;
     }
 

@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
@@ -106,8 +107,9 @@ public class JdbcRecordDao implements RecordDao {
 
     @Override
     public boolean createTags(Record record, String tagName){
-        String sql = "INSERT INTO user_record_tag (tag_name) VALUES (?) WHERE user_id = ? AND record_id = ?;";
+
         try {
+            String sql = "INSERT INTO user_record_tag (tag_name) VALUES (?) WHERE user_id = ? AND record_id = ?;";
             return jdbcTemplate.update(sql, tagName, record.getId(), record.getTitle()) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
@@ -121,25 +123,22 @@ public class JdbcRecordDao implements RecordDao {
 
     @Override
     public boolean updateTags(String tagName, String recordId, int userId){
-        String sql= "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
         try{
-           int numberOfRows = this.jdbcTemplate.update(sql, recordId, userId);
-
+        String sql= "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
+           int numberOfRows = this.jdbcTemplate.update(sql, tagName, recordId, userId);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
-            }
+            }  return true;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return true;
     }
 
     @Override
     public boolean deleteTags(int userId, int recordId) {
         String sql = "DELETE FROM user_record_tag WHERE user_id = ? AND record_id = ?;";
-
         try {
          return jdbcTemplate.update(sql, userId, recordId)==1;
         } catch (CannotGetJdbcConnectionException e) {
@@ -148,8 +147,11 @@ public class JdbcRecordDao implements RecordDao {
             throw new DaoException("SQL syntax error", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
+        }catch (DataAccessException e) {
+            throw new DaoException("Failed to deleteTags", e);
         }
-    }
+        }
+
 
 
 
@@ -160,14 +162,15 @@ public class JdbcRecordDao implements RecordDao {
             int numberOfRows = this.jdbcTemplate.update(sql, condition, userId, recordId);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
-            }
+            }  return true;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
+        }catch (DataAccessException e) {
+            throw new DaoException("Failed to update condition", e);
         }
-        return true;
-    }
+          }
 
 
 
@@ -177,14 +180,12 @@ public class JdbcRecordDao implements RecordDao {
             int numberOfRows = this.jdbcTemplate.update(sql, note, recordId, userId);
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
-
-            }
+            } return true;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
-        return true;
     }
 
     public boolean createRecord(Record record) {

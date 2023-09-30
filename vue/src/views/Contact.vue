@@ -5,7 +5,6 @@
     <div class="linkedin-profiles">
 
       <a href="https://www.linkedin.com/in/kirby-moore/" target="_blank">Kirby Moore</a><br>
-
       <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a><br>
       <a href="https://www.linkedin.com/in/johnjoyc/" target="_blank">John Joyce</a><br>
       <a href="https://www.linkedin.com/in/joshuajanosek" target="_blank">Joshua Janosek</a><br>

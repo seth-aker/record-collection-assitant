@@ -6,6 +6,7 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 
+import com.techelevator.model.Collection;
 import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
 import com.techelevator.services.APIService;
@@ -66,14 +67,18 @@ public class RecordController {
     @RequestMapping(path = "/records/{id}", method = RequestMethod.PUT)
     public RecordDTO updateRecord(@RequestParam String condition, @RequestBody RecordDTO recordDTO, Principal principal, @PathVariable String recordId) {
         int userId = userDao.findIdByUsername(principal.getName());
+        Collection collection = collectionDao.
+        Record recordToUpdate = recordDao.getRecordById(recordId);
+        recordToUpdate.
+       RecordDTO updatedRecord
+
+
+
+
          String recordToUpdate = recordDao.getRecordById(recordId).getId();
+
         boolean updatedRecord = recordDao.updateCondition(recordToUpdate, condition, userId);
-        if (updatedRecord) {
-            return ResponseEntity.ok("Record condition updated.");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-                    .body("Failed to update record condition");
-        }
+
 
 
     }
