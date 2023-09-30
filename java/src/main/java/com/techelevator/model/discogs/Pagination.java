@@ -1,6 +1,9 @@
 package com.techelevator.model.discogs;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class Pagination {
+    @JsonAlias(value = "per_page")
     private int perPage;
     private int pages;
     private int page;
