@@ -3,9 +3,9 @@
         <image-spinner v-show="showSpinner"/>
         <div v-show="userCollections.length != 0 && !showSpinner">
             <div id="collection-row" 
-                v-for="curRecord in userCollections"
-                :key="curRecord.id"
-                :record="curRecord">
+                v-for="curCollection in userCollections"
+                :key="curCollection.id"
+                :collectionId="curCollection.id">
                 <div id="collection-container">
                     
                 </div>
