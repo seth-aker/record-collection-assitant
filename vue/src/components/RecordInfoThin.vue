@@ -31,4 +31,8 @@ span {
     display: flex;
     align-items: center;
 }
+
+album-art {
+  height: 10vh;
+}
 </style>

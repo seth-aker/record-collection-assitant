@@ -5,6 +5,7 @@ import java.util.List;
 public class SearchResponse {
 
         private Pagination pagination;
+
         private List<Result> results;
 
         public Pagination getPagination() {
