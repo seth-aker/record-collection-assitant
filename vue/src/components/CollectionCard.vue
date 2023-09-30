@@ -1,6 +1,8 @@
 <template>
   <span class="colletionInfo">
       <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
+      <div>{{ collection.name}}</div>
+      <div>{{collection.userName}}
   </span>
 </template>
 
@@ -20,7 +22,7 @@ export default {
             collection:"",
             recordIds:[],
             recordDTO: "",
-            recordId:""
+            recordId:"",
         }
     },
     computed: {
@@ -39,6 +41,7 @@ export default {
         RecordService.getRecordInfo(this.recordId)
             .then(response => {this.recordDTO = response.data;
             });
+        this.userId = this.collection.userId;
         }
 }
 </script>

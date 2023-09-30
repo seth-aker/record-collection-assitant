@@ -10,6 +10,8 @@ public interface UserDao {
 
     User getUserById(int userId);
 
+    public String getUserNameById(int userId);
+
     User findByUsername(String username);
 
     int findIdByUsername(String username);

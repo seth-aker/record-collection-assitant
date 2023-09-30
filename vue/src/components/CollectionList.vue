@@ -26,7 +26,8 @@ export default {
     },
     data() {
         return {
-            showSpinner: true
+            showSpinner: true,
+            
         }
     },
     computed: {
