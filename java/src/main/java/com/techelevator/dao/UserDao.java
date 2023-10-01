@@ -10,11 +10,7 @@ public interface UserDao {
 
     User getUserById(int userId);
 
-<<<<<<< HEAD
-    public String getUserNameById(int userId);
-=======
-    String getUsernameById(int userId);
->>>>>>> c254d948537aa70ea2681a1791b591f122ea6c80
+    String getUserNameById(int userId);
 
     User findByUsername(String username);
 

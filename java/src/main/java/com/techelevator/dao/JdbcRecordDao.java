@@ -75,13 +75,11 @@ public class JdbcRecordDao implements RecordDao {
                 noteAndCondition[0] = results.getString("user_note");
                 noteAndCondition[1] = results.getString("record_condition");
             }
-
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (NullPointerException e) {
             return noteAndCondition;
         }
-
         return noteAndCondition;
     }
 

@@ -85,7 +85,7 @@ public class RecordController {
 //    }
 
 
-    public RecordDTO mapRowRecordDTO(Record record, Principal principal) {
+    public RecordDTO mapNoteTagCondition(Record record, Principal principal) {
         RecordDTO recordDTO = new RecordDTO();
         try {
             Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), principal);

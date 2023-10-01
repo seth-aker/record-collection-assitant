@@ -6,14 +6,11 @@ public class Collection {
 
     private int id;
     private int userId;
-<<<<<<< HEAD
-    private String userName;
-=======
     private String username;
->>>>>>> c254d948537aa70ea2681a1791b591f122ea6c80
     private String name;
     private boolean isPublic;
     private List<String> recordIds;
+
     public Collection() {
     }
 
@@ -40,12 +37,12 @@ public class Collection {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getName() {
@@ -72,13 +69,6 @@ public class Collection {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public List<String> getRecordIds() {
         return recordIds;

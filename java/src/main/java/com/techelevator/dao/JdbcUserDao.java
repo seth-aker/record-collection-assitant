@@ -47,14 +47,12 @@ public class JdbcUserDao implements UserDao {
 		}
 	}
 
-<<<<<<< HEAD
+    @Override
     public String getUserNameById(int userId) {
-        String sql = "SELECT username FROM users WHERE user_id = ?";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-        String username = "";
-        if (results.next()) {
-            username = results.getString("username");
-=======
+        return null;
+    }
+
+
     public String getUsernameById(int userId) {
         String sql = "SELECT username FROM users WHERE user_id = ?";
         String username = "";
@@ -65,7 +63,7 @@ public class JdbcUserDao implements UserDao {
             }
         } catch (EmptyResultDataAccessException e) {
             throw new UsernameNotFoundException("userId:( " + userId + ") was not found.");
->>>>>>> c254d948537aa70ea2681a1791b591f122ea6c80
+
         }
         return username;
     }
