@@ -2,7 +2,7 @@
   <span class="colletionInfo">
       <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
       <div>{{ collection.name}}</div>
-      <div>{{collection.userName}}
+      <div>{{collection.userName}}</div>
   </span>
 </template>
 

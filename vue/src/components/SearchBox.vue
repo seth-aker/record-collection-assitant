@@ -26,7 +26,9 @@ export default {
      this.$emit('updateSearchResults');
     },
     goToSearchPage() {
-      this.$router.push({name: 'search-page', query: { q: this.searchInput}})
+      if(!this.$route.path === '/search') {
+        this.$router.push({name: 'search-page'})
+        }
     }
   }
   
