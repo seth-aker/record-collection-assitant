@@ -193,7 +193,7 @@ public class JdbcCollectionDao implements CollectionDao {
         Collection collection = new Collection();
         collection.setId(rowSet.getInt("collection_id"));
         collection.setUserId(rowSet.getInt("user_id"));
-        collection.setUserName(userDao.getUserNameById(rowSet.getInt("user_id")));
+        collection.setUsername(userDao.getUserNameById(rowSet.getInt("user_id")));
         collection.setName(rowSet.getString("collection_name"));
         collection.setPublic(rowSet.getBoolean("is_public"));
         return collection;
