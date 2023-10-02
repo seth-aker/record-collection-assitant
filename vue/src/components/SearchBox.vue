@@ -26,7 +26,7 @@ export default {
     },
     goToSearchPage() {
       this.$emit('requestSearch');   
-        this.$router.push({name: 'search-page', 
+      this.$router.push({name: 'search-page', 
                           query: {q: this.$store.state.sr.search, 
                                   type: this.$store.state.sr.searchType, 
                                   per_page: this.$store.state.sr.resultsPerPage} 

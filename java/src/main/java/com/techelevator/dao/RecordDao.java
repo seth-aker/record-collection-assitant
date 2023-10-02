@@ -25,7 +25,7 @@ public interface RecordDao {
 
     public boolean createRecord(Record record);
 
-    public boolean addRecordToUserLib(String recordId, int userId, String userNote);
+    public boolean addRecordToUserLib(String recordId, int userId);
 
     public boolean removeRecordFromUserLib(String recordId, int userId);
 

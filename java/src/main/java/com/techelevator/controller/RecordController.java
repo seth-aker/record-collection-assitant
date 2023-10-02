@@ -80,7 +80,7 @@ public class RecordController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/records", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public void addRecordToUserLib(@RequestBody RecordDTO recordDTO, Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
         String recordId = String.valueOf(recordDTO.getId());
@@ -88,7 +88,7 @@ public class RecordController {
             recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), "", ""));
         }
         if(!recordLogic.isRecordInUserLib(recordId, userId)){
-            recordDao.addRecordToUserLib(recordId, userId, recordDTO.getUserNotes());
+            recordDao.addRecordToUserLib(recordId, userId);
         }
     }
 
