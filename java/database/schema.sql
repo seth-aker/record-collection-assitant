@@ -1,8 +1,8 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS collection_record, user_record_tag, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users;
+DROP TABLE IF EXISTS collection_record, user_record_tag, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users CASCADE;
 
-DROP SEQUENCE IF EXISTS seq_user_id, seq_collection_id, seq_label_id;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_collection_id, seq_label_id CASCADE;
 
 CREATE SEQUENCE seq_user_id
 	INCREMENT BY 1
@@ -67,6 +67,7 @@ CREATE TABLE user_record_tag (
     CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
 );
 
+--INSERT INTO artists
 
 --CREATE TABLE genres (
 --	genre_id SERIAL,
@@ -133,3 +134,4 @@ CREATE TABLE user_record_tag (
 
 
 COMMIT TRANSACTION;
+
