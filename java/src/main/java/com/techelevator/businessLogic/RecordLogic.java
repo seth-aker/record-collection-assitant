@@ -24,7 +24,10 @@ public class RecordLogic {
     public boolean doesRecordExist(String recordId) {
         try {
             //check to see if record exists in database.
-            recordDao.getRecordById(recordId);
+            Record record = recordDao.getRecordById(recordId);
+            if(record == null){
+                return false;
+            }
         } catch (DaoException e) {
             if (e.getMessage().equals("Record id does not exist")) {
                 return false;

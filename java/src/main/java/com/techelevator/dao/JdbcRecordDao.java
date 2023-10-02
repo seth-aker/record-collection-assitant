@@ -29,13 +29,17 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public Record getRecordById(String recordId) {
+<<<<<<< HEAD
 Record record = null;
         String sql = "SELECT record_id, record_title " +
+=======
+        Record record = null;
+        String sql = "SELECT record_title, record_id " +
+>>>>>>> 4b11fa68c0d57385f78401ec5455e692b0bd22bb
                     "FROM records " +
                     "WHERE record_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
         try {
-
             if(result.next()) {
                record = mapRowToRecord(result);
             }
@@ -49,7 +53,7 @@ Record record = null;
     }
 
     public List<Record> getUserLibrary(int userId) {
-        String sql = "SELECT r.record_id, r.record_title, ur.user_note " +
+        String sql = "SELECT r.record_id, r.record_title, ur.user_note, ur.record_condition " +
                     "FROM records as r " +
                     "JOIN user_record AS ur ON r.record_id = ur.record_id " +
                     "WHERE ur.user_id = ?";
@@ -203,12 +207,12 @@ Record record = null;
         }
     }
 
-    public boolean addRecordToUserLib(String recordId, int userId, String userNote) {
-        String sql = "INSERT INTO user_record (record_id, user_id, user_note " +
-                "VALUES (?, ?, ?);";
+    public boolean addRecordToUserLib(String recordId, int userId) {
+        String sql = "INSERT INTO user_record (record_id, user_id) " +
+                "VALUES (?, ?);";
 
         try {
-            return jdbcTemplate.update(sql, recordId, userId, userNote) == 1;
+            return jdbcTemplate.update(sql, recordId, userId) == 1;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -237,12 +241,12 @@ Record record = null;
         Record record = new Record();
         record.setId(rowSet.getString("record_id"));
         record.setTitle(rowSet.getString("record_title"));
-        if(rowSet.getString("record_condition") != null) {
-            record.setCondition(rowSet.getString("record_condition"));
-        }
-        if(rowSet.getString("user_note") != null) {
-            record.setUserNote(rowSet.getString("user_note"));
-        }
+//        if(rowSet.getString("record_condition") != null) {
+//            record.setCondition(rowSet.getString("record_condition"));
+//        }
+//        if(rowSet.getString("user_note") != null) {
+//            record.setUserNote(rowSet.getString("user_note"));
+//        }
     return record;
     }
 }

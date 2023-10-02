@@ -82,10 +82,10 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
 
     @Test
     public void addRecordToUserLib_adds_record(){
-     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1001, DUMMY_RECORD_5.getUserNote());
+     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1001);
         Assert.assertTrue(result);
 
-        result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1003, DUMMY_RECORD_5.getUserNote());
+        result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1003);
         Assert.assertTrue(result);
 
     }

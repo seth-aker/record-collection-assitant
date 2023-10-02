@@ -6,7 +6,10 @@
         <router-link class="record-title" :to="{name: 'record-page', params: {recordId : recordInfo.id}}">{{ recordTitle }}</router-link>
         <div class="record-artist">{{ recordArtist }}</div>
       </div>
-      <button id="add-record-btn" @click="addToCollection" ><font-awesome-icon icon='fa-regular fa-plus-square' /></button>
+      <button id="add-record-btn" @click="addToCollection" >
+        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
+        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
+        </button>
     </div>
   </div>
 </template>
@@ -32,6 +35,8 @@ export default {
             if(resp.status === 201) {
               this.recordAdded = true
             }
+          }).catch( () => {
+            alert("Oops! Something went wrong and the record was not added to your library")
           })
         })
         
@@ -79,8 +84,12 @@ export default {
     font-size: 30px;
 }
 
-#add-record-btn:hover {
-  background-color: #1e8c72;
+.add-record-icon:hover {
+  color: #d0d319;
+}
+
+.record-added-icon {
+  cursor: default;
 }
 
 .record-info {
