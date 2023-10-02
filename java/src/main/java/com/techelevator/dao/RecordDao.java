@@ -11,9 +11,7 @@ public interface RecordDao {
 
     public List<Record> getUserLibrary(int userId);
 
-    boolean createTags(Record record, String tagName);
-
-
+    boolean createTags(Record record, String tagName, Principal principal);
 
     boolean updateTags(List<String> tagName, String recordId, int userId);
 

@@ -23,10 +23,21 @@ export default {
     updateSearch() {
      this.$store.commit("UPDATE_SEARCH", this.searchInput);
 
-     this.$emit('updateSearchResults');
     },
     goToSearchPage() {
-      this.$router.push({name: 'search-page', query: { q: this.searchInput}})
+      this.$emit('requestSearch');   
+        this.$router.push({name: 'search-page', 
+                          query: {q: this.$store.state.sr.search, 
+                                  type: this.$store.state.sr.searchType, 
+                                  per_page: this.$store.state.sr.resultsPerPage} 
+                          }).catch(error => {
+                            if (error.name !== 'NavigationDuplicated' &&
+                                !error.message.includes('Avoided redundant navigation to current location')
+                                ) {
+                                  console.log(error)
+                                }
+                            });
+                               
     }
   }
   

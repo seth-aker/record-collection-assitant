@@ -14,33 +14,37 @@
     </section>
 
     <h1>SLEEVES</h1>
-
-    <section class="nav-bar-buttons nav-bar-right">
-
+ <section class="nav-bar-buttons nav-bar-right">
       <div id="login" v-if="!loggedIn" class="rounded-button">
-        <router-link :to="{name: 'login'}">LOGIN</router-link>
+        <router-link :to="{ name: 'login' }">LOGIN</router-link>
       </div>
       <div id="registry" v-if="!loggedIn" class="rounded-button">
-          <router-link :to="{name: 'register'}">REGISTER</router-link>
+        <router-link :to="{ name: 'register' }">REGISTER</router-link>
       </div>
       <button v-else @click="myProfile">My Profile</button>
-  </section>
+    </section>
  </nav>
 
 </template>
 
 <script> 
-
-
-
 export default {
   name: "NavBar",
-  data(){
-    return{
+  data() {
+    return {
       loggedIn: false
-    }
+    };
   },
-
+  methods: {
+    login() {
+      this.loggedIn = true;
+    },
+     logout() {
+   
+    this.loggedIn = false;
+    this.$router.push({ name: 'home' });
+  },
+  }
 }
 
 </script>
@@ -51,7 +55,7 @@ export default {
 nav {
   display: flex;
   justify-content: space-between;
-  
+  height: 160px;
 }
 .nav-bar-buttons {
   display: flex;
@@ -94,7 +98,7 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
-    margin-top: 50px;
+  
 
 }
 .rounded-button a {

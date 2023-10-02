@@ -21,6 +21,7 @@ export default new Vuex.Store({
     sr: SearchResults
   },
   state: {
+    isLoading: true,
     token: currentToken || '',
     user: currentUser || {},
     allReleases: [],

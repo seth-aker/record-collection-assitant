@@ -6,7 +6,7 @@ public class Collection {
 
     private int id;
     private int userId;
-    private String username;
+    private String userName;
     private String name;
     private boolean isPublic;
     private List<String> recordIds;
@@ -37,12 +37,12 @@ public class Collection {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String userName) {
-        this.username = userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getName() {

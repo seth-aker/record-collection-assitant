@@ -1,6 +1,6 @@
 <template>
   <div>
-        <image-spinner v-show="showSpinner"/>
+        
         <div v-show="userCollections.length != 0 && !showSpinner">
             <div id="collection-row" 
                 v-for="curCollection in userCollections"
