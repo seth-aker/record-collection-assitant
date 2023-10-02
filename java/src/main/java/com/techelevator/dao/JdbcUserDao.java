@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.exception.DaoException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +38,22 @@ public class JdbcUserDao implements UserDao {
         return userId;
     }
 
-	@Override
+    @Override
+    public boolean findUserPremiumStatus(int userId) {
+        boolean status = false;
+        try {
+        String sql = "SELECT is_premium FROM users WHERE user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            status = results.getBoolean("is_premium");
+        }
+    }catch(CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return status;
+    }
+
+    @Override
 	public User getUserById(int userId) {
 		String sql = "SELECT * FROM users WHERE user_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -47,13 +64,10 @@ public class JdbcUserDao implements UserDao {
 		}
 	}
 
-    @Override
+
+
+
     public String getUserNameById(int userId) {
-        return null;
-    }
-
-
-    public String getUsernameById(int userId) {
         String sql = "SELECT username FROM users WHERE user_id = ?";
         String username = "";
         try {
@@ -63,7 +77,6 @@ public class JdbcUserDao implements UserDao {
             }
         } catch (EmptyResultDataAccessException e) {
             throw new UsernameNotFoundException("userId:( " + userId + ") was not found.");
-
         }
         return username;
     }
@@ -78,7 +91,6 @@ public class JdbcUserDao implements UserDao {
             User user = mapRowToUser(results);
             users.add(user);
         }
-
         return users;
     }
 
@@ -95,12 +107,12 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean create(String username, String password, String role) {
-        String insertUserSql = "insert into users (username,password_hash,role) values (?,?,?)";
+    public boolean create(String username, String password, String role, boolean isPremium) {
+        String insertUserSql = "insert into users (username,password_hash,role, is_premium) values (?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
 
-        return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
+        return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole, isPremium) == 1;
     }
 
     private User mapRowToUser(SqlRowSet rs) {
@@ -109,6 +121,7 @@ public class JdbcUserDao implements UserDao {
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
+        user.setPremium(rs.getBoolean("is_premium"));
         user.setActivated(true);
         return user;
     }

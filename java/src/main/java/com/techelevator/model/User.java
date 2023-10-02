@@ -9,6 +9,7 @@ import java.util.Set;
 public class User {
 
    private int id;
+
    private String username;
    @JsonIgnore
    private String password;
@@ -27,7 +28,7 @@ public class User {
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
-      this.isPremium = false;
+      this.isPremium = isPremium;
    }
 
    public boolean isPremium() {
