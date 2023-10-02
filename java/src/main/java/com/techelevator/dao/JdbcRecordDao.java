@@ -207,12 +207,12 @@ Record record = null;
         }
     }
 
-    public boolean addRecordToUserLib(Record record, int userId) {
+    public boolean addRecordToUserLib(String recordId, int userId, String userNote) {
         String sql = "INSERT INTO user_record (record_id, user_id, user_note " +
                 "VALUES (?, ?, ?);";
 
         try {
-            return jdbcTemplate.update(sql, record.getId(), userId, record.getUserNote()) == 1;
+            return jdbcTemplate.update(sql, recordId, userId, userNote) == 1;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
@@ -220,11 +220,11 @@ Record record = null;
         }
     }
 
-    public boolean removeRecordFromUserLib(Record record, int userId) {
+    public boolean removeRecordFromUserLib(String recordId, int userId) {
         String sql = "DELETE FROM user_record " +
                 "WHERE user_id = ? AND record_id = ?;";
         try {
-            return jdbcTemplate.update(sql, userId, record.getId()) == 1;
+            return jdbcTemplate.update(sql, userId, recordId) == 1;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {

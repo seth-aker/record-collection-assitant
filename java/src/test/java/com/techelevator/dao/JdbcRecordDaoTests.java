@@ -82,10 +82,10 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
 
     @Test
     public void addRecordToUserLib_adds_record(){
-     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5, 1001);
+     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1001, DUMMY_RECORD_5.getUserNote());
         Assert.assertTrue(result);
 
-        result = sut.addRecordToUserLib(DUMMY_RECORD_5, 1003);
+        result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1003, DUMMY_RECORD_5.getUserNote());
         Assert.assertTrue(result);
 
     }
@@ -122,7 +122,7 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     @Test
     public void removeRecordFromUserLibrary(){
         int originalLibraryCount = sut.getUserLibrary(1001).size();
-        boolean result = sut.removeRecordFromUserLib(DUMMY_RECORD_1, 1001);
+        boolean result = sut.removeRecordFromUserLib(DUMMY_RECORD_1.getId(), 1001);
         int newLibraryCount = sut.getUserLibrary(1001).size();
         Assert.assertTrue(result);
         Assert.assertEquals(originalLibraryCount - 1, newLibraryCount);

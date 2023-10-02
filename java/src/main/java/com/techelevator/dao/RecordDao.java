@@ -23,9 +23,9 @@ public interface RecordDao {
 
     public boolean createRecord(Record record);
 
-    public boolean addRecordToUserLib(Record record, int userId);
+    public boolean addRecordToUserLib(String recordId, int userId, String userNote);
 
-    public boolean removeRecordFromUserLib(Record record, int userId);
+    public boolean removeRecordFromUserLib(String recordId, int userId);
 
 
     public String[] getRecordNoteAndCondition(String recordId, Principal principal);
