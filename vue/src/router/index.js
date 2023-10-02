@@ -59,7 +59,7 @@ const router = new Router({
       }
     },
     {
-      path: '/',
+      path: '/:username',
       name: 'userhome',
       component: UserHome,
       meta: {

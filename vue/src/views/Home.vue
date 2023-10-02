@@ -1,7 +1,7 @@
 <template>
   <div>
+    <search-box class="search" />
     <SlideShow></SlideShow>
-    <search-box />
     <PopularArtist></PopularArtist>
     <div class="custom-content">
       <div class="genres">
@@ -17,17 +17,25 @@ import SlideShow from "@/components/SlideShow.vue";
 import PopularArtist from '../components/PopularArtist.vue';
 
 
-
 export default {
   components: {
     SearchBox,
     SlideShow,
     PopularArtist,
-    
-  },
+  }
 };
 </script>
 
 <style scoped>
+
+.search {
+display: flex;
+justify-content: center;
+}
+
+.user-view {
+  display: flex;
+  justify-content: space-evenly;
+}
 
 </style>

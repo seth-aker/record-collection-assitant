@@ -24,14 +24,10 @@ export default new Vuex.Store({
     isLoading: true,
     token: currentToken || '',
     user: currentUser || {},
-    allReleases: [],
     publicCollections: [],
     userLibrary: [],
     userCollections: [],
-    totalReleases: 0,
-    curPageReleases: [],
-    totalCollections: 0,
-    curPageCollections: []
+
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -50,9 +46,7 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    SET_ALL_RELEASES(state, data) {
-      state.allReleases = data;
-    },
+  
     SET_PUBLIC_COLLECTIONS(state, data) {
       state.publicCollections = data;
     },
@@ -61,20 +55,6 @@ export default new Vuex.Store({
     },
     SET_USER_COLLECTIONS(state, data) {
       state.userCollections = data;
-    },
-    SET_TOTAL_RELEASES(state, count) {
-      state.totalReleases = count;
-    },
-   
-    SET_CUR_PAGE_RELEASES(state, releases) {
-      state.curPageReleases = releases;
-    },
-    SET_TOTAL_COLLECTIONS(state, count) {
-      state.totalCollections = count;
-    },
-    SET_CUR_PAGE_COLLECTIONS(state, collections) {
-      state.curPageCollections = collections;
-    }
-   
+    }   
   }
 })

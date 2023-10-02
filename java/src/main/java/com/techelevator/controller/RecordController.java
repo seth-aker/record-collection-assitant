@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -76,6 +77,19 @@ public class RecordController {
         }
         return recordDTO;
 
+    }
+
+    @GetMapping(path = "")
+    public List<Record> getUserLibrary(@Valid Principal principal) {
+        int userId = userDao.findIdByUsername(principal.getName());
+        List<Record> userLib = new ArrayList<>();
+
+        try {
+            userLib = recordDao.getUserLibrary(userId);
+        } catch (DaoException e) {
+            throw new DaoException("User library not found.", e);
+        }
+        return userLib;
     }
 
 
