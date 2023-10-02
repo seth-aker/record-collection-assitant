@@ -13,8 +13,7 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Component
 public class DiscogsAPIService implements APIService {

@@ -1,11 +1,8 @@
 <template>
-    <div class="record-list">
-            <div class="record-card" 
+    <div class="record-list">  
+         <record-card 
                 v-for="record in records"
-                :key="record.id">
-                <record-card :recordInfo="record"/>
-            </div>
-        
+                :key="record.id" :recordInfo="record"/>
         <!-- <div class="no-items-msg" v-show="records.length === 0">
             No records found.
         </div> -->
@@ -27,6 +24,8 @@ export default {
 
 <style scoped>
 .record-card {
-    width: 155px;
+    margin: 15px;
+    width: 200px;
+    
 }
 </style>

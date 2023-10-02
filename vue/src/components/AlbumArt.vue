@@ -13,11 +13,10 @@ export default {
 
 <style scoped>
 .album-art {
-  height: inherit;
   background-color: #fff;
 }
-
 img {
-  height: inherit;
+  width: 100px;
 }
+
 </style>

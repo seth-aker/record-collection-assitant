@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@PreAuthorize("isAuthenticated()")
 public class SearchController {
 
     private APIService apiService;
