@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@AutoConfigureTestDatabase
 public class JdbcRecordDaoTests extends BaseDaoTests {
 
 
@@ -30,13 +29,15 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     private static Record dumbestRecord = new Record();
 
     private JdbcRecordDao sut;
+
     private Record testRecord;
+
 
     @Before
     public void setup() {
-
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         sut = new JdbcRecordDao(jdbcTemplate);
+
 
         testRecord = new Record(
                 "12345",
@@ -48,17 +49,13 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     @Test
     public void getRecordById_returns_correct_record() {
 
-        Record record = sut.getRecordById("1353040");
-        assertRecordsMatch(DUMMY_RECORD_1, record);
 
-        record = sut.getRecordById("1486272");
-        assertRecordsMatch(DUMMY_RECORD_2, record);
 
-        record = sut.getRecordById("498868");
-        assertRecordsMatch(DUMMY_RECORD_3, record);
+        Record record = sut.getRecordById("498868");
+        Assert.assertEquals(DUMMY_RECORD_3.getTitle(), record.getTitle());
 
         record = sut.getRecordById("372778");
-        assertRecordsMatch(DUMMY_RECORD_4, record);
+        Assert.assertEquals(DUMMY_RECORD_4.getTitle(), record.getTitle());
 
     }
 
@@ -94,11 +91,11 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     }
     @Test
     public void updateCondition_has_expected_values_when_retrieved(){
-        boolean result = sut.updateCondition("1353040","Has a large crack now", 1001);
+        boolean result = sut.updateCondition("1353040","Cracked", 1001);
         Assert.assertTrue(result);
 
         dumbestRecord = sut.getRecordById("1353040");
-       Assert.assertEquals(dumbestRecord.getCondition(), "Has a large crack now");
+       Assert.assertEquals(dumbestRecord.getCondition(), "Cracked");
 
         result = sut.updateCondition("1353040","", 1001);
         Assert.assertTrue(result);

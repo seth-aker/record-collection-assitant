@@ -2,6 +2,8 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -9,35 +11,40 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import com.techelevator.dao.UserDao;
 
-
+import javax.sql.DataSource;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class JdbcRecordDao implements RecordDao {
+
     private JdbcTemplate jdbcTemplate;
-    private UserDao userDao;
+
+    private static  UserDao userDao;
+
 
     public JdbcRecordDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userDao = userDao;
 
     }
 
-
     public Record getRecordById(String recordId) {
-
-        String sql = "SELECT r.record_id, r.record_title " +
+Record record = null;
+        String sql = "SELECT record_title " +
                     "FROM records " +
                     "WHERE record_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
         try {
-            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
+
             if(result.next()) {
-                return mapRowToRecord(result);
-            } else {
-                return null;
+               record = mapRowToRecord(result);
             }
+            return record;
+
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (BadSqlGrammarException e) {
@@ -105,10 +112,11 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     @Override
-    public boolean createTags(Record record, String tagName){
+    public boolean createTags(Record record, String tagName, Principal principal){
         try {
-            String sql = "INSERT INTO user_record_tag (tag_name) VALUES (?) WHERE user_id = ? AND record_id = ?;";
-            return jdbcTemplate.update(sql, tagName, record.getId(), record.getTitle()) == 1;
+            String sql = "INSERT INTO user_record_tag (tag_name, user_id, record_id) VALUES (?, ?, ?);";
+            return jdbcTemplate.update(sql, tagName,
+                    userDao.findIdByUsername(principal.getName()), record.getId()) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -158,7 +166,7 @@ public class JdbcRecordDao implements RecordDao {
 
     @Override
     public boolean updateCondition(String recordId, String condition, int userId){
-        String sql= "UPDATE user_record_tag SET record_condition = ? WHERE user_id = ? AND record_id =?";
+        String sql= "UPDATE user_record SET record_condition = ? WHERE user_id = ? AND record_id =?";
         try{
             int numberOfRows = this.jdbcTemplate.update(sql, condition, userId, recordId);
             if (numberOfRows == 0) {
@@ -229,11 +237,15 @@ public class JdbcRecordDao implements RecordDao {
 
 
 
+
+
     private Record mapRowToRecord(SqlRowSet rowSet) {
         Record record = new Record();
         record.setId(rowSet.getString("record_id"));
         record.setTitle(rowSet.getString("record_title"));
-        record.setCondition(rowSet.getString("record_condition"));
+        if(rowSet.getString("record_condition") != null) {
+            record.setCondition(rowSet.getString("record_condition"));
+        }
         if(rowSet.getString("user_note") != null) {
             record.setUserNote(rowSet.getString("user_note"));
         }

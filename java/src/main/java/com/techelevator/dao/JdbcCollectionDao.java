@@ -20,12 +20,12 @@ import java.util.List;
 public class JdbcCollectionDao implements CollectionDao {
 
     private JdbcTemplate jdbcTemplate;
+
     private UserDao userDao;
 
-
-    public JdbcCollectionDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
+    public JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.userDao = userDao;
+
     }
 
     @Override
