@@ -20,12 +20,11 @@ public class JdbcRecordDao implements RecordDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    private static  UserDao userDao;
+
 
 
     public JdbcRecordDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.userDao = userDao;
 
     }
 
@@ -67,11 +66,9 @@ Record record = null;
         return userLib;
     }
 
-    public String[] getRecordNoteAndCondition(String recordId, Principal principal){
+    public String[] getRecordNoteAndCondition(String recordId,  int userId){
         String[] noteAndCondition = new String[2];
-        int userId = userDao.findIdByUsername(principal.getName());
         String sql = "SELECT user_note, record_condition FROM user_record WHERE user_id = ? AND record_id = ?;";
-
 
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, recordId);
@@ -88,9 +85,8 @@ Record record = null;
     }
 
     @Override
-    public List<String> getRecordTags(String recordId, Principal principal) {
+    public List<String> getRecordTags(String recordId, int userId) {
         List<String> tags = new ArrayList<>();
-        int userId = userDao.findIdByUsername(principal.getName());
         String sql = "SELECT tag_name " +
                 "FROM user_record_tag " +
                 "WHERE record_id = ? AND user_id = ?;";
@@ -109,11 +105,11 @@ Record record = null;
     }
 
     @Override
-    public boolean createTags(Record record, String tagName, Principal principal){
+    public boolean createTags(Record record, String tagName, int userID){
         try {
             String sql = "INSERT INTO user_record_tag (tag_name, user_id, record_id) VALUES (?, ?, ?);";
             return jdbcTemplate.update(sql, tagName,
-                    userDao.findIdByUsername(principal.getName()), record.getId()) == 1;
+                   userID, record.getId()) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -231,6 +227,7 @@ Record record = null;
             throw new DaoException("Data integrity violation", e);
         }
     }
+
 
 
 
