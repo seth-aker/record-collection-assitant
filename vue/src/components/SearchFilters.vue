@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: "Search Filters"
+    name: "search-filters"
 }
 </script>
 

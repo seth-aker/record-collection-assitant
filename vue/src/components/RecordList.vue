@@ -1,16 +1,15 @@
 <template>
     <div>
-        <image-spinner v-show="showSpinner"/>
-        <div v-show="userLibrary.length != 0 && !showSpinner">
+        <div v-show="1">
             <div id="record-row" 
-                v-for="curRecord in userLibrary"
-                :key="curRecord.id">
-                <record-info-thin :recordId="curRecord.id"/>
+                v-for="record in records"
+                :key="record.id">
+                <record-info-thin :recordInfo="record"/>
             </div>
         </div>
-        <div class="no-items-msg" v-show="userLibrary.length === 0 && !showSpinner">
+        <!-- <div class="no-items-msg" v-show="records.length === 0">
             No records found.
-        </div>
+        </div> -->
     </div>  
 </template>
 
@@ -22,22 +21,7 @@ export default {
     components: {
         RecordInfoThin
     },
-    data() {
-        return {
-            showSpinner: true
-        }
-    },
-    computed: {
-        userLibrary() {
-            return this.$store.state.userLibrary;
-        }
-    },
-    methods: {
-        
-    },
-    created() {
-        
-    }
+    props: ['records'],
 
 }
 </script>

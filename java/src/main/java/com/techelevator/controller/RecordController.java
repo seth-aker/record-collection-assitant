@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.security.Principal;
 import java.util.List;
 
@@ -45,12 +46,17 @@ public class RecordController {
     @GetMapping(path = "/{recordId}")
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
-        String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, principal));
-        List<String> tags = recordDao.getRecordTags(recordId, principal);
+        try {
+            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, principal));
+            List<String> tags = recordDao.getRecordTags(recordId, principal);
 
-        recordDTO.setUserNotes(recordNotesAndCondition[0]);
-        recordDTO.setCondition(recordNotesAndCondition[1]);
-        recordDTO.setTags(tags);
+            recordDTO.setUserNotes(recordNotesAndCondition[0]);
+            recordDTO.setCondition(recordNotesAndCondition[1]);
+            recordDTO.setTags(tags);
+        } catch (DaoException | NullPointerException e) {
+            return recordDTO;
+        }
+
         return recordDTO;
     }
 

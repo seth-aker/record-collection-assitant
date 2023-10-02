@@ -1,10 +1,13 @@
 <template>
-  <div class="search-page" @updateSearchResults="search">
+  <div class="search-page" @request-search="search">
     <loading-icon v-show="isLoading" />
-    <search-box />
+    <search-box @requestSearch='search'/>
     <search-filters />
     <collection-list />
-    <record-list />
+    <div class="record-list" >
+      <record-list :records="$store.state.sr.searchResultsRecords" />
+
+    </div>
   </div>
   
 </template>
@@ -26,17 +29,16 @@ export default {
     }
   },
   created() {
-    //   this.search();
+      this.search();
   },
   methods: {
       search() {
         this.isLoading = true;
-        const searchString = `q=${this.$route.query.q}`
-        searchService.searchRecords(searchString)
-            // .then(response => {
-            //     this.$store.commit("")
-            // this.isLoading = false;
-            // })
+        searchService.searchRecords(this.$store.getters.searchQuery)
+            .then(response => {
+              this.$store.commit("SET_SEARCH_RESULTS_RECORDS", response.data.results)
+              this.isLoading = false;
+            })
       },
   }
 

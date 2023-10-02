@@ -51,7 +51,7 @@ export default {
 nav {
   display: flex;
   justify-content: space-between;
-  
+  height: 160px;
 }
 .nav-bar-buttons {
   display: flex;
@@ -94,7 +94,7 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
-    margin-top: 50px;
+  
 
 }
 .rounded-button a {
