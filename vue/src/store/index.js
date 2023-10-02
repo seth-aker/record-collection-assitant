@@ -24,7 +24,6 @@ export default new Vuex.Store({
     isLoading: true,
     token: currentToken || '',
     user: currentUser || {},
-    allReleases: [],
     publicCollections: [],
     userLibrary: [],
     userCollections: [],
@@ -52,9 +51,7 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    SET_ALL_RELEASES(state, data) {
-      state.allReleases = data;
-    },
+  
     SET_PUBLIC_COLLECTIONS(state, data) {
       state.publicCollections = data;
     },

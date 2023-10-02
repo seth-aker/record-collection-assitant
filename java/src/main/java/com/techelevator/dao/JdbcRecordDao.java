@@ -29,9 +29,19 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public Record getRecordById(String recordId) {
+<<<<<<< HEAD
 
 Record record = null;
         String sql = "SELECT record_id, record_title " +
+=======
+<<<<<<< HEAD
+Record record = null;
+        String sql = "SELECT record_id, record_title " +
+=======
+        Record record = null;
+        String sql = "SELECT record_title, record_id " +
+>>>>>>> 4b11fa68c0d57385f78401ec5455e692b0bd22bb
+>>>>>>> 6cbdd9fdde374cf9febe6387ff37c3b93fd2ccb2
                     "FROM records " +
                     "WHERE record_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -79,6 +80,19 @@ public class RecordController {
 
     }
 
+<<<<<<< HEAD
+    @GetMapping(path = "")
+    public List<Record> getUserLibrary(@Valid Principal principal) {
+        int userId = userDao.findIdByUsername(principal.getName());
+        List<Record> userLib = new ArrayList<>();
+
+        try {
+            userLib = recordDao.getUserLibrary(userId);
+        } catch (DaoException e) {
+            throw new DaoException("User library not found.", e);
+        }
+        return userLib;
+=======
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void addRecordToUserLib(@RequestBody RecordDTO recordDTO, Principal principal) {
@@ -90,6 +104,7 @@ public class RecordController {
         if(!recordLogic.isRecordInUserLib(recordId, userId)){
             recordDao.addRecordToUserLib(recordId, userId);
         }
+>>>>>>> f46764911841a968a78c3eaad36d52aabfe7c0f7
     }
 
 
