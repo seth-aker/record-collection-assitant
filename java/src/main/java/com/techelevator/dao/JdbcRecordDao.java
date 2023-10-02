@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.security.Principal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +29,9 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public Record getRecordById(String recordId) {
-        Record record = null;
-        String sql = "SELECT record_title, record_id " +
+
+Record record = null;
+        String sql = "SELECT record_id, record_title " +
                     "FROM records " +
                     "WHERE record_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
