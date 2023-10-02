@@ -21,8 +21,8 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     private static final Record DUMMY_RECORD_4 = new Record("372778", "Sgt. Peppers Lonely Hearts Club Band", "I like this", "Good");
     private static final Record DUMMY_RECORD_5 = new Record("168314", "Songs In The Key Of Life", "I like this", "Good");
 
-    private static final Collection DUMMY_COLLECTION_1 = new Collection(101, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868", "1353040"));
-    private static final Collection DUMMY_COLLECTION_2 = new Collection(104, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868", "1353040"));
+    private static final Collection DUMMY_COLLECTION_1 = new Collection(101, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868"));
+    private static final Collection DUMMY_COLLECTION_2 = new Collection(104, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868"));
 
     private static RecordDTO RECORD_DTO_5 = new RecordDTO();
     private static RecordDTO RECORD_DTO_6 = new RecordDTO();
@@ -82,10 +82,10 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
 
     @Test
     public void addRecordToUserLib_adds_record(){
-     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5, 1001);
+     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1001, DUMMY_RECORD_5.getUserNote());
         Assert.assertTrue(result);
 
-        result = sut.addRecordToUserLib(DUMMY_RECORD_5, 1003);
+        result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1003, DUMMY_RECORD_5.getUserNote());
         Assert.assertTrue(result);
 
     }
@@ -122,7 +122,7 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     @Test
     public void removeRecordFromUserLibrary(){
         int originalLibraryCount = sut.getUserLibrary(1001).size();
-        boolean result = sut.removeRecordFromUserLib(DUMMY_RECORD_1, 1001);
+        boolean result = sut.removeRecordFromUserLib(DUMMY_RECORD_1.getId(), 1001);
         int newLibraryCount = sut.getUserLibrary(1001).size();
         Assert.assertTrue(result);
         Assert.assertEquals(originalLibraryCount - 1, newLibraryCount);

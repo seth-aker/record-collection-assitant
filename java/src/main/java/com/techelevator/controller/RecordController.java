@@ -9,15 +9,16 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
-import com.techelevator.model.discogs.SearchResponse;
+
 import com.techelevator.services.APIService;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class RecordController {
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
         try {
-            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, principal));
-            List<String> tags = recordDao.getRecordTags(recordId, principal);
+            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userDao.findIdByUsername(principal.getName())));
+            List<String> tags = recordDao.getRecordTags(recordId, userDao.findIdByUsername(principal.getName()));
 
             recordDTO.setUserNotes(recordNotesAndCondition[0]);
             recordDTO.setCondition(recordNotesAndCondition[1]);
@@ -66,7 +67,7 @@ public class RecordController {
 
         try {
             Record recordToUpdate = recordDao.getRecordById(String.valueOf(recordDTO.getId()));
-            if (recordLogic.isRecordInUserLib(recordToUpdate, userDao.findIdByUsername(principal.getName()))) {
+            if (recordLogic.isRecordInUserLib(recordToUpdate.getId(), userDao.findIdByUsername(principal.getName()))) {
                 recordDao.updateTags(recordDTO.getTags(), String.valueOf(recordDTO.getId()), userId);
                 recordDao.updateRecordNote(String.valueOf(recordDTO.getId()), userId, recordDTO.getUserNotes());
                 recordDao.updateCondition(String.valueOf(recordDTO.getId()), recordDTO.getCondition(), userId);
@@ -76,6 +77,19 @@ public class RecordController {
         }
         return recordDTO;
 
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/records", method = RequestMethod.POST)
+    public void addRecordToUserLib(@RequestBody RecordDTO recordDTO, Principal principal) {
+        int userId = userDao.findIdByUsername(principal.getName());
+        String recordId = String.valueOf(recordDTO.getId());
+        if(!recordLogic.doesRecordExist(recordId)){
+            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), "", ""));
+        }
+        if(!recordLogic.isRecordInUserLib(recordId, userId)){
+            recordDao.addRecordToUserLib(recordId, userId, recordDTO.getUserNotes());
+        }
     }
 
 
@@ -89,23 +103,7 @@ public class RecordController {
 //
 //        }
 //    }
-
-
-    public RecordDTO mapNoteTagCondition(Record record, Principal principal) {
-        RecordDTO recordDTO = new RecordDTO();
-        try {
-            Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), principal);
-            String note = (noteAndCondition != null && noteAndCondition.length > 0) ? noteAndCondition[0].toString() : null;
-            String condition = (noteAndCondition != null && noteAndCondition.length > 1) ? noteAndCondition[1].toString() : null;
-            List<String> tags = recordDao.getRecordTags(record.getId(), principal);
-            recordDTO.setUserNotes(note);
-            recordDTO.setTags(tags);
-            recordDTO.setCondition(condition);
-        } catch (DaoException e) {
-            throw new DaoException("Needs some better handling error here", e);
-        }
-        return recordDTO;
-    }
+    
 
 
 //    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
