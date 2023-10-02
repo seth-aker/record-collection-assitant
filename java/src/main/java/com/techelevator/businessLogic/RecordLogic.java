@@ -21,10 +21,13 @@ public class RecordLogic {
         this.recordDao = recordDao;
     }
 
-    public boolean doesRecordExist(Record record) {
+    public boolean doesRecordExist(String recordId) {
         try {
             //check to see if record exists in database.
-            recordDao.getRecordById(record.getId());
+            Record record = recordDao.getRecordById(recordId);
+            if(record == null){
+                return false;
+            }
         } catch (DaoException e) {
             if (e.getMessage().equals("Record id does not exist")) {
                 return false;
@@ -33,11 +36,11 @@ public class RecordLogic {
         return true;
     }
 
-    public boolean isRecordInUserLib(Record record, int userId) {
+    public boolean isRecordInUserLib(String recordId, int userId) {
         List<Record> lib = recordDao.getUserLibrary(userId);
 
         //maps the library to a list of recordIds and then checks if that list already contains the record in question
-        return lib.stream().map(Record::getId).collect(Collectors.toList()).contains(record.getId());
+        return lib.stream().map(Record::getId).collect(Collectors.toList()).contains(recordId);
     }
 
 

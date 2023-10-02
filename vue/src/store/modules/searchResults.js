@@ -21,6 +21,9 @@ const mutations = {
     SET_CUR_PAGE(state, pageNum) {
         state.curPage = pageNum;
       },
+    UPDATE_PER_PAGE(state, perPage) {
+        state.resultsPerPage = perPage
+    },
     UPDATE_SEARCH(state, term) {
         state.search = term;
         state.curPage = 1;

@@ -4,7 +4,7 @@
     <!-- Container for the green box -->
     <div class="green-box">
       <!-- Heading for the slideshow -->
-      <h2>TRENDING COLLECTIONS</h2>
+      <h2>TOP GENRES</h2>
     </div>
     <!-- Container for the carousel and navigation buttons -->
     <div class="carousel-container">
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'SlideShow',
+  name: 'TopGenreSlideshow',
   data() {
     return {
       // An array of objects representing items with images and titles
@@ -174,14 +174,13 @@ h2 {
   margin-top: 230px;
 }
 
+/* Style for the green box */
 .green-box {
   background-color: #40c5a4;
   padding: 20px; /* Add padding for spacing */
   text-align: center; /* Center the text horizontally */
-  margin-bottom: 10px;
 }
 
-/* Style for the white text (h2) */
 .green-box h2 {
   font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 50px;

@@ -21,11 +21,9 @@
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
    
-   <b-modal title="Sleeves Premium Just for You!">
-   <p> Would you like to try 1 free month of Sleeves?</p>
-    <button class="premium" @click="isPremium(true)">Yes</button>
-    <button class="premium" @click="isPremium(false)">No</button>
-   </b-modal>
+   <section id="get-premium"><p>Sign me up for one free month of Sleeves Premium!</p>
+    <input type="checkbox" id="premiumCheckbox" v-model="user.isPremium" @change="togglePremium">
+</section>
       <div class="create-account-button">
       <button @click="showPopup = true" type="submit">Create Account</button>
 
@@ -45,6 +43,7 @@ export default {
   components: {
 
   },
+   
   data() {
     return {
        showPopup: false,
@@ -53,31 +52,35 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
+        isPremium: '',
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
     };
   },
   methods: {
+    togglePremium() {
+     const isPremium = this.user.isPremium;
 
-// TODO: fix this method to submit isPremium status
-
-    becomePremium(){
-        this.closePopup;
-        return this.user.isPremium;
-        },
-
-        // saveChoice(){
-        //   axios.post~
-        // },
-
-
+ console.log('isPremium in togglePremium:', isPremium);
+ 
+  this.$store.dispatch('setIsPremium', isPremium);
+      // Use the 'isPremium' value as needed
+      if (isPremium) {
+         
+         // You can perform actions here
+      } else {
+        
+         // You can perform actions here
+      }
+   },
 
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
+         console.log('isPremium in register:', this.user.isPremium); 
         authService
           .register(this.user)
           .then((response) => {
@@ -112,6 +115,8 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
 }
 
 label {
@@ -137,6 +142,7 @@ display: flex;
 justify-content: center;
 align-items: top;
 min-height: 100vh;
+margin-top: 200px;
 
 }
 
@@ -158,22 +164,28 @@ min-height: 100vh;
   padding-top: 20px;
 }
 
-p{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .username{
    color:#F8E73B;
 }
 
 
+div.create-account-button{
+  display: flex;
+}
 
 
+section{
+  display: inline-block;
+}
+#premiumCheckbox{
+  display: flex;
+}
 
-
-
+p{
+  display: flex;
+  justify-content: center;
+}
 
 
 
