@@ -47,8 +47,8 @@ public class RecordController {
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
         try {
-            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, principal));
-            List<String> tags = recordDao.getRecordTags(recordId, principal);
+            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userDao.findIdByUsername(principal.getName())));
+            List<String> tags = recordDao.getRecordTags(recordId, userDao.findIdByUsername(principal.getName()));
 
             recordDTO.setUserNotes(recordNotesAndCondition[0]);
             recordDTO.setCondition(recordNotesAndCondition[1]);
@@ -91,13 +91,13 @@ public class RecordController {
 //    }
 
 
-    public RecordDTO mapNoteTagCondition(Record record, Principal principal) {
+    public RecordDTO mapNoteTagCondition(Record record, int userId) {
         RecordDTO recordDTO = new RecordDTO();
         try {
-            Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), principal);
+            Object[] noteAndCondition = recordDao.getRecordNoteAndCondition(record.getId(), userId);
             String note = (noteAndCondition != null && noteAndCondition.length > 0) ? noteAndCondition[0].toString() : null;
             String condition = (noteAndCondition != null && noteAndCondition.length > 1) ? noteAndCondition[1].toString() : null;
-            List<String> tags = recordDao.getRecordTags(record.getId(), principal);
+            List<String> tags = recordDao.getRecordTags(record.getId(), userId);
             recordDTO.setUserNotes(note);
             recordDTO.setTags(tags);
             recordDTO.setCondition(condition);
