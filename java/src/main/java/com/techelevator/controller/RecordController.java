@@ -80,7 +80,6 @@ public class RecordController {
 
     }
 
-<<<<<<< HEAD
     @GetMapping(path = "")
     public List<Record> getUserLibrary(@Valid Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
@@ -92,7 +91,8 @@ public class RecordController {
             throw new DaoException("User library not found.", e);
         }
         return userLib;
-=======
+    }
+    
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void addRecordToUserLib(@RequestBody RecordDTO recordDTO, Principal principal) {
@@ -104,7 +104,6 @@ public class RecordController {
         if(!recordLogic.isRecordInUserLib(recordId, userId)){
             recordDao.addRecordToUserLib(recordId, userId);
         }
->>>>>>> f46764911841a968a78c3eaad36d52aabfe7c0f7
     }
 
 
