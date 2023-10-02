@@ -51,12 +51,7 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
 
 
 
-
-
-     Record record = sut.getRecordById("1486272");
-        System.out.println(record.getTitle());
-
-        record = sut.getRecordById("498868");
+        Record record = sut.getRecordById("498868");
         Assert.assertEquals(DUMMY_RECORD_3.getTitle(), record.getTitle());
 
         record = sut.getRecordById("372778");
