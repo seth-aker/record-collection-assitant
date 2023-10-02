@@ -12,7 +12,7 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
@@ -31,8 +31,10 @@ export default new Vuex.Store({
     totalReleases: 0,
     curPageReleases: [],
     totalCollections: 0,
-    curPageCollections: []
+    curPageCollections: [],
+    isPremium: false,
   },
+
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -41,7 +43,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -65,7 +67,7 @@ export default new Vuex.Store({
     SET_TOTAL_RELEASES(state, count) {
       state.totalReleases = count;
     },
-   
+
     SET_CUR_PAGE_RELEASES(state, releases) {
       state.curPageReleases = releases;
     },
@@ -74,7 +76,29 @@ export default new Vuex.Store({
     },
     SET_CUR_PAGE_COLLECTIONS(state, collections) {
       state.curPageCollections = collections;
-    }
-   
+    },
+    SET_IS_PREMIUM(state, isPremium) {
+      state.isPremium = isPremium;
+    },
+
+  },
+  actions: {
+    async setIsPremium({ commit }, isPremium) {
+      try {
+        commit('SET_IS_PREMIUM', isPremium);
+    await axios.post('/register', { isPremium });
+    
+      } catch (error) {
+        if (error.response) {
+          console.error('Response Error:', error.response.data);
+          console.error('Status Code:', error.response.status);
+        } else if (error.request) {
+          console.error('Request Error:', error.request);
+        } else {
+     
+          console.error('General Error:', error.message);
+        }
+      }
+  },
   }
-})
+  });

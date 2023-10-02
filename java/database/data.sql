@@ -29,7 +29,7 @@ INSERT INTO collection_record (collection_id, record_id) VALUES (102, '1353040')
 INSERT INTO collection_record (collection_id, record_id) VALUES (102, '498868');
 INSERT INTO collection_record (collection_id, record_id) VALUES (102, '1486272');
 INSERT INTO collection_record (collection_id, record_id) VALUES (102, '372778');
-INSERT INTO collection_record (collection_id, record_id) VALUES (102, '168314)';
+INSERT INTO collection_record (collection_id, record_id) VALUES (102, '168314');
 
 INSERT INTO collection_record (collection_id, record_id) VALUES (103, '1353040');
 INSERT INTO collection_record (collection_id, record_id) VALUES (103, '498868');

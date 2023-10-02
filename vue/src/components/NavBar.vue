@@ -35,6 +35,18 @@
 
 export default {
   name: "NavBar",
+
+  computed: {
+    isPremium: {
+      get() {
+        return this.$store.state.isPremium;
+      },
+      set(newValue) {
+      
+        this.$store.dispatch('setIsPremium', newValue);
+      },
+    },
+  },
   data(){
     return{
       loggedIn: false
