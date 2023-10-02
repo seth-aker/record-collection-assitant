@@ -1,7 +1,7 @@
 <template>
   <div class="record-collection">
     <div class="container" v-for="recordId in recordIds" :key="recordId" >
-      <record-info-thin :recordId="recordId"/>
+      <record-card :recordId="recordId"/>
     </div>
   </div>
 </template>
@@ -9,10 +9,10 @@
 <script>
 import collectionService from '../services/CollectionService.js'
 
-import RecordInfoThin from '../components/RecordInfoThin.vue'
+import RecordCard from '../components/RecordCard.vue'
 
 export default {
-  components: { RecordInfoThin },
+  components: { RecordCard },
   name: 'Collection-View',
   data() {
     return {

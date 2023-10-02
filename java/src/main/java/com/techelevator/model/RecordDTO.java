@@ -1,10 +1,12 @@
 package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.discogs.*;
 import com.techelevator.model.discogs.Artist;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 
 import java.security.Principal;
@@ -16,7 +18,7 @@ public class RecordDTO {
     //Added from our database
     private List<String> tags;
     private String condition;
-    private String userNotes;
+    private String userNotes = "";
 
     // From discogs
     private String title;

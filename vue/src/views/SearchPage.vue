@@ -47,6 +47,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.record-list {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>

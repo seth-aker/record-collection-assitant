@@ -115,6 +115,8 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
 }
 
 label {
@@ -140,6 +142,7 @@ display: flex;
 justify-content: center;
 align-items: top;
 min-height: 100vh;
+margin-top: 200px;
 
 }
 

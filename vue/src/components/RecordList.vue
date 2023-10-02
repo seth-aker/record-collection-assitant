@@ -1,12 +1,8 @@
 <template>
-    <div>
-        <div v-show="1">
-            <div id="record-row" 
+    <div class="record-list">  
+         <record-card 
                 v-for="record in records"
-                :key="record.id">
-                <record-info-thin :recordInfo="record"/>
-            </div>
-        </div>
+                :key="record.id" :recordInfo="record"/>
         <!-- <div class="no-items-msg" v-show="records.length === 0">
             No records found.
         </div> -->
@@ -14,18 +10,22 @@
 </template>
 
 <script>
-import RecordInfoThin from './RecordInfoThin.vue';
+import RecordCard from './RecordCard.vue';
 
 export default {
     name: "record-list",
     components: {
-        RecordInfoThin
+        RecordCard
     },
     props: ['records'],
 
 }
 </script>
 
-<style>
-
+<style scoped>
+.record-card {
+    margin: 10px;
+    width: 200px;
+    
+}
 </style>

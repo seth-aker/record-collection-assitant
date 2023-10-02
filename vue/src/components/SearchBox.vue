@@ -47,10 +47,12 @@ export default {
 
 <style scoped>
 .search-box {
+    display: flex;
     text-align: center;
     margin-top: 20px;
-    padding-bottom: 100px;
+    padding-bottom: 10000px;
     padding-top: 100px;
+
 }
 
 #search-input {
@@ -74,6 +76,11 @@ export default {
 #search-button:hover {
     background-color: #555;
 }
-
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
 
 </style>

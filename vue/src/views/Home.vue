@@ -1,7 +1,13 @@
 <template>
   <div>
+     <search-box />
     <SlideShow></SlideShow>
-    <search-box />
+    
+
+    <TopArtistSlideshow></TopArtistSlideshow>
+
+    <TopGenreSlideshow></TopGenreSlideshow>
+
     <PopularArtist></PopularArtist>
     <div class="custom-content">
       <div class="genres">
@@ -15,13 +21,16 @@
 import SearchBox from "@/components/SearchBox.vue";
 import SlideShow from "@/components/SlideShow.vue";
 import PopularArtist from '../components/PopularArtist.vue';
-
+import TopArtistSlideshow from '../components/TopArtistSlideshow.vue';
+import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 
 
 export default {
   components: {
     SearchBox,
     SlideShow,
+    TopArtistSlideshow,
+    TopGenreSlideshow,
     PopularArtist,
     
   },
@@ -29,5 +38,10 @@ export default {
 </script>
 
 <style scoped>
+
+.slideshow {
+margin-top: 100px;
+margin-bottom: 100px;
+}
 
 </style>
