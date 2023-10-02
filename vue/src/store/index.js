@@ -60,9 +60,6 @@ export default new Vuex.Store({
     },
     SET_USER_COLLECTIONS(state, data) {
       state.userCollections = data;
-<<<<<<< HEAD
-    }   
-=======
     },
     SET_TOTAL_RELEASES(state, count) {
       state.totalReleases = count;
@@ -100,6 +97,5 @@ export default new Vuex.Store({
         }
       }
   },
->>>>>>> f46764911841a968a78c3eaad36d52aabfe7c0f7
   }
   });

@@ -1,9 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <search-box class="search" />
-    <SlideShow></SlideShow>
-=======
      <search-box />
     <SlideShow></SlideShow>
     
@@ -12,7 +8,6 @@
 
     <TopGenreSlideshow></TopGenreSlideshow>
 
->>>>>>> f46764911841a968a78c3eaad36d52aabfe7c0f7
     <PopularArtist></PopularArtist>
     <div class="custom-content">
       <div class="genres">
@@ -42,20 +37,9 @@ export default {
 
 <style scoped>
 
-<<<<<<< HEAD
-.search {
-display: flex;
-justify-content: center;
-}
-
-.user-view {
-  display: flex;
-  justify-content: space-evenly;
-=======
 .slideshow {
 margin-top: 100px;
 margin-bottom: 100px;
->>>>>>> f46764911841a968a78c3eaad36d52aabfe7c0f7
 }
 
 </style>
