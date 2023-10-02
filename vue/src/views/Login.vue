@@ -88,6 +88,7 @@ export default {
   color:  #F8E73B;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   min-height: 100vh;
+  margin-top: 200px;
 }
 
 

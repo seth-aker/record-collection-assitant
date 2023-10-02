@@ -2,7 +2,7 @@
   <div>
     <!-- First artist section -->
     <div class="popular-artist-container">
-      <h1>POPULAR ARTISTS</h1>
+      <h1>RECENTLY ADDED</h1>
     </div>
     <div class="artist-section">
       <div class="album-cover">
