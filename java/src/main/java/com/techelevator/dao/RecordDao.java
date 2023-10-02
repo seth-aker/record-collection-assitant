@@ -11,7 +11,9 @@ public interface RecordDao {
 
     public List<Record> getUserLibrary(int userId);
 
-    boolean createTags(Record record, String tagName, Principal principal);
+    List<String> getRecordTags(String recordId, int userId);
+
+    boolean createTags(Record record, String tagName, int userID);
 
     boolean updateTags(List<String> tagName, String recordId, int userId);
 
@@ -27,9 +29,9 @@ public interface RecordDao {
 
     public boolean removeRecordFromUserLib(String recordId, int userId);
 
+    public String[] getRecordNoteAndCondition(String recordId,  int userId);
 
-    public String[] getRecordNoteAndCondition(String recordId, Principal principal);
 
-    public List<String> getRecordTags(String recordId, Principal principal);
+
 
 }

@@ -21,8 +21,8 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
     private static final Record DUMMY_RECORD_4 = new Record("372778", "Sgt. Peppers Lonely Hearts Club Band", "I like this", "Good");
     private static final Record DUMMY_RECORD_5 = new Record("168314", "Songs In The Key Of Life", "I like this", "Good");
 
-    private static final Collection DUMMY_COLLECTION_1 = new Collection(101, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868", "1353040"));
-    private static final Collection DUMMY_COLLECTION_2 = new Collection(104, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868", "1353040"));
+    private static final Collection DUMMY_COLLECTION_1 = new Collection(101, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868"));
+    private static final Collection DUMMY_COLLECTION_2 = new Collection(104, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868"));
 
     private static RecordDTO RECORD_DTO_5 = new RecordDTO();
     private static RecordDTO RECORD_DTO_6 = new RecordDTO();

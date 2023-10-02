@@ -48,8 +48,8 @@ public class RecordController {
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
         try {
-            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, principal));
-            List<String> tags = recordDao.getRecordTags(recordId, principal);
+            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userDao.findIdByUsername(principal.getName())));
+            List<String> tags = recordDao.getRecordTags(recordId, userDao.findIdByUsername(principal.getName()));
 
             recordDTO.setUserNotes(recordNotesAndCondition[0]);
             recordDTO.setCondition(recordNotesAndCondition[1]);
@@ -103,9 +103,7 @@ public class RecordController {
 //
 //        }
 //    }
-
-
-
+    
 
 
 //    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
