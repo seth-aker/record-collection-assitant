@@ -2,8 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -11,9 +10,7 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import com.techelevator.dao.UserDao;
 
-import javax.sql.DataSource;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
