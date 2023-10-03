@@ -12,14 +12,11 @@
       <button @click="slideLeft" class="arrow left-arrow">&lt;</button>
       <!-- Container for the slides -->
       <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
-        <!-- Iterate through items to display each image and title -->
+        <!-- Iterate through items to display each colored square with text -->
         <div class="slide" v-for="(item, index) in items" :key="index">
-          <!-- Display the image with its source and alt text -->
-          <img :src="item.image" :alt="item.title" class="image" />
-          <!-- Container for the album title text -->
-          <div class="album-title">
-            <!-- Display the album title text -->
-            <div class="album-title-text">{{ item.title }}</div>
+          <!-- Display the colored square with text -->
+          <div class="colored-square">
+            <div class="square-text">{{ item.title }}</div>
           </div>
         </div>
       </div>
@@ -34,45 +31,27 @@ export default {
   name: 'TopGenreSlideshow',
   data() {
     return {
-      // An array of objects representing items with images and titles
+      // An array of objects representing items with titles
       items: [
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
+        { title: 'ROCK' },
+        { title: 'ALTERNATIVE' },
+        { title: 'R&B' },
+        { title: 'METAL' },
+        { title: 'JAZZ' },
+        { title: 'RAP' },
+        { title: 'CLASSICAL' },
+        { title: 'BLUES' },
+        { title: 'POP' },
+        { title: 'COUNTRY' },
+        { title: 'CLASSIC ROCK' },
+        { title: 'WORLD' },
+        { title: 'INDE' },
+        
+        
+  
+        // Add more genre titles as needed
       ],
-      // Current index to keep track of which images are displayed
+      // Current index to keep track of which genres are displayed
       currentIndex: 0,
     };
   },
@@ -83,7 +62,7 @@ export default {
     },
   },
    methods: {
-    // Method to slide to the left and display previous images
+    // Method to slide to the left and display previous genres
     slideLeft() {
       if (this.currentIndex > 0) {
         this.currentIndex--;
@@ -92,7 +71,7 @@ export default {
         this.currentIndex = this.maxIndex;
       }
     },
-    // Method to slide to the right and display next images
+    // Method to slide to the right and display next genres
     slideRight() {
       if (this.currentIndex < this.maxIndex) {
         this.currentIndex++;
@@ -118,27 +97,19 @@ export default {
 }
 
 .slides {
-  /* Flex container for sliding images with a transition effect */
+  /* Flex container for sliding genres with a transition effect */
   display: flex;
   transition: transform 0.5s ease-in-out;
 }
 
 .slide {
   /* Style for each individual slide */
-  flex: 0 0 20%; /* Adjust the width to display 5 images at a time */
+  flex: 0 0 18%; /* Adjust the width to display 5 squares at a time */
   padding: 10px;
   box-sizing: border-box;
   text-align: center;
   overflow: hidden; /* Hide overflowing content */
   position: relative;
-  transition: transform 0.5s ease-in-out; /* Add sliding transition */
-}
-
-.image {
-  /* Style for images within slides */
-  width: 100%; /* Ensure all images have the same width */
-  max-height: 100%; /* Maintain aspect ratio */
-  object-fit: cover; /* Cover the container */
   transition: transform 0.5s ease-in-out; /* Add sliding transition */
 }
 
@@ -187,6 +158,28 @@ h2 {
   color: #eff13f;
   margin: 0; 
 }
+.colored-square {
+  /* Style for the colored square with text */
+  
+  box-sizing: border-box;
+  text-align: center;
 
+  position: relative;
+  transition: transform 0.5s ease-in-out; /* Add sliding transition */
+  background-color: #40c5a4; /* Background color for the square */
+  color: #fff; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px; /* Set a fixed height for the square */
+  font-size: 50px; /* Text font size */
+}
+
+.square-text {
+  /* Style for the text inside the colored square */
+  margin: 0;
+   font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #eff13f;
+}
 
 </style>
