@@ -1,5 +1,5 @@
 <template>
-  <div class="collection-card">
+  <div class="collection-card" v-show="this.$store.state.userCollections.length != 0 && !isLoading">
     <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
     <div class="collection-info">
         <div class="collection-name">
@@ -16,15 +16,18 @@
 import CollectionService from '../services/CollectionService'
 import RecordService from '../services/RecordService'
 import AlbumArt from './AlbumArt.vue'
+// import LoadingIcon from '../components/LoadingIcon.vue';
+
 export default {
     name: 'collection-card',
     props:['collectionId'],
     components: {
-        AlbumArt
-
+        AlbumArt,
+        // LoadingIcon
     },
     data() {
         return {
+            isLoading: false,
             collection:{},
             recordIds:[],
             recordDTO: "",
@@ -38,6 +41,7 @@ export default {
 
     },
     created() {
+        this.isLoading = true;
         CollectionService.getCollection(this.collectionId)
             .then(response => {
                 this.collection = response.data;
@@ -47,7 +51,7 @@ export default {
             .then(response => {this.recordDTO = response.data;
             });
             });
-
+        this.isLoading = false;
         }
 }
 </script>
@@ -74,8 +78,10 @@ export default {
     flex-direction: column;
 }
 
-div.collection-info > div {
+div.collection-info {
     font-size: 12px;
-  font-style: italic;}
+    font-style: italic;
+}
+
 
 </style>
