@@ -27,7 +27,6 @@ export default new Vuex.Store({
     publicCollections: [],
     userLibrary: [],
     userCollections: [],
-
     isPremium: false,
   },
 
