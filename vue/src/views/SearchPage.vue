@@ -3,7 +3,7 @@
     <loading-icon v-show="isLoading" />
     <search-box @requestSearch='search'/>
     <search-filters @requestSearch='search' />
-    <collection-list />
+    <!-- <collection-list /> -->
     <div class="record-list" >
       <record-list :records="$store.state.sr.searchResultsRecords" />
 
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import CollectionList from '../components/CollectionList.vue';
+
 import LoadingIcon from '../components/LoadingIcon.vue';
 import RecordList from '../components/RecordList.vue';
 import SearchBox from '../components/SearchBox.vue';
@@ -22,7 +22,7 @@ import searchService from '../services/SearchService.js';
 
 export default {
   name: 'searchPage',
-  components: { CollectionList, RecordList, SearchBox, LoadingIcon , SearchFilters},
+  components: {  RecordList, SearchBox, LoadingIcon , SearchFilters},
   data() {
     return {
       isLoading: true

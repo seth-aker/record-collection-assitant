@@ -1,6 +1,5 @@
 <template>
   <div>
-        
         <div v-show="this.$store.state.userCollections.length != 0 && !isLoading">
             <div id="collection-row" 
                 v-for="curCollection in collections"
@@ -17,7 +16,9 @@
 </template>
 
 <script>
+
 import CollectionCard from './CollectionCard.vue';
+
 
 export default {
     name: 'collection-list',
@@ -39,7 +40,7 @@ export default {
         
     },
     created() {
-        
+       
     }
 
 }

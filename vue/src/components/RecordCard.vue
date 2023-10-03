@@ -1,6 +1,6 @@
 <template>
   <div class="record-card">
-    <album-art :albumImageUrl="recordInfo.thumb" :albumName="recordInfo.title" class="album-art"/>
+    <album-art :albumImageUrl="recordInfo.thumb" :albumName="recordInfo.title" :albumId="recordInfo.id" class="album-art"/>
     <div class="record-info">
       <div class="record-text">
         <router-link class="record-title" :to="{name: 'record-page', params: {recordId : recordInfo.id}}">{{ recordTitle }}</router-link>

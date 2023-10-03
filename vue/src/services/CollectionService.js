@@ -11,10 +11,12 @@ export default {
     },
 
     getUserCollections() {
-        return axios.get(`/collections/myCollections`)
+        return axios.get(`/collections/my-collections`)
     },
 
-    
+    getTrendingCollections(numOfCollections) {
+        return axios.get(`/collections/public/${numOfCollections}`)
+    }
 
     
 }

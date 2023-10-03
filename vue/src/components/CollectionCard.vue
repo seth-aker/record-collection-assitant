@@ -1,6 +1,6 @@
 <template>
-  <span class="colletionInfo">
-      <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
+  <span class="colletionInfo">                                                <!--  links to collection page -->
+      <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="collectionId"/>
       <div>{{ collection.name}}</div>
       <div>{{collection.userName}}</div>
   </span>

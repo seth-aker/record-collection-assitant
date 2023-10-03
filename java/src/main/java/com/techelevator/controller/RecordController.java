@@ -45,6 +45,7 @@ public class RecordController {
     }
 
 
+    @PreAuthorize("permitAll")
     @GetMapping(path = "/{recordId}")
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
@@ -62,7 +63,7 @@ public class RecordController {
         return recordDTO;
     }
 
-    @RequestMapping(path = "/records/{recordId}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/{recordId}", method = RequestMethod.PUT)
     public RecordDTO updateRecord(@RequestBody RecordDTO recordDTO, Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
 
