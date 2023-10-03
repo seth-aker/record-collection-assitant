@@ -14,12 +14,12 @@
       </div>
       
       <div class="profile">
-        <img src="image.jpg" alt="John Joyce">
+        <img src="john.jpg" alt="John Joyce">
         <a href="https://www.linkedin.com/in/johnjoyc/" target="_blank">John Joyce</a>
       </div>
       
       <div class="profile">
-        <img src="image.jpg" alt="Joshua Janosek">
+        <img src="joshua.jpg" alt="Joshua Janosek">
         <a href="https://www.linkedin.com/in/joshuajanosek" target="_blank">Joshua Janosek</a>
       </div>
     </div>

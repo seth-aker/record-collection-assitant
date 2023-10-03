@@ -5,7 +5,7 @@
     </div>
     <div v-else >
       <h2>{{ recordDTO.title }}</h2>
-      <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
+      <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
       <div class="record-info" > 
         <ul>
           <li v-for="artist in recordDTO.artists" :key="artist.id"> Artist: {{ artist.name }}</li>

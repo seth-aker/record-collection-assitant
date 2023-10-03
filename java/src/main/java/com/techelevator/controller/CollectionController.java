@@ -31,14 +31,13 @@ public class CollectionController {
             this.collectionDao = collectionDao;
             this.userDao = userDao;
         }
-
-
+    @PreAuthorize("permitAll")
     @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
     public List<Collection> viewPublicCollections() {
         return this.collectionDao.getPublicCollections();
     }
 
-    @RequestMapping(path = "/collections/myCollections", method = RequestMethod.GET)
+    @RequestMapping(path = "/collections/my-collections", method = RequestMethod.GET)
     public List<Collection> getUserCollections(Principal principal) {
             return this.collectionDao.getCollectionsByUserId(userDao.findIdByUsername(principal.getName()));
     }
@@ -67,4 +66,10 @@ public class CollectionController {
     public void deleteCollection(@PathVariable int collectionId, @Valid Principal principal) {
             collectionDao.deleteCollection(collectionId);
     }
+
+    @PreAuthorize("permitAll")
+    @GetMapping(path = "/collections/public/{numberOfCollections}")
+    public List<Collection> getTrendingCollections(@PathVariable int numberOfCollections) {
+            return collectionDao.getPublicCollections(numberOfCollections);
+        }
 }
