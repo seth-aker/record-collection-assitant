@@ -69,6 +69,54 @@ CREATE TABLE user_record_tag (
     CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
 );
 
+CREATE OR REPLACE FUNCTION check_max_records()
+RETURNS TRIGGER AS $$
+DECLARE
+  collection_user_id INT;
+  record_count INT;
+BEGIN
+  SELECT user_id INTO collection_user_id
+  FROM collections
+  WHERE collection_id = NEW.collection_id;
+
+  SELECT COUNT(*) INTO record_count
+  FROM collection_record
+  WHERE collection_id = NEW.collection_id;
+
+  IF (SELECT u.is_premium FROM users u WHERE u.user_id = collection_user_id) = false
+  AND record_count >= 25 THEN
+    RAISE EXCEPTION 'Free users can have at most 25 records in a collection.';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER record_limit_trigger
+BEFORE INSERT ON collection_record
+FOR EACH ROW
+EXECUTE FUNCTION  check_max_records();
+
+CREATE OR REPLACE FUNCTION check_collection_limit()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF (SELECT u.is_premium
+      FROM users u
+      WHERE u.user_id = NEW.user_id) = false
+  AND (SELECT COUNT(*)
+      FROM collections c
+      WHERE c.user_id = NEW.user_id) > 0 THEN
+    RAISE EXCEPTION 'Free users can have at most 1 collection.';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER collection_limit_trigger
+BEFORE INSERT ON collections
+FOR EACH ROW
+EXECUTE FUNCTION check_collection_limit();
+
+
 --INSERT INTO artists
 
 --CREATE TABLE genres (
