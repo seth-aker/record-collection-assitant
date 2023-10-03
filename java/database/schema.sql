@@ -68,8 +68,8 @@ CREATE TABLE user_record_tag (
     CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
 );
 
--- Theses are database triggers.  Triggers can enforce rules, and here we are enforcing the amount of records
--- one can INSERT into the collection_record table .When it is triggered it runs the check_max_records() function.
+-- These are database triggers.  Triggers can enforce rules, and here we are enforcing the amount of records
+-- one can INSERT into the collection_record table. When it is triggered it runs the check_max_records() function.
 -- The function declares an INT called record_count selects COUNT(*) from a specific collection_record id and throws it
 -- into record_count. If the user exceeds 25 records and his premium status = false, he cannot add more.
 
@@ -102,7 +102,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- the $$ indicates the method is closed, and LANGUAGE is a keyword that lets you specify a programmming language to use,
+-- the $$ indicates the method is closed, and LANGUAGE is a keyword that lets you specify a programming language to use,
 -- in this case PL/pgSQL, which is an extension of SQL that allows procedural code within your database.
 
 CREATE TRIGGER collection_limit_trigger
