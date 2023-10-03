@@ -63,23 +63,23 @@ export default new Vuex.Store({
     },
 
   },
-  actions: {
-    async setIsPremium({ commit }, isPremium) {
-      try {
-        commit('SET_IS_PREMIUM', isPremium);
-    await axios.post('/register', { isPremium });
+  // actions: {
+  //   async setIsPremium({ commit }, isPremium) {
+  //     try {
+  //       commit('SET_IS_PREMIUM', isPremium);
+  //   await axios.post('/register', { isPremium });
     
-      } catch (error) {
-        if (error.response) {
-          console.error('Response Error:', error.response.data);
-          console.error('Status Code:', error.response.status);
-        } else if (error.request) {
-          console.error('Request Error:', error.request);
-        } else {
+  //     } catch (error) {
+  //       if (error.response) {
+  //         console.error('Response Error:', error.response.data);
+  //         console.error('Status Code:', error.response.status);
+  //       } else if (error.request) {
+  //         console.error('Request Error:', error.request);
+  //       } else {
      
-          console.error('General Error:', error.message);
-        }
-      }
-  },
-  }
+  //         console.error('General Error:', error.message);
+  //       }
+  //     }
+  // },
+  // }
   });

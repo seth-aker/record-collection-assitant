@@ -20,10 +20,14 @@
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
-   
-   <section id="get-premium"><p>Sign me up for one free month of Sleeves Premium!</p>
-    <input type="checkbox" id="premiumCheckbox" v-model="user.isPremium" @change="togglePremium">
-</section>
+
+       <div id="get-premium" class="form-input-group">
+        <label>
+          <input type="checkbox" id="premiumCheckbox" v-model="user.isPremium" @change="togglePremium" />
+          Sign me up for Sleeves Premium!
+        </label>
+      </div>
+
       <div class="create-account-button">
       <button @click="showPopup = true" type="submit">Create Account</button>
 
@@ -64,7 +68,7 @@ export default {
 
  console.log('isPremium in togglePremium:', isPremium);
  
-  this.$store.dispatch('setIsPremium', isPremium);
+  // this.$store.dispatch('setIsPremium', isPremium);
     },
       // if (isPremium) {
          
