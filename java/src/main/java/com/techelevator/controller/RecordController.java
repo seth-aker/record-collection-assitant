@@ -81,7 +81,7 @@ public class RecordController {
     }
 
     @GetMapping(path = "")
-    public List<RecordDTO> getUserLibrary(@Valid Principal principal) {
+    public List<Record> getUserLibrary(@Valid Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
         List<Record> userLib = new ArrayList<>();
 
@@ -99,7 +99,7 @@ public class RecordController {
             int userId = userDao.findIdByUsername(principal.getName());
             String recordId = String.valueOf(recordDTO.getId());
             if (!recordLogic.doesRecordExist(recordId)) {
-                recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), "", ""));
+                recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(),"", ""));
             }
             if (!recordLogic.isRecordInUserLib(recordId, userId)) {
                 recordDao.addRecordToUserLib(recordId, userId);

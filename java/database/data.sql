@@ -11,11 +11,11 @@ INSERT INTO users (username,password_hash,role) VALUES ('john', '$2a$10$0KNXXA/D
 
 
 
-INSERT INTO records (record_id, record_title) VALUES ('1353040', 'Kind of Blue');
-INSERT INTO records (record_id, record_title) VALUES ('1486272', 'Nashville Skyline');
-INSERT INTO records (record_id, record_title) VALUES ('498868', 'Harvest');
-INSERT INTO records (record_id, record_title) VALUES ('372778', 'Sgt. Peppers Lonely Hearts Club Band');
-INSERT INTO records (record_id, record_title) VALUES ('168314', 'Songs In The Key Of Life');
+INSERT INTO records (record_id, record_title, record_image) VALUES ('1353040', 'Kind of Blue', 'https://i.discogs.com/HfTjPxtmfSpll3yHaogArZEhqh8fSFRXiyAzec2aQaY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkzMjI4/MTYtMTQ3ODU3NTcy/OC03OTMwLmpwZWc.jpeg');
+INSERT INTO records (record_id, record_title, record_image) VALUES ('1486272', 'Nashville Skyline', 'https://i.discogs.com/iWfKlsFIuysQE-EysfZKtV6muCjpPBCDc4_DPDdSnTs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDM3/ODAwLTE1Njg2NjQx/MTAtNjk0MS5qcGVn.jpeg');
+INSERT INTO records (record_id, record_title, record_image) VALUES ('498868', 'Harvest', 'https://i.discogs.com/y5YpQDGFxagrQmMwiI2ThRGCdXxoZxF046meBjNd3Tw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNDQy/ODctMTQwMDMyNzM1/OS02OTM1LmpwZWc.jpeg');
+INSERT INTO records (record_id, record_title, record_image) VALUES ('372778', 'Sgt. Peppers Lonely Hearts Club Band', 'https://i.discogs.com/X9qfdXjTtICVY7HOm51lZVqr1V9KdKOm5efxaXPtugQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMzQz/OTQtMTMxODg5OTU2/My5qcGVn.jpeg');
+INSERT INTO records (record_id, record_title, record_image) VALUES ('168314', 'Songs In The Key Of Life','https://i.discogs.com/3PiDzC0Fn4Ot-m02vrjsGAsIbck2fU-R2b9g_EJRHP0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwODky/NDEyLTE1MzI3NzY5/MTEtODEzMS5qcGVn.jpeg');
 
 INSERT INTO collections (user_id, collection_name, is_public) VALUES (1002, 'The Test Collection', true);
 INSERT INTO collections (user_id, collection_name, is_public) VALUES (1002, 'Collection Cool', true);
