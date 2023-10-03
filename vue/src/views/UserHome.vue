@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <SearchBox></SearchBox>
+  <search-box />
     <div class="user-heading">
               <h1>Collections</h1>
               <h1>Library</h1>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import SearchBox from "@/components/SearchBox.vue";
 import About from "@/components/About.vue";
 import CollectionList from '../components/CollectionList.vue';
 import RecordList from '../components/RecordList.vue';
@@ -33,6 +34,7 @@ import RecordService from '../services/RecordService';
 export default {
   name: 'user-home',
   components: {
+    SearchBox,
     CollectionList,
     RecordList,
     About
