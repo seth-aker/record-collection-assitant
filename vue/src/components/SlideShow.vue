@@ -1,6 +1,6 @@
 <template>
   <!-- Container for the entire slideshow -->
-  <div class="slideshow" v-if="items.length != 0">
+  <div class="slideshow" >
     <!-- Container for the green box -->
     <div class="green-box">
       <!-- Heading for the slideshow -->
@@ -34,20 +34,19 @@
 export default {
   components: {  },
   name: 'SlideShow',
-  props: ['collections'],
+  props: ['items'],
   
   data() {
     return {
-      isLoading: true,
+     
       // An array of objects representing items with images and titles
       // Current index to keep track of which images are displayed
       currentIndex: 0,
-      items: []
+     
     };
   },
   created() {
-    this.isLoading = false;
-    this.items = this.collections;
+    
   },
   computed: {
     // Calculate the maximum index based on the number of items

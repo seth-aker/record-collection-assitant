@@ -28,6 +28,7 @@ export default new Vuex.Store({
     userLibrary: [],
     userCollections: [],
     premium: false,
+    trendingCollections: []
   },
 
   mutations: {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     },
     SET_IS_PREMIUM(state, premium) {
       state.premium = premium;
+    },
+    ADD_TO_TRENDING_COLLECTIONS(state, collection) {
+      state.trendingCollections.push(collection);
     },
 
   },

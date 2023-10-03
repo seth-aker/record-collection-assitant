@@ -2,7 +2,7 @@
   <div>
     <loading-icon v-show="isLoading" />
     <search-box />
-    <SlideShow :collections="collections" v-if="!isLoading"></SlideShow>
+    <slide-show :items="this.$store.state.trendingCollections" />
     
     <TopArtistSlideshow></TopArtistSlideshow>
 
@@ -19,40 +19,43 @@
 
 <script>
 import SearchBox from "@/components/SearchBox.vue";
-import SlideShow from "@/components/SlideShow.vue";
 import PopularArtist from '../components/PopularArtist.vue';
 import TopArtistSlideshow from '../components/TopArtistSlideshow.vue';
 import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
 import LoadingIcon from '../components/LoadingIcon.vue';
+import SlideShow from '../components/SlideShow.vue';
+
 
 export default {
   components: {
     SearchBox,
-    SlideShow,
     TopArtistSlideshow,
     TopGenreSlideshow,
     PopularArtist,
     LoadingIcon,
+    SlideShow,
   },
+
   created() {
-      
       CollectionService.getTrendingCollections(20).then(response => {
-        this.collections = response.data
-        this.collections.forEach(collection => {
+        const collections = response.data;
+        collections.forEach(collection => {
           RecordService.getRecordInfo(collection.recordIds[0]).then(resp => {
             collection.imgUrl = resp.data.images[0].uri
+            this.$store.commit("ADD_TO_TRENDING_COLLECTIONS", collection)
           })
         })
-        this.isLoading = false
+        
+        this.isLoading = false;
       })
       //call topArtists
   },
   data() {
     return {
       isLoading: true,
-      collections: [],
+      
       
     }
   }
