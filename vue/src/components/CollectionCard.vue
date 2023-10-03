@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-            collection:"",
+            collection:{},
             recordIds:[],
             recordDTO: "",
             recordId:"",
@@ -35,13 +35,14 @@ export default {
         CollectionService.getCollection(this.collectionId)
             .then(response => {
                 this.collection = response.data;
-            });
-        this.recordIds = this.collection.recordIds;
+                this.recordIds = this.collection.recordIds;
         this.recordId = this.recordIds[0];
         RecordService.getRecordInfo(this.recordId)
             .then(response => {this.recordDTO = response.data;
             });
         this.userId = this.collection.userId;
+            });
+
         }
 }
 </script>

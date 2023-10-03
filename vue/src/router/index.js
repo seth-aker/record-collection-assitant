@@ -60,7 +60,7 @@ const router = new Router({
     },
     {
       path: '/:username',
-      name: 'userhome',
+      name: 'user-home',
       component: UserHome,
       meta: {
         requiresAuth: false
