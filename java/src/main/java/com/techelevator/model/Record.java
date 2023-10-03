@@ -6,7 +6,8 @@ public class Record {
 
     private String id;
     private String title;
-    private String image;
+    private String thumb;
+    private String artist;
     private String userNote;
     private String condition;
 
@@ -16,7 +17,7 @@ public class Record {
     public Record(String id, String title, String image, String userNote, String condition) {
         this.id = id;
         this.title = title;
-        this.image = image;
+        this.thumb = image;
         this.userNote = userNote;
         this.condition = condition;
     }
@@ -37,12 +38,20 @@ public class Record {
         this.title = title;
     }
 
-    public String getImage() {
-        return image;
+    public String getThumb() {
+        return thumb;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public String getUserNote() {

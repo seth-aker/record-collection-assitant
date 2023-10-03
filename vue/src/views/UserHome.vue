@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading-icon v-show="isLoading"/>
-    <SearchBox></SearchBox>
+    <search-box></search-box>
     <div class="user-heading">
               <h1>Collections</h1>
               <h1>Library</h1>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import SearchBox from "@/components/SearchBox.vue";
 import About from "@/components/About.vue";
 import CollectionList from '../components/CollectionList.vue';
 import RecordList from '../components/RecordList.vue';
@@ -34,6 +35,7 @@ import LoadingIcon from '../components/LoadingIcon.vue';
 export default {
   name: 'user-home',
   components: {
+    SearchBox,
     CollectionList,
     RecordList,
     About,

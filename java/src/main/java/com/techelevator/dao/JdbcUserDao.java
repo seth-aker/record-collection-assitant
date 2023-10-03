@@ -108,7 +108,7 @@ public class JdbcUserDao implements UserDao {
 
     @Override
     public boolean create(String username, String password, String role, boolean isPremium) {
-        String insertUserSql = "insert into users (username,password_hash,role, is_premium) values (?,?,?,?)";
+        String insertUserSql = "insert into users (username,password_hash, role, is_premium) values (?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
 
