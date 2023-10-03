@@ -30,7 +30,7 @@ public class JdbcRecordDao implements RecordDao {
 
     public Record getRecordById(String recordId) {
         Record record = null;
-        String sql = "SELECT record_title, record_id, record_image " +
+        String sql = "SELECT record_title, record_id, record_image, record_artist " +
                     "FROM records " +
                     "WHERE record_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
@@ -48,7 +48,7 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public List<Record> getUserLibrary(int userId) {
-        String sql = "SELECT r.record_id, r.record_title, r.record_image, ur.user_note, ur.record_condition " +
+        String sql = "SELECT r.record_id, r.record_title, r.record_image, r.record_artist, ur.user_note, ur.record_condition " +
                     "FROM records as r " +
                     "JOIN user_record AS ur ON r.record_id = ur.record_id " +
                     "WHERE ur.user_id = ?";
@@ -237,6 +237,7 @@ public class JdbcRecordDao implements RecordDao {
         record.setId(rowSet.getString("record_id"));
         record.setTitle(rowSet.getString("record_title"));
         record.setThumb(rowSet.getString("record_image"));
+        record.setArtist(rowSet.getString("record_artist"));
 //        if(rowSet.getString("record_condition") != null) {
 //            record.setCondition(rowSet.getString("record_condition"));
 //        }
