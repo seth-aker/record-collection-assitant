@@ -10,8 +10,8 @@ export default {
         return axios.get('/collections/public')
     },
 
-    getUserCollections(userName) {
-        return axios.get(`/collections/users?name=${userName}`)
+    getUserCollections() {
+        return axios.get(`/collections/myCollections`)
     },
 
     

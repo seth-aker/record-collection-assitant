@@ -2,8 +2,12 @@
   <div>
 
     <SearchBox></SearchBox>
+    <div class="user-heading">
+              <h1>Collections</h1>
+              <h1>Library</h1>
+    </div>
       <div class="user-view">
-        <collection-list :collections="$store.state.userCollections"/>
+        <collection-list :collections="this.$store.state.userCollections"/>
         <record-list :records="$store.state.userLibrary" />
       </div>
     <About></About>
@@ -27,7 +31,7 @@ import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
 
 export default {
-  name: 'userhome',
+  name: 'user-home',
   components: {
     CollectionList,
     RecordList,
@@ -35,7 +39,6 @@ export default {
   },
   data() {
         return {
-            username: ""
         }
     },
     computed: {
@@ -45,12 +48,11 @@ export default {
         
     },
     created() {
-      this.username = this.$store.state.user;
-      CollectionService.getUserCollections(this.username)
+      CollectionService.getUserCollections()
         .then(response => {
           this.$store.commit('SET_USER_COLLECTIONS', response.data);
           });
-      RecordService.getUserLibrary
+      RecordService.getUserLibrary()
         .then(response => {
           this.$store.commit('SET_USER_LIBRARY', response.data);
         });
@@ -59,5 +61,14 @@ export default {
 </script>
 
 <style scoped>
+.user-view {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user-heading {
+  display: flex;
+  justify-content: space-around;
+}
 
 </style>
