@@ -1,17 +1,12 @@
-
 <template>
   <div id="app">
-
-
-
-      <nav-bar-vue />
-      
-
+    <nav-bar-vue />
     <router-view />
     <footer-vue />
-
+    <div class="background">
+    
+    </div>
   </div>
-  
 </template>
 
 <script>
@@ -34,12 +29,21 @@ body {
 }
 
 #app {
-  background-image: url('./assets/pinkYellowFaded.jpg'); 
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
+  position: relative;
 }
 
-
-
+.background {
+  background-image: url('./assets/pinkYellow.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: blur(3px);
+  
+}
 </style>
