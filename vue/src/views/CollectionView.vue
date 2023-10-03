@@ -1,7 +1,7 @@
 <template>
   <div class="record-collection">
-    <div class="container" v-for="recordId in recordIds" :key="recordId" >
-      <record-card :recordId="recordId"/>
+    <div class="container" v-for="record in records" :key="record.id" >
+      <record-card :recordInfo="record"/>
     </div>
   </div>
 </template>
@@ -10,6 +10,7 @@
 import collectionService from '../services/CollectionService.js'
 
 import RecordCard from '../components/RecordCard.vue'
+import RecordService from '../services/RecordService.js'
 
 export default {
   components: { RecordCard },
@@ -18,7 +19,8 @@ export default {
     return {
       collectionDTO: [],
       isLoading: true,
-      recordIds: []
+      recordIds: [],
+      records: []
     }
   },
   computed: {
@@ -31,6 +33,12 @@ export default {
         this.collectionDTO = response.data
         this.isLoading = false;
         this.recordIds = this.collectionDTO.recordIds;
+        this.recordIds.forEach(recordId => {
+          RecordService.getRecordInfo(recordId).then(resp => {
+            resp.data.thumb = resp.data.images[0].uri;
+            this.records.push(resp.data)
+          })
+        })
       })
 
   }

@@ -1,18 +1,9 @@
 <template>
-  <div>
-        <div v-show="this.$store.state.userCollections.length != 0 && !isLoading">
-            <div id="collection-row" 
-                v-for="curCollection in collections"
-                :key="curCollection.id">
-                <div id="collection-container">
-                    <collection-card :collectionId="curCollection.id"/>
-                </div>
-            </div>
-        </div>
-        <div class="no-items-msg" v-show="this.$store.state.userCollections.length === 0 && !isLoading">
-            No collections found.
-        </div>
-    </div> 
+    <div class="list-container">
+        <collection-card v-for="curCollection in collections"
+        :key="curCollection.id"
+        :collectionId="curCollection.id"/>
+    </div>
 </template>
 
 <script>
@@ -28,8 +19,7 @@ export default {
     props: ['collections'],
     data() {
         return {
-            isLoading: false,
-            
+                        
             
         }
     },
@@ -48,5 +38,12 @@ export default {
 </script>
 
 <style>
+div.collection-card {
+    width: 49%;
+}
+
+.list-container {
+    display: flex;
+}
 
 </style>

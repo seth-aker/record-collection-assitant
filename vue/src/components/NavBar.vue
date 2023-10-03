@@ -11,7 +11,10 @@
             <router-link :to="{ name: 'collection-view', params: { collectionId: 'public' } }" class="gradient-text">PUBLIC COLLECTIONS</router-link>
           </li>
           <li class="option" id="my-collections">
+
             <router-link :to="{ name: 'collection-view', params: { collectionId: 'my-collections' } }" class="gradient-text">MY COLLECTIONS</router-link>
+
+
           </li>
         </ul>
       </div>

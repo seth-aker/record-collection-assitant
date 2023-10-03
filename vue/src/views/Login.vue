@@ -72,6 +72,13 @@ export default {
 <style scoped>
 @import url('https://fonts.cdnfonts.com/css/keep-on-truckin-2');
 
+form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 .form-input-group{
   display: flex;

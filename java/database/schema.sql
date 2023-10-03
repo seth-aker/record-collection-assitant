@@ -38,7 +38,6 @@ CREATE TABLE records (
 	record_id varChar(30) NOT NULL, --Not serial because it will be created by the API
 	record_title varChar(50) NOT NULL,
 	record_image varChar(200) NOT NULL,
-	record_artist varChar(50) NOT NULL,
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)
 );
 
@@ -68,6 +67,68 @@ CREATE TABLE user_record_tag (
     CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
     CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
 );
+
+-- These are database triggers.  Triggers can enforce rules, and here we are enforcing the amount of records
+-- one can INSERT into the collection_record table. When it is triggered it runs the check_max_records() function.
+-- The function declares an INT called record_count selects COUNT(*) from a specific collection_record id and throws it
+-- into record_count. If the user exceeds 25 records and his premium status = false, he cannot add more.
+
+CREATE TRIGGER record_limit_trigger
+BEFORE INSERT ON collection_record
+FOR EACH ROW
+EXECUTE FUNCTION  check_max_records();
+
+-- the $$ are delimiters.  They enclose and define the body of the function
+
+CREATE OR REPLACE FUNCTION check_max_records()
+RETURNS TRIGGER AS $$
+DECLARE
+  record_count INT;
+BEGIN
+  SELECT COUNT(*) INTO record_count
+  FROM collection_record cr
+  JOIN collections c ON cr.collection_id = c.collection_id
+  JOIN users u ON c.user_id = u.user_id
+  WHERE cr.collection_id = NEW.collection_id;
+
+  IF (SELECT u.is_premium
+      FROM users u
+      JOIN collections c ON c.user_id = u.user_id
+      WHERE c.collection_id = NEW.collection_id) = false
+      AND record_count >= 25 THEN
+    RAISE EXCEPTION 'Free users can have at most 25 records in a collection.';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- the $$ indicates the method is closed, and LANGUAGE is a keyword that lets you specify a programming language to use,
+-- in this case PL/pgSQL, which is an extension of SQL that allows procedural code within your database.
+
+CREATE TRIGGER collection_limit_trigger
+BEFORE INSERT ON collections
+FOR EACH ROW
+EXECUTE FUNCTION check_collection_limit();
+
+
+
+CREATE OR REPLACE FUNCTION check_collection_limit()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF (SELECT u.is_premium
+      FROM users u
+      WHERE u.user_id = NEW.user_id) = false
+  AND (SELECT COUNT(*)
+      FROM collections c
+      WHERE c.user_id = NEW.user_id) > 0 THEN
+    RAISE EXCEPTION 'Free users can have at most 1 collection.';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
 
 --INSERT INTO artists
 

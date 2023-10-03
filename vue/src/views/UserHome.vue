@@ -2,14 +2,20 @@
   <div>
     <loading-icon v-show="isLoading"/>
     <search-box></search-box>
-    <div class="user-heading">
-              <h1>Collections</h1>
-              <h1>Library</h1>
-    </div>
+    <div class="user-dashboard" v-show="!isLoading">
+      <div class="user-heading">
+        <h1>Collections</h1>
+      </div>
+      <div class="user-heading">
+        <h1>Library</h1>
+      </div>
       <div class="user-view">
         <collection-list :collections="this.$store.state.userCollections"/>
+      </div>
+      <div>
         <record-list :records="$store.state.userLibrary" />
       </div>
+    </div>
     <About></About>
     <div class="custom-content">
       
@@ -43,7 +49,7 @@ export default {
   },
   data() {
         return {
-          isLoading: true
+          isLoading: false
         }
     },
     computed: {
@@ -64,19 +70,30 @@ export default {
           this.$store.commit('SET_USER_LIBRARY', response.data);
           this.isLoading = false;
         });
+      this.isLoading = false;
     }
 };
 </script>
 
 <style scoped>
-.user-view {
+
+div.record-list {
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .user-heading {
   display: flex;
   justify-content: space-around;
+  font-family: "KEEPT___", Arial, sans-serif;
+  color: #eff13f;
 }
+
+.user-dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
 
 </style>

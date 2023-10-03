@@ -7,8 +7,8 @@
         <div class="record-artist">{{ recordArtist }}</div>
       </div>
       <button id="add-record-btn" @click="addToCollection" >
-        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
-        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
+        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
+        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
         </button>
     </div>
   </div>
@@ -114,12 +114,12 @@ export default {
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: .9rem;
   
 }
 
 .record-artist {
-  font-size: 12px;
+  font-size: .8rem;
   font-style: italic;
 }
 </style>
