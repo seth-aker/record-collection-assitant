@@ -1,7 +1,8 @@
 <template>
   <div>
-     <search-box />
-    <SlideShow :items="collections" ></SlideShow>
+    <loading-icon v-show="isLoading" />
+    <search-box />
+    <SlideShow :collections="collections" v-if="!isLoading"></SlideShow>
     
     <TopArtistSlideshow></TopArtistSlideshow>
 
@@ -24,6 +25,7 @@ import TopArtistSlideshow from '../components/TopArtistSlideshow.vue';
 import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
+import LoadingIcon from '../components/LoadingIcon.vue';
 
 export default {
   components: {
@@ -32,8 +34,10 @@ export default {
     TopArtistSlideshow,
     TopGenreSlideshow,
     PopularArtist,
+    LoadingIcon,
   },
   created() {
+      
       CollectionService.getTrendingCollections(20).then(response => {
         this.collections = response.data
         this.collections.forEach(collection => {
@@ -41,12 +45,15 @@ export default {
             collection.imgUrl = resp.data.images[0].uri
           })
         })
+        this.isLoading = false
       })
       //call topArtists
   },
   data() {
     return {
-      collections: []
+      isLoading: true,
+      collections: [],
+      
     }
   }
 };

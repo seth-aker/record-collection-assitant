@@ -1,14 +1,14 @@
 <template>
   <div class="record-card">
-    <album-art :albumImageUrl="recordInfo.images[0].uri" :albumName="recordInfo.title" :albumId="recordInfo.id" class="album-art"/>
+    <album-art :albumImageUrl="recordInfo.thumb" :albumName="recordInfo.title" :albumId="recordInfo.id" class="album-art"/>
     <div class="record-info">
       <div class="record-text">
         <router-link class="record-title" :to="{name: 'record-page', params: {recordId : recordInfo.id}}">{{ recordTitle }}</router-link>
         <div class="record-artist">{{ recordArtist }}</div>
       </div>
       <button id="add-record-btn" @click="addToCollection" >
-        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
-        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
+        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
+        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
         </button>
     </div>
   </div>

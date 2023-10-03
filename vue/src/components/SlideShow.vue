@@ -1,6 +1,6 @@
 <template>
   <!-- Container for the entire slideshow -->
-  <div class="slideshow">
+  <div class="slideshow" v-if="items.length != 0">
     <!-- Container for the green box -->
     <div class="green-box">
       <!-- Heading for the slideshow -->
@@ -13,13 +13,13 @@
       <!-- Container for the slides -->
       <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
         <!-- Iterate through items to display each image and title -->
-        <div class="slide" v-for="(item) in items" :key="item.id">
+        <div class="slide" v-for="(item, index) in items" :key="index">
           <!-- Display the image with its source and alt text -->
-          <album-art :albumImageUrl="item.imgUrl" :albumName="item.title" :albumId="item.id"/>
+           <img :src="item.imgUrl" :alt="item.name" class="image"/>
           <!-- Container for the album title text -->
           <div class="album-title">
             <!-- Display the album title text -->
-            <div class="album-title-text">{{ item.title }}</div>
+            <div class="album-title-text">{{ item.name }}</div>
           </div>
         </div>
       </div>
@@ -31,56 +31,23 @@
 
 <script>
 
-import AlbumArt from './AlbumArt.vue';
-
 export default {
-  components: { AlbumArt },
+  components: {  },
   name: 'SlideShow',
-  props: ['items'],
+  props: ['collections'],
   
   data() {
     return {
+      isLoading: true,
       // An array of objects representing items with images and titles
-      hitems: [
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-        { image: '/theWho.jpg', title: '' },
-        { image: '/neilYoung.jpg', title: '' },
-        { image: '/sgtPepper.jpg', title: '' },
-        { image: '/foals.jpg', title: '' },
-        { image: '/funk.jpg', title: '' },
-        { image: '/steveMiller.jpg', title: '' },
-        { image: '/rem.jpg', title: '' },
-      ],
       // Current index to keep track of which images are displayed
       currentIndex: 0,
+      items: []
     };
+  },
+  created() {
+    this.isLoading = false;
+    this.items = this.collections;
   },
   computed: {
     // Calculate the maximum index based on the number of items
@@ -107,6 +74,7 @@ export default {
         this.currentIndex = 0;
       }
     },
+    
   },
 };
 </script>
@@ -194,6 +162,8 @@ h2 {
   color: #eff13f;
   margin: 0; 
 }
+
+
 
 
 </style>

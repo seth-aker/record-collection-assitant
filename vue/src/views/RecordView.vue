@@ -42,7 +42,8 @@ export default {
     data() {
       return {
         recordDTO : [],
-        isLoading: true
+        isLoading: true,
+        recordAdded: false
       }
     },
     created() {
