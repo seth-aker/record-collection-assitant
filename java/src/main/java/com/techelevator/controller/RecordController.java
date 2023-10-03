@@ -91,7 +91,10 @@ public class RecordController {
             throw new DaoException("User library not found.", e);
         }
         return userLib;
+
     }
+ 
+    
 
         @ResponseStatus(HttpStatus.CREATED)
         @RequestMapping(path = "", method = RequestMethod.POST)

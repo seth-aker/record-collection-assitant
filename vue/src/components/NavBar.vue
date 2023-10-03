@@ -4,8 +4,17 @@
       <div id="home" class="rounded-button">
           <router-link :to="{name: 'home'}">HOME </router-link>
       </div>
-      <div id="collections" class="rounded-button">
-        <router-link :to="{name: 'collections'}">COLLECTIONS</router-link>
+      <div id="collections" class="rounded-button dropdown">
+        <p>COLLECTIONS</p>
+        <ul class="dropdown-options">
+          <li class="option" id="public-collections">
+            <router-link :to="{name: 'collection-view', params: { collectionId: 'public'}}">PUBLIC COLLECTIONS</router-link>
+          </li>
+          <li class="option" id="my-collections">
+            <router-link :to="{name: 'collection-view', params: {collectionId: 'my-collections'}}">MY COLLECTIONS</router-link>
+          </li>
+        </ul>
+        
       </div>
       
       <div id="contact" class="rounded-button">
@@ -17,13 +26,16 @@
 
     <section class="nav-bar-buttons nav-bar-right">
 
-      <div id="login" v-if="!loggedIn" class="rounded-button">
+      <div id="login" v-show="!loggedIn" class="rounded-button">
         <router-link :to="{name: 'login'}">LOGIN</router-link>
       </div>
-      <div id="registry" v-if="!loggedIn" class="rounded-button">
+      <div id="registry" v-show="!loggedIn" class="rounded-button">
           <router-link :to="{name: 'register'}">REGISTER</router-link>
       </div>
-      <button v-else @click="myProfile">My Profile</button>
+      <div v-show="loggedIn" class="rounded-button">
+        <a @click.prevent="logout">LOGOUT</a>
+      </div>
+      <font-awesome-icon icon="fa-solid fa-user-circle" class="user-icon rounded-button" v-show="loggedIn" />
   </section>
  </nav>
 
@@ -37,21 +49,27 @@ export default {
   name: "NavBar",
 
   computed: {
+    loggedIn() {
+       const user = this.$store.state.user;
+       return user.username != null;
+    },
+    
     isPremium: {
       get() {
         return this.$store.state.isPremium;
       },
       set(newValue) {
-      
         this.$store.dispatch('setIsPremium', newValue);
       },
     },
   },
-  data(){
-    return{
-      loggedIn: false
+  methods: {
+    logout() {
+      this.$store.commit('LOGOUT');
+      this.$router.push({name: 'home'})
     }
-  },
+  }
+  
 
 }
 
@@ -79,7 +97,6 @@ nav {
    display: flex;
  }
 .rounded-button {
-  display: flex;
   border-radius: 20px; /* Rounded corners */
   background-color: #40c5a4; /* Background color */
   padding: 15px; /* Padding for a bigger button */
@@ -96,6 +113,7 @@ nav {
 .rounded-button:hover {
   background-color: #1e8c72; /* Darker color on hover */
 }
+
 
 h1 {
     font-size: 130px;
@@ -115,6 +133,68 @@ h1 {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.dropdown {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    transition: 250ms border-radius;
+}
+
+
+
+.dropdown-options {
+  visibility: hidden;
+  opacity: 0;
+  float: left;
+  width: 135%;
+  left: 0;
+  top: 0px;
+  transition: 250ms ease-in-out;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  list-style: none;
+  background: #40c5a4;
+  padding: 0;
+  border-radius: 0 20px 20px 20px;
+}
+
+.dropdown:hover .dropdown-options {
+  opacity: 1;
+  visibility: visible;
+  top: 29px
+}
+
+.dropdown:hover{
+  border-radius: 20px 20px 0 0;
+}
+
+.option {
+ padding: 10px;
+}
+
+#public-collections:hover {
+  background-color: #1e8c72;
+  border-radius: 0px 20px 0 0;
+}
+
+#my-collections:hover {
+  background-color: #1e8c72;
+  border-radius: 0 0 20px 20px ;
+}
+
+p{
+  padding: 0;
+  margin: 0;
+  color: #eff13f;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.user-icon {
+  color:#eff13f;
+  height: 25px;
+  padding: 10px
+}
 
 @font-face {
   font-family: 'KEEPT___'; 
