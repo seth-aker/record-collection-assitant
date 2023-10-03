@@ -16,6 +16,10 @@ export default {
 
     updateRecordInfo(record) {
         return axios.put('/records', record);
+    },
+
+    getUserLibrary() {
+        return axios.get(`/records`)
     }
 
 }

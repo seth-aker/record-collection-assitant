@@ -15,11 +15,11 @@ import java.util.List;
 public class JdbcRecordDaoTests extends BaseDaoTests {
 
 
-    private static final Record DUMMY_RECORD_1 = new Record("1353040", "Kind of Blue", "I like this", "Good");
-    private static final Record DUMMY_RECORD_2 = new Record("1486272", "Nashville Skyline", "I like this", "Good");
-    private static final Record DUMMY_RECORD_3 = new Record("498868", "Harvest", "I like this", "Good");
-    private static final Record DUMMY_RECORD_4 = new Record("372778", "Sgt. Peppers Lonely Hearts Club Band", "I like this", "Good");
-    private static final Record DUMMY_RECORD_5 = new Record("168314", "Songs In The Key Of Life", "I like this", "Good");
+    private static final Record DUMMY_RECORD_1 = new Record("1353040", "Kind of Blue", "https://i.discogs.com/HfTjPxtmfSpll3yHaogArZEhqh8fSFRXiyAzec2aQaY/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkzMjI4/MTYtMTQ3ODU3NTcy/OC03OTMwLmpwZWc.jpeg", "I like this", "Good");
+    private static final Record DUMMY_RECORD_2 = new Record("1486272", "Nashville Skyline", "https://i.discogs.com/iWfKlsFIuysQE-EysfZKtV6muCjpPBCDc4_DPDdSnTs/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0MDM3/ODAwLTE1Njg2NjQx/MTAtNjk0MS5qcGVn.jpeg","I like this", "Good");
+    private static final Record DUMMY_RECORD_3 = new Record("498868", "Harvest", "https://i.discogs.com/y5YpQDGFxagrQmMwiI2ThRGCdXxoZxF046meBjNd3Tw/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwNDQy/ODctMTQwMDMyNzM1/OS02OTM1LmpwZWc.jpeg","I like this", "Good");
+    private static final Record DUMMY_RECORD_4 = new Record("372778", "Sgt. Peppers Lonely Hearts Club Band", "https://i.discogs.com/X9qfdXjTtICVY7HOm51lZVqr1V9KdKOm5efxaXPtugQ/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEzMzQz/OTQtMTMxODg5OTU2/My5qcGVn.jpeg","I like this", "Good");
+    private static final Record DUMMY_RECORD_5 = new Record("168314", "Songs In The Key Of Life", "https://i.discogs.com/3PiDzC0Fn4Ot-m02vrjsGAsIbck2fU-R2b9g_EJRHP0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTEwODky/NDEyLTE1MzI3NzY5/MTEtODEzMS5qcGVn.jpeg","I like this", "Good");
 
     private static final Collection DUMMY_COLLECTION_1 = new Collection(101, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868"));
     private static final Collection DUMMY_COLLECTION_2 = new Collection(104, 1001, "USER", false, Arrays.asList("1353040", "1486272", "498868"));
@@ -42,6 +42,7 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
         testRecord = new Record(
                 "12345",
                 "Jettison Mind Hatch",
+                "https://i.discogs.com/G8CJevOw4K_ubszlRz-LUKh8MoOUdNIacWodINzwWC0/rs:fit/g:sm/q:40/h:150/w:150/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTQy/Mjc1LTE1NzcyMDg1/MjQtNjYyMS5qcGVn.jpeg",
                 "This music sounds like an upset stomach",
                 "Far Out");
     }
@@ -82,10 +83,10 @@ public class JdbcRecordDaoTests extends BaseDaoTests {
 
     @Test
     public void addRecordToUserLib_adds_record(){
-     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1001, DUMMY_RECORD_5.getUserNote());
+     boolean result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1001);
         Assert.assertTrue(result);
 
-        result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1003, DUMMY_RECORD_5.getUserNote());
+        result = sut.addRecordToUserLib(DUMMY_RECORD_5.getId(), 1003);
         Assert.assertTrue(result);
 
     }

@@ -34,7 +34,7 @@ body {
 }
 
 #app {
-  background-image: url('../public/pinkYellow.jpg'); 
+  background-image: url('./assets/pinkYellowFaded.jpg'); 
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 

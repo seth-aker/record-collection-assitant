@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -79,19 +80,35 @@ public class RecordController {
 
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/records", method = RequestMethod.POST)
-    public void addRecordToUserLib(@RequestBody RecordDTO recordDTO, Principal principal) {
+    @GetMapping(path = "")
+    public List<Record> getUserLibrary(@Valid Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
-        String recordId = String.valueOf(recordDTO.getId());
-        if(!recordLogic.doesRecordExist(recordId)){
-            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), "", ""));
+        List<Record> userLib = new ArrayList<>();
+
+        try {
+            userLib = recordDao.getUserLibrary(userId);
+        } catch (DaoException e) {
+            throw new DaoException("User library not found.", e);
         }
-        if(!recordLogic.isRecordInUserLib(recordId, userId)){
-            recordDao.addRecordToUserLib(recordId, userId, recordDTO.getUserNotes());
+        return userLib;
+
+    }
+ 
+    
+
+        @ResponseStatus(HttpStatus.CREATED)
+        @RequestMapping(path = "", method = RequestMethod.POST)
+        public void addRecordToUserLib (@RequestBody RecordDTO recordDTO, Principal principal){
+            int userId = userDao.findIdByUsername(principal.getName());
+            String recordId = String.valueOf(recordDTO.getId());
+            if (!recordLogic.doesRecordExist(recordId)) {
+                recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(),"", ""));
+            }
+            if (!recordLogic.isRecordInUserLib(recordId, userId)) {
+                recordDao.addRecordToUserLib(recordId, userId);
+            }
         }
     }
-
 
     // This will add a single tag into the tags array vs the whole array @once
     //    (We can fill it with tags but should we do it one at a time or all at once?
@@ -112,7 +129,6 @@ public class RecordController {
 //
 //    }
 
-}
 
 
 //    @ResponseStatus(HttpStatus.CREATED)

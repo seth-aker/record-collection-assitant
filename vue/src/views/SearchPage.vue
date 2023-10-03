@@ -1,8 +1,8 @@
 <template>
-  <div class="search-page" @request-search="search">
+  <div class="search-page" >
     <loading-icon v-show="isLoading" />
     <search-box @requestSearch='search'/>
-    <search-filters />
+    <search-filters @requestSearch='search' />
     <collection-list />
     <div class="record-list" >
       <record-list :records="$store.state.sr.searchResultsRecords" />

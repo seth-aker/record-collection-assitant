@@ -24,7 +24,6 @@ import PopularArtist from '../components/PopularArtist.vue';
 import TopArtistSlideshow from '../components/TopArtistSlideshow.vue';
 import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 
-
 export default {
   components: {
     SearchBox,
@@ -32,8 +31,7 @@ export default {
     TopArtistSlideshow,
     TopGenreSlideshow,
     PopularArtist,
-    
-  },
+  }
 };
 </script>
 

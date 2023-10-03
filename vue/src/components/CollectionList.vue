@@ -1,16 +1,16 @@
 <template>
   <div>
         
-        <div v-show="userCollections.length != 0 && !showSpinner">
+        <div v-show="this.$store.state.userCollections.length != 0 && !isLoading">
             <div id="collection-row" 
-                v-for="curCollection in userCollections"
+                v-for="curCollection in collections"
                 :key="curCollection.id">
                 <div id="collection-container">
                     <collection-card :collectionId="curCollection.id"/>
                 </div>
             </div>
         </div>
-        <div class="no-items-msg" v-show="userCollections.length === 0 && !showSpinner">
+        <div class="no-items-msg" v-show="this.$store.state.userCollections.length === 0 && !isLoading">
             No collections found.
         </div>
     </div> 
@@ -24,16 +24,16 @@ export default {
     components: {
         CollectionCard
     },
+    props: ['collections'],
     data() {
         return {
-            showSpinner: true,
+            isLoading: false,
+            
             
         }
     },
     computed: {
-        userCollections() {
-            return this.$store.state.userCollections;
-        }
+
     },
     methods: {
         

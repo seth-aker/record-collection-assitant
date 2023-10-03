@@ -6,15 +6,17 @@ public class Record {
 
     private String id;
     private String title;
+    private String thumb;
     private String userNote;
     private String condition;
 
 
     public Record(){}
 
-    public Record(String id, String title, String userNote, String condition) {
+    public Record(String id, String title, String image, String userNote, String condition) {
         this.id = id;
         this.title = title;
+        this.thumb = image;
         this.userNote = userNote;
         this.condition = condition;
     }
@@ -35,9 +37,18 @@ public class Record {
         this.title = title;
     }
 
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
     public String getUserNote() {
         return userNote;
     }
+
     public void setUserNote(String userNote) {
         this.userNote = userNote;
     }
