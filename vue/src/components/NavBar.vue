@@ -11,7 +11,7 @@
             <router-link :to="{name: 'collection-view', params: { collectionId: 'public'}}">PUBLIC COLLECTIONS</router-link>
           </li>
           <li class="option" id="my-collections">
-            <router-link :to="{name: 'collection-view', params: {collectionId: 'my-collections'}}">MY COLLECTIONS</router-link>
+            <router-link :to="{name: 'user-home', params: {username: this.$store.state.user.username}}">MY COLLECTIONS</router-link>
           </li>
         </ul>
         

@@ -105,6 +105,18 @@ export default {
 <style scoped>
 @import url('https://fonts.cdnfonts.com/css/keep-on-truckin-2');
 
+form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div#get-premium.form-input-group{
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .form-input-group {
   display: flex;
   justify-content: space-between;
@@ -140,12 +152,6 @@ margin-top: 200px;
 
 }
 
-#form{
-  display: flex;
-  flex-direction:row;
-  
-}
-
 #form-input{
   justify-content: center;
   display: flex; flex-flow: column nowrap;
@@ -172,7 +178,7 @@ div.create-account-button{
 section{
   display: inline-block;
 }
-#premiumCheckbox{
+.premiumCheckbox{
   display: flex;
 }
 

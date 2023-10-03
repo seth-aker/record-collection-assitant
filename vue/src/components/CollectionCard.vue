@@ -1,6 +1,6 @@
 <template>
-  <div class="collection-card" v-show="this.$store.state.userCollections.length != 0 && !isLoading">
-    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
+  <div class="collection-card">
+    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
     <div class="collection-info">
         <div class="collection-name">
             <div class="collection-name">{{ collection.name }}</div>
@@ -48,7 +48,9 @@ export default {
                 this.recordIds = this.collection.recordIds;
                 this.recordId = this.recordIds[0];
         RecordService.getRecordInfo(this.recordId)
-            .then(response => {this.recordDTO = response.data;
+            .then(response => {
+                this.recordDTO = response.data;
+                this.recordDTO.thumb = response.data.images[0].uri
             });
             });
         this.isLoading = false;
