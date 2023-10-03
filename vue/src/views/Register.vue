@@ -65,14 +65,14 @@ export default {
  console.log('isPremium in togglePremium:', isPremium);
  
   this.$store.dispatch('setIsPremium', isPremium);
-      // Use the 'isPremium' value as needed
-      if (isPremium) {
+    },
+      // if (isPremium) {
          
-         // You can perform actions here
-      } else {
+       
+      // } else {
         
-         // You can perform actions here
-      }
+         
+      // }
    },
 
     register() {
