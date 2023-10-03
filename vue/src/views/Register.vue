@@ -23,8 +23,9 @@
 
        <div id="get-premium" class="form-input-group">
         <label>
-          <input type="checkbox" id="premiumCheckbox" v-model="user.isPremium" @change="togglePremium" />
-          Sign me up for Sleeves Premium!
+           
+         Sign me up for Sleeves Premium!<input type="checkbox" id="premiumCheckbox" v-model="user.premium" @change="togglePremium" />
+         
         </label>
       </div>
 
@@ -56,7 +57,7 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
-        isPremium: '',
+        premium: '',
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
@@ -64,26 +65,16 @@ export default {
   },
   methods: {
     togglePremium() {
-     const isPremium = this.user.isPremium;
-
- console.log('isPremium in togglePremium:', isPremium);
- 
-  // this.$store.dispatch('setIsPremium', isPremium);
+     const premium = this.user.premium;
+  this.$store.dispatch('setPremium', premium);
     },
-      // if (isPremium) {
-         
-       
-      // } else {
-        
-         
-      // }
-
+    
     register() {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
-         console.log('isPremium in register:', this.user.isPremium); 
+         console.log('premium in register:', this.user.premium); 
         authService
           .register(this.user)
           .then((response) => {
@@ -195,7 +186,7 @@ p{
 button{
   display: inline-flex;
 }
-premium{
+.get-premium{
   display: flex;
 align-items: center;
 }
