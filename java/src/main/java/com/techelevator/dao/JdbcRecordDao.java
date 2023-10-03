@@ -236,7 +236,7 @@ public class JdbcRecordDao implements RecordDao {
         Record record = new Record();
         record.setId(rowSet.getString("record_id"));
         record.setTitle(rowSet.getString("record_title"));
-        record.setImage(rowSet.getString("record_image"));
+        record.setThumb(rowSet.getString("record_image"));
 //        if(rowSet.getString("record_condition") != null) {
 //            record.setCondition(rowSet.getString("record_condition"));
 //        }
