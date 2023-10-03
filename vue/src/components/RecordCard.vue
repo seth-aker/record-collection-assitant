@@ -1,6 +1,6 @@
 <template>
   <div class="record-card">
-    <album-art :albumImageUrl="recordInfo.thumb" :albumName="recordInfo.title" class="album-art"/>
+    <album-art :albumImageUrl="recordInfo.images[0].uri" :albumName="recordInfo.title" :albumId="recordInfo.id" class="album-art"/>
     <div class="record-info">
       <div class="record-text">
         <router-link class="record-title" :to="{name: 'record-page', params: {recordId : recordInfo.id}}">{{ recordTitle }}</router-link>
@@ -43,14 +43,24 @@ export default {
     }
   },
   computed: {
+
     recordTitle() {
       const artistTitle = this.recordInfo.title.split(' - ');
+      if (artistTitle[1] === undefined) {
+        return this.recordInfo.title;
+      } else {
       return artistTitle[1];
+      }
     },
     recordArtist() {
        const artistTitle = this.recordInfo.title.split(' - ');
+       if (artistTitle[1] === undefined) {
+         return this.recordInfo.artist;
+       } else {
       return artistTitle[0];
+       }
     }
+    
   }
 
 

@@ -13,9 +13,9 @@
       <!-- Container for the slides -->
       <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
         <!-- Iterate through items to display each image and title -->
-        <div class="slide" v-for="(item, index) in items" :key="index">
+        <div class="slide" v-for="(item) in items" :key="item.id">
           <!-- Display the image with its source and alt text -->
-          <img :src="item.image" :alt="item.title" class="image" />
+          <album-art :albumImageUrl="item.imgUrl" :albumName="item.title" :albumId="item.id"/>
           <!-- Container for the album title text -->
           <div class="album-title">
             <!-- Display the album title text -->
@@ -30,12 +30,18 @@
 </template>
 
 <script>
+
+import AlbumArt from './AlbumArt.vue';
+
 export default {
+  components: { AlbumArt },
   name: 'SlideShow',
+  props: ['items'],
+  
   data() {
     return {
       // An array of objects representing items with images and titles
-      items: [
+      hitems: [
         { image: '/theWho.jpg', title: '' },
         { image: '/neilYoung.jpg', title: '' },
         { image: '/sgtPepper.jpg', title: '' },

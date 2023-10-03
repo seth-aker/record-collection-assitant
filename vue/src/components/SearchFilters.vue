@@ -21,7 +21,7 @@ export default {
       updatePerPage() {
         this.$store.commit('UPDATE_PER_PAGE', this.perPage);
         this.$emit('requestSearch');
-        this.$router.push({ 
+        this.$router.push({name: 'search-page',
                           query: {q: this.$store.state.sr.search, 
                                   type: this.$store.state.sr.searchType, 
                                   per_page: this.$store.state.sr.resultsPerPage} 

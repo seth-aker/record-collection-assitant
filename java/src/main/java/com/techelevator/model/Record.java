@@ -7,6 +7,7 @@ public class Record {
     private String id;
     private String title;
     private String thumb;
+    private String artist;
     private String userNote;
     private String condition;
 
@@ -43,6 +44,14 @@ public class Record {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public String getUserNote() {

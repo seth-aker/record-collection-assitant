@@ -11,6 +11,8 @@ public interface CollectionDao {
 
     List<Collection> getPublicCollections();
 
+    List<Collection> getPublicCollections(int numberOfCollections);
+
     List<Collection> getCollectionsByUserId(int id);
 
 

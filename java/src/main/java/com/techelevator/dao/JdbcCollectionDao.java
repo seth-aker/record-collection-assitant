@@ -48,10 +48,27 @@ public class JdbcCollectionDao implements CollectionDao {
         List<Collection> collections = new ArrayList<>();
         String sql = "SELECT collection_id, collection_name, user_id, is_public " +
                 "FROM collections " +
-                "WHERE is_public = true " +
-                "LIMIT 10;";
+                "WHERE is_public = true ";
+
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()) {
+                collections.add(mapRecordIdsToCollection(mapRowToCollection(results)));
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return collections;
+    }
+    @Override
+    public List<Collection> getPublicCollections(int numberOfCollections) {
+        List<Collection> collections = new ArrayList<>();
+        String sql = "SELECT collection_id, collection_name, user_id, is_public " +
+                "FROM collections " +
+                "WHERE is_public = true " +
+                "LIMIT ?;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, numberOfCollections);
             while (results.next()) {
                 collections.add(mapRecordIdsToCollection(mapRowToCollection(results)));
             }

@@ -1,11 +1,9 @@
 <template>
   <div class="record-page">
-    <div class="loading" v-if="isLoading">
-      Loading
-    </div>
-    <div v-else >
+    <loading-icon v-show="isLoading" />
+    <div >
       <h2>{{ recordDTO.title }}</h2>
-      <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
+      <album-art class="album" :albumImageUrl="recordDTO.images[0].uri" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
       <div class="record-info" > 
         <ul>
           <li v-for="artist in recordDTO.artists" :key="artist.id"> Artist: {{ artist.name }}</li>
@@ -21,6 +19,10 @@
           <li> Year: {{ recordDTO.year }}</li>
         </ul>
       </div>
+      <button id="add-record-btn" @click="addToCollection" >
+        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
+        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
+      </button>
     </div>
   </div>
 </template>
@@ -28,10 +30,12 @@
 <script>
 import recordService from "../services/RecordService.js"
 import AlbumArt from "../components/AlbumArt.vue"
+import LoadingIcon from '../components/LoadingIcon.vue'
 
 export default {
     components: {
       AlbumArt,
+        LoadingIcon,
  
     },
     
@@ -42,16 +46,50 @@ export default {
       }
     },
     created() {
+        this.isLoading = true;
         const recordId = this.$route.params.recordId;
         recordService.getRecordInfo(recordId)
         .then(response => {
           this.recordDTO = response.data;
           this.isLoading = false;
         });
+    },
+    methods: {
+      addToCollection() {
+        if(!this.recordAdded) {
+          recordService.addRecordToUserLib(this.recordDTO).then(resp => {
+              if(resp.status === 201) {
+                this.recordAdded = true
+              }
+            }).catch( () => {
+              alert("Oops! Something went wrong and the record was not added to your library")
+            })
+        }
+      }
     }
 }
 </script>
 
-<style>
+<style scoped>
+.album {
+  width: 600px;
+}
 
+#add-record-btn {
+    padding: 0, 5px;
+    margin: 0;
+    color: #eff13f;
+    background-color: #40c5a4;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.add-record-icon:hover {
+  color: #d0d319;
+}
+
+.record-added-icon {
+  cursor: default;
+}
 </style>
