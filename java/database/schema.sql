@@ -129,6 +129,7 @@ $$ LANGUAGE plpgsql;
 
 
 
+
 --INSERT INTO artists
 
 --CREATE TABLE genres (
