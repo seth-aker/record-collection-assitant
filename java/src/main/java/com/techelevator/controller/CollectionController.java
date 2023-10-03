@@ -38,14 +38,9 @@ public class CollectionController {
         return this.collectionDao.getPublicCollections();
     }
 
-    @RequestMapping(path = "/collections/user", method = RequestMethod.GET)
-    public List<Collection> getUserCollections(Principal principal, @RequestParam(value = "name", required = false, defaultValue = "") String userName) {
-        //checks if requester is user, if not shows only public collections of specified user
-        if (userName.equals("") || userName.equals(principal.getName())) {
+    @RequestMapping(path = "/collections/myCollections", method = RequestMethod.GET)
+    public List<Collection> getUserCollections(Principal principal) {
             return this.collectionDao.getCollectionsByUserId(userDao.findIdByUsername(principal.getName()));
-        } else {
-            return this.collectionDao.getUserPublicCollection(userDao.findIdByUsername(userName));
-        }
     }
 
     @RequestMapping(path = "/collections/{collectionId}", method = RequestMethod.GET)

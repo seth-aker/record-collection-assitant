@@ -27,10 +27,7 @@ export default new Vuex.Store({
     publicCollections: [],
     userLibrary: [],
     userCollections: [],
-    totalReleases: 0,
-    curPageReleases: [],
-    totalCollections: 0,
-    curPageCollections: [],
+
     isPremium: false,
   },
 
@@ -60,19 +57,6 @@ export default new Vuex.Store({
     },
     SET_USER_COLLECTIONS(state, data) {
       state.userCollections = data;
-    },
-    SET_TOTAL_RELEASES(state, count) {
-      state.totalReleases = count;
-    },
-
-    SET_CUR_PAGE_RELEASES(state, releases) {
-      state.curPageReleases = releases;
-    },
-    SET_TOTAL_COLLECTIONS(state, count) {
-      state.totalCollections = count;
-    },
-    SET_CUR_PAGE_COLLECTIONS(state, collections) {
-      state.curPageCollections = collections;
     },
     SET_IS_PREMIUM(state, isPremium) {
       state.isPremium = isPremium;

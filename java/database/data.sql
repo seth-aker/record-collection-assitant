@@ -21,6 +21,8 @@ INSERT INTO collections (user_id, collection_name, is_public) VALUES (1002, 'The
 INSERT INTO collections (user_id, collection_name, is_public) VALUES (1002, 'Collection Cool', true);
 INSERT INTO collections (user_id, collection_name, is_public) VALUES (1002, 'Private Collection', false);
 INSERT INTO collections (user_id, collection_name, is_public) VALUES (1001, 'Ambient Mix', false);
+INSERT INTO collections (user_id, collection_name, is_public) VALUES (1008, 'The Best of Test', true);
+INSERT INTO collections (user_id, collection_name, is_public) VALUES (1008, 'The Best of Test 2', false);
 
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, '1353040');
 INSERT INTO collection_record (collection_id, record_id) VALUES (101, '498868');
@@ -43,12 +45,17 @@ INSERT INTO collection_record (collection_id, record_id) VALUES (104, '1486272')
 INSERT INTO collection_record (collection_id, record_id) VALUES (104, '498868');
 INSERT INTO collection_record (collection_id, record_id) VALUES (104, '372778');
 
+INSERT INTO collection_record (collection_id, record_id) VALUES (105, '1486272');
+INSERT INTO collection_record (collection_id, record_id) VALUES (106, '498868');
+
 
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, '1353040', 'I like this', 'Good');--user 1 / record 1--
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, '498868', 'I like this', 'Good');--user 1 / record 3--
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, '1486272', 'I like this', 'Good');--user 1 / record 2--
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, '372778', 'I like this', 'Good');--user 1 / record 4--
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1001, '168314', 'I like this', 'Good');--user 1 / record 5, (SHOULD CAUSE ERROR)--
+INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1008, '1486272', 'Me gusta mucho', 'Good');
+INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1008, '372778', 'Muy bueno', 'Good');
 
 
 INSERT INTO user_record_tag (tag_name, record_id, user_id) VALUES ('Jazz', '1353040', 1001);

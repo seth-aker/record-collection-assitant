@@ -1,7 +1,7 @@
 <template>
   <div>
         
-        <div v-show="userCollections.length != 0 && !isLoading">
+        <div v-show="this.$store.state.userCollections.length != 0 && !isLoading">
             <div id="collection-row" 
                 v-for="curCollection in collections"
                 :key="curCollection.id">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="no-items-msg" v-show="userCollections.length === 0 && !isLoading">
+        <div class="no-items-msg" v-show="this.$store.state.userCollections.length === 0 && !isLoading">
             No collections found.
         </div>
     </div> 

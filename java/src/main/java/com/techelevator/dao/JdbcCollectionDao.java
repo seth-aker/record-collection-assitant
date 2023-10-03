@@ -23,9 +23,9 @@ public class JdbcCollectionDao implements CollectionDao {
 
     private UserDao userDao;
 
-    public JdbcCollectionDao(JdbcTemplate jdbcTemplate) {
+    public JdbcCollectionDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
         this.jdbcTemplate = jdbcTemplate;
-
+        this.userDao = userDao;
     }
 
     @Override
