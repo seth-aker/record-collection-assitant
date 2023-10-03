@@ -46,7 +46,6 @@ export default {
         RecordService.getRecordInfo(this.recordId)
             .then(response => {this.recordDTO = response.data;
             });
-        this.userId = this.collection.userId;
             });
 
         }
