@@ -73,7 +73,7 @@ export default {
         
          
       // }
-   },
+   
 
     register() {
       if (this.user.password != this.user.confirmPassword) {
