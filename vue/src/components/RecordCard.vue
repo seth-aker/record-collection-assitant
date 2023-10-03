@@ -43,14 +43,24 @@ export default {
     }
   },
   computed: {
+
     recordTitle() {
       const artistTitle = this.recordInfo.title.split(' - ');
+      if (artistTitle[1] === undefined) {
+        return this.recordInfo.title;
+      } else {
       return artistTitle[1];
+      }
     },
     recordArtist() {
        const artistTitle = this.recordInfo.title.split(' - ');
+       if (artistTitle[1] === undefined) {
+         return this.recordInfo.artist;
+       } else {
       return artistTitle[0];
+       }
     }
+    
   }
 
 
