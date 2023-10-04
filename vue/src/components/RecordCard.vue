@@ -114,12 +114,12 @@ export default {
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: .9rem;
   
 }
 
 .record-artist {
-  font-size: 12px;
+  font-size: .8rem;
   font-style: italic;
 }
 </style>

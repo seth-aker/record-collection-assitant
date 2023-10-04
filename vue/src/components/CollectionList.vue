@@ -1,9 +1,9 @@
 <template>
-<div class="list-container">
-    <collection-card v-for="curCollection in collections"
-    :key="curCollection.id"
-    :collectionId="curCollection.id"/>
-</div>
+    <div class="list-container">
+        <collection-card v-for="curCollection in collections"
+        :key="curCollection.id"
+        :collectionId="curCollection.id"/>
+    </div>
 </template>
 
 <script>
@@ -19,8 +19,7 @@ export default {
     props: ['collections'],
     data() {
         return {
-            isLoading: false,
-            
+                        
             
         }
     },
