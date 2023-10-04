@@ -2,7 +2,7 @@
   <div>
     <loading-icon v-show="isLoading"/>
     <search-box></search-box>
-    <div class="user-dashboard">
+    <div class="user-dashboard" v-show="!isLoading">
       <div class="user-heading">
         <h1>Collections</h1>
       </div>
@@ -49,7 +49,7 @@ export default {
   },
   data() {
         return {
-          isLoading: true
+          isLoading: false
         }
     },
     computed: {
@@ -70,6 +70,7 @@ export default {
           this.$store.commit('SET_USER_LIBRARY', response.data);
           this.isLoading = false;
         });
+      this.isLoading = false;
     }
 };
 </script>

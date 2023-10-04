@@ -1,6 +1,6 @@
 <template>
   <div class="collection-card">
-    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title"/>
+    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
     <div class="collection-info">
         <div class="collection-name">
             <div class="collection-name">{{ collection.name }}</div>
@@ -16,15 +16,18 @@
 import CollectionService from '../services/CollectionService'
 import RecordService from '../services/RecordService'
 import AlbumArt from './AlbumArt.vue'
+// import LoadingIcon from '../components/LoadingIcon.vue';
+
 export default {
     name: 'collection-card',
     props:['collectionId'],
     components: {
-        AlbumArt
-
+        AlbumArt,
+        // LoadingIcon
     },
     data() {
         return {
+            isLoading: false,
             collection:{},
             recordIds:[],
             recordDTO: "",
@@ -38,16 +41,19 @@ export default {
 
     },
     created() {
+        this.isLoading = true;
         CollectionService.getCollection(this.collectionId)
             .then(response => {
                 this.collection = response.data;
                 this.recordIds = this.collection.recordIds;
                 this.recordId = this.recordIds[0];
         RecordService.getRecordInfo(this.recordId)
-            .then(response => {this.recordDTO = response.data;
+            .then(response => {
+                this.recordDTO = response.data;
+                this.recordDTO.thumb = response.data.images[0].uri
             });
             });
-
+        this.isLoading = false;
         }
 }
 </script>
@@ -74,8 +80,10 @@ export default {
     flex-direction: column;
 }
 
-div.collection-info > div {
+div.collection-info {
     font-size: 12px;
-  font-style: italic;}
+    font-style: italic;
+}
+
 
 </style>
