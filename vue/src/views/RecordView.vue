@@ -26,12 +26,15 @@
         </ul>
       </div>
       <button id="add-record-btn" @click="addToCollection" >
-        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
         <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
       </button>
+      <!-- <button id="remove-record-btn" @click="removeRecord">
+        <font-awesome-icon class="x-icon" icon="fa-regular fa-circle-x-mark" v-show="recordAdded" />
+      </button> -->
       <add-record-form v-if="showForm" :record="$store.state.currentRecord"  />
       <button @click="toggleForm" v-show="!showForm && recordAdded">Add notes</button>
       <button @click="toggleForm" v-show="showForm">Cancel</button>
+      
     </div>
   </div>
 </template>
