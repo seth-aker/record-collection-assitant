@@ -57,6 +57,7 @@ export default {
   margin-bottom: 300px;
   margin-top: 50px;
 
+
 }
 .record-collection {
   display: flex;
