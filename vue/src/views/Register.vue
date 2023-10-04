@@ -4,6 +4,7 @@
     <div>
 
     </div>
+  
       <h2>Create Account</h2>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
@@ -34,8 +35,11 @@
 
       </div>
       <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+    
     </form>
-  </div>
+    </div>
+
+  
 </template>
 
 <script>
@@ -105,11 +109,28 @@ export default {
 <style scoped>
 @import url('https://fonts.cdnfonts.com/css/keep-on-truckin-2');
 
+input#premiumCheckbox{
+  display: inline-block;
+ align-items: center; 
+}
+
+#flex-display{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 form {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-color:  #40c5a4 ;
+  padding-left: 9px; padding-right: 9px;
+  border-width: 20px;
+  border-style:ridge;
+    background-color: #fb7600;
+  border-radius: 15px;
 }
 
 div#get-premium.form-input-group{
@@ -122,25 +143,25 @@ div#get-premium.form-input-group{
   justify-content: space-between;
   padding-top: 15px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: white;
+  color:#F8E73B;
 }
 
 label {
   margin-right: 0.5rem;
 }
 
-h1{
-  display: flex;
-  justify-content: center;
-  font-family: 'Keep on Truckin', sans-serif;
-  color:  #F8E73B;
-  font-size: 400%;
-}
+
 
 h2{
   display: flex;
   justify-content: center;
-  color: #F8E73B;
+  align-items: center;
+      font-family: 'KEEPT___'; 
+  src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
+  font-size: 40px;
+ color: #F8E73B;
+
+
 }
 
 #register {
@@ -186,8 +207,6 @@ p{
   display: flex;
   justify-content: center;
 }
-
-
 
 button{
   display: inline-flex;

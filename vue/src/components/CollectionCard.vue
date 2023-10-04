@@ -1,12 +1,19 @@
 <template>
   <div class="collection-card">
+      <div class="grid-control">
     <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
-    <div class="collection-info">
-        <div class="collection-name">
-            <div class="collection-name">{{ collection.name }}</div>
+        <div class="collection-info">
+            <div class="collection-name">
+                <div class="collection-name">{{ collection.name }}</div>
+            </div>
+            <div class="user-name">
+                <div>By: {{ collection.userName }}</div>
+            </div>
         </div>
-        <div class="user-name">
-            <div>By: {{ collection.userName }}</div>
+        <div class="button">
+        <button id="delete-record-btn" @click="deleteCollection" >
+            <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
+        </button>
         </div>
     </div>
   </div>
@@ -38,7 +45,9 @@ export default {
 
     },
     methods: {
-
+        deleteCollection() {
+            return;
+        }
     },
     created() {
         this.isLoading = true;
@@ -73,16 +82,46 @@ export default {
 .album-art {
   width: 99%;
   margin: 2px;
+  grid-area: image;
 }
 
-.collection-info {
+#delete-record-btn {
     display: flex;
-    flex-direction: column;
+    padding: 0, 2px;
+    margin: 0;
+    color: #eff13f;
+    background-color: #40c5a4;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    grid-area: button;
+}
+
+div>
+
+.delete-recrod-icon:hover {
+    color: #d0d319;
+}
+
+.grid-control {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-rows: 8fr 1fr;
+    grid-template-areas: 
+    "image image"
+    "info button";
 }
 
 div.collection-info {
     font-size: 12px;
     font-style: italic;
+    grid-area: info;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
