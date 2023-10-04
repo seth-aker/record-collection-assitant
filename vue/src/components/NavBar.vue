@@ -212,6 +212,7 @@ p{
   height: 25px;
   padding: 10px
   
+  
 }
 .gradient-text {
   background: linear-gradient(180deg, rgba(64,197,164,1) 0%, rgba(239,241,63,1) 100%);
