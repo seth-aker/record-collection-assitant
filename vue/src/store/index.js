@@ -70,8 +70,23 @@ export default new Vuex.Store({
     },
     SET_CUR_RECORD(state, record ) {
       state.currentRecord = record;
+    },
+    REMOVE_RECORD_FROM_LIBRARY(state, recordId) {
+      state.userLibrary = state.userLibrary.filter( record => {
+        return record.id != recordId;
+      })
+    },
+    REMOVE_COLLECTION_FROM_COLLECTIONS(state, collectionId) {
+      state.userCollections = state.userCollections.filter( coll => {
+        return coll.id != collectionId;
+      })
+    },
+    ADD_RECORD_TO_LIBRARY(state, record) {
+      state.userLibrary.push(record);
+    },
+    ADD_COLLECTION_TO_COLLECTIONS(state,collection) {
+      state.userCollections.push(collection);
     }
-
   },
   
   });

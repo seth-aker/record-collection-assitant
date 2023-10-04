@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="saveRecordInfo">
-      <textarea v-model="userNotes" name="user-notes" id="" cols="50" rows="10"></textarea>
+      <textarea v-model="newNotes" name="user-notes" id="" cols="50" rows="10"></textarea>
       <div>Tags:</div>
       <div v-for="(tag, index) in tags" :key="index">{{tag}}</div>
       <input v-model="newTag" placeholder="Add a tag...">
@@ -17,7 +17,6 @@
           <option value="Poor">Poor</option>
       </select>
       <button type="submit">Save</button>
-      <button>Cancel</button>
   </form>
 </template>
 
@@ -31,6 +30,7 @@ data() {
     return {
         recordDTO: {},
         userNotes: "",
+        newNotes: "",
         tags: '',
         numOfTags: 1, 
         condition: '',
@@ -39,11 +39,12 @@ data() {
 },
 methods: {
     saveRecordInfo() {
-        this.recordDTO.userNotes = this.userNotes;
+        this.recordDTO.userNotes = this.newNotes;
         this.recordDTO.tags = this.tags;
         this.recordDTO.condition = this.condition;
         RecordService.updateRecordInfo(this.recordDTO).then(response => {
             if(response.status === 200){
+               this.recordDTO = response.data
                alert("Record Updated") 
             }
         }).catch(()=> {
@@ -53,11 +54,12 @@ methods: {
     addTag() {
        this.tags.push(this.newTag) 
        this.newTag = "";
-    }
+    },
+  
 },
 created(){
     this.recordDTO = this.record;
-    this.userNotes = this.record.userNotes;
+    this.newNotes = this.record.userNotes;
     this.tags = this.record.tags;
     this.condtiion = this.record.condition;
 }

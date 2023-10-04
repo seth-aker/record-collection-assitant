@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="button">
-        <button id="delete-record-btn" @click="deleteCollection" >
-            <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
+        <button id="delete-coll-btn" @click="deleteCollection" >
+            <font-awesome-icon class="delete-coll-icon" icon="fa-regular fa-square-minus" />
         </button>
         </div>
     </div>
@@ -85,7 +85,7 @@ export default {
   grid-area: image;
 }
 
-#delete-record-btn {
+#delete-coll-btn {
     display: flex;
     padding: 0, 2px;
     margin: 0;
@@ -97,10 +97,8 @@ export default {
     grid-area: button;
 }
 
-div>
-
-.delete-recrod-icon:hover {
-    color: #d0d319;
+.delete-coll-icon:hover {
+  color: #d0d319;
 }
 
 .grid-control {
