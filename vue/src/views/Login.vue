@@ -11,11 +11,11 @@
       </div>
       <div class="input-block">
       <div class="form-input-group">
-        <label for="username">Username:</label>
+        <label for="username">Username:&nbsp;</label>
         <input type="text" id="username" v-model="user.username" required autofocus />
       </div>
       <div class="form-input-group">
-        <label for="password">Password:</label>
+        <label for="password">Password: &nbsp;</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
 
@@ -77,14 +77,23 @@ form {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+    padding-left: 42px; padding-right: 42px;
+   padding-bottom: 50px;
+     border-color: #40c5a4 ;
+  border-width: 20px;
+  border-style:ridge;
+    background-color: #fb7600;
+    border-radius: 15px;
 }
 
 
-.form-input-group{
+
+.form-input-group {
   display: flex;
   justify-content: space-between;
   padding-top: 15px;
-  
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color:#F8E73B;
 }
 
 #login{
@@ -103,8 +112,15 @@ form {
 h2{
   display: flex;
   justify-content: center;
+    padding-bottom: -25px;
+     font-family: 'KEEPT___'; 
+  src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
+  font-size: 50px;
+ 
 }
 
+
+   
 .sign-in-button{
 display: flex;
   justify-content: center;
