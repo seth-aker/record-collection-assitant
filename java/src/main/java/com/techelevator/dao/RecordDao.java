@@ -13,7 +13,7 @@ public interface RecordDao {
 
     List<String> getRecordTags(String recordId, int userId);
 
-    boolean createTags(Record record, String tagName, int userID);
+    boolean createTag(String recordId, String tagName, int userID);
 
     boolean updateTags(List<String> tagName, String recordId, int userId);
 

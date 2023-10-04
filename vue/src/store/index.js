@@ -28,7 +28,8 @@ export default new Vuex.Store({
     userLibrary: [],
     userCollections: [],
     premium: false,
-    trendingCollections: []
+    trendingCollections: [],
+    currentRecord: {}
   },
 
   mutations: {
@@ -66,6 +67,9 @@ export default new Vuex.Store({
     },
     CLEAR_TRENDING(state) {
       state.trendingCollections = [];
+    },
+    SET_CUR_RECORD(state, record ) {
+      state.currentRecord = record;
     }
 
   },

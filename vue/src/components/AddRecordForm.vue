@@ -1,10 +1,10 @@
 <template>
-  <form @submit="saveRecordInfo">
+  <form @submit.prevent="saveRecordInfo">
       <textarea v-model="userNotes" name="user-notes" id="" cols="50" rows="10"></textarea>
       <div>Tags:</div>
       <div v-for="(tag, index) in tags" :key="index">{{tag}}</div>
       <input v-model="newTag" placeholder="Add a tag...">
-      <font-awesome-icon icon="fa-solid fa-plus" @click="tags.push(newTag)"/>
+      <font-awesome-icon icon="fa-solid fa-plus" @click="addTag"/>
       
       <div>Condition: {{ condition }} </div>
       <select v-model="condition">
@@ -26,12 +26,12 @@ import RecordService from '../services/RecordService'
 
 export default {
 name: 'add-record-form',
-props: ['recordId'],
+props: ['record'],
 data() {
     return {
         recordDTO: {},
         userNotes: "",
-        tags: [],
+        tags: '',
         numOfTags: 1, 
         condition: '',
         newTag: ""
@@ -49,19 +49,26 @@ methods: {
         }).catch(()=> {
             alert("An error occured updating this record's information")
         })
+    },
+    addTag() {
+       this.tags.push(this.newTag) 
+       this.newTag = "";
     }
 },
 created(){
-    RecordService.getRecordInfo(this.recordId).then(response => {
-        this.recordDTO = response.data;
-        this.userNotes = response.data.userNotes;
-        this.tags = response.data.tags
-        this.condition = response.data.condition;
-    })
+    this.recordDTO = this.record;
+    this.userNotes = this.record.userNotes;
+    this.tags = this.record.tags;
+    this.condtiion = this.record.condition;
 }
 }
 </script>
 
 <style scoped>
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
 
+}
 </style>

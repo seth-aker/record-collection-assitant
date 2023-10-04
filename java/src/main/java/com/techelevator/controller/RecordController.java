@@ -74,11 +74,10 @@ public class RecordController {
                 recordDao.updateRecordNote(String.valueOf(recordDTO.getId()), userId, recordDTO.getUserNotes());
                 recordDao.updateCondition(String.valueOf(recordDTO.getId()), recordDTO.getCondition(), userId);
             }
+            return recordDTO;
         } catch (DaoException e) {
             throw new DaoException("Record not in library.", e);
         }
-        return recordDTO;
-
     }
 
     @GetMapping(path = "")
