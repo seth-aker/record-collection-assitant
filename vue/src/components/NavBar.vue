@@ -2,43 +2,42 @@
   <nav>
     <section class="nav-bar-buttons nav-bar-left">
       <div id="home" class="rounded-button">
-          <router-link :to="{name: 'home'}">HOME </router-link>
+        <router-link :to="{ name: 'home' }" class="gradient-text">HOME</router-link>
       </div>
       <div id="collections" class="rounded-button dropdown">
-        <p>COLLECTIONS</p>
+        <p class="gradient-text">COLLECTIONS</p>
         <ul class="dropdown-options">
           <li class="option" id="public-collections">
-            <router-link :to="{name: 'collection-view', params: { collectionId: 'public'}}">PUBLIC COLLECTIONS</router-link>
+            <router-link :to="{ name: 'collection-view', params: { collectionId: 'public' } }" class="gradient-text">PUBLIC COLLECTIONS</router-link>
           </li>
           <li class="option" id="my-collections">
-            <router-link :to="{name: 'user-home', params: {username: this.$store.state.user.username}}">MY COLLECTIONS</router-link>
+
+            <router-link :to="{ name: 'collection-view', params: { collectionId: 'my-collections' } }" class="gradient-text">MY COLLECTIONS</router-link>
+
+
           </li>
         </ul>
-        
       </div>
-      
       <div id="contact" class="rounded-button">
-        <router-link :to="{name: 'contact'}">CONTACT</router-link>
+        <router-link :to="{ name: 'contact' }" class="gradient-text">CONTACT</router-link>
       </div>
     </section>
 
     <h1>SLEEVES</h1>
 
     <section class="nav-bar-buttons nav-bar-right">
-
       <div id="login" v-show="!loggedIn" class="rounded-button">
-        <router-link :to="{name: 'login'}">LOGIN</router-link>
+        <router-link :to="{ name: 'login' }" class="gradient-text">LOGIN</router-link>
       </div>
       <div id="registry" v-show="!loggedIn" class="rounded-button">
-          <router-link :to="{name: 'register'}">REGISTER</router-link>
+        <router-link :to="{ name: 'register' }" class="gradient-text">REGISTER</router-link>
       </div>
       <div v-show="loggedIn" class="rounded-button">
-        <a @click.prevent="logout">LOGOUT</a>
+        <a @click.prevent="logout" class="gradient-text">LOGOUT</a>
       </div>
       <font-awesome-icon icon="fa-solid fa-user-circle" class="user-icon rounded-button" v-show="loggedIn" />
-  </section>
- </nav>
-
+    </section>
+  </nav>
 </template>
 
 <script> 
@@ -82,15 +81,19 @@ nav {
   display: flex;
   justify-content: space-between;
   height: 160px;
+  
 }
 .nav-bar-buttons {
   display: flex;
   align-items: center;
   padding: 10px 20px;
+  
+  
 }
 
  .nav-bar-left{
    display: flex;
+
  }
 
  .nav-bar-right {
@@ -98,7 +101,7 @@ nav {
  }
 .rounded-button {
   border-radius: 20px; /* Rounded corners */
-  background-color: #40c5a4; /* Background color */
+  background-color: #40c5a400; /* Background color */
   padding: 15px; /* Padding for a bigger button */
   border: none;
   cursor: pointer;
@@ -107,11 +110,15 @@ nav {
   margin: 5px;
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   align-items: center;
+  justify-content: center;
+  display: flex;
+  
 
 }
 
 .rounded-button:hover {
-  background-color: #1e8c72; /* Darker color on hover */
+  background-color: #40c5a4; /* Darker color on hover */
+  
 }
 
 
@@ -128,9 +135,14 @@ h1 {
 
 }
 .rounded-button a {
-  color: #eff13f;
+
   text-decoration: none;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 25px;
+  
+  
+  
+ 
 }
 
 .dropdown {
@@ -155,7 +167,7 @@ h1 {
   flex-direction: column;
   position: absolute;
   list-style: none;
-  background: #40c5a4;
+  background: #40c5a400;
   padding: 0;
   border-radius: 0 20px 20px 20px;
 }
@@ -172,28 +184,43 @@ h1 {
 
 .option {
  padding: 10px;
+
 }
 
 #public-collections:hover {
-  background-color: #1e8c72;
+  background-color: #40c5a4;
   border-radius: 0px 20px 0 0;
 }
 
 #my-collections:hover {
-  background-color: #1e8c72;
+  background-color: #40c5a4;
   border-radius: 0 0 20px 20px ;
+  
 }
 
 p{
   padding: 0;
   margin: 0;
   color: #eff13f;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 25px;
+  
+  
 }
 .user-icon {
-  color:#eff13f;
+  
   height: 25px;
   padding: 10px
+  
+  
+}
+.gradient-text {
+  background: linear-gradient(180deg, rgba(64,197,164,1) 0%, rgba(239,241,63,1) 100%);
+  -webkit-background-clip: text; /* For browser compatibility */
+  background-clip: text;
+  color: transparent;
+  text-decoration: none;
+  font-size: 25px;
 }
 
 @font-face {
