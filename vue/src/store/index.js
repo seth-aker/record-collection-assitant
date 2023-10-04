@@ -64,6 +64,9 @@ export default new Vuex.Store({
     ADD_TO_TRENDING_COLLECTIONS(state, collection) {
       state.trendingCollections.push(collection);
     },
+    CLEAR_TRENDING(state) {
+      state.trendingCollections = [];
+    }
 
   },
   

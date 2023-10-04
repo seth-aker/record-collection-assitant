@@ -15,7 +15,7 @@
         <!-- Iterate through items to display each image and title -->
         <div class="slide" v-for="(item, index) in items" :key="index">
           <!-- Display the image with its source and alt text -->
-           <img :src="item.imgUrl" :alt="item.name" class="image"/>
+           <router-link :to="{name: 'collection-view', params: {collectionId: item.id}}"><img :src="item.imgUrl" :alt="item.name" class="image"/></router-link>
           <!-- Container for the album title text -->
           <div class="album-title">
             <!-- Display the album title text -->
