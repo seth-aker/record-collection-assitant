@@ -5,9 +5,10 @@
     <div class="user-dashboard" v-show="!isLoading">
       <div class="user-heading-left">
         <h1>Collections</h1>
-        <div class="button">
-          <button id="add-collection-btn">
+        <div>
+          <button id="add-collection-btn" class="button tooltip">
             <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square'/>
+            <span class="tooltiptext">Add a Collection</span>
           </button>
         </div>
       </div>
@@ -98,6 +99,7 @@ div.record-list {
 .user-heading-left {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-family: "KEEPT___", Arial, sans-serif;
   color: #eff13f;
 }
@@ -132,6 +134,31 @@ div.record-list {
 
 .add-record-icon:hover {
   color: #d0d319;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #eff13f;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: transparent;
+  color: #eff13f;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-family: "KEEPT___", Arial, sans-serif;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 </style>
