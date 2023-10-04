@@ -93,6 +93,8 @@ div.record-list {
   display: flex;
   justify-content: space-around;
   font-family: "KEEPT___", Arial, sans-serif;
+  font-size: 2rem;
+  -webkit-text-stroke:1px #40c5a4 ;
   color: #eff13f;
 }
 
@@ -101,6 +103,8 @@ div.record-list {
   justify-content: center;
   align-items: center;
   font-family: "KEEPT___", Arial, sans-serif;
+  font-size: 2rem;
+  -webkit-text-stroke:1px #40c5a4 ;
   color: #eff13f;
 }
 
@@ -116,13 +120,13 @@ div.record-list {
 
 #add-collection-btn {
     display: flex;
-    padding: 0, 2px;
+    padding: 0, 0;
     margin: 0;
     color: #eff13f;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size:2rem;
     grid-area: button;
 }
 
@@ -151,9 +155,11 @@ div.record-list {
   padding: 5px 0;
   border-radius: 6px;
   font-family: "KEEPT___", Arial, sans-serif;
+  font-size: 1em;
+  -webkit-text-stroke:1px #40c5a4 ;
   position: absolute;
   z-index: 1;
-  top: -5px;
+  top: -25px;
   left: 105%;
 }
 

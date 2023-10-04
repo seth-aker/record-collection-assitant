@@ -23,7 +23,8 @@
       </div>
     </section>
 
-    <h1>Sleeves</h1>
+    <h1><font-awesome-icon class="record-icon" icon="fa-solid fa-record-vinyl" />SLEEVES</h1>
+    
 
     <section class="nav-bar-buttons nav-bar-right">
       <div id="login" v-show="!loggedIn" class="rounded-button">
@@ -128,7 +129,7 @@ opacity: .9;
 h1 {
     font-size: 130px;
     font-family: "KEEPT___", Arial, sans-serif;
-    color: #E00A86;
+    color: #eff13f;
     margin: 0;
     position: absolute;
     top: 0;
@@ -136,12 +137,20 @@ h1 {
     text-align: center;
 
  
-    -webkit-text-stroke:0.5px  #F8E73B; /* width and color */
-
-    
+    -webkit-text-stroke:1px #40c5a4 ; ; /* width and color */
+ 
   
-
 }
+
+.record-icon {
+  margin-bottom: 8px;
+  margin-right: 8px;
+  font-size: 90px;
+  border: #40c5a4 solid 5px;
+  border-radius: 56px;
+  background-color: #40c5a4;
+}
+
 .rounded-button a {
 
   text-decoration: none;
