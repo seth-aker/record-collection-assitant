@@ -9,7 +9,7 @@
       </div>
       
       <div class="profile">
-        <img src="image.jpg" alt="Seth Aker">
+        <img src="seth.jpg" alt="Seth Aker">
         <a href="https://www.linkedin.com/in/sethaker" target="_blank">Seth Aker</a>
       </div>
       
