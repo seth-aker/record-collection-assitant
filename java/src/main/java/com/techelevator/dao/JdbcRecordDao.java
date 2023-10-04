@@ -103,12 +103,11 @@ public class JdbcRecordDao implements RecordDao {
         return tags;
     }
 
-    @Override
-    public boolean createTags(Record record, String tagName, int userID){
+    public boolean createTag(String recordId, String tagName, int userID){
         try {
             String sql = "INSERT INTO user_record_tag (tag_name, user_id, record_id) VALUES (?, ?, ?);";
             return jdbcTemplate.update(sql, tagName,
-                   userID, record.getId()) == 1;
+                   userID, recordId) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -123,10 +122,8 @@ public class JdbcRecordDao implements RecordDao {
     public boolean updateTags(List<String> tags, String recordId, int userId){
         try{
             for(String tag : tags) {
-                String sql = "UPDATE user_record_tag SET tag_name = ? WHERE record_id = ? AND user_id = ?";
-                int numberOfRows = this.jdbcTemplate.update(sql, tag, recordId, userId);
-                if (numberOfRows == 0) {
-                    throw new DaoException("Zero rows affected, expected at least one");
+                if(!checkIfTagExists(recordId, userId, tag)) {
+                    createTag(recordId, tag, userId);
                 }
             }
             return true;
@@ -245,5 +242,21 @@ public class JdbcRecordDao implements RecordDao {
 //            record.setUserNote(rowSet.getString("user_note"));
 //        }
     return record;
+    }
+
+    private boolean checkIfTagExists(String recordId, int userId, String tag) {
+        String sql = "SELECT tag_name FROM user_record_tag WHERE user_id = ? AND record_id = ? ;";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, recordId);
+            while (results.next()) {
+                String recordTag = results.getString("tag_name");
+                if (recordTag.equals(tag)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
     }
 }

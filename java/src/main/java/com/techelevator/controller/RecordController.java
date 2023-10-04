@@ -62,23 +62,22 @@ public class RecordController {
 
         return recordDTO;
     }
-
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/{recordId}", method = RequestMethod.PUT)
     public RecordDTO updateRecord(@RequestBody RecordDTO recordDTO, Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
 
         try {
             Record recordToUpdate = recordDao.getRecordById(String.valueOf(recordDTO.getId()));
-            if (recordLogic.isRecordInUserLib(recordToUpdate.getId(), userDao.findIdByUsername(principal.getName()))) {
+            if (recordLogic.isRecordInUserLib(recordToUpdate.getId(), userId)) {
                 recordDao.updateTags(recordDTO.getTags(), String.valueOf(recordDTO.getId()), userId);
                 recordDao.updateRecordNote(String.valueOf(recordDTO.getId()), userId, recordDTO.getUserNotes());
                 recordDao.updateCondition(String.valueOf(recordDTO.getId()), recordDTO.getCondition(), userId);
             }
+            return recordDTO;
         } catch (DaoException e) {
             throw new DaoException("Record not in library.", e);
         }
-        return recordDTO;
-
     }
 
     @GetMapping(path = "")

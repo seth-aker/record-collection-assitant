@@ -3,6 +3,7 @@
     <div class="container" v-for="record in records" :key="record.id" >
       <record-card :recordInfo="record"/>
     </div>
+    
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import collectionService from '../services/CollectionService.js'
 
 import RecordCard from '../components/RecordCard.vue'
 import RecordService from '../services/RecordService.js'
+
 
 export default {
   components: { RecordCard },

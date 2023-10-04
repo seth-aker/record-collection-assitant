@@ -12,7 +12,7 @@
           </li>
           <li class="option" id="my-collections">
 
-            <router-link :to="{ name: 'collection-view', params: { collectionId: 'my-collections' } }" class="gradient-text">MY COLLECTIONS</router-link>
+            <router-link :to="{ name: 'user-home', params: { username: $store.state.user.username } }" class="gradient-text">MY COLLECTIONS</router-link>
 
 
           </li>
@@ -208,7 +208,7 @@ p{
   
 }
 .user-icon {
-  
+  color: #eff13f;
   height: 25px;
   padding: 10px
   

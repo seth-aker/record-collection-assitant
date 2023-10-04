@@ -23,6 +23,8 @@
         <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
         <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
       </button>
+      <add-record-form v-if="showForm" :record="$store.state.currentRecord"  />
+      <button @click="toggleForm">Add notes</button>
     </div>
   </div>
 </template>
@@ -31,11 +33,13 @@
 import recordService from "../services/RecordService.js"
 import AlbumArt from "../components/AlbumArt.vue"
 import LoadingIcon from '../components/LoadingIcon.vue'
+import AddRecordForm from '../components/AddRecordForm.vue'
 
 export default {
     components: {
       AlbumArt,
         LoadingIcon,
+        AddRecordForm
  
     },
     
@@ -43,7 +47,8 @@ export default {
       return {
         recordDTO : [],
         isLoading: true,
-        recordAdded: false
+        recordAdded: false,
+        showForm: false
       }
     },
     created() {
@@ -52,6 +57,7 @@ export default {
         recordService.getRecordInfo(recordId)
         .then(response => {
           this.recordDTO = response.data;
+          this.$store.commit('SET_CUR_RECORD', response.data);
           this.isLoading = false;
         });
     },
@@ -66,6 +72,9 @@ export default {
               alert("Oops! Something went wrong and the record was not added to your library")
             })
         }
+      },
+      toggleForm() {
+        this.showForm = !this.showForm;
       }
     }
 }
