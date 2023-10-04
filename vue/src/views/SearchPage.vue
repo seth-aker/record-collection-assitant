@@ -1,8 +1,12 @@
 <template>
   <div class="search-page" >
     <loading-icon v-show="isLoading" />
-    <search-box @requestSearch='search'/>
-    <search-filters @requestSearch='search' />
+    <div class="search">
+      <search-box class="search-input" @requestSearch='search'/>
+      <search-filters class="search-filters" @requestSearch='search' />
+    </div>
+      <item-pager :curPage="$store.state.sr.curPage" :maxPages="$store.state.sr.maxPages" @requestSearch='search'></item-pager>
+    
     <!-- <collection-list /> -->
     <div class="record-list" >
      <record-card class="record-card" v-for="record in $store.state.sr.searchResultsRecords" :key="record.id" :recordInfo="record" :isHome="false" />
@@ -52,9 +56,15 @@ export default {
 </script>
 
 <style scoped>
+.search {
+  display: flex;
+  justify-content: center;
+}
+
 .record-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
   .record-card {
     margin: 10px;

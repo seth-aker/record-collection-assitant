@@ -50,8 +50,8 @@ public class RecordController {
     @GetMapping(path = "/{recordId}")
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
-        int userId = userDao.findIdByUsername(principal.getName());
         try {
+            int userId = userDao.findIdByUsername(principal.getName());
             String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userId));
             List<String> tags = new ArrayList<>();
             if(recordLogic.isRecordInUserLib(recordId, userId)) {
