@@ -98,6 +98,7 @@ export default {
     border-radius: 10px;
     border: solid #40c5a4 1px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 }
 
 .album-art {

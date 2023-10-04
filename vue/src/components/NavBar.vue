@@ -23,7 +23,10 @@
       </div>
     </section>
 
-    <h1><font-awesome-icon class="record-icon" icon="fa-solid fa-record-vinyl" />SLEEVES</h1>
+<h1>
+      <font-awesome-icon class="record-icon" icon="fa-solid fa-record-vinyl" />
+      <span class="gradient-text2">SLEEVES</span>
+    </h1>
     
 
     <section class="nav-bar-buttons nav-bar-right">
@@ -96,6 +99,7 @@ nav {
    display: flex;
 
  }
+ 
 
  .nav-bar-right {
    display: flex;
@@ -129,12 +133,12 @@ opacity: .9;
 h1 {
     font-size: 130px;
     font-family: "KEEPT___", Arial, sans-serif;
-    color: #eff13f;
     margin: 0;
     position: absolute;
     top: 0;
     width: 100vw;
     text-align: center;
+    
 
  
     -webkit-text-stroke:1px #40c5a4 ; ; /* width and color */
@@ -148,7 +152,7 @@ h1 {
   font-size: 90px;
   border: #40c5a4 solid 5px;
   border-radius: 56px;
-  background-color: #40c5a4;
+   background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
 }
 
 .rounded-button a {
@@ -240,10 +244,28 @@ p{
   font-size: 25px;
 }
 
+.gradient-text2 {
+  background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  -webkit-background-clip: text; /* For browser compatibility */
+  background-clip: text;
+  color: transparent;
+  
+  
+
+
+  top: 0;
+  width: 100vw;
+  text-align: center;
+  -webkit-text-stroke: 1px #40c5a4; /* Optional text stroke */
+}
+
+
+
 @font-face {
   font-family: 'KEEPT___'; 
   src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
 }
+
 
 /* a {
   color: #eff13f;

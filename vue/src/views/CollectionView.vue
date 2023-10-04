@@ -49,7 +49,23 @@ export default {
 </script>
 
 <style>
+.container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next row if needed */
+  justify-content: center; /* Center items horizontally within the container */
+  gap: 20px; /* Add spacing between items */
+  margin-bottom: 300px;
+  margin-top: 50px;
+
+
+}
 .record-collection {
   display: flex;
+  justify-items: center;
+  align-items: center;
+  
+  
+
 }
+
 </style>
