@@ -111,7 +111,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
 }
 
 .add-record-icon:hover {
@@ -155,7 +155,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1em;
     grid-area: button;
 }
 
@@ -163,6 +163,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  font-size: 1.7rem;
 }
 
 .tooltipadd {
@@ -186,13 +187,15 @@ export default {
   padding: 5px 0;
   border-radius: 6px;
   font-family: "KEEPT___", Arial, sans-serif;
+  font-size: 1.3rem;
   position: absolute;
   z-index: 1;
   width: 120px;
   bottom: 150%;
   left: 50%;
   margin-left: -105px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  -webkit-text-stroke:1px #40c5a4 ;
 }
 
 .tooltipdelete .tooltiptextdelete {
@@ -204,6 +207,7 @@ export default {
   padding: 5px 0;
   border-radius: 6px;
   font-family: "KEEPT___", Arial, sans-serif;
+  font-size: 1.3rem;
   position: absolute;
   z-index: 1;
   width: 120px;
@@ -211,6 +215,7 @@ export default {
   left: 50%;
   margin-left: -105px;
   margin-bottom: 50px;
+  -webkit-text-stroke:1px #40c5a4 ;
 }
 
 .tooltipadd:hover .tooltiptextadd {

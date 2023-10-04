@@ -23,7 +23,8 @@
       </div>
     </section>
 
-    <h1>SLEEVES</h1>
+    <h1><font-awesome-icon class="record-icon" icon="fa-solid fa-record-vinyl" />SLEEVES</h1>
+    
 
     <section class="nav-bar-buttons nav-bar-right">
       <div id="login" v-show="!loggedIn" class="rounded-button">
@@ -134,11 +135,19 @@ h1 {
 
  
     -webkit-text-stroke:1px #40c5a4 ; ; /* width and color */
-
-    
+ 
   
-
 }
+
+.record-icon {
+  margin-bottom: 8px;
+  margin-right: 8px;
+  font-size: 90px;
+  border: #40c5a4 solid 5px;
+  border-radius: 56px;
+  background-color: #40c5a4;
+}
+
 .rounded-button a {
 
   text-decoration: none;

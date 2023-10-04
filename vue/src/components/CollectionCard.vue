@@ -121,6 +121,7 @@ div.collection-info {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.7rem;
 }
 
 .tooltip {
@@ -138,12 +139,14 @@ div.collection-info {
   padding: 5px 0;
   border-radius: 6px;
   font-family: "KEEPT___", Arial, sans-serif;
+  font-size: 1.5rem;
   position: absolute;
   z-index: 1;
   width: 120px;
   bottom: 150%;
   left: 50%;
   margin-left: -110px;
+  -webkit-text-stroke:1px #40c5a4 ;
 }
 
 .tooltip:hover .tooltiptext {
