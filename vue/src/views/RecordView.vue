@@ -6,25 +6,35 @@
       <album-art class="album" :albumImageUrl="recordDTO.images[0].uri" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
       <div class="record-info" > 
         <ul>
-          <li v-for="artist in recordDTO.artists" :key="artist.id"> Artist: {{ artist.name }}</li>
+          <li v-for="artist in recordDTO.artists" :key="artist.id">Artist: {{ artist.name }}</li>
 
   <!-- TODO: need to make it so the last element of genre list doesn't get a comma; -->
-          <li> Genres: <span v-for="(genre, index) in recordDTO.genres" :key="index">{{ genre }}, </span></li>
+          <li>Genres: <span v-for="(genre, index) in recordDTO.genres" :key="index">{{ genre }}, </span></li>
 
-          <li> Label: {{ recordDTO.labels[0].name }}</li>
+          <li>Label: {{ recordDTO.labels[0].name }}</li>
 
   <!-- TODO: need to make it so the last element of genre list doesn't get a comma; -->
-          <li> Stlyes: <span v-for="(style, index) in recordDTO.styles" :key="index">{{ style }}, </span></li>
+          <li>Stlyes: <span v-for="(style, index) in recordDTO.styles" :key="index">{{ style }}, </span></li>
 
-          <li> Year: {{ recordDTO.year }}</li>
+          <li>Year: {{ recordDTO.year }}</li>
+
+          <li>Notes: {{ recordDTO.userNotes }} </li>
+
+          <li>Condition: {{ recordDTO.condition}} </li>
+
+          <li>Tags: <span v-for="(tag, index) in recordDTO.tags" :key="index">{{tag}}</span></li>
         </ul>
       </div>
       <button id="add-record-btn" @click="addToCollection" >
-        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" />
         <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
       </button>
+      <!-- <button id="remove-record-btn" @click="removeRecord">
+        <font-awesome-icon class="x-icon" icon="fa-regular fa-circle-x-mark" v-show="recordAdded" />
+      </button> -->
       <add-record-form v-if="showForm" :record="$store.state.currentRecord"  />
-      <button @click="toggleForm">Add notes</button>
+      <button @click="toggleForm" v-show="!showForm && recordAdded">Add notes</button>
+      <button @click="toggleForm" v-show="showForm">Cancel</button>
+      
     </div>
   </div>
 </template>
@@ -59,6 +69,13 @@ export default {
           this.recordDTO = response.data;
           this.$store.commit('SET_CUR_RECORD', response.data);
           this.isLoading = false;
+        })
+        recordService.getUserLibrary().then(response => {
+          response.data.forEach(record => {
+            if(record.id === recordId) {
+              this.recordAdded = true;
+            }
+          })
         });
     },
     methods: {
