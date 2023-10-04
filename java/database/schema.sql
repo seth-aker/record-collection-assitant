@@ -111,8 +111,6 @@ FOR EACH ROW
 EXECUTE FUNCTION  check_max_records();
 
 
-
-
 CREATE OR REPLACE FUNCTION check_collection_limit()
 RETURNS TRIGGER AS $$
 BEGIN
