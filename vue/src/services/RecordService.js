@@ -10,8 +10,8 @@ export default {
         return axios.post('/records', record);
     },
 
-    deleteRecordFromUserLib(record) {
-        return axios.delete('/records', record);
+    deleteRecordFromUserLib(recordId) {
+        return axios.delete(`/records/${recordId}`);
     },
 
     updateRecordInfo(record) {

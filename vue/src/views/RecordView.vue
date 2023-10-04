@@ -22,16 +22,13 @@
 
           <li>Condition: {{ recordDTO.condition}} </li>
 
-          <li>Tags: <span v-for="(tag, index) in recordDTO.tags" :key="index">{{tag}}</span></li>
+          <li>Tags: <span v-for="(tag, index) in recordDTO.tags" :key="index">{{tag}}, </span></li>
         </ul>
       </div>
-      <button id="add-record-btn" @click="addToCollection" >
-        <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-if="recordAdded" />
-      </button>
-      <!-- <button id="remove-record-btn" @click="removeRecord">
-        <font-awesome-icon class="x-icon" icon="fa-regular fa-circle-x-mark" v-show="recordAdded" />
-      </button> -->
-      <add-record-form v-if="showForm" :record="$store.state.currentRecord"  />
+      
+        <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-if="!recordAdded" @click="addToCollection"/>
+        <font-awesome-icon class="x-icon" icon="fa-regular fa-circle-xmark" v-show="recordAdded" @click="removeFromLib" />
+      <add-record-form v-if="showForm" :record="$store.state.currentRecord" @hideForm="showForm = false" />
       <button @click="toggleForm" v-show="!showForm && recordAdded">Add notes</button>
       <button @click="toggleForm" v-show="showForm">Cancel</button>
       
@@ -92,6 +89,19 @@ export default {
       },
       toggleForm() {
         this.showForm = !this.showForm;
+      },
+      removeFromLib() {
+        if(this.recordAdded) {
+          recordService.deleteRecordFromUserLib(this.recordDTO.id).then(response => {
+            if(response.status === 204) {
+              alert("Record removed from user's libray")
+              this.recordAdded = false;
+              this.$store.commit("REMOVE_COLLECTION_FROM_COLLECTIONS", this.recordDTO.id);         
+            }
+          }).catch(() => {
+            alert("Oops! Something went wrong and the record was not removed from your library")
+          })
+        }
       }
     }
 }
@@ -102,7 +112,7 @@ export default {
   width: 600px;
 }
 
-#add-record-btn {
+.add-record-icon {
     padding: 0, 5px;
     margin: 0;
     color: #eff13f;
@@ -110,9 +120,25 @@ export default {
     border: none;
     cursor: pointer;
     font-size: 30px;
+    
 }
 
 .add-record-icon:hover {
+  color: #d0d319;
+}
+
+.x-icon {
+   padding: 0, 5px;
+    margin: 0;
+    color: #eff13f;
+    background-color: #40c5a4;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    border-radius: 30px;
+}
+
+.x-icon:hover {
   color: #d0d319;
 }
 

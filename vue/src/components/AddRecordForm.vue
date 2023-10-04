@@ -46,6 +46,7 @@ methods: {
             if(response.status === 200){
                this.recordDTO = response.data
                alert("Record Updated") 
+               this.$emit("hideForm")
             }
         }).catch(()=> {
             alert("An error occured updating this record's information")

@@ -57,6 +57,11 @@ INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUE
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1008, '1486272', 'Me gusta mucho', 'Good');
 INSERT INTO user_record (user_id, record_id, user_note, record_condition ) VALUES (1008, '372778', 'Muy bueno', 'Good');
 
+INSERT INTO tags (tag_name) VALUES ('Jazz');
+INSERT INTO tags (tag_name) VALUES ('Johns Favorites');
+INSERT INTO tags (tag_name) VALUES ('Kirbys Favorites');
+INSERT INTO tags (tag_name) VALUES ('Rock');
+INSERT INTO tags (tag_name) VALUES ('Funk');
 
 INSERT INTO user_record_tag (tag_name, record_id, user_id) VALUES ('Jazz', '1353040', 1001);
 INSERT INTO user_record_tag (tag_name, record_id, user_id) VALUES ('Johns Favorites', '1353040', 1001);
