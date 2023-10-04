@@ -36,6 +36,8 @@ CREATE TABLE collections (
 
 CREATE TABLE records (
 	record_id varChar(30) NOT NULL, --Not serial because it will be created by the API
+	record_artist varChar(50),
+	artist_genre varChar(50),
 	record_title varChar(50) NOT NULL,
 	record_image varChar(200) NOT NULL,
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)

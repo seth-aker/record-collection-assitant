@@ -75,7 +75,6 @@ public class JdbcRecordDao implements RecordDao {
                 noteAndCondition[0] = results.getString("user_note");
                 noteAndCondition[1] = results.getString("record_condition");
             }
-
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (NullPointerException e) {
@@ -109,6 +108,7 @@ public class JdbcRecordDao implements RecordDao {
             String sql = "INSERT INTO user_record_tag (tag_name, user_id, record_id) VALUES (?, ?, ?);";
             return jdbcTemplate.update(sql, tagName,
                    userID, recordId) == 1;
+
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
