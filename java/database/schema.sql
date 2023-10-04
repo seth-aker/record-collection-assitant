@@ -70,7 +70,7 @@ CREATE TABLE user_record_tag (
 
 -- These are database triggers.  Triggers can enforce rules, and here we are enforcing the amount of records
 -- one can INSERT into the collection_record table. When it is triggered it runs the check_max_records() function.
--- The function declares an INT called record_count selects COUNT(*) from a specific collection_record id and throws it
+-- The function declares an INT called record_count, selects COUNT(*) from a specific collection_record id, and throws it
 -- into record_count. If the user exceeds 25 records and his premium status = false, he cannot add more.
 
 CREATE TRIGGER record_limit_trigger
@@ -109,8 +109,6 @@ CREATE TRIGGER collection_limit_trigger
 BEFORE INSERT ON collections
 FOR EACH ROW
 EXECUTE FUNCTION check_collection_limit();
-
-
 
 CREATE OR REPLACE FUNCTION check_collection_limit()
 RETURNS TRIGGER AS $$
