@@ -9,10 +9,10 @@
       <div class="user-heading">
         <h1>Library</h1>
       </div>
-      <div class="user-view">
+      <div class="user-view-left">
         <collection-list :collections="this.$store.state.userCollections"/>
       </div>
-      <div>
+      <div class="user-view-right">
         <record-list :records="$store.state.userLibrary" />
       </div>
     </div>
@@ -94,6 +94,9 @@ div.record-list {
   grid-template-columns: 1fr 1fr;
 }
 
-
+.user-view-left {
+  border-right: 2px solid;
+  border-color: #eff13f;
+}
 
 </style>

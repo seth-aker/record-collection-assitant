@@ -35,15 +35,14 @@ body {
 .background {
   background-image: url('./assets/pinkYellow.jpg'); 
   background-size: cover; 
-  background-position: center; 
+  background-position: center top; /* Adjust the background position to center top */
   background-repeat: no-repeat;
-  position: absolute;
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
   filter: blur(3px);
-  
 }
 </style>
