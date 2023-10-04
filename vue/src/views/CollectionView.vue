@@ -49,5 +49,7 @@ export default {
 </script>
 
 <style>
-
+.record-collection {
+  display: flex;
+}
 </style>

@@ -113,13 +113,16 @@ nav {
   align-items: center;
   justify-content: center;
   display: flex;
+
+  -webkit-text-stroke:0.5px  black; 
   
 
 }
 
 .rounded-button:hover {
   background-color: #40c5a4; /* Darker color on hover */
-  
+-webkit-text-stroke:0.5px black;
+opacity: .9;
 }
 
 

@@ -105,9 +105,8 @@ public class JdbcRecordDao implements RecordDao {
 
     public boolean createTag(String recordId, String tagName, int userID){
         try {
-            String sql = "INSERT INTO user_record_tag (tag_name, user_id, record_id) VALUES (?, ?, ?);";
-            return jdbcTemplate.update(sql, tagName,
-                   userID, recordId) == 1;
+            String sql = "INSERT INTO tags (tag_name) VALUES (?);";
+            return jdbcTemplate.update(sql, tagName) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -124,6 +123,9 @@ public class JdbcRecordDao implements RecordDao {
             for(String tag : tags) {
                 if(!checkIfTagExists(recordId, userId, tag)) {
                     createTag(recordId, tag, userId);
+                }
+                if(!tagInUserRecordTags(recordId, userId, tag)){
+                    addTagToUserRecordTags(recordId, userId, tag);
                 }
             }
             return true;
@@ -188,9 +190,9 @@ public class JdbcRecordDao implements RecordDao {
 
     public boolean createRecord(Record record) {
         String sql = "INSERT INTO records (record_id, record_title, record_image) " +
-                "VALUES (?, ?) ";
+                "VALUES (?, ?, ?) ";
         try {
-            return jdbcTemplate.update(sql, record.getId(), record.getTitle()) == 1;
+            return jdbcTemplate.update(sql, record.getId(), record.getTitle(), record.getThumb()) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -213,11 +215,24 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public boolean removeRecordFromUserLib(String recordId, int userId) {
+        deleteTags(userId, recordId);
         String sql = "DELETE FROM user_record " +
                 "WHERE user_id = ? AND record_id = ?;";
         try {
             return jdbcTemplate.update(sql, userId, recordId) == 1;
         } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        }
+    }
+
+    public boolean removeRecordFromCollection(int collectionId, String recordId) {
+        String sql = "DELETE FROM collection_record WHERE collection_id = ? AND record_id = ?";
+
+        try {
+            return jdbcTemplate.update(sql, collectionId, recordId) == 1;
+        }catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
@@ -245,9 +260,9 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     private boolean checkIfTagExists(String recordId, int userId, String tag) {
-        String sql = "SELECT tag_name FROM user_record_tag WHERE user_id = ? AND record_id = ? ;";
+        String sql = "SELECT tag_name FROM tags;";
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, recordId);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while (results.next()) {
                 String recordTag = results.getString("tag_name");
                 if (recordTag.equals(tag)) {
@@ -259,4 +274,28 @@ public class JdbcRecordDao implements RecordDao {
             throw new DaoException("Unable to connect to server or database", e);
         }
     }
+    private boolean addTagToUserRecordTags(String recordId, int userId, String tag) {
+        String sql = "INSERT INTO user_record_tag (tag_name, record_id, user_id) VALUES (?, ?, ?);";
+        try {
+            return jdbcTemplate.update(sql, tag, recordId, userId ) == 1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+    }
+
+    private boolean tagInUserRecordTags(String recordId, int userId, String tag) {
+        String sql = "SELECT tag_name FROM user_record_tag WHERE record_id = ? AND user_id = ? ; ";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recordId, userId);
+            while(results.next()) {
+                if(results.getString("tag_name").equals(tag)){
+                    return true;
+                }
+            }
+            return false;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+    }
+
 }

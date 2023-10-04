@@ -7,6 +7,7 @@ import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 
 import com.techelevator.exception.DaoException;
+import com.techelevator.model.Collection;
 import com.techelevator.model.Record;
 import com.techelevator.model.RecordDTO;
 
@@ -49,10 +50,13 @@ public class RecordController {
     @GetMapping(path = "/{recordId}")
     public RecordDTO getRecordById(@Valid Principal principal, @PathVariable String recordId) {
         RecordDTO recordDTO = apiService.getRecordInformation(recordId);
+        int userId = userDao.findIdByUsername(principal.getName());
         try {
-            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userDao.findIdByUsername(principal.getName())));
-            List<String> tags = recordDao.getRecordTags(recordId, userDao.findIdByUsername(principal.getName()));
-
+            String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userId));
+            List<String> tags = new ArrayList<>();
+            if(recordLogic.isRecordInUserLib(recordId, userId)) {
+                recordDao.getRecordTags(recordId, userId);
+            }
             recordDTO.setUserNotes(recordNotesAndCondition[0]);
             recordDTO.setCondition(recordNotesAndCondition[1]);
             recordDTO.setTags(tags);
@@ -62,6 +66,7 @@ public class RecordController {
 
         return recordDTO;
     }
+
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "/{recordId}", method = RequestMethod.PUT)
     public RecordDTO updateRecord(@RequestBody RecordDTO recordDTO, Principal principal) {
@@ -93,41 +98,37 @@ public class RecordController {
         return userLib;
 
     }
- 
-    
 
-        @ResponseStatus(HttpStatus.CREATED)
-        @RequestMapping(path = "", method = RequestMethod.POST)
-        public void addRecordToUserLib (@RequestBody RecordDTO recordDTO, Principal principal){
-            int userId = userDao.findIdByUsername(principal.getName());
-            String recordId = String.valueOf(recordDTO.getId());
-            if (!recordLogic.doesRecordExist(recordId)) {
-                recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(),"", ""));
-            }
-            if (!recordLogic.isRecordInUserLib(recordId, userId)) {
-                recordDao.addRecordToUserLib(recordId, userId);
-            }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    public void addRecordToUserLib(@RequestBody RecordDTO recordDTO, Principal principal) {
+        int userId = userDao.findIdByUsername(principal.getName());
+        String recordId = String.valueOf(recordDTO.getId());
+        if (!recordLogic.doesRecordExist(recordId)) {
+            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(), "", ""));
+        }
+        if (!recordLogic.isRecordInUserLib(recordId, userId)) {
+            recordDao.addRecordToUserLib(recordId, userId);
         }
     }
 
-    // This will add a single tag into the tags array vs the whole array @once
-    //    (We can fill it with tags but should we do it one at a time or all at once?
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path = "/{recordId}")
+    public void deleteRecordFromUserLib(@PathVariable String recordId, Principal principal ) {
+        int userId = userDao.findIdByUsername(principal.getName());
 
-//    public void setTags(String tag) {
-//        if(tags != null && !tags.isEmpty()) {
-//            tags.add(tag);
-//
-//
-//        }
-//    }
-    
+        if(recordLogic.doesRecordExist(recordId)) {
+            List<Collection> collections = collectionDao.getCollectionsByUserId(userId);
+            for(Collection collection : collections) {
+                recordDao.removeRecordFromCollection(collection.getId(), recordId);
+            }
+            recordDao.removeRecordFromUserLib(recordId, userId);
+        }
+    }
 
+}
 
-//    @RequestMapping(path = "/set-tags", method = RequestMethod.PUT)
-//    public ResponseEntity addRecordTag(@RequestParam String tag, Principal principal, @RequestParam int recordId) {
-//
-//
-//    }
 
 
 

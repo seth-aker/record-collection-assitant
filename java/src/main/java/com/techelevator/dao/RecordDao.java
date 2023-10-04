@@ -31,7 +31,7 @@ public interface RecordDao {
 
     public String[] getRecordNoteAndCondition(String recordId,  int userId);
 
-
+    boolean removeRecordFromCollection(int collectionId, String recordId);
 
 
 }

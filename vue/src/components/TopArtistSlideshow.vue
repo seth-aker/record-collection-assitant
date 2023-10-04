@@ -172,6 +172,8 @@ h2 {
   font-size: 50px;
   color: #40c5a4;
   margin-top: 230px;
+
+   -webkit-text-stroke:1.5px #E00A86;
 }
 
 /* Style for the green box */

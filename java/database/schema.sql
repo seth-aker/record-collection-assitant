@@ -36,7 +36,9 @@ CREATE TABLE collections (
 
 CREATE TABLE records (
 	record_id varChar(30) NOT NULL, --Not serial because it will be created by the API
-	record_title varChar(50) NOT NULL,
+	record_title varChar(200) NOT NULL,
+	record_artist varChar(50),
+	artist_genre varChar(50),
 	record_image varChar(200) NOT NULL,
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)
 );
@@ -59,11 +61,17 @@ CREATE TABLE user_record (
 	CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
 );
 
+CREATE TABLE tags (
+    tag_name varChar(30) NOT NULL,
+    CONSTRAINT PK_tag_name PRIMARY KEY (tag_name)
+);
+
 CREATE TABLE user_record_tag (
-    tag_name varChar(20) NOT NULL,
+    tag_name varChar(30) NOT NULL,
     record_id varChar(30) NOT NULL,
     user_id int NOT NULL,
-    CONSTRAINT PK_tag_name PRIMARY KEY (tag_name),
+    CONSTRAINT PK_tag_name_record_id_user_id PRIMARY KEY (tag_name, record_id, user_id),
+    CONSTRAINT FK_tag_name FOREIGN KEY (tag_name) REFERENCES tags(tag_name),
     CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
     CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id)
 );
