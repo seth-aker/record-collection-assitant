@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .record-card {
     margin: 10px;
-    width: 30%;
+    width: 15%;
     
 }
 </style>

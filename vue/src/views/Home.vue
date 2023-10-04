@@ -3,6 +3,7 @@
     <loading-icon v-show="isLoading" />
     <search-box />
     <slide-show :items="this.$store.state.trendingCollections" />
+   
     
     <TopArtistSlideshow></TopArtistSlideshow>
 
@@ -28,6 +29,7 @@ import LoadingIcon from '../components/LoadingIcon.vue';
 import SlideShow from '../components/SlideShow.vue';
 
 
+
 export default {
   components: {
     SearchBox,
@@ -36,9 +38,11 @@ export default {
     PopularArtist,
     LoadingIcon,
     SlideShow,
+   
   },
 
   created() {
+    this.$store.commit('CLEAR_TRENDING')
       CollectionService.getTrendingCollections(20).then(response => {
         const collections = response.data;
         collections.forEach(collection => {

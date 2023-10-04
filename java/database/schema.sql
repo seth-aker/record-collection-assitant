@@ -70,13 +70,9 @@ CREATE TABLE user_record_tag (
 
 -- These are database triggers.  Triggers can enforce rules, and here we are enforcing the amount of records
 -- one can INSERT into the collection_record table. When it is triggered it runs the check_max_records() function.
--- The function declares an INT called record_count selects COUNT(*) from a specific collection_record id and throws it
--- into record_count. If the user exceeds 25 records and his premium status = false, he cannot add more.
 
-CREATE TRIGGER record_limit_trigger
-BEFORE INSERT ON collection_record
-FOR EACH ROW
-EXECUTE FUNCTION  check_max_records();
+-- The function below declares an INT called record_count, selects COUNT(*) from a specific collection_record id, and throws it
+-- into record_count. If the user exceeds 25 records and his premium status = false, they cannot add more.
 
 -- the $$ are delimiters.  They enclose and define the body of the function
 
@@ -105,11 +101,14 @@ $$ LANGUAGE plpgsql;
 -- the $$ indicates the method is closed, and LANGUAGE is a keyword that lets you specify a programming language to use,
 -- in this case PL/pgSQL, which is an extension of SQL that allows procedural code within your database.
 
-CREATE TRIGGER collection_limit_trigger
-BEFORE INSERT ON collections
-FOR EACH ROW
-EXECUTE FUNCTION check_collection_limit();
 
+-- this is the actual database trigger.  The trigger must always come after the function so it has a
+-- or it will have nothing to search for, and will most definitely break your code.
+
+CREATE TRIGGER record_limit_trigger
+BEFORE INSERT ON collection_record
+FOR EACH ROW
+EXECUTE FUNCTION  check_max_records();
 
 
 CREATE OR REPLACE FUNCTION check_collection_limit()
@@ -127,8 +126,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-
-
+CREATE TRIGGER collection_limit_trigger
+BEFORE INSERT ON collections
+FOR EACH ROW
+EXECUTE FUNCTION check_collection_limit();
 
 --INSERT INTO artists
 
@@ -193,8 +194,6 @@ $$ LANGUAGE plpgsql;
 --	CONSTRAINT FK_record_id FOREIGN KEY (record_id) REFERENCES records(record_id),
 --	CONSTRAINT FK_track_id FOREIGN KEY (track_id) REFERENCES tracks(track_id)
 --);
-
-
 
 COMMIT TRANSACTION;
 

@@ -7,10 +7,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faPlusSquare, faAddressBook, faCircleCheck} from '@fortawesome/free-regular-svg-icons'
-import { faBars, faUserCircle} from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare, faAddressBook, faCircleCheck, faCircleXmark, faSquareMinus} from '@fortawesome/free-regular-svg-icons'
+import { faBars, faPlus, faUserCircle} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faPlusSquare, faUserCircle, faBars, faAddressBook, faCircleCheck);
+library.add(faPlusSquare, faUserCircle, faBars, faAddressBook, faCircleCheck, faCircleXmark,faSquareMinus, faPlus);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
