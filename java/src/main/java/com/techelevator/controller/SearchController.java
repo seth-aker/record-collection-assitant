@@ -21,8 +21,9 @@ public class SearchController {
     @GetMapping(path = "/search")
     public SearchResponse getRecordSearchResults(@RequestParam(defaultValue = "") String q,
                                                  @RequestParam (defaultValue = "25" ) int per_page,
-                                                 @RequestParam (defaultValue = "release") String type) {
-        return apiService.getAlbumSearch(q, per_page, type);
+                                                 @RequestParam (defaultValue = "release") String type,
+                                                 @RequestParam (defaultValue = "1" ) int page) {
+        return apiService.getAlbumSearch(q, per_page, type, page);
     }
 
 }
