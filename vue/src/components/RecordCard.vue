@@ -91,7 +91,7 @@ export default {
     background-color: #40c5a4;
     border: none;
     cursor: pointer;
-    font-size: 30px;
+    font-size: 1.2rem;
 }
 
 .add-record-icon:hover {
@@ -114,12 +114,12 @@ export default {
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: .9rem;
+  font-size: .8rem;
   
 }
 
 .record-artist {
-  font-size: .8rem;
+  font-size: .7rem;
   font-style: italic;
 }
 </style>
