@@ -48,7 +48,7 @@ h2 {
   flex-wrap: wrap; /* Allow profiles to wrap to the next line if there's not enough space */
   justify-content: center;
   margin-top: 100px;
-  min-height: 100vh;
+  min-height: 50vh;
 }
 
 .profile {
