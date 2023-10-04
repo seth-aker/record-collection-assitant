@@ -2,7 +2,8 @@
     <div class="record-list">  
          <record-card 
                 v-for="record in records"
-                :key="record.id" :recordInfo="record"/>
+                :key="record.id" :recordInfo="record"
+                :isHome="isHome"/>
         <!-- <div class="no-items-msg" v-show="records.length === 0">
             No records found.
         </div> -->
@@ -17,7 +18,7 @@ export default {
     components: {
         RecordCard
     },
-    props: ['records'],
+    props: ['records','isHome'],
 
 }
 </script>
@@ -25,7 +26,7 @@ export default {
 <style scoped>
 .record-card {
     margin: 10px;
-    width: 15%;
-    
+    width: 20%;
+    min-width: 80px;
 }
 </style>
