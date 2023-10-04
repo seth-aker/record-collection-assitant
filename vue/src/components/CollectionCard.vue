@@ -11,8 +11,9 @@
             </div>
         </div>
         <div class="button">
-        <button id="delete-coll-btn" @click="deleteCollection" >
+        <button class="tooltip" id="delete-coll-btn" @click="deleteCollection" >
             <font-awesome-icon class="delete-coll-icon" icon="fa-regular fa-square-minus" />
+            <span class="tooltiptext">Remove this collection</span>
         </button>
         </div>
     </div>
@@ -122,5 +123,30 @@ div.collection-info {
     align-items: center;
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #eff13f;
+}
 
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: transparent;
+  color: #eff13f;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-family: "KEEPT___", Arial, sans-serif;
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -110px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 </style>
