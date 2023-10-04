@@ -116,7 +116,9 @@ h2{
      font-family: 'KEEPT___'; 
   src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
   font-size: 50px;
- 
+
+   -webkit-text-stroke:0.5px  #9709aa /*width and color */
+  
 }
 
 
