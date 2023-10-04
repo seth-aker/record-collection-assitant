@@ -23,7 +23,7 @@
       </div>
     </section>
 
-    <h1>SLEEVES</h1>
+    <h1>Sleeves</h1>
 
     <section class="nav-bar-buttons nav-bar-right">
       <div id="login" v-show="!loggedIn" class="rounded-button">
@@ -112,20 +112,23 @@ nav {
   align-items: center;
   justify-content: center;
   display: flex;
+
+  -webkit-text-stroke:0.5px  black; 
   
 
 }
 
 .rounded-button:hover {
   background-color: #40c5a4; /* Darker color on hover */
-  
+-webkit-text-stroke:0.5px black;
+opacity: .9;
 }
 
 
 h1 {
     font-size: 130px;
     font-family: "KEEPT___", Arial, sans-serif;
-    color: #eff13f;
+    color: #E00A86;
     margin: 0;
     position: absolute;
     top: 0;
@@ -133,7 +136,7 @@ h1 {
     text-align: center;
 
  
-    -webkit-text-stroke:1px #40c5a4 ; ; /* width and color */
+    -webkit-text-stroke:0.5px  #F8E73B; /* width and color */
 
     
   

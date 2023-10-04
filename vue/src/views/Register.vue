@@ -160,7 +160,7 @@ h2{
   src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
   font-size: 40px;
  color: #F8E73B;
-
+ -webkit-text-stroke:0.5px  #9709aa;
 
 }
 

@@ -12,6 +12,7 @@ public class Record {
     private String condition;
 
 
+
     public Record(){}
 
     public Record(String id, String title, String image, String userNote, String condition) {
