@@ -7,17 +7,20 @@
         <div class="record-artist">{{ recordArtist }}</div>
       </div>
       <div class="buttons">
-        <button id="add-record-btn" @click="addToCollection" v-show="isHome">
+        <button class="tooltipadd" id="add-record-btn" @click="addToCollection" v-show="isHome">
           <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
+          <span class="tooltiptextadd">Add this record to a collection</span>
           <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
         </button>
-                <button id="add-record-btn" @click="addToCollection" v-show="!isHome">
+        <button class="tooltipadd" id="add-record-btn" @click="addToLibrary" v-show="!isHome">
           <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
+          <span class="tooltiptextadd">Add this record to you library</span>
           <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
         </button>
         <div class="button" v-show="isHome">
-          <button id="delete-record-btn" @click="deleteRecord">
-              <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
+          <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
+            <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
+            <span class="tooltiptextdelete">Remove this record</span>
           </button>
         </div>
       </div>
@@ -53,6 +56,9 @@ export default {
         
     },
     deleteRecord() {
+      return ;
+    },
+    addToLibrary() {
       return ;
     }
   },
@@ -157,5 +163,61 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+}
+
+.tooltipadd {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #eff13f;
+}
+
+.tooltipdelete {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #eff13f;
+}
+
+.tooltipadd .tooltiptextadd {
+  visibility: hidden;
+  width: 120px;
+  background-color: transparent;
+  color: #eff13f;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-family: "KEEPT___", Arial, sans-serif;
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -105px;
+  margin-bottom: 20px;
+}
+
+.tooltipdelete .tooltiptextdelete {
+  visibility: hidden;
+  width: 120px;
+  background-color: transparent;
+  color: #eff13f;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-family: "KEEPT___", Arial, sans-serif;
+  position: absolute;
+  z-index: 1;
+  width: 120px;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -105px;
+  margin-bottom: 50px;
+}
+
+.tooltipadd:hover .tooltiptextadd {
+  visibility: visible;
+}
+
+.tooltipdelete:hover .tooltiptextdelete {
+  visibility: visible;
 }
 </style>
