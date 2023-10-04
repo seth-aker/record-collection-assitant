@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+        <div class="fixed-border"></div>
     <nav-bar-vue />
     <router-view />
     <footer-vue />
@@ -30,7 +31,9 @@ body {
 
 #app {
   position: relative;
+  border: #E00A86;
 }
+
 
 .background {
   background-image: url('./assets/pinkYellow.jpg'); 

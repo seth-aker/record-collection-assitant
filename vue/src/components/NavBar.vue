@@ -131,6 +131,11 @@ h1 {
     top: 0;
     width: 100vw;
     text-align: center;
+
+ 
+    -webkit-text-stroke:1px #40c5a4 ; ; /* width and color */
+
+    
   
 
 }
