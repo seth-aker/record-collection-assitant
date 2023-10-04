@@ -65,11 +65,14 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 100%;
+  height: auto;
 }
   .record-card {
     margin: 10px;
     width: 20%;
-    min-width: 80px;
+   
+    
 }
 
 </style>
