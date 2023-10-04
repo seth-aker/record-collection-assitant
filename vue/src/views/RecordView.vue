@@ -100,6 +100,7 @@ export default {
 <style scoped>
 .album {
   width: 600px;
+  
 }
 
 #add-record-btn {
@@ -118,5 +119,28 @@ export default {
 
 .record-added-icon {
   cursor: default;
+}
+.record-page {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.record-info {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 20px;
+  color: #eff13f;
+  font-family: "KEEPT___", Arial, sans-serif;
+  
+  
+}
+h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  color: #eff13f;
+  font-family: "KEEPT___", Arial, sans-serif;
 }
 </style>
