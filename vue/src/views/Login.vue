@@ -38,7 +38,9 @@ export default {
   name: "login",
   components: {
    statsData,
+
   },
+  
   data() {
     return {
       user: {
