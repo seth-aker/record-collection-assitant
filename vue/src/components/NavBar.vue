@@ -45,7 +45,7 @@
       </div>
     </section> -->
 
-<h1>
+<h1 @click="goToHomePage">
       <font-awesome-icon class="record-icon" icon="fa-solid fa-record-vinyl" />
       <span class="gradient-text2">SLEEVES</span>
     </h1>
@@ -96,8 +96,12 @@ export default {
     logout() {
       this.$store.commit('LOGOUT');
       this.$router.push({name: 'home'})
+    },
+    goToHomePage() {
+    this.$router.push({name: 'home'})
     }
   }
+  
   
 
 }
@@ -133,7 +137,7 @@ nav {
     border-radius: 5px;
     padding: 5px 8px 5px 9px;
     font-size: 40px;
-    color: linear-gradient(180deg, rgba(64,197,164,1) 0%, rgba(239,241,63,1) 100%);
+    color: #40c5a4;
  }
 
  .nav-bar-right {
@@ -176,7 +180,7 @@ h1 {
     text-align: center;
     z-index: 0;
     -webkit-text-stroke:1px #40c5a4f6 ; ; /* width and color */
- 
+    cursor: pointer;
   
 }
 
@@ -238,6 +242,7 @@ h1 {
 .dropdown:hover .fa-icon{
   background-color: #40c5a4f6; 
   border-radius: 5px 5px 5px 0px;
+  color:#eff13f;
 }
 
 .option {
