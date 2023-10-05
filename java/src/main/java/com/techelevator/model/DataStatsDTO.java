@@ -10,8 +10,12 @@ public class DataStatsDTO {
     private int collectionCount;
     private int premiumUserCount;
     private double avgRecordsInCollection;
+    private String mostActiveUser;
+
+
     private List <Record> artistsBestRecord;
     private int downloadNumber;
+
 
 
     private List<Record> topTenRecords;
@@ -21,16 +25,10 @@ public class DataStatsDTO {
     private String topGenre;
 
 
+
     private List<Record> publicSearchTags;
     private   List<Record> privateSearchTags;
 
-
-
-   private String worstArtist;
-   private String worstGenre;
-   private Record worstRecord;
-
-    private String mostActiveUser;
 
 
 
@@ -138,30 +136,6 @@ public class DataStatsDTO {
         this.topGenre = topGenre;
     }
 
-    public String getWorstArtist() {
-        return worstArtist;
-    }
-
-    public void setWorstArtist(String worstArtist) {
-        this.worstArtist = worstArtist;
-    }
-
-    public String getWorstGenre() {
-        return worstGenre;
-    }
-
-    public void setWorstGenre(String worstGenre) {
-        this.worstGenre = worstGenre;
-    }
-
-    public Record getWorstRecord() {
-        return worstRecord;
-    }
-
-    public void setWorstRecord(Record worstRecord) {
-        this.worstRecord = worstRecord;
-    }
-
     public String getMostActiveUser() {
         return mostActiveUser;
     }
@@ -187,9 +161,6 @@ public class DataStatsDTO {
                 ", topTenArtists=" + topTenArtists +
                 ", topArtist='" + topArtist + '\'' +
                 ", topGenre='" + topGenre + '\'' +
-                ", worstArtist='" + worstArtist + '\'' +
-                ", worstGenre='" + worstGenre + '\'' +
-                ", worstRecord=" + worstRecord +
                 ", mostActiveUser='" + mostActiveUser + '\'' +
                 '}';
     }

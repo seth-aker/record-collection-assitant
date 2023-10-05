@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import { mixin as clickaway } from "vue-clickaway";
+// import { mixin as clickaway } from "vue-clickaway";
 
 export default {
     name: 'CollectionDropdown',
-    mixins: [clickaway],
+    // mixins: [clickaway],
     props: ['isHome','recordAdded'],
     provide () {
       return {
