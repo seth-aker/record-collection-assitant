@@ -72,8 +72,10 @@ export default {
         recordService.getRecordInfo(this.recordInfo.id).then(response => {
           CollectionService.addRecordToUserCollection(this.collection.id, response.data).then(resp => {
             if(resp.status === 201) {
-              alert("Collection added successfully.");
-              this.recordAdded = true
+              alert("Record added to colleciton successfully.");
+              this.recordAdded = true;
+              const user = this.$store.state.username;
+              this.$router.push(`/${user}`);
             }
           }).catch( () => {
             alert("Oops! Something went wrong and the record was not added to your collection")

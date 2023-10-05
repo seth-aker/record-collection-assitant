@@ -38,7 +38,7 @@ createCollection() {
         alert("Collection created successfully");
         this.$emit("hideForm");
         this.$store.commit("ADD_COLLECTION_TO_COLLECTIONS", this.collection);
-    }
+        }
     })
     }
 }
