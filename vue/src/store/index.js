@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import SearchResults from './modules/searchResults.js'
+
 Vue.use(Vuex)
 
 /*
@@ -29,7 +30,8 @@ export default new Vuex.Store({
     userCollections: [],
     premium: false,
     trendingCollections: [],
-    currentRecord: {}
+    currentRecord: {},
+    dataStats:{}
   },
 
   mutations: {
@@ -86,7 +88,11 @@ export default new Vuex.Store({
     },
     ADD_COLLECTION_TO_COLLECTIONS(state,collection) {
       state.userCollections.push(collection);
+    },
+    SET_DATA_STATS(state, stats){
+      state.dataStats=stats;
     }
+    
   },
   
   });

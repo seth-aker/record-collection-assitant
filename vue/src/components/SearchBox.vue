@@ -74,14 +74,15 @@ export default {
 #search-button {
     padding: 10px 20px;
     background-color: #333;
-    color: #fff;
+    color: #eff13f;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 16px;
-     background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+    font-size: 20px;
+    background: linear-gradient(180deg, rgba(239,241,63,0.7455357142857143) 37%, rgba(224,10,134,0.7231267507002801) 100%);
+
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
-   -webkit-text-stroke:0.5px #40c5a4f6; 
+    -webkit-text-stroke:0.5px #E00A86;
 }
 
 #search-button:hover {

@@ -136,18 +136,22 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
     margin: 10px;
     background-color: #40c5a4;
-    padding: 3px;
-    border-radius: 10px;
-    border: solid #40c5a4 1px;
+    padding: 20px;
+    border-radius: 75px;
+    border: solid #40c5a4 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);
+
     
 }
 
 .album-art {
-  width: 99%;
-  margin: 2px;
+  width: 45%;
+
   
 }
 #add-record-btn {
@@ -157,7 +161,8 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    
 }
 
 .add-record-icon:hover {
@@ -174,8 +179,8 @@ export default {
 
 .record-info {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  
+  justify-content: center;
   width: 100%;
   height: 100%;
    -webkit-text-stroke:0.5px #E00A86;
@@ -188,7 +193,11 @@ export default {
 .record-text {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   font-size: 1rem;
+=======
+  font-size: 1.7rem;
+>>>>>>> 52d8feb34c373a4203299d415cff59fed71b2ce7
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   color: #eff13f;
 
