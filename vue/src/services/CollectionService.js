@@ -24,5 +24,9 @@ export default {
     
     createNewCollection(collection) {
         return axios.post('/collections/create',collection)
+    },
+
+    deleteCollection(collectionId) {
+        return axios.delete(`/collections/${collectionId}`)
     }
 }
