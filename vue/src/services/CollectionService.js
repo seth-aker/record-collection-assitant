@@ -16,7 +16,10 @@ export default {
 
     getTrendingCollections(numOfCollections) {
         return axios.get(`/collections/public/${numOfCollections}`)
+    },
+    
+    addRecordToUserCollection(collectionId, record){
+        return axios.post(`/collections/${collectionId}`, record)
     }
-
     
 }

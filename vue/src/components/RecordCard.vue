@@ -1,23 +1,33 @@
 <template>
   <div class="record-card">
-    <album-art :albumImageUrl="recordInfo.thumb" :albumName="recordInfo.title" :albumId="recordInfo.id" class="album-art"/>
+    <album-art :albumImageUrl="recordInfo.thumb" 
+    :albumName="recordInfo.title" 
+    :albumId="recordInfo.id" class="album-art"/>
     <div class="record-info">
       <div class="record-text">
-        <router-link class="record-title" :to="{name: 'record-page', params: {recordId : recordInfo.id}}">{{ recordTitle }}</router-link>
+        <router-link class="record-title" 
+        :to="{name: 'record-page', params: {recordId : recordInfo.id}}">
+        {{ recordTitle }}
+        </router-link>
         <div class="record-artist">{{ recordArtist }}</div>
       </div>
       <div class="buttons">
-        <button class="tooltipadd" id="add-record-btn" @click="addToCollection" v-show="isHome">
-          <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
-          <span class="tooltiptextadd">Add this record to a collection</span>
-          <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
-        </button>
+        <collection-dropdown :isHome="isHome" 
+        :recordAdded="recordAdded"
+        @toggle-isNotVis="receiveEmit"
+        @away-toggle="awayToggle">
+          <template></template>
+          <collection-dropdown-content>
+            <collection-dropdown-item v-for="collection in this.$store.state.userCollections" 
+            :key="collection.id">{{collection.name}}</collection-dropdown-item>
+          </collection-dropdown-content>
+        </collection-dropdown>
         <button class="tooltipadd" id="add-record-btn" @click="addToLibrary" v-show="!isHome">
           <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
           <span class="tooltiptextadd">Add this record to you library</span>
           <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
         </button>
-        <div class="button" v-show="isHome">
+        <div class="button" v-show="isHome && !isNotVis">
           <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
             <span class="tooltiptextdelete">Remove this record</span>
@@ -32,17 +42,27 @@
 
 import AlbumArt from './AlbumArt.vue'
 import recordService from '../services/RecordService.js'
+import CollectionDropdown from './CollectionDropdown.vue'
+import CollectionDropdownContent from './CollectionDropdownContent.vue'
+import CollectionDropdownItem from './CollectionDropdownItem.vue'
 
 export default {
   name: "recordInfo",
   props: ['recordInfo','isHome'], 
-  components: { AlbumArt },
+  components: { AlbumArt, CollectionDropdown, CollectionDropdownContent, CollectionDropdownItem },
   data() {
     return {
-      recordAdded: false
+      recordAdded: false,
+      isNotVis: false
     }
   },
   methods: {
+    awayToggle() {
+      this.isNotVis = false;
+    },
+    receiveEmit(isNotVis) {
+      this.isNotVis = isNotVis;
+    },
     addToCollection() {
         recordService.getRecordInfo(this.recordInfo.id).then(response => {
           recordService.addRecordToUserLib(response.data).then(resp => {
@@ -59,6 +79,18 @@ export default {
       return ;
     },
     addToLibrary() {
+      recordService.getRecordInfo(this.recordInfo.id)
+        .then(response => {
+          recordService.addRecordToUserLib(response.data)
+            .then(resp => {
+              if(resp.status === 201) {
+              this.recordAdded = true
+              this.$store.commit('ADD_RECORD_TO_LIBRARY',response.data)
+            }
+          }).catch( () => {
+            alert("Oops! Something went wrong and the record was not added to your library")
+          })
+        })
       return ;
     }
   },
@@ -234,5 +266,14 @@ export default {
 .tooltipdelete:hover .tooltiptextdelete {
   visibility: visible;
   
+}
+
+.collection-name {
+  font-family: "KEEPT___", Arial, sans-serif;
+  color: #40c5a4;
+  -webkit-text-stroke:1px #eff13f ;
+  font-size: 1.1rem;
+  width: 500%;
+  margin-top: 3px;
 }
 </style>

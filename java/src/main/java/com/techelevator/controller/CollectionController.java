@@ -3,9 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Collection;
-import com.techelevator.model.Label;
-import com.techelevator.model.User;
+import com.techelevator.model.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,7 +56,12 @@ public class CollectionController {
     public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal) {
         collection.setUserId(userDao.findIdByUsername(principal.getName()));
         return this.collectionDao.createCollection(collection);
+    }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/collections/{collectionId}")
+    public void addRecordToUserCollection(@RequestBody Record record, @PathVariable int collectionId) {
+            collectionDao.addRecordToCollection(collectionId,record);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
