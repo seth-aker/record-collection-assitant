@@ -284,7 +284,7 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     private boolean tagInUserRecordTags(String recordId, int userId, String tag) {
-        String sql = "SELECT tag_name FROM user_record_tag WHERE record_id = ? AND user_id = ? ; ";
+        String sql = "SELECT tag_name FROM user_record_tag WHERE record_id = ? AND user_id = ?;";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recordId, userId);
             while(results.next()) {
