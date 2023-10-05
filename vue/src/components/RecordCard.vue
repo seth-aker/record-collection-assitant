@@ -193,18 +193,14 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
 .record-text {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  font-size: 1rem;
-=======
-  font-size: 1.7rem;
->>>>>>> 52d8feb34c373a4203299d415cff59fed71b2ce7
+  font-size: 1.1rem;
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   color: #eff13f;
 
 }
 
 .record-artist {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-style: italic;
   
 }
