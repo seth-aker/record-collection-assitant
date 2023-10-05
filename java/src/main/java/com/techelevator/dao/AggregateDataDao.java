@@ -15,6 +15,8 @@ public interface AggregateDataDao {
 
     int getTotalNumberOfRecord();
 
+    int numberOfTimesRecordAppears(String recordId);
+
     Record getMostPopularRecord();
 
     int getTotalNumberOfCollections();
@@ -27,7 +29,7 @@ public interface AggregateDataDao {
 
     String getLeastPopularArtist();
 
-    List<String> getTopTenArtists();
+    List<String> topTenArtists();
 
     String getMostActiveUser();
 
