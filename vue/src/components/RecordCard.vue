@@ -132,7 +132,8 @@ export default {
     border-radius: 75px;
     border: solid #40c5a4 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: linear-gradient(180deg, rgba(239,241,63,1) 0%, rgba(64,197,164,1) 100%);
+background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);
+
     
 }
 

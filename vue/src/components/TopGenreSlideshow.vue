@@ -131,7 +131,7 @@ export default {
   /* Style for the left arrow button */
   left: 10px;
   color: #E00A86;
-   background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  background: linear-gradient(180deg, rgba(239,241,63,0.7455357142857143) 37%, rgba(224,10,134,0.7231267507002801) 100%);
   border-radius: 50px;
  
 }
@@ -140,7 +140,7 @@ export default {
   /* Style for the right arrow button */
   right: 10px;
   color: #E00A86;
-   background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  background: linear-gradient(180deg, rgba(239,241,63,0.7455357142857143) 37%, rgba(224,10,134,0.7231267507002801) 100%);
   border-radius: 50px;
 }
 h2 {
