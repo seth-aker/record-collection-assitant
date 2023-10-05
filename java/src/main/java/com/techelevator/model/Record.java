@@ -14,10 +14,11 @@ public class Record {
 
     public Record(){}
 
-    public Record(String id, String title, String image, String userNote, String condition) {
+    public Record(String id, String title, String image, String artist, String userNote, String condition) {
         this.id = id;
         this.title = title;
         this.thumb = image;
+        this.artist = artist;
         this.userNote = userNote;
         this.condition = condition;
     }

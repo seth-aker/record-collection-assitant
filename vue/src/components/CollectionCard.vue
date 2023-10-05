@@ -112,9 +112,11 @@ export default {
 }
 
 div.collection-info {
-    font-size: 12px;
-    font-style: italic;
+  font-size: 1rem;
+    /* font-style: italic; */
     grid-area: info;
+    font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+    color: #eff13f;
 }
 
 .button {

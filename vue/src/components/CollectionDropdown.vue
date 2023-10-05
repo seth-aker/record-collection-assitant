@@ -1,11 +1,11 @@
 <template>
   <div @click="toggleHideDeleteButton(); toggleCollectionList();" 
-  v-on-clickaway.stop="away">
+  v-on-clickaway="away">
       <slot name="toggler">
         <button class="tooltipadd" id="add-record-btn">
           <font-awesome-icon class="add-record-icon" 
           icon='fa-regular fa-plus-square' 
-          v-show="!recordAdded" />
+          v-show="!recordAdded && !isCollection" />
           <span class="tooltiptextadd">
             Add this record to a collection</span>
         </button>
@@ -20,7 +20,7 @@ import { mixin as clickaway } from "vue-clickaway";
 export default {
     name: 'CollectionDropdown',
     mixins: [clickaway],
-    props: ['isHome','recordAdded'],
+    props: ['isHome','recordAdded','isCollection'],
     provide () {
       return {
         sharedState: this.sharedState
