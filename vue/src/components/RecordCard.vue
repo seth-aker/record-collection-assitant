@@ -13,21 +13,25 @@
       </div>
       <div class="buttons">
         <collection-dropdown :isHome="isHome" 
-        :recordAdded="recordAdded"
+        :recordAdded="recordAdded" :isCollection="isCollection"
         @toggle-isNotVis="receiveEmit"
         @away-toggle="awayToggle">
           <template></template>
-          <collection-dropdown-content>
+          <collection-dropdown-content >
             <collection-dropdown-item v-for="collection in this.$store.state.userCollections" 
-            :key="collection.id">{{collection.name}}</collection-dropdown-item>
+            :key="collection.id" :recordInfo="recordInfo" :collection="collection"
+            >{{collection.name}}</collection-dropdown-item>
           </collection-dropdown-content>
         </collection-dropdown>
-        <button class="tooltipadd" id="add-record-btn" @click="addToLibrary" v-show="!isHome">
-          <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' v-show="!recordAdded" />
+        <button class="tooltipadd" id="add-record-btn" 
+        @click="addToLibrary" v-show="!isHome && !isCollection">
+          <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' 
+          v-show="!recordAdded" />
           <span class="tooltiptextadd">Add this record to you library</span>
-          <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' v-show="recordAdded" />
+          <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
+          v-show="recordAdded" />
         </button>
-        <div class="button" v-show="isHome && !isNotVis">
+        <div class="button" v-show="(isHome || isCollection) && !isNotVis">
           <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
             <span class="tooltiptextdelete">Remove this record</span>
@@ -45,10 +49,11 @@ import recordService from '../services/RecordService.js'
 import CollectionDropdown from './CollectionDropdown.vue'
 import CollectionDropdownContent from './CollectionDropdownContent.vue'
 import CollectionDropdownItem from './CollectionDropdownItem.vue'
+import CollectionService from '../services/CollectionService'
 
 export default {
   name: "recordInfo",
-  props: ['recordInfo','isHome'], 
+  props: ['recordInfo','isHome','isCollection'], 
   components: { AlbumArt, CollectionDropdown, CollectionDropdownContent, CollectionDropdownItem },
   data() {
     return {
@@ -65,7 +70,7 @@ export default {
     },
     addToCollection() {
         recordService.getRecordInfo(this.recordInfo.id).then(response => {
-          recordService.addRecordToUserLib(response.data).then(resp => {
+          CollectionService.addRecordToUserCollection(this.collection.id, response.data).then(resp => {
             if(resp.status === 201) {
               this.recordAdded = true
             }
@@ -76,7 +81,14 @@ export default {
         
     },
     deleteRecord() {
-      return ;
+      recordService.deleteRecordFromUserLib(this.recordInfo.id)
+        .then(rep => {
+          if(rep.status === 200 || rep.status === 204){
+              alert("Record deleted successfully.");
+              this.$store.commit("REMOVE_RECORD_FROM_LIBRARY", this.recordInfo.id);
+              // this.$router.push({ name: 'Messages', params:{ id: this.message.topicId}});
+            }
+        }) ;
     },
     addToLibrary() {
       recordService.getRecordInfo(this.recordInfo.id)
@@ -181,14 +193,14 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: 1.7rem;
+  font-size: 1.1rem;
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   color: #eff13f;
 
 }
 
 .record-artist {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-style: italic;
   
 }
@@ -201,7 +213,7 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.7em;
     grid-area: button;
 }
 

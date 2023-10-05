@@ -1,7 +1,7 @@
 <template>
   <div class="record-collection">
     <div class="container" v-for="record in records" :key="record.id" >
-      <record-card :recordInfo="record"/>
+      <record-card :recordInfo="record" :isCollection="isCollection"/>
     </div>
     
   </div>
@@ -22,7 +22,8 @@ export default {
       collectionDTO: [],
       isLoading: true,
       recordIds: [],
-      records: []
+      records: [],
+      isCollection: true
     }
   },
   computed: {
