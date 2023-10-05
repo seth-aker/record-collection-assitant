@@ -52,7 +52,7 @@
         <div class="tags" v-show="recordDTO.tags.length > 0">
           <h3>Tags</h3>
           <div class="tags-list">
-            <span v-for="(tag, index) in recordDTO.tags" :key="index" class="tag">{{tag}} <font-awesome-icon icon="fa-regular fa-circle-xmark" @click="cancelTag(index)"/></span>
+            <span v-for="(tag, index) in recordDTO.tags" :key="index" class="tag">{{tag}} <font-awesome-icon icon="fa-regular fa-circle-xmark" @click="removeTag(index)"/></span>
           </div>
         </div>  
        </section>
@@ -138,6 +138,14 @@ export default {
             alert("Oops! Something went wrong and the record was not removed from your library")
           })
         }
+      },
+      removeTag(tagIndex) {
+        const tagName = this.recordDTO.tags[tagIndex];
+        recordService.deleteTag(this.$route.params.recordId, tagName).then(resp => {
+          if(resp.status === 204) {
+            this.recordDTO.tags.splice(tagIndex, 1);
+          }
+        })
       }
     }
 }

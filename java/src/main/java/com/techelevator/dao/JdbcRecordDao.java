@@ -140,7 +140,7 @@ public class JdbcRecordDao implements RecordDao {
     public boolean deleteTags(int userId, String recordId) {
         String sql = "DELETE FROM user_record_tag WHERE user_id = ? AND record_id = ?;";
         try {
-         return jdbcTemplate.update(sql, userId, recordId)==1;
+         return jdbcTemplate.update(sql, userId, recordId) == 1;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (BadSqlGrammarException e) {
@@ -152,7 +152,19 @@ public class JdbcRecordDao implements RecordDao {
         }
         }
 
-
+    @Override
+    public boolean removeTag(String tagName, int userId, String recordId) {
+        String sql = "DELETE FROM user_record_tag WHERE tag_name = ? AND user_id = ? AND record_id = ?;";
+        try {
+            return jdbcTemplate.update(sql, tagName, userId, recordId) == 1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        } catch (DataAccessException e) {
+            throw new DaoException("Failed to deleteTags", e);
+        }
+    }
 
 
     @Override
