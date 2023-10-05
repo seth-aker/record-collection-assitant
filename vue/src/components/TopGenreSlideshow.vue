@@ -130,13 +130,18 @@ export default {
 .left-arrow {
   /* Style for the left arrow button */
   left: 10px;
+  color: #E00A86;
+   background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  border-radius: 50px;
  
 }
 
 .right-arrow {
   /* Style for the right arrow button */
   right: 10px;
-  color: white;
+  color: #E00A86;
+   background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  border-radius: 50px;
 }
 h2 {
       font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -151,6 +156,7 @@ h2 {
   background-color: #40c5a4;
   padding: 20px; /* Add padding for spacing */
   text-align: center; /* Center the text horizontally */
+  
 }
 
 .green-box h2 {
@@ -158,6 +164,7 @@ h2 {
   font-size: 50px;
   color: #eff13f;
   margin: 0; 
+  
 }
 .colored-square {
   /* Style for the colored square with text */
@@ -181,6 +188,7 @@ h2 {
   margin: 0;
    font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: #eff13f;
+    -webkit-text-stroke:1.5px #E00A86;
 }
 
 </style>

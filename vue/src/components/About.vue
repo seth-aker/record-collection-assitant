@@ -3,56 +3,85 @@
     <div class="container">
       <h2>TRENDING COLLECTIONS</h2>
       <div class="album-art">
-        <!-- Placeholder images for album art with text boxes -->
-        <div class="album-placeholder">
-          <img src="theWho.jpg" alt="Album 1" />
-          <div class="album-title">
-            <div class="album-title-text">Album title 1</div>
+        <!-- Album 1 -->
+        <router-link to="/collection-view/album1">
+          <div class="album-placeholder">
+            <img src="theWho.jpg" alt="Album 1" />
+            <div class="album-title">
+              <div class="album-title-text">Album title 1</div>
+            </div>
           </div>
-        </div>
-        <div class="album-placeholder">
-          <img src="neilYoung.jpg" alt="Album 2" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 2</div>
-          </div>
-        </div>
+        </router-link>
 
-        <div class="album-placeholder">
-          <img src="funk.jpg" alt="Album 3" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 3</div>
+        <!-- Album 2 -->
+        <router-link to="/collection-view/album2">
+          <div class="album-placeholder">
+            <img src="neilYoung.jpg" alt="Album 2" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 2</div>
+            </div>
           </div>
-        </div>
-        <div class="album-placeholder">
-          <img src="sgtPepper.jpg" alt="Album 4" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 4</div>
+        </router-link>
+
+        <!-- Album 3 -->
+        <router-link to="/collection-view/album3">
+          <div class="album-placeholder">
+            <img src="funk.jpg" alt="Album 3" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 3</div>
+            </div>
           </div>
-        </div>
-        <div class="album-placeholder">
-          <img src="rem.jpg" alt="Album 5" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 5</div>
+        </router-link>
+
+        <!-- Album 4 -->
+        <router-link to="/collection-view/album4">
+          <div class="album-placeholder">
+            <img src="sgtPepper.jpg" alt="Album 4" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 4</div>
+            </div>
           </div>
-        </div>
-        <div class="album-placeholder">
-          <img src="theWho.jpg" alt="Album 6" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 6</div>
+        </router-link>
+
+        <!-- Album 5 -->
+        <router-link to="/collection-view/album5">
+          <div class="album-placeholder">
+            <img src="rem.jpg" alt="Album 5" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 5</div>
+            </div>
           </div>
-        </div>
-        <div class="album-placeholder">
-          <img src="mj.jpg" alt="Album 7" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 7</div>
+        </router-link>
+
+        <!-- Album 6 -->
+        <router-link to="/collection-view/album6">
+          <div class="album-placeholder">
+            <img src="theWho.jpg" alt="Album 6" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 6</div>
+            </div>
           </div>
-        </div>
-           <div class="album-placeholder">
-          <img src="foals.jpg" alt="Album 8" />
-          <div class="album-title">
-            <div class="album-title-text">Album Title 8</div>
+        </router-link>
+
+        <!-- Album 7 -->
+        <router-link to="/collection-view/album7">
+          <div class="album-placeholder">
+            <img src="mj.jpg" alt="Album 7" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 7</div>
+            </div>
           </div>
-        </div>
+        </router-link>
+
+        <!-- Album 8 -->
+        <router-link to="/collection-view/album8">
+          <div class="album-placeholder">
+            <img src="foals.jpg" alt="Album 8" />
+            <div class="album-title">
+              <div class="album-title-text">Album Title 8</div>
+            </div>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -68,7 +97,6 @@ export default {
 .container {
   margin-top: 200px;
   padding: 0px;
-
   text-align: center;
 }
 
@@ -110,7 +138,6 @@ h2 {
   font-size: 14px;
   color: #40c5a4;
 }
-
 
 .right-section {
   padding: 100px;
