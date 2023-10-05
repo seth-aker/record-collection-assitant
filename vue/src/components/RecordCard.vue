@@ -296,7 +296,7 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
   color: #40c5a4;
   -webkit-text-stroke:1px #eff13f ;
   font-size: 1.1rem;
-  width: 250%;
+  width: 400%;
   margin-top: 3px;
 }
 </style>
