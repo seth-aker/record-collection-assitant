@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import com.techelevator.model.Collection;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Component
@@ -228,6 +229,8 @@ public class JdbcCollectionDao implements CollectionDao {
             }
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
+        } catch (NullPointerException e) {
+            return collection;
         }
         collection.setRecordIds(recordIds);
         return collection;

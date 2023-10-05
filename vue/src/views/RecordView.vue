@@ -166,6 +166,7 @@ export default {
   border: #40c5a4f6 2px solid;
   margin-bottom: 25px;
   background-color:#a7a7a7b6;
+  width: 95%;
 }
 
 
