@@ -40,7 +40,6 @@
         :records="$store.state.userLibrary" :isHome="this.isHome"/>
       </div>
     </div>
-    <About></About>
     <div class="custom-content">
       
       <div class="genres">
@@ -55,7 +54,7 @@
 
 <script>
 import SearchBox from "@/components/SearchBox.vue";
-import About from "@/components/About.vue";
+
 import CollectionList from '../components/CollectionList.vue';
 import RecordList from '../components/RecordList.vue';
 import CollectionService from '../services/CollectionService';
@@ -72,7 +71,6 @@ export default {
     SearchBox,
     CollectionList,
     RecordList,
-    About,
     LoadingIcon,
     AddCollectionForm
   },
@@ -110,7 +108,7 @@ export default {
 
 <style scoped>
 
-div.record-list {
+div .record-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

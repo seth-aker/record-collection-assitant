@@ -2,14 +2,20 @@
   <div class="album-art">
     <!-- Display album art here -->
     <router-link :to="{name: 'record-page', params: {recordId: albumId}}">
-      <img :src="albumImageUrl" :alt="albumName" />
+      <img :src="imageUrl" :alt="albumName" />
     </router-link>
   </div>
 </template>
 
 <script>
+import errImage from '../assets/onErr.jpg'
 export default {
-  props: ['albumImageUrl', 'albumName', 'albumId']
+ props: ['albumImageUrl', 'albumName', 'albumId'],
+ computed: {
+   imageUrl() {
+     return this.albumImageUrl != null ? this.albumImageUrl : errImage;
+   }
+ }
 }
 </script>
 

@@ -39,11 +39,15 @@ export default {
 
 <style>
 div.collection-card {
-    width: 49%;
+    width: 30%;
 }
 
 .list-container {
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    min-height: 350px;
 }
 
 </style>
