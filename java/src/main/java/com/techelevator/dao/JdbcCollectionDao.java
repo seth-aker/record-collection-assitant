@@ -138,9 +138,9 @@ public class JdbcCollectionDao implements CollectionDao {
     public Collection createCollection(Collection collection) {
         Collection createdCollection = null;
         String sql = "INSERT INTO collections (user_id, collection_name, is_public) " +
-                "VALUES (?, ?, ?);";
+                     "VALUES (?, ?, ?) RETURNING collection_id;";
         try {
-            int createdCollectionId = jdbcTemplate.update(sql, collection.getUserId(),
+            int createdCollectionId = jdbcTemplate.queryForObject(sql, Integer.class, collection.getUserId(),
                     collection.getName(), collection.isPublic());
             createdCollection = getCollectionByCollectionId(createdCollectionId);
             return createdCollection;

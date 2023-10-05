@@ -22,6 +22,7 @@ export default {
           CollectionService.addRecordToUserCollection(this.collection.id, response.data).then(resp => {
             if(resp.status === 201) {
               this.recordAdded = true
+              alert("Collection added successfully.");
             }
           }).catch( () => {
             alert("Oops! Something went wrong and the record was not added to your library")
