@@ -50,12 +50,12 @@ export default {
     background-color: #40c5a4;
     margin-left: 40%;
     margin-right: 40%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    
     font-family: "KEEPT___", Arial, sans-serif;
     -webkit-text-stroke:0.5px #E00A86;
-     border-radius: 20px;
+     border-radius: 40px;
      display: flex;
      justify-content: center;
      align-items: center;
