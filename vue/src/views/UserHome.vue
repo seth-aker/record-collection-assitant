@@ -113,6 +113,7 @@ export default {
 div.record-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .user-heading-right {
@@ -142,6 +143,7 @@ div.record-list {
 .user-view-left {
   border-right: 2px solid;
   border-color: #eff13f;
+  display: flex;
 }
 
 #add-collection-btn {
