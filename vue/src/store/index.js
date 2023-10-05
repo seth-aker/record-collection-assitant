@@ -32,7 +32,10 @@ export default new Vuex.Store({
     trendingCollections: [],
     currentRecord: {},
     dataStats:{},
-    topTenRecords:{}
+    topTenRecords:{},
+    topTenArtists:{},
+ 
+ 
   },
 
   mutations: {
@@ -95,8 +98,33 @@ export default new Vuex.Store({
     },
     SET_TOP_TEN_RECORDS(state, record){
       state.topTenRecords = record;
+    },
+    SET_TOP_TEN_ARTISTS(state, topArtists){
+      state.topTenArtists = topArtists;
+    }
+
+  },
+  getters: {
+    memberCount(state){
+      return state.dataStats.memberCount;
+    },
+    recordCount(state){
+      return state.dataStats.recordCount;
+    },
+    avgRecordPerCollection(state){
+      return state.dataStats.avgRecordPerCollection;
+    },
+    mostActiveUser(state){
+return state.dataStats.avgRecordPerCollection;
+    },
+    premiumCount(state){
+      return state.dataStats.premiumCount;
+    },
+    collectionCount(state){
+      return state.dataStats.collectionCount;
     }
     
-  },
+
+  }
   
   });

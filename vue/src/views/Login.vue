@@ -2,6 +2,7 @@
   <div id="login">
     <form @submit.prevent="login">
       <h2 class="gradient-text">Login</h2>
+  
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password! Not groovy, man
       </div>
@@ -31,12 +32,12 @@
 <script>
 
 import authService from "../services/AuthService";
-
+import statsData from "../components/StatsData.vue"
 
 export default {
   name: "login",
   components: {
-   
+   statsData,
   },
   data() {
     return {
