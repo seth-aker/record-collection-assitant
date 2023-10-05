@@ -52,7 +52,8 @@ export default {
                 if(rep.status === 200 || rep.status === 204){
                     alert("Collection deleted successfully.");
                     this.$store.commit("REMOVE_COLLECTION_FROM_COLLECTIONS", this.collection.id);
-                    this.$router.push({name: 'UserHome', params: {username: 'username'}});
+                    const user = this.$store.state.username;
+                    this.$router.push(`/${user}`);
                     }
                 }).catch( () => {
             alert("Oops! Something went wrong and the collection was not removed from your collections")
@@ -70,6 +71,8 @@ export default {
             .then(response => {
                 this.recordDTO = response.data;
                 this.recordDTO.thumb = response.data.images[0].uri
+            }).catch(() => {
+
             });
             });
         this.isLoading = false;

@@ -85,9 +85,9 @@ export default {
       recordService.deleteRecordFromUserLib(this.recordInfo.id)
         .then(rep => {
           if(rep.status === 200 || rep.status === 204){
-              alert("Record deleted successfully.");
               this.$store.commit("REMOVE_RECORD_FROM_LIBRARY", this.recordInfo.id);
-              this.$router.push({name: 'UserHome'});
+              const user = this.$store.state.username;
+              this.$router.push(`/${user}`);
             }
         }).catch( () => {
             alert("Oops! Something went wrong and the record was not removed from your library")
@@ -101,6 +101,8 @@ export default {
               if(resp.status === 201) {
               this.recordAdded = true
               this.$store.commit('ADD_RECORD_TO_LIBRARY',response.data)
+              const user = this.$store.state.username;
+              this.$router.push(`/${user}`);
             }
           }).catch( () => {
             alert("Oops! Something went wrong and the record was not added to your library")
