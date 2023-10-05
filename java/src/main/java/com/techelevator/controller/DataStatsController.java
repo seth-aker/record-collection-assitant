@@ -4,12 +4,17 @@ import com.techelevator.dao.DataStatsDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.DataStatsDTO;
+import com.techelevator.model.Record;
 import com.techelevator.services.APIService;
+import org.springframework.boot.web.embedded.netty.NettyWebServer;
 import org.springframework.jdbc.datasource.lookup.DataSourceLookupFailureException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.channels.ScatteringByteChannel;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -39,14 +44,12 @@ public class DataStatsController {
 
 
     @GetMapping(path = "/data/search-tags/public")
-    public DataStatsDTO searchPublicTags(@RequestParam(required = false) String searchword) {
+    public List<Record> searchPublicTags(@RequestParam(required = false) String searchword) {
+        List<Record> addedRecords = new ArrayList<>();
         DataStatsDTO searchResult = new DataStatsDTO();
-        if (this.statsdao.searchTagsPublic(searchword) != null) {
-            searchResult.setPublicSearchTags(statsdao.searchTagsPublic(searchword));
-            return searchResult;
-        } else {
-            throw new DataSourceLookupFailureException("No columns found at this time.");
-        }
+            return searchResult.getPublicSearchTags();
+
+
     }
 
         @GetMapping(path = "/data/search-tags/private")
