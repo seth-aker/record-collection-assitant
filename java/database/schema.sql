@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS collection_record, user_record_tag, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users CASCADE;
+DROP TABLE IF EXISTS collection_record, tags, user_record_tag, user_record, record_track, record_artist, record_label, artist_genre, labels, genres, tracks, artists, records, collections, users CASCADE;
 
 DROP SEQUENCE IF EXISTS seq_user_id, seq_collection_id, seq_label_id CASCADE;
 
