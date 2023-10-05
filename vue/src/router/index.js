@@ -11,6 +11,7 @@ import CollectionView from '../views/CollectionView.vue'
 import SearchPage from '../views/SearchPage.vue'
 
 
+
 Vue.use(Router)
 
 /**

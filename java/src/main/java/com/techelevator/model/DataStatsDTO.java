@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 import java.util.List;
 
-public class AggregatedDataDTO {
+public class DataStatsDTO {
 
 
     private int recordCount;
@@ -10,9 +10,12 @@ public class AggregatedDataDTO {
     private int collectionCount;
     private int premiumUserCount;
     private double avgRecordsInCollection;
+    private String mostActiveUser;
 
-    private Record artistsBestRecord;
+
+    private List <Record> artistsBestRecord;
     private int downloadNumber;
+
 
 
     private List<Record> topTenRecords;
@@ -22,24 +25,12 @@ public class AggregatedDataDTO {
     private String topGenre;
 
 
+
     private List<Record> publicSearchTags;
     private   List<Record> privateSearchTags;
 
 
 
-   private String worstArtist;
-   private String worstGenre;
-   private Record worstRecord;
-
-    private String mostActiveUser;
-
-    public Record getArtistsBestRecord() {
-        return artistsBestRecord;
-    }
-
-    public void setArtistsBestRecord(Record artistsBestRecord) {
-        this.artistsBestRecord = artistsBestRecord;
-    }
 
     public int getDownloadNumber() {
         return downloadNumber;
@@ -109,7 +100,7 @@ public class AggregatedDataDTO {
         return topTenRecords;
     }
 
-    public void setTopTenRecords(List<Record> topTenRecords) {
+    public void setTopTenRecords(List <Record> topTenRecords) {
         this.topTenRecords = topTenRecords;
     }
 
@@ -145,30 +136,6 @@ public class AggregatedDataDTO {
         this.topGenre = topGenre;
     }
 
-    public String getWorstArtist() {
-        return worstArtist;
-    }
-
-    public void setWorstArtist(String worstArtist) {
-        this.worstArtist = worstArtist;
-    }
-
-    public String getWorstGenre() {
-        return worstGenre;
-    }
-
-    public void setWorstGenre(String worstGenre) {
-        this.worstGenre = worstGenre;
-    }
-
-    public Record getWorstRecord() {
-        return worstRecord;
-    }
-
-    public void setWorstRecord(Record worstRecord) {
-        this.worstRecord = worstRecord;
-    }
-
     public String getMostActiveUser() {
         return mostActiveUser;
     }
@@ -194,9 +161,6 @@ public class AggregatedDataDTO {
                 ", topTenArtists=" + topTenArtists +
                 ", topArtist='" + topArtist + '\'' +
                 ", topGenre='" + topGenre + '\'' +
-                ", worstArtist='" + worstArtist + '\'' +
-                ", worstGenre='" + worstGenre + '\'' +
-                ", worstRecord=" + worstRecord +
                 ", mostActiveUser='" + mostActiveUser + '\'' +
                 '}';
     }

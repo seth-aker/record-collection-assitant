@@ -16,7 +16,6 @@ CREATE TABLE users (
 	role varchar(50) NOT NULL,
 	is_premium boolean NOT NULL DEFAULT false,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
-
 );
 
 CREATE SEQUENCE seq_collection_id
