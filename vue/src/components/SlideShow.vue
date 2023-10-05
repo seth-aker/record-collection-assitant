@@ -14,8 +14,9 @@
       <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
         <!-- Iterate through items to display each image and title -->
         <div class="slide" v-for="(item, index) in items" :key="index">
-          <!-- Display the image with its source and alt text -->
-           <router-link :to="{name: 'collection-view', params: {collectionId: item.id}}"><img :src="item.imgUrl" :alt="item.name" class="image"/></router-link>
+            <!-- display for link to trending collections-->
+           <router-link v-if="name === 'TRENDING COLLECTIONS'" :to="{name: 'collection-view', params: {collectionId: item.id}}"><img :src="item.imgUrl" :alt="item.name" class="image"/></router-link>
+           <router-link v-if="name === 'TOP 25 RECORDS'" :to="{name: 'record-page', params: {recordId: item.id}}"><img :src="item.imgUrl" :alt="item.name" class="image"/></router-link>
           <!-- Container for the album title text -->
           <div class="album-title">
             <!-- Display the album title text -->
