@@ -8,7 +8,7 @@
           <div class="album-placeholder">
             <img src="theWho.jpg" alt="Album 1" />
             <div class="album-title">
-              <div class="album-title-text">Album title 1</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -18,7 +18,7 @@
           <div class="album-placeholder">
             <img src="neilYoung.jpg" alt="Album 2" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 2</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -28,7 +28,7 @@
           <div class="album-placeholder">
             <img src="funk.jpg" alt="Album 3" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 3</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -38,7 +38,7 @@
           <div class="album-placeholder">
             <img src="sgtPepper.jpg" alt="Album 4" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 4</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -48,7 +48,7 @@
           <div class="album-placeholder">
             <img src="rem.jpg" alt="Album 5" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 5</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -58,7 +58,7 @@
           <div class="album-placeholder">
             <img src="theWho.jpg" alt="Album 6" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 6</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -68,7 +68,7 @@
           <div class="album-placeholder">
             <img src="mj.jpg" alt="Album 7" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 7</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -78,7 +78,7 @@
           <div class="album-placeholder">
             <img src="foals.jpg" alt="Album 8" />
             <div class="album-title">
-              <div class="album-title-text">Album Title 8</div>
+              <div class="album-title-text"></div>
             </div>
           </div>
         </router-link>
@@ -95,7 +95,7 @@ export default {
 
 <style scoped>
 .container {
-  margin-top: 200px;
+  margin-top: 50px;
   padding: 0px;
   text-align: center;
 }
