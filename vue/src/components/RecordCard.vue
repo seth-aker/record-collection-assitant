@@ -72,10 +72,11 @@ export default {
         recordService.getRecordInfo(this.recordInfo.id).then(response => {
           CollectionService.addRecordToUserCollection(this.collection.id, response.data).then(resp => {
             if(resp.status === 201) {
+              alert("Collection added successfully.");
               this.recordAdded = true
             }
           }).catch( () => {
-            alert("Oops! Something went wrong and the record was not added to your library")
+            alert("Oops! Something went wrong and the record was not added to your collection")
           })
         })
         
@@ -84,11 +85,13 @@ export default {
       recordService.deleteRecordFromUserLib(this.recordInfo.id)
         .then(rep => {
           if(rep.status === 200 || rep.status === 204){
-              alert("Record deleted successfully.");
               this.$store.commit("REMOVE_RECORD_FROM_LIBRARY", this.recordInfo.id);
-              // this.$router.push({ name: 'Messages', params:{ id: this.message.topicId}});
+              const user = this.$store.state.username;
+              this.$router.push(`/${user}`);
             }
-        }) ;
+        }).catch( () => {
+            alert("Oops! Something went wrong and the record was not removed from your library")
+          })
     },
     addToLibrary() {
       recordService.getRecordInfo(this.recordInfo.id)
@@ -98,12 +101,13 @@ export default {
               if(resp.status === 201) {
               this.recordAdded = true
               this.$store.commit('ADD_RECORD_TO_LIBRARY',response.data)
+              const user = this.$store.state.username;
+              this.$router.push(`/${user}`);
             }
           }).catch( () => {
             alert("Oops! Something went wrong and the record was not added to your library")
           })
         })
-      return ;
     }
   },
   computed: {
@@ -141,7 +145,7 @@ export default {
     margin: 10px;
     background-color: #40c5a4;
     padding: 20px;
-    border-radius: 75px;
+    border-radius: 10px;
     border: solid #40c5a4 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);
@@ -290,7 +294,7 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
   color: #40c5a4;
   -webkit-text-stroke:1px #eff13f ;
   font-size: 1.1rem;
-  width: 500%;
+  width: 250%;
   margin-top: 3px;
 }
 </style>

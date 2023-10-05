@@ -22,6 +22,7 @@ export default {
           CollectionService.addRecordToUserCollection(this.collection.id, response.data).then(resp => {
             if(resp.status === 201) {
               this.recordAdded = true
+              alert("Collection added successfully.");
             }
           }).catch( () => {
             alert("Oops! Something went wrong and the record was not added to your library")
@@ -39,13 +40,11 @@ export default {
   color: #40c5a4;
   -webkit-text-stroke:1px #eff13f ;
   font-size: 1.1rem;
-  width: 500%;
   margin-top: 3px;
   z-index: 1;
   position :relative;
   border: #eff13f solid 1px;
   border-radius: 5px;
-  width: 120px;
   bottom: 300%;
   left: 50%;
   margin-left: -105px;

@@ -1,8 +1,7 @@
 <template>
     <div class="pager-container">
-      <span v-show="curPage > 1" @click="prevPage"><font-awesome-icon icon="fa-solid fa-caret-left"/> {{ (curPage - 1) }} </span>
+      <span class="next-page" v-show="curPage > 1" @click="prevPage"><font-awesome-icon icon="fa-solid fa-caret-left"/> {{ (curPage - 1) }} </span>
        
-      Page 
       <span class="current-page" >{{ curPage }}</span>
       
       <span class="next-page" v-show="curPage < $store.state.sr.maxPages"  @click="nextPage">{{ (curPage + 1 ) }} <font-awesome-icon icon="fa-solid fa-caret-right"/> </span>

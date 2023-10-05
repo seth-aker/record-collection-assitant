@@ -1,7 +1,7 @@
 <template>
   <div class="collection-card">
       <div class="grid-control">
-    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
+    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="collectionId" isCollection="true"/>
         <div class="collection-info">
             <div class="collection-name">
                 <div class="collection-name">{{ collection.name }}</div>
@@ -46,8 +46,18 @@ export default {
 
     },
     methods: {
-        deleteCollection() {
-            return;
+    deleteCollection() {
+        CollectionService.deleteCollection(this.collection.id)
+            .then(rep => {
+                if(rep.status === 200 || rep.status === 204){
+                    alert("Collection deleted successfully.");
+                    this.$store.commit("REMOVE_COLLECTION_FROM_COLLECTIONS", this.collection.id);
+                    const user = this.$store.state.username;
+                    this.$router.push(`/${user}`);
+                    }
+                }).catch( () => {
+            alert("Oops! Something went wrong and the collection was not removed from your collections")
+          })
         }
     },
     created() {
@@ -61,6 +71,8 @@ export default {
             .then(response => {
                 this.recordDTO = response.data;
                 this.recordDTO.thumb = response.data.images[0].uri
+            }).catch(() => {
+
             });
             });
         this.isLoading = false;
