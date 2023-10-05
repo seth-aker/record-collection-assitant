@@ -130,11 +130,13 @@ export default {
     border-radius: 10px;
     border: solid #40c5a4 1px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 }
 
 .album-art {
   width: 99%;
   margin: 2px;
+  
 }
 #add-record-btn {
     padding: 0, 5px;
@@ -143,7 +145,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
 }
 
 .add-record-icon:hover {
@@ -164,19 +166,26 @@ export default {
   justify-content: space-between;
   width: 100%;
   height: 100%;
+   -webkit-text-stroke:0.5px #E00A86;
+   
+  
+   
   
 }
 
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: .8rem;
-  
+  font-size: 1.9rem;
+  font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+  color: #eff13f;
+
 }
 
 .record-artist {
-  font-size: .7rem;
+  font-size: 1.7rem;
   font-style: italic;
+  
 }
 
 #delete-record-btn {
@@ -187,7 +196,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.2em;
     grid-area: button;
 }
 
@@ -195,19 +204,20 @@ export default {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  font-size: 1.7rem;
 }
 
 .tooltipadd {
   position: relative;
   display: inline-block;
   border: 1px solid #eff13f;
+  
 }
 
 .tooltipdelete {
   position: relative;
   display: inline-block;
   border: 1px solid #eff13f;
+  
 }
 
 .tooltipadd .tooltiptextadd {
@@ -219,15 +229,14 @@ export default {
   padding: 5px 0;
   border-radius: 6px;
   font-family: "KEEPT___", Arial, sans-serif;
-  font-size: 1.3rem;
   position: absolute;
   z-index: 1;
   width: 120px;
   bottom: 150%;
   left: 50%;
   margin-left: -105px;
-  margin-bottom: 5px;
-  -webkit-text-stroke:1px #40c5a4 ;
+  margin-bottom: 20px;
+  
 }
 
 .tooltipdelete .tooltiptextdelete {
@@ -239,7 +248,6 @@ export default {
   padding: 5px 0;
   border-radius: 6px;
   font-family: "KEEPT___", Arial, sans-serif;
-  font-size: 1.3rem;
   position: absolute;
   z-index: 1;
   width: 120px;
@@ -247,15 +255,17 @@ export default {
   left: 50%;
   margin-left: -105px;
   margin-bottom: 50px;
-  -webkit-text-stroke:1px #40c5a4 ;
+  
 }
 
 .tooltipadd:hover .tooltiptextadd {
   visibility: visible;
+  
 }
 
 .tooltipdelete:hover .tooltiptextdelete {
   visibility: visible;
+  
 }
 
 .collection-name {

@@ -32,6 +32,7 @@ body {
 #app {
   position: relative;
   border: #E00A86;
+  min-height: 100vh;
 }
 
 

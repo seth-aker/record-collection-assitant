@@ -3,13 +3,19 @@ const state = () => ({
     curPage: 1,
     searchType: 'release',
     searchResultsRecords: [],
-    resultsPerPage: 25
+    resultsPerPage: 25,
+    maxPages: 0
 })
 
 const getters = {
     searchQuery(state) {
-        return `q=${state.search}&type=${state.searchType}&per_page=${state.resultsPerPage}`;
+        let q = `q=${state.search}&type=${state.searchType}&per_page=${state.resultsPerPage}`;
+        if(state.curPage != 1) {
+            q += `&page=${state.curPage}`;
+        }
+        return q;
     },
+   
     
 }
 
@@ -26,10 +32,12 @@ const mutations = {
     },
     UPDATE_SEARCH(state, term) {
         state.search = term;
-        state.curPage = 1;
       },
     SET_SEARCH_RESULTS_RECORDS(state, records) {
         state.searchResultsRecords = records;
+    },
+    SET_MAX_PAGES(state, maxPages) {
+        state.maxPages = maxPages;
     }
 }
 
