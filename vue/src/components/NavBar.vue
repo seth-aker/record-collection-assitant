@@ -61,7 +61,9 @@
       <div v-show="loggedIn" class="rounded-button">
         <a @click.prevent="logout" class="gradient-text">LOGOUT</a>
       </div>
-      <font-awesome-icon icon="fa-solid fa-user-circle" class="user-icon rounded-button" v-show="loggedIn" />
+      
+      <font-awesome-icon icon="fa-solid fa-user-circle" class="user-icon rounded-button" v-show="loggedIn" 
+              @click="$router.push({name: 'user-home', params: {username: $store.state.user.username}})"/>
     </section>
   </nav>
 </template>
