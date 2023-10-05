@@ -45,19 +45,29 @@ export default {
 
 <style scoped>
 .pager-container {
-    font-size: 24px;
-    color: white;
+    font-size: 26px;
+    color: #eff13f;
     background-color: #40c5a4;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-left: 40%;
+    margin-right: 40%;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding: 10px;
+    font-family: "KEEPT___", Arial, sans-serif;
+    -webkit-text-stroke:0.5px #E00A86;
+     border-radius: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
 }
 
 .next-page {
-    margin: 5px;
+    margin: 15px;
     cursor: pointer;
+    color: #E00A86;
+    -webkit-text-stroke:0.5px #eff13f;
+    
 }
 
 </style>
