@@ -52,6 +52,9 @@ export default {
     margin-top: 20px;
     padding-bottom: 10000px;
     padding-top: 100px;
+    background-color: #E00A86;
+      -webkit-text-stroke:0.5px #E00A86;
+   
 
 }
 
@@ -59,8 +62,13 @@ export default {
     padding: 10px;
     width: 30%;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 20px;
+    font-size: 20px;
+     background-color: #40c5a4f6;
+      -webkit-text-stroke:0.5px #E00A86;
+
+      color: #eff13f;
+   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #search-button {
@@ -68,9 +76,12 @@ export default {
     background-color: #333;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
+     background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+   -webkit-text-stroke:0.5px #40c5a4f6; 
 }
 
 #search-button:hover {

@@ -56,20 +56,26 @@ export default {
 </script>
 
 <style scoped>
-.search {
-  display: flex;
-  justify-content: center;
-}
+
 
 .record-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 100%;
+  height: auto;
+  
+  
 }
   .record-card {
     margin: 10px;
     width: 20%;
-    min-width: 80px;
+    
+    
+   
+    
 }
+
+
 
 </style>

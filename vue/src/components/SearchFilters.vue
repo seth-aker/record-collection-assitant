@@ -38,5 +38,19 @@ export default {
 </script>
 
 <style>
+.search-filters {
+  display: flex;
+  justify-content: center;
+  color: #eff13f;
+  
+}
 
+.num-page {
+  color: #E00A86;
+  font-size: 16px; 
+  padding: 10px; 
+  font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #40c5a4f6;
+   border-radius: 20px;
+}
 </style>
