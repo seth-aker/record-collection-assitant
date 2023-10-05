@@ -1,37 +1,53 @@
 <template>
   <div>
-    {{ this.$store.state.dataStats.memberCount }}
-    {{ this.$store.state.dataStats.collectionCount }}
-    {{ this.$store.state.dataStats.premiumUserCount }}
-    {{ this.$store.state.dataStats.avgRecordsInCollection }}
-    {{ this.$store.state.dataStats.mostActiveUser }}
-
-     {{ this.$store.state.dataStats.artistsBestRecord }}
-    {{ this.$store.state.dataStats.downloadNumber }}
-
- <!-- {{ this.$store.state.dataStats.downloadNumber }}
-    {{ this.$store.state.dataStats.topTenRecords }}
-    {{ this.$stroe.state.dataStats.topTenArtists}} -->
-     </div> 
+    <div>
+      <strong>Member Count:</strong>
+      {{ this.$store.state.siteStats.memberCount }}
+    </div>
+    <div>
+      <strong>Avg Records per Collection:</strong>
+      {{ this.$store.state.siteStats.avgRecordsInCollection }}
+    </div>
+    <div>
+      <strong>Most Active User:</strong>
+      {{ this.$store.state.siteStats.mostActiveUser }}
+    </div>
+    <div>
+      <strong>Premium User Count:</strong>
+      {{ this.$store.state.siteStats.premiumUserCount }}
+    </div>
+    <div>
+      <strong>Record Count:</strong>
+      {{ this.$store.state.siteStats.recordCount }}
+    </div>
+  </div>
 </template>
 
 <script>
-import dataStats from "../services/dataStats.js";
+import dataStats from "../services/AggrDataService";
 
 export default {
   data() {
     return {
+      isLoading: true,
     };
   },
   computed: {},
   created() {
-
-     // this.isloading = true;
-    dataStats.getDataStats()
+    // this.isloading = true;
+    dataStats
+      .getDataStats()
       .then((response) => {
-        console.log("Response from API:", response.data);
-        this.$store.commit("SET_DATA_STATS", response.data);
-        //    this.isLoading = false;
+        this.$store.commit("SET_SITE_STATS", response.data);
+        const siteStats = [
+          response.data.recordCount,
+          response.data.memberCount,
+          response.data.mostActiveUser,
+          response.data.premiumUserCount,
+          response.data.collectionCount,
+          response.data.avgRecordsInCollection,
+        ];
+        this.$store.commit("SET_SITE_STATS", siteStats);
       })
       .catch((error) => {
         console.error("Error fetching data stats:", error);
@@ -42,4 +58,3 @@ export default {
 
 <style>
 </style>
-    

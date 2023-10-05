@@ -32,7 +32,10 @@ export default new Vuex.Store({
     trendingCollections: [],
     currentRecord: {},
     dataStats:{},
-    topTenRecords:{}
+    topTenRecords:{},
+    siteStats: [
+    ],
+  
   },
 
   mutations: {
@@ -95,8 +98,11 @@ export default new Vuex.Store({
     },
     SET_TOP_TEN_RECORDS(state, record){
       state.topTenRecords = record;
-    }
-    
+    },
+    SET_SITE_STATS(state, stats){
+      state.siteStats = stats;
+    },
+
   },
   
   });
