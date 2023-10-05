@@ -49,7 +49,7 @@ export default {
     deleteCollection() {
         CollectionService.deleteCollection(this.collection.id)
             .then(rep => {
-                if(rep.status === 200 || rep.status === 204){
+                if(rep.status === 200 || rep.status === 202){
                     alert("Collection deleted successfully.");
                     this.$store.commit("REMOVE_COLLECTION_FROM_COLLECTIONS", this.collection.id);
                     const user = this.$store.state.username;

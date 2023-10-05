@@ -50,4 +50,6 @@ div.collection-card {
     min-height: 350px;
 }
 
+
+
 </style>
