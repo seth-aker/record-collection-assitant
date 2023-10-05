@@ -2,24 +2,27 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcAggregateDataDao implements AggregateDataDao {
+public class JdbcDataStatsDao implements DataStatsDao {
 
     private final JdbcTemplate jdbcTemplate;
 
     private UserDao userDao;
 
-    public JdbcAggregateDataDao(JdbcTemplate jdbcTemplate) {
+    public JdbcDataStatsDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+
     }
 
 
@@ -68,8 +71,8 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
                 "GROUP BY record_id " +
                 "ORDER BY popularity_count DESC " +
                 "LIMIT 1;";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
             if (result.next()) {
                 record = mapRowToRecord(result);
             }
@@ -90,8 +93,8 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
                 "GROUP BY record_id " +
                 "ORDER BY popularity_count DESC " +
                 "LIMIT 10;";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         try {
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
             while (result.next()) {
                 topTen.add(mapRowToRecord(result));
             }
@@ -104,27 +107,6 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
 
     }
 
-    @Override
-    public Record getLeastPopularRecord() {
-        Record record = null;
-        String sql = "SELECT record_id, record_image, record_artist, " +
-                "record_title, COUNT(*) AS popularity_not_count " +
-                "FROM records " +
-                "GROUP BY record_id " +
-                "ORDER BY popularity_not_count ASC " +
-                "LIMIT 1;";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
-        try {
-            if (result.next()) {
-                record = mapRowToRecord(result);
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (BadSqlGrammarException e) {
-            throw new DaoException("There is no least popular record");
-        }
-        return record;
-    }
 
     @Override
     public int getTotalNumberOfRecord() {
@@ -218,26 +200,6 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
         return mostPopularArtist;
     }
 
-    @Override
-    public String getLeastPopularArtist() {
-        String mostPopularArtist = null;
-        String sql = "SELECT r.record_id, r.record_title, r.record_artist, COUNT(*) AS popularity_count " +
-                "FROM collection_record cr " +
-                "JOIN records r ON cr.record_id = r.record_id " +
-                "GROUP BY r.record_id, r.record_title " +
-                "ORDER BY popularity_count ASC LIMIT 1;";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
-        try {
-            if (result.next()) {
-                mostPopularArtist = result.getString("record_artist");
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (BadSqlGrammarException e) {
-            throw new DaoException("Cannot get an Artist, bad sql grammar");
-        }
-        return mostPopularArtist;
-    }
 
     @Override
     public List<String> topTenArtists() {
@@ -295,32 +257,15 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
         return mostPopularGenre;
     }
 
-    @Override
-    public String getLeastPopularGenre() {
-        String mostPopularGenre = null;
-        String sql = "SELECT r.artist_genre AS most_popular_genre, COUNT(*) AS genre_count " +
-                "FROM records r GROUP BY r.artist_genre ORDER BY genre_count ASC LIMIT 1;";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
-        try {
-            if (result.next()) {
-                mostPopularGenre = result.getString("artist_genre");
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (BadSqlGrammarException e) {
-            throw new DaoException("Cannot get a genre, bad sql grammar");
-        }
-        return mostPopularGenre;
-    }
-
 
     @Override
     public List<Record> searchTagsPublic(String searchword) {
         List<Record> recordsWithTag = new ArrayList<>();
-        String sql = "SELECT r.* FROM records r " +
-                "JOIN user_record_tag urt ON r.record_id = urt.record_id " +
-                "JOIN tags t ON urt.tag_name = t.tag_name " +
-                "WHERE t.tag_name LIKE;";
+        String sql = "SELECT r.*\n" +
+                "FROM records r\n" +
+                "JOIN user_record_tag urt ON r.record_id = urt.record_id\n" +
+                "WHERE urt.tag_name = ?;";
+
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, searchword);
         try {
             while (result.next()) {
@@ -333,6 +278,8 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
         }
         return recordsWithTag;
     }
+
+
 
     @Override
     public List<Record> searchTagsThroughPersonalCollection(String searchword, int userId) {
@@ -348,6 +295,8 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
             while (result.next()) {
                 recordsWithTag.add(mapRowToRecord(result));
             }
+        } catch (EmptyResultDataAccessException e) {
+            throw new DaoException("No records found for the given tag: " + searchword);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (BadSqlGrammarException e) {
@@ -385,13 +334,12 @@ public class JdbcAggregateDataDao implements AggregateDataDao {
         record.setThumb(rowSet.getString("record_image"));
         record.setArtist(rowSet.getString("record_artist"));
 
-
-//        if(rowSet.getString("record_condition") != null) {
-//            record.setCondition(rowSet.getString("record_condition"));
-//        }
-//        if(rowSet.getString("user_note") != null) {
-//            record.setUserNote(rowSet.getString("user_note"));
-//        }
+        if(rowSet.getString("record_condition") != null) {
+            record.setCondition(rowSet.getString("record_condition"));
+        }
+        if(rowSet.getString("user_note") != null) {
+            record.setUserNote(rowSet.getString("user_note"));
+        }
         return record;
     }
 

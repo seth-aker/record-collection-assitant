@@ -106,7 +106,7 @@ public class RecordController {
         int userId = userDao.findIdByUsername(principal.getName());
         String recordId = String.valueOf(recordDTO.getId());
         if (!recordLogic.doesRecordExist(recordId)) {
-            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(), "", ""));
+            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(), recordDTO.getArtists().get(0).getName(),"", ""));
         }
         if (!recordLogic.isRecordInUserLib(recordId, userId)) {
             recordDao.addRecordToUserLib(recordId, userId);

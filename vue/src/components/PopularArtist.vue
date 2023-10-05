@@ -54,6 +54,8 @@ h1 {
   font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 50px;
   color: #eff13f;
+  -webkit-text-stroke:1.5px #E00A86;
+  
 }
 
 .artist-section {
@@ -61,6 +63,7 @@ h1 {
   align-items: center;
   justify-content: space-around;
   margin-top: 50px;
+  
 }
 
 .album-cover {
@@ -68,10 +71,11 @@ h1 {
   text-align: center;
   display: flex;
   justify-content: center;
+  
 }
 
 .album-cover img {
-  width: 50%;
+  width: 40%;
   display: flex;
   justify-content: space-around;
 }
@@ -79,11 +83,12 @@ h1 {
 .artist-info {
   flex: 1;
   padding-left: 0px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: #40c5a4;
+   font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #eff13f;
   text-align: center;
   display: flex;
   flex-direction: column;
+  -webkit-text-stroke:0.1px #40c5a4;
 
   
   
@@ -113,6 +118,7 @@ h1 {
 h2 {
   font-size: 50px;
   margin-bottom: 10px;
+  
 }
 
 p {
@@ -124,6 +130,8 @@ p {
   font-weight: bold; 
   font-size: 20px; 
   transition: color 0.3s; 
+  -webkit-text-stroke:0.1px #E00A86;
+
 
  
   padding: 5px 10px;

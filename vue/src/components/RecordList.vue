@@ -28,5 +28,6 @@ export default {
     margin: 10px;
     width: 20%;
     min-width: 80px;
+    
 }
 </style>

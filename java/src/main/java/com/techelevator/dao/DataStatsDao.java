@@ -1,21 +1,18 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Record;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
-public interface AggregateDataDao {
+public interface DataStatsDao {
 
     int getTotalNumberOfUsers();
 
     List<Record> getTopTenRecords();
 
-    Record getLeastPopularRecord();
-
     int getTotalNumberOfRecord();
-
-    int numberOfTimesRecordAppears(String recordId);
 
     Record getMostPopularRecord();
 
@@ -27,19 +24,19 @@ public interface AggregateDataDao {
 
     String getMostPopularArtist();
 
-    String getLeastPopularArtist();
-
     List<String> topTenArtists();
 
     String getMostActiveUser();
-
-    String getMostPopularGenre();
-
-    String getLeastPopularGenre();
 
     List<Record> searchTagsPublic(String searchword);
 
     List<Record> searchTagsThroughPersonalCollection(String searchword, int userId);
 
     Record mostPopularRecordByArtist(String artistName);
+
+    int numberOfTimesRecordAppears(String recordId);
+
+
+// Broken
+    String getMostPopularGenre();
 }

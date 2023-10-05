@@ -132,13 +132,18 @@ export default {
 .left-arrow {
   /* Style for the left arrow button */
   left: 10px;
+  color: #E00A86;
+   background: linear-gradient(180deg, rgba(239,241,63,0.7455357142857143) 37%, rgba(224,10,134,0.7231267507002801) 100%);
+  border-radius: 50px;
  
 }
 
 .right-arrow {
   /* Style for the right arrow button */
   right: 10px;
-  color: white;
+  color: #E00A86;
+ background: linear-gradient(180deg, rgba(239,241,63,0.7455357142857143) 37%, rgba(224,10,134,0.7231267507002801) 100%);
+  border-radius: 50px;
 }
 h2 {
       font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

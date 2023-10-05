@@ -5,39 +5,21 @@
     <div class="user-dashboard" v-show="!isLoading">
       <div class="user-heading-left">
         <h1>Collections</h1>
-        <div v-on-clickaway="away">
-          <button 
-          id="add-collection-btn"
-          class="button tooltip">
-            <font-awesome-icon 
-            @click="showForm = true"
-            class="add-record-icon" 
-            icon='fa-regular fa-plus-square'
-            v-show="!showForm"/>
+        <div>
+          <button id="add-collection-btn" class="button tooltip">
+            <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square'/>
             <span class="tooltiptext">Add a Collection</span>
-
           </button>
-          <button class="tooltipclose" id="delete-coll-btn" 
-          @click="away" v-show="showForm">
-            <font-awesome-icon class="delete-coll-icon" 
-            icon="fa-regular fa-square-minus" />
-            <span class="tooltiptextclose">Close form</span>
-          </button>
-            <add-collection-form id="form" 
-            v-show="showForm" 
-            @hideForm="showForm = false"/>
         </div>
       </div>
       <div class="user-heading-right">
         <h1>Library</h1>
       </div>
       <div class="user-view-left">
-        <collection-list 
-        :collections="this.$store.state.userCollections"/>
+        <collection-list :collections="this.$store.state.userCollections"/>
       </div>
       <div class="user-view-right">
-        <record-list 
-        :records="$store.state.userLibrary" :isHome="this.isHome"/>
+        <record-list :records="$store.state.userLibrary" :isHome="this.isHome"/>
       </div>
     </div>
     <About></About>
@@ -61,35 +43,27 @@ import RecordList from '../components/RecordList.vue';
 import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
 import LoadingIcon from '../components/LoadingIcon.vue';
-import AddCollectionForm from '../components/AddCollectionForm.vue';
-import { mixin as clickaway } from "vue-clickaway";
 
 export default {
   name: 'user-home',
-  mixins: [clickaway],
-
   components: {
     SearchBox,
     CollectionList,
     RecordList,
     About,
-    LoadingIcon,
-    AddCollectionForm
+    LoadingIcon
   },
   data() {
         return {
           isLoading: false,
-          isHome: true,
-          showForm: false
+          isHome: true
         }
     },
     computed: {
         
     },
     methods: {
-      away () {
-        this.showForm = false;
-      }
+        
     },
     created() {
       this.isLoading = true;
@@ -185,68 +159,12 @@ div.record-list {
   -webkit-text-stroke:1px #40c5a4 ;
   position: absolute;
   z-index: 1;
-  top: -100px;
-  left: -300%;
+  top: -25px;
+  left: 105%;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
 
-.tooltipclose {
-  position: relative;
-  display: inline-block;
-  border: 1px solid #eff13f;
-}
-
-.tooltipclose .tooltiptextclose {
-  visibility: hidden;
-  width: 120px;
-  background-color: transparent;
-  color: #eff13f;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  font-family: "KEEPT___", Arial, sans-serif;
-  font-size: 1em;
-  -webkit-text-stroke:1px #40c5a4 ;
-  position: absolute;
-  z-index: 1;
-  top: -150%;
-  left: 50%;
-}
-
-.tooltipclose:hover .tooltiptextclose {
-  visibility: visible;
-}
-
-#delete-coll-btn {
-    display: flex;
-    padding: 0, 2px;
-    margin: 0;
-    color: #eff13f;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-.delete-coll-icon:hover {
-  color: #d0d319;
-}
-
-#form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "KEEPT___", Arial, sans-serif;
-    color: #40c5a4;
-  -webkit-text-stroke:1px rgb(224, 10, 134);
-  font-size: 1.25rem;
-  border: #40c5a4 solid 1px;
-  border-radius: 5px;
-  background-color: #eff13f; 
-  position: relative;
-  left: 30px;
-}
 </style>
