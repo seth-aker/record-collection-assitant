@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Record;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,7 +24,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
         this.jdbcTemplate = jdbcTemplate;
 
     }
-
 
 
     @Override
@@ -106,7 +106,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
         return topTen;
 
     }
-
 
 
     @Override
@@ -202,7 +201,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
     }
 
 
-
     @Override
     public List<String> topTenArtists() {
         List<String> mostPopularArtist = new ArrayList<>();
@@ -260,14 +258,14 @@ public class JdbcDataStatsDao implements DataStatsDao {
     }
 
 
-
     @Override
     public List<Record> searchTagsPublic(String searchword) {
         List<Record> recordsWithTag = new ArrayList<>();
-        String sql = "SELECT r.* FROM records r " +
-                "JOIN user_record_tag urt ON r.record_id = urt.record_id " +
-                "JOIN tags t ON urt.tag_name = t.tag_name " +
-                "WHERE t.tag_name LIKE;";
+        String sql = "SELECT r.*\n" +
+                "FROM records r\n" +
+                "JOIN user_record_tag urt ON r.record_id = urt.record_id\n" +
+                "WHERE urt.tag_name = ?;";
+
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, searchword);
         try {
             while (result.next()) {
@@ -280,6 +278,8 @@ public class JdbcDataStatsDao implements DataStatsDao {
         }
         return recordsWithTag;
     }
+
+
 
     @Override
     public List<Record> searchTagsThroughPersonalCollection(String searchword, int userId) {
@@ -295,6 +295,8 @@ public class JdbcDataStatsDao implements DataStatsDao {
             while (result.next()) {
                 recordsWithTag.add(mapRowToRecord(result));
             }
+        } catch (EmptyResultDataAccessException e) {
+            throw new DaoException("No records found for the given tag: " + searchword);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (BadSqlGrammarException e) {
@@ -332,13 +334,12 @@ public class JdbcDataStatsDao implements DataStatsDao {
         record.setThumb(rowSet.getString("record_image"));
         record.setArtist(rowSet.getString("record_artist"));
 
-
-//        if(rowSet.getString("record_condition") != null) {
-//            record.setCondition(rowSet.getString("record_condition"));
-//        }
-//        if(rowSet.getString("user_note") != null) {
-//            record.setUserNote(rowSet.getString("user_note"));
-//        }
+        if(rowSet.getString("record_condition") != null) {
+            record.setCondition(rowSet.getString("record_condition"));
+        }
+        if(rowSet.getString("user_note") != null) {
+            record.setUserNote(rowSet.getString("user_note"));
+        }
         return record;
     }
 
