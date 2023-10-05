@@ -36,7 +36,5 @@ public interface DataStatsDao {
 
     int numberOfTimesRecordAppears(String recordId);
 
-
-// Broken
     String getMostPopularGenre();
 }

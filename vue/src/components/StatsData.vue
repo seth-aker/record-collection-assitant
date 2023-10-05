@@ -1,19 +1,18 @@
 <template>
   <div>
-
     {{ this.$store.state.dataStats.memberCount }}
     {{ this.$store.state.dataStats.collectionCount }}
     {{ this.$store.state.dataStats.premiumUserCount }}
     {{ this.$store.state.dataStats.avgRecordsInCollection }}
     {{ this.$store.state.dataStats.mostActiveUser }}
 
-    {{ this.$store.state.dataStats.artistsBestRecord }}
+     {{ this.$store.state.dataStats.artistsBestRecord }}
     {{ this.$store.state.dataStats.downloadNumber }}
 
- {{ this.$store.state.dataStats.downloadNumber }}
+ <!-- {{ this.$store.state.dataStats.downloadNumber }}
     {{ this.$store.state.dataStats.topTenRecords }}
-    {{ this.$stroe.state.dataStats.topTenArtists}}
-  </div>
+    {{ this.$stroe.state.dataStats.topTenArtists}} -->
+     </div> 
 </template>
 
 <script>
