@@ -46,8 +46,17 @@ export default {
 
     },
     methods: {
-        deleteCollection() {
-            return;
+    deleteCollection() {
+        CollectionService.deleteCollection(this.collection.id)
+            .then(rep => {
+                if(rep.status === 200 || rep.status === 204){
+                    alert("Collection deleted successfully.");
+                    this.$store.commit("REMOVE_COLLECTION_FROM_COLLECTIONS", this.collection.id);
+                    this.$router.push({name: 'UserHome', params: {username: 'username'}});
+                    }
+                }).catch( () => {
+            alert("Oops! Something went wrong and the collection was not removed from your collections")
+          })
         }
     },
     created() {

@@ -1,7 +1,9 @@
 <template>
   <div class="album-art">
     <!-- Display album art here -->
-   <router-link :to="{name: 'record-page', params: {recordId: albumId}}"><img :src="albumImageUrl" :alt="albumName" /></router-link>
+    <router-link :to="{name: 'record-page', params: {recordId: albumId}}">
+      <img :src="albumImageUrl" :alt="albumName" />
+    </router-link>
   </div>
 </template>
 
@@ -20,11 +22,10 @@ img {
   width: 100%;
   height: 100%;
   border-radius: 7px;
-  
 }
 
 a {
-  background-color: #40c5a4;
+  background-color: transparent;
 }
 
 </style>
