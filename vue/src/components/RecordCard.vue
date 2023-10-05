@@ -145,7 +145,7 @@ export default {
     margin: 10px;
     background-color: #40c5a4;
     padding: 20px;
-    border-radius: 75px;
+    border-radius: 10px;
     border: solid #40c5a4 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);

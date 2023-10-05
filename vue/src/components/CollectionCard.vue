@@ -1,7 +1,7 @@
 <template>
   <div class="collection-card">
       <div class="grid-control">
-    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
+    <album-art :albumImageUrl="recordDTO.thumb" :albumName="recordDTO.title" :albumId="collectionId" isCollection="true"/>
         <div class="collection-info">
             <div class="collection-name">
                 <div class="collection-name">{{ collection.name }}</div>
