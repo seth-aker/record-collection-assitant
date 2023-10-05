@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 import java.util.List;
 
-public class AggregatedDataDTO {
+public class DataStatsDTO {
 
 
     private int recordCount;
@@ -10,8 +10,7 @@ public class AggregatedDataDTO {
     private int collectionCount;
     private int premiumUserCount;
     private double avgRecordsInCollection;
-
-    private Record artistsBestRecord;
+    private List <Record> artistsBestRecord;
     private int downloadNumber;
 
 
@@ -33,13 +32,7 @@ public class AggregatedDataDTO {
 
     private String mostActiveUser;
 
-    public Record getArtistsBestRecord() {
-        return artistsBestRecord;
-    }
 
-    public void setArtistsBestRecord(Record artistsBestRecord) {
-        this.artistsBestRecord = artistsBestRecord;
-    }
 
     public int getDownloadNumber() {
         return downloadNumber;
@@ -109,7 +102,7 @@ public class AggregatedDataDTO {
         return topTenRecords;
     }
 
-    public void setTopTenRecords(List<Record> topTenRecords) {
+    public void setTopTenRecords(List <Record> topTenRecords) {
         this.topTenRecords = topTenRecords;
     }
 

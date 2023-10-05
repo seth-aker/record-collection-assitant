@@ -1,15 +1,17 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.AggregateDataDao;
+import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.AggregatedDataDTO;
+import com.techelevator.model.DataStatsDTO;
 import com.techelevator.model.Record;
+import com.techelevator.model.RecordDTO;
+import com.techelevator.services.APIService;
 import org.springframework.jdbc.datasource.lookup.DataSourceLookupFailureException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 
 @RestController
@@ -20,69 +22,80 @@ import java.util.List;
 public class AggregatedDataController {
 
     private UserDao userdao;
-    private AggregateDataDao dao;
+    private AggregateDataDao statsdao;
+    private RecordDao recordDao;
+    private APIService apiService;
 
-    public AggregatedDataController(AggregateDataDao dao) {
-        this.dao = dao;
+
+    public AggregatedDataController(AggregateDataDao dao, UserDao userDao, RecordDao recordDao) {
+        this.statsdao = dao;
+        this.userdao = userDao;
     }
 
     @GetMapping(path = "/data/site-stats")
-    public AggregatedDataDTO getTotalNumberOfUsers() {
-        AggregatedDataDTO siteStats = new AggregatedDataDTO();
-        siteStats.setMemberCount(dao.getTotalNumberOfUsers());
-        siteStats.setPremiumUserCount(dao.getTotalPremiumUsers());
-        siteStats.setCollectionCount(dao.getTotalNumberOfCollections());
-        siteStats.setRecordCount(dao.getTotalNumberOfRecord());
-        siteStats.setAvgRecordsInCollection(dao.getAverageNumberOfRecordsInCollections());
-        siteStats.setTopTenRecords(dao.getTopTenRecords());
-        siteStats.setWorstRecord(dao.getLeastPopularRecord());
-        siteStats.setTopArtist(dao.getMostPopularArtist());
-        siteStats.setWorstArtist(dao.getLeastPopularArtist());
-        siteStats.setTopRecord(dao.getMostPopularRecord());
-        siteStats.setMostActiveUser(dao.getMostActiveUser());
-
-        return siteStats;
+    public DataStatsDTO getTotalNumberOfUsers() {
+        return this.statsdao
     }
 
-
-    @GetMapping(path = "/data/top-genre")
-    public String getMostPopularGenre() {
-        return this.dao.getMostPopularGenre();
-    }
-
-    @GetMapping(path = "/data/worst-genre")
-    public String getLeastPopularGenre() {
-        return this.dao.getLeastPopularGenre();
-    }
 
     @GetMapping(path = "/data/search-tags/public")
-    public List<Record> searchPublicTags(@RequestParam(required = false) String searchword) {
-        if (this.dao.searchTagsPublic(searchword) != null) {
-            return this.dao.searchTagsPublic(searchword);
+    public DataStatsDTO searchPublicTags(@RequestParam(required = false) String searchword) {
+        DataStatsDTO searchResult = new DataStatsDTO();
+        if (this.statsdao.searchTagsPublic(searchword) != null) {
+            searchResult.setPublicSearchTags(statsdao.searchTagsPublic(searchword));
+            return searchResult;
         } else {
             throw new DataSourceLookupFailureException("No columns found at this time.");
         }
     }
 
     @GetMapping(path = "/data/search-tags/private")
-    public List<Record> searchPersonalTags(@RequestParam(required = false) String searchword, Principal principal) {
-        List<Record> publicSearch = this.dao.searchTagsThroughPersonalCollection(searchword, userdao.findIdByUsername(principal.getName()));
-        if (publicSearch != null) {
-            return publicSearch;
+    public DataStatsDTO searchPersonalTags(@RequestParam(required = false) String searchword, Principal principal) {
+        DataStatsDTO selfSearch = new DataStatsDTO();
+        int userId = userdao.findIdByUsername(principal.getName());
+        if (this.statsdao.searchTagsThroughPersonalCollection(searchword, userId) != null) {
+            selfSearch.setPrivateSearchTags(statsdao.searchTagsThroughPersonalCollection(searchword, userId));
+            return selfSearch;
         } else {
-            throw new DataSourceLookupFailureException("Information Cannot Be Found");
+            throw new DataSourceLookupFailureException("No columns found at this time.");
         }
     }
 
-    @GetMapping(path = "/data/top-record-artist")
-    public Record getMostPopularRecordByArtist(@RequestParam("artistName") String artistName) {
-        return this.dao.mostPopularRecordByArtist(artistName);
+}
+    public RecordDTO mapRowToData(DataStatsDTO siteStats) {
+        siteStats.setMostActiveUser(statsdao.getMostActiveUser());
+        siteStats.setMemberCount(statsdao.getTotalNumberOfUsers());
+        siteStats.setPremiumUserCount(statsdao.getTotalPremiumUsers());
+        siteStats.setCollectionCount(statsdao.getTotalNumberOfCollections());
+        siteStats.setRecordCount(statsdao.getTotalNumberOfRecord());
+        siteStats.setAvgRecordsInCollection(statsdao.getAverageNumberOfRecordsInCollections());
+
+
+        return siteStats;
     }
 
-    @GetMapping(path = "/data/top-ten-records")
-    public List<Record> getTopTenRecords() {
-        return this.dao.getTopTenRecords();
+
+    public DataStatsDTO mapRowToData(DataStatsDTO dataStatsDTO) {
+        DataStatsDTO siteStats = new DataStatsDTO();
+        siteStats.setMostActiveUser(statsdao.getMostActiveUser());
+        siteStats.setMemberCount(statsdao.getTotalNumberOfUsers());
+        siteStats.setPremiumUserCount(statsdao.getTotalPremiumUsers());
+        siteStats.setCollectionCount(statsdao.getTotalNumberOfCollections());
+        siteStats.setRecordCount(statsdao.getTotalNumberOfRecord());
+        siteStats.setAvgRecordsInCollection(statsdao.getAverageNumberOfRecordsInCollections());
+
+
+        siteStats.setTopTenRecords(statsdao.getTopTenRecords());
+        siteStats.setTopTenArtists(statsdao.topTenArtists());
+        siteStats.setTopArtist(statsdao.getMostPopularArtist());
+        siteStats.setTopRecord(statsdao.getMostPopularRecord());
+
+        siteStats.setWorstArtist(statsdao.getLeastPopularArtist());
+        siteStats.setWorstRecord(statsdao.getLeastPopularRecord());
+        siteStats.setWorstGenre(statsdao.getLeastPopularGenre());
+
+        siteStats.setTopGenre(statsdao.getMostPopularGenre());
+
+        return siteStats;
     }
-
-
 }
