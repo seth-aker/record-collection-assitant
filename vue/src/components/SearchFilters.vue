@@ -52,5 +52,6 @@ export default {
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   background-color: #40c5a4f6;
    border-radius: 20px;
+   opacity: 90%;
 }
 </style>

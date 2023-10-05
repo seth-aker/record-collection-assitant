@@ -42,6 +42,7 @@ export default {
 <style scoped>
 .popular-artist-container {
   background-color: #40c5a4;
+  opacity: 90%;
   padding: 5px;
   text-align: center;
   display: flex;
@@ -52,9 +53,9 @@ export default {
 
 h1 {
   font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 50px;
+  font-size: 60px;
   color: #eff13f;
-  -webkit-text-stroke:1.5px #E00A86;
+  -webkit-text-stroke:0.8px #E00A86;
   
 }
 

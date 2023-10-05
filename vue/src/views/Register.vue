@@ -5,7 +5,7 @@
 
     </div>
   
-      <h2>Create Account</h2>
+      <h2 class="gradient-text">Create Account</h2>
       <div role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -129,7 +129,7 @@ form {
   padding-left: 9px; padding-right: 9px;
   border-width: 20px;
   border-style:ridge;
-    background-color: #fb7600;
+   background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);
   border-radius: 15px;
 }
 
@@ -215,6 +215,21 @@ button{
   display: flex;
 align-items: center;
 }
+
+.gradient-text { 
+
+  font-family: 'KEEPT___'; 
+  src: url('@/assets/fonts/KEEPT___.TTF') format('truetype');
+  font-size: 50px;
+  -webkit-text-stroke: 0.5px #40c5a4; /* Width and color of the text stroke */
+   background: linear-gradient(180deg, rgba(239,241,63,1) 38%, rgb(224, 10, 134) 77%);
+  -webkit-background-clip: text; /* Clip the background to the text */
+  color: transparent; /* Make the text color transparent to show the gradient */
+  display: flex;
+  justify-content: center;
+  padding-bottom: -25px;
+}
+
 
 
 </style>

@@ -186,13 +186,16 @@ h2 {
   background-color: #40c5a4;
   padding: 20px; /* Add padding for spacing */
   text-align: center; /* Center the text horizontally */
+  opacity: 90%;
 }
 
 .green-box h2 {
   font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 50px;
+  font-size: 60px;
   color: #eff13f;
   margin: 0; 
+  color: #eff13f;
+  -webkit-text-stroke:0.8px #E00A86;
 }
 
 
