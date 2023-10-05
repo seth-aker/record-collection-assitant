@@ -37,17 +37,21 @@
            <th>Released</th>
            <td>|  {{ recordDTO.year }} </td>
          </tr>
+         <tr>
+           <th>Facts</th>
+           <td>| {{recordDTO.notes}}</td>
+         </tr>
        </table>
       </section>
 
       <section class="user-record-info">
          <div class="user-notes" v-show='recordDTO.userNotes !== "" && recordDTO.userNotes !== null' >
           <h3>Notes</h3>
-          <div class="user-text">{{ recordDTO.userNotes }}</div>
+          <div class="user-text">- {{ recordDTO.userNotes }}</div>
         </div>
         <div class="condition" v-show='recordDTO.condition !== "" && recordDTO.condition !== null'>
           <h3>Condition</h3>
-          <div class="user-text">{{ recordDTO.condition }}</div>
+          <div class="user-text">- {{ recordDTO.condition }}</div>
         </div>
         <div class="tags" v-show="recordDTO.tags.length > 0">
           <h3>Tags</h3>
@@ -174,7 +178,7 @@ export default {
 .add-or-remove-icon {
   display: flex;
   align-items: center;
-  border: #40c5a4 1px solid;
+  border: #40c5a4 2px solid;
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
@@ -218,6 +222,11 @@ export default {
   grid-area: details;
   text-align: left;
   border-bottom: #40c5a4 3px solid;
+  
+}
+
+.record-info tr {
+  height: 65px;
 }
 
 .user-record-info {
@@ -251,6 +260,8 @@ h3 {
   flex-direction: column;
   align-items: center;
   width: 90%;
+  border: #40c5a4 2px solid;
+  margin: 10px;
 }
 .form button {
   width: 20%;
@@ -269,6 +280,7 @@ h3 {
 }
 
 .user-text {
+  color: #eff13f;
    padding: 10px;
   margin: 10px;
   font-family:"KEEPT___", Arial, sans-serif;

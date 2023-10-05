@@ -98,6 +98,7 @@ form {
     color: #eff13f;
     background-color: #40c5a4f6;
     border-radius: 5px;
+    height: 90%;
 }
 textarea {
     width: 97%;
