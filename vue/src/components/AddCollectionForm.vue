@@ -30,17 +30,17 @@ data() {
 },
 methods: {
 createCollection() {
- CollectionService.createNewCollection(this.collection)
-  .then(resp => {
-   if(resp.status === 201){
-    this.collection = resp.data;
-    alert("Collection created successfully");
-    this.$emit("hideForm");
-    this.$store.commit("ADD_COLLECTION_TO_COLLECTIONS", this.collection);
-    this.$router.push({name: 'UserHome', params: {username: 'username'}});
-   }
-  })
- }
+    
+    CollectionService.createNewCollection(this.collection)
+    .then(resp => {
+    if(resp.status === 201){
+        this.collection = resp.data;
+        alert("Collection created successfully");
+        this.$emit("hideForm");
+        this.$store.commit("ADD_COLLECTION_TO_COLLECTIONS", this.collection);
+    }
+    })
+    }
 }
 }
 </script>

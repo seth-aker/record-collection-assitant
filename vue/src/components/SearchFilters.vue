@@ -50,7 +50,7 @@ export default {
   font-size: 16px; 
   padding: 10px; 
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #40c5a4f6;
+  background-color: #40c5a4;
    border-radius: 20px;
    opacity: 90%;
 }

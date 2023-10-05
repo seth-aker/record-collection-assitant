@@ -64,8 +64,7 @@ export default {
     border: 1px solid #ccc;
     border-radius: 20px;
     font-size: 20px;
-     background-color: #40c5a4f6;
-      -webkit-text-stroke:0.5px #E00A86;
+     background-color: #40c5a4;
 
       color: #eff13f;
    font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
