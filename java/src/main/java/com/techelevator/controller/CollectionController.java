@@ -53,12 +53,8 @@ public class CollectionController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/collections/create", method = RequestMethod.POST)
     public Collection addCollection(@RequestBody Collection collection, @Valid Principal principal) {
-            Collection newCollection = new Collection();
-            newCollection.setUserId(userDao.findIdByUsername(principal.getName()));
-            newCollection.setPublic(collection.isPublic());
-            newCollection.setName(collection.getName());
         collection.setUserId(userDao.findIdByUsername(principal.getName()));
-        return this.collectionDao.createCollection(newCollection);
+        return this.collectionDao.createCollection(collection);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
