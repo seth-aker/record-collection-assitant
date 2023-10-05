@@ -1,8 +1,6 @@
 <template>
   <div id="login">
     <form @submit.prevent="login">
-      
-
       <h2 class="gradient-text">Login</h2>
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password! Not groovy, man
