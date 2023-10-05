@@ -84,6 +84,8 @@ public class JdbcDataStatsDao implements DataStatsDao {
         return record;
     }
 
+
+    // this is actually top 25
     @Override
     public List<Record> getTopTenRecords() {
         List<Record> topTen = new ArrayList<>();
@@ -92,7 +94,7 @@ public class JdbcDataStatsDao implements DataStatsDao {
                 "FROM records " +
                 "GROUP BY record_id " +
                 "ORDER BY popularity_count DESC " +
-                "LIMIT 10;";
+                "LIMIT 25;";
         try {
             SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
             while (result.next()) {
@@ -280,7 +282,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
     }
 
 
-
     @Override
     public List<Record> searchTagsThroughPersonalCollection(String searchword, int userId) {
         List<Record> recordsWithTag = new ArrayList<>();
@@ -334,16 +335,16 @@ public class JdbcDataStatsDao implements DataStatsDao {
         record.setThumb(rowSet.getString("record_image"));
         record.setArtist(rowSet.getString("record_artist"));
 
-        if(rowSet.getString("record_condition") != null) {
-            record.setCondition(rowSet.getString("record_condition"));
-        }
-        if(rowSet.getString("user_note") != null) {
-            record.setUserNote(rowSet.getString("user_note"));
-        }
+//        if(rowSet.getString("record_condition") != null) {
+//            record.setCondition(rowSet.getString("record_condition"));
+//        }
+//        if(rowSet.getString("user_note") != null) {
+//            record.setUserNote(rowSet.getString("user_note"));
+//        }
         return record;
     }
 
-}
+    }
 
 
 

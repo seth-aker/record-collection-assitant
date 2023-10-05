@@ -2,10 +2,10 @@
   <div>
     <loading-icon v-show="isLoading" />
     <search-box />
-    <slide-show :items="this.$store.state.trendingCollections" />
+    <slide-show :items="this.$store.state.trendingCollections" name="TRENDING COLLECTIONS" /> 
    
     
-    <TopArtistSlideshow></TopArtistSlideshow>
+    <slide-show :items="this.$store.state.topTenRecords" name="TOP 25 RECORDS"></slide-show>
 
     <TopGenreSlideshow></TopGenreSlideshow>
 
@@ -21,19 +21,17 @@
 <script>
 import SearchBox from "@/components/SearchBox.vue";
 import PopularArtist from '../components/PopularArtist.vue';
-import TopArtistSlideshow from '../components/TopArtistSlideshow.vue';
 import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
 import LoadingIcon from '../components/LoadingIcon.vue';
 import SlideShow from '../components/SlideShow.vue';
-
+import dataStats from '../services/AggrDataService'
 
 
 export default {
   components: {
     SearchBox,
-    TopArtistSlideshow,
     TopGenreSlideshow,
     PopularArtist,
     LoadingIcon,
@@ -54,7 +52,19 @@ export default {
         
         this.isLoading = false;
       })
-      //call topArtists
+      dataStats.getDataStats()
+      .then(response => {
+        this.$store.commit('SET_DATA_STATS', response.data);
+         const topTenRecords = response.data.topTenRecords;
+          topTenRecords.forEach(eachRecord => {
+            eachRecord.imgUrl = eachRecord.thumb;
+              eachRecord.name = eachRecord.title;
+        })
+         this.$store.commit('SET_TOP_TEN_RECORDS', topTenRecords);
+      })
+      .catch((error) => {
+          console.error("Error fetching data stats:", error);  
+      });
   },
   data() {
     return {
