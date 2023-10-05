@@ -4,11 +4,12 @@
       <textarea v-model="newNotes" name="user-notes" id="" cols="50" rows="10"></textarea>
       <div class="tags-div">
         <div class="input-tags" >
-            <input v-model="newTag" placeholder="Add a tag...">
-            <div class="add-tag" @click="addTag">
+            <input v-model="newTag" placeholder="Add a tag..." @keydown.enter.prevent="addTag">
+            <font-awesome-icon class="add-tag" icon="fa-solid fa-arrow-right" @click="addTag"/>
+            <!-- <div class="add-tag" @click="addTag">
                 <font-awesome-icon icon="fa-solid fa-plus"/>
                 <span>Add tag</span>
-            </div>
+            </div> -->
         </div>
 
         <div class="display-tags">
@@ -30,7 +31,7 @@
           <option value="Fair">Fair</option>
           <option value="Poor">Poor</option>
       </select>
-      <button type="submit">Save</button>
+      <button type="submit" >Save</button>
   </form>
 </template>
 
@@ -109,15 +110,25 @@ button {
 }
 .add-tag {
     border:#eff13f 2px solid;
-    border-radius: 5px;
+    border-radius: 15px;
+    margin-left: 5px;
+}
+.add-tag:hover {
+    color: #e2e475;
+    border-color:#e2e475;
 }
 .input-title {
-    margin: 5px 0px 0px 15px;
+    margin-left: 15px;
 }
 .tags-div {
     display: flex;
     width: 97%;
     margin: 10px 5px 10px 5px
+}
+
+.input-tags {
+    display: flex;
+    align-items: center;
 }
 .input-tag {
     width: 40%;
@@ -125,14 +136,15 @@ button {
 .display-tags{
     flex-basis: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 .tag-to-add {
     color: #40c5a4f6;
     background-color: #eff13f;
-    border-radius: 5px;
-    padding: 5px 10px 5px 10px;
-    margin: 5px;
+    border-radius: 15px;
+    padding: 2px 10px 2px 10px;
+    margin: 2px 5px 2px 5px
 }
 .condition {
     width: 40%;

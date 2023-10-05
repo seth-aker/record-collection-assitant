@@ -55,7 +55,7 @@ public class RecordController {
             String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userId));
             List<String> tags = new ArrayList<>();
             if(recordLogic.isRecordInUserLib(recordId, userId)) {
-                recordDao.getRecordTags(recordId, userId);
+               tags.addAll(recordDao.getRecordTags(recordId, userId));
             }
             recordDTO.setUserNotes(recordNotesAndCondition[0]);
             recordDTO.setCondition(recordNotesAndCondition[1]);

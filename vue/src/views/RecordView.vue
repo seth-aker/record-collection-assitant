@@ -3,16 +3,18 @@
     <loading-icon v-show="isLoading" />
     <div class="record-content">
       <h2>{{ recordDTO.title }}
-        <div class="add-or-remove-icon" v-if="!recordAdded">
-          <font-awesome-icon  icon='fa-regular fa-plus-square' @click="addToCollection"/>
+        <div class="add-or-remove-icon" v-if="!recordAdded" @click="addToCollection">
+          <font-awesome-icon  icon='fa-regular fa-plus-square'/>
           <span>Add to Library</span>
         </div>
-        <div class="add-or-remove-icon" v-show="recordAdded">
-          <font-awesome-icon class="x-icon" icon="fa-regular fa-circle-xmark" @click="removeFromLib" />
+        <div class="add-or-remove-icon" v-show="recordAdded" @click="removeFromLib">
+          <font-awesome-icon class="x-icon" icon="fa-regular fa-circle-xmark" />
           <span>Remove from Library</span>
         </div>  
         </h2>
-      <album-art class="album" :albumImageUrl="recordDTO.images[0].uri" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
+      <div class="album">
+          <album-art  :albumImageUrl="recordDTO.images[0].uri" :albumName="recordDTO.title" :albumId="recordDTO.id"/>
+      </div>
       <section class="record-info" > 
        <table>
          <tr>
@@ -41,20 +43,21 @@
       <section class="user-record-info">
          <div class="user-notes" v-show='recordDTO.userNotes !== "" && recordDTO.userNotes !== null' >
           <h3>Notes</h3>
-          <div>{{ recordDTO.userNotes }}</div>
+          <div class="user-text">{{ recordDTO.userNotes }}</div>
         </div>
         <div class="condition" v-show='recordDTO.condition !== "" && recordDTO.condition !== null'>
           <h3>Condition</h3>
-          <div>{{ recordDTO.condition }}</div>
+          <div class="user-text">{{ recordDTO.condition }}</div>
         </div>
         <div class="tags" v-show="recordDTO.tags.length > 0">
           <h3>Tags</h3>
-          <div v-for="(tag, index) in recordDTO.tags" :key="index" class="tag">{{tag}}</div>
-          </div>  
+          <div class="tags-list">
+            <span v-for="(tag, index) in recordDTO.tags" :key="index" class="tag">{{tag}} <font-awesome-icon icon="fa-regular fa-circle-xmark" @click="cancelTag(index)"/></span>
+          </div>
+        </div>  
        </section>
       
       <div class="form">
-         
           <button @click="toggleForm" v-show="!showForm && recordAdded">Add notes</button>
           <button @click="toggleForm" v-show="showForm">Cancel</button>
           <add-record-form v-if="showForm" :record="$store.state.currentRecord" @hideForm="showForm = false" />
@@ -144,29 +147,35 @@ export default {
 .record-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 3fr 2fr;
+  grid-template-rows: 1fr 6fr 3fr;
   grid-template-areas: "title title"
                        "photo details"
                        "form userInfo";
   border: #40c5a4f6 2px solid;
   margin-bottom: 25px;
+  background-color:#a7a7a7b6;
 }
 
 
+
 .album {
-  width: 600px;
-  grid-area: photo;
-  margin: 25px;
+   grid-area: photo;
+  border-bottom: #40c5a4 3px solid;
+  padding: 25px;
 }
 .add-or-remove-icon {
   display: flex;
   align-items: center;
-
+  border: #40c5a4 1px solid;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .add-or-remove-icon svg{
     padding: 0, 5px;
     margin: 0;
-    color: #40c5a4f6;
+    margin-right: 5px;
+    color:#eff13f;
     border: none;
     cursor: pointer;
     font-size: 30px;
@@ -174,26 +183,13 @@ export default {
 }
 .add-or-remove-icon span {
   font-size: 16px;
+
 }
 
-.add-or-.add-or-remove-icon:hover {
-  color: #33977e;
+.add-or-remove-icon:hover {
+  background-color: #40c5a4;
 }
 
-.x-icon {
-   padding: 0, 5px;
-    margin: 0;
-    color: #40c5a4;
-    
-    border: none;
-    cursor: pointer;
-    font-size: 30px;
-    border-radius: 30px;
-}
-
-.x-icon:hover {
-  color: #33977e;
-}
 
 .record-added-icon {
   cursor: default;
@@ -212,7 +208,8 @@ export default {
   color: #eff13f;
   font-family: "KEEPT___", Arial, sans-serif;
   grid-area: details;
-  
+  text-align: left;
+  border-bottom: #40c5a4 3px solid;
 }
 
 .user-record-info {
@@ -220,20 +217,80 @@ export default {
 }
 h2 {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   font-size: 50px;
   color: #eff13f;
   font-family: "KEEPT___", Arial, sans-serif;
   grid-area: title;
-  align-items: center;
+  border-bottom: #40c5a4 3px solid;
+  margin: 0;
 }
 h3 {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   color: #eff13f;
   font-family: "KEEPT___", Arial, sans-serif;
+  border-bottom: #40c5a4 2px solid;
+  padding: 10px;
+  margin: 10px;
+
 }
 .form {
   grid-area: form;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
 }
+.form button {
+  width: 20%;
+  margin: 5px;
+  background-color: transparent ;
+  border: #40c5a4 1px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  font-family: "KEEPT___", Arial, sans-serif;
+  color:#eff13f ;
+}
+
+.form button:hover {
+  background-color:#40c5a4;
+}
+
+.user-text {
+   padding: 10px;
+  margin: 10px;
+  font-family:"KEEPT___", Arial, sans-serif;
+}
+
+.tags {
+  display: flex;
+  flex-direction: column;
+}
+.tags-list {
+  display: flex;
+  margin-left: 15px;
+}
+.tag {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    color: #40c5a4f6;
+    background-color: #eff13f;
+    border-radius: 15px;
+    padding: 2px 10px 2px 10px;
+    margin: 2px 5px 2px 5px;
+    width: fit-content;
+}
+
+.tag svg {
+  padding-left: 5px ;
+  font-size: 14px ;
+}
+
+
+
 </style>
