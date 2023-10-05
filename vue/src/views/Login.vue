@@ -2,7 +2,8 @@
   <div id="login">
     <form @submit.prevent="login">
       
-      <h2> Login</h2>
+      <h2> Login </h2>
+
       <div role="alert" v-if="invalidCredentials">
         Invalid username and password! Not groovy, man
       </div>
@@ -36,7 +37,9 @@ import authService from "../services/AuthService";
 
 export default {
   name: "login",
-  components: {},
+  components: {
+   
+  },
   data() {
     return {
       user: {

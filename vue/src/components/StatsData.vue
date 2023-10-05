@@ -1,43 +1,47 @@
 <template>
+  <div>
+    {{ this.$store.state.datatats.memberCount }}
+    {{ this.$store.state.dataStats.memberCount }}
+    {{ this.$store.state.dataStats.collectionCount }}
+    {{ this.$store.state.dataStats.premiumUserCount }}
 
+    {{ this.$store.state.dataStats.avgRecordsInCollection }}
+    {{ this.$store.state.dataStats.mostActiveUser }}
 
-<div>
-{{ this.$store.state.dataStats.recordCount }}
-</div>
+    {{ this.$store.state.dataStats.artistsBestRecord }}
+    {{ this.$store.state.dataStats.downloadNumber }}
+
+ {{ this.$store.state.dataStats.downloadNumber }}
+    {{ this.$store.state.dataStats.topTenRecords }}
+  
+  </div>
 </template>
 
 <script>
+import dataStats from "../services/dataStats.js";
 
-
- import dataStats from '../services/dataStats.js'
 export default {
+  data() {
+    return {
+    };
+  },
+  computed: {},
+  created() {
 
-   name: "data-stats",
-data(){
-   
-    return{
-            stats:[
-                  
-
-         ] 
-    }
-},
-    created(){
-        // this.isloading = true;
-            dataStats.getDataStats()
-                .then(response => {
-             this.$store.commit('SET_DATA_STATS', response.data);
+     // this.isloading = true;
+    dataStats.getDataStats()
+      .then((response) => {
+        console.log("Response from API:", response.data);
+        this.$store.commit("SET_DATA_STATS", response.data);
         //    this.isLoading = false;
-        });
-
-        }
-
-}      
-    
-
-
-
+      })
+      .catch((error) => {
+        console.error("Error fetching data stats:", error);
+      });
+  },
+};
 </script>
 
 <style>
 </style>
+    

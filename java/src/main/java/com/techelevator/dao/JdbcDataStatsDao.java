@@ -280,7 +280,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
     }
 
 
-
     @Override
     public List<Record> searchTagsThroughPersonalCollection(String searchword, int userId) {
         List<Record> recordsWithTag = new ArrayList<>();
@@ -334,16 +333,16 @@ public class JdbcDataStatsDao implements DataStatsDao {
         record.setThumb(rowSet.getString("record_image"));
         record.setArtist(rowSet.getString("record_artist"));
 
-        if(rowSet.getString("record_condition") != null) {
-            record.setCondition(rowSet.getString("record_condition"));
-        }
-        if(rowSet.getString("user_note") != null) {
-            record.setUserNote(rowSet.getString("user_note"));
-        }
+//        if(rowSet.getString("record_condition") != null) {
+//            record.setCondition(rowSet.getString("record_condition"));
+//        }
+//        if(rowSet.getString("user_note") != null) {
+//            record.setUserNote(rowSet.getString("user_note"));
+//        }
         return record;
     }
 
-}
+    }
 
 
 
