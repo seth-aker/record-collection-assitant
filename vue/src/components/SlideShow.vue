@@ -4,7 +4,7 @@
     <!-- Container for the green box -->
     <div class="green-box">
       <!-- Heading for the slideshow -->
-      <h2>TRENDING COLLECTIONS</h2>
+      <h2>{{name}}</h2>
     </div>
     <!-- Container for the carousel and navigation buttons -->
     <div class="carousel-container">
@@ -34,8 +34,11 @@
 export default {
   components: {  },
   name: 'SlideShow',
-  props: ['items'],
-  
+  props: ['items',
+            'name'
+  ],
+
+        
   data() {
     return {
      
