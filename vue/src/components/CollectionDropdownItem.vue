@@ -45,9 +45,15 @@ export default {
   position :relative;
   border: #eff13f solid 1px;
   border-radius: 5px;
-  bottom: 300%;
-  left: 50%;
-  margin-left: -105px;
+  right: 67%;
+  
+  
   background-color: rgb(224, 10, 134); 
+  cursor: pointer;
+  padding: 3px;
+}
+
+.collection-name:hover {
+   background-color: rgb(160, 43, 111); 
 }
 </style>

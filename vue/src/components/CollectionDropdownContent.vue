@@ -16,6 +16,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+div {
+    position: absolute;
 
+}
 </style>
