@@ -1,6 +1,6 @@
 <template>
   <div @click="toggleHideDeleteButton(); toggleCollectionList();" 
-  v-on-clickaway="away">
+  v-on-clickaway="away" v-show="isHome">
       <slot name="toggler">
         <button class="tooltipadd" id="add-record-btn">
           <font-awesome-icon class="add-record-icon" 
