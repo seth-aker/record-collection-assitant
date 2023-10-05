@@ -20,6 +20,9 @@ export default {
     
     addRecordToUserCollection(collectionId, record){
         return axios.post(`/collections/${collectionId}`, record)
-    }
+    },
     
+    createNewCollection(collection) {
+        return axios.post('/collections/create',collection)
+    }
 }

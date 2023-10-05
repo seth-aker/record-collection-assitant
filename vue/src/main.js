@@ -8,10 +8,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { faPlusSquare, faAddressBook, faCircleCheck, faCircleXmark, faSquareMinus} from '@fortawesome/free-regular-svg-icons'
-import { faBars, faBarsStaggered, faPlus, faRecordVinyl, faUserCircle, faCaretLeft, faCaretRight} from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBarsStaggered, faPlus, faRecordVinyl, faUserCircle, faCaretLeft, faCaretRight, faArrowRight} from '@fortawesome/free-solid-svg-icons'
 // import {faRecordVinyl} from '@fortawesome/'
 
-library.add(faPlusSquare, faUserCircle, faBars, faBarsStaggered, faAddressBook, faCircleCheck, faCircleXmark,faSquareMinus, faPlus, faRecordVinyl, faCaretLeft, faCaretRight);
+library.add(faPlusSquare, faUserCircle, faBars, faBarsStaggered, faAddressBook, faCircleCheck, faCircleXmark,faSquareMinus, faPlus, faRecordVinyl, faCaretLeft, faCaretRight, faArrowRight);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

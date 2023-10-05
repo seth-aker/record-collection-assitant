@@ -20,6 +20,10 @@ export default {
 
     getUserLibrary() {
         return axios.get(`/records`)
-    }
+    },
+
+    deleteTag(recordId, tagName) {
+        return axios.delete(`/records/${recordId}/${tagName}`)
+    } 
 
 }

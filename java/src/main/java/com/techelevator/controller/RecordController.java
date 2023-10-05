@@ -55,7 +55,7 @@ public class RecordController {
             String[] recordNotesAndCondition = (recordDao.getRecordNoteAndCondition(recordId, userId));
             List<String> tags = new ArrayList<>();
             if(recordLogic.isRecordInUserLib(recordId, userId)) {
-                recordDao.getRecordTags(recordId, userId);
+               tags.addAll(recordDao.getRecordTags(recordId, userId));
             }
             recordDTO.setUserNotes(recordNotesAndCondition[0]);
             recordDTO.setCondition(recordNotesAndCondition[1]);
@@ -106,7 +106,7 @@ public class RecordController {
         int userId = userDao.findIdByUsername(principal.getName());
         String recordId = String.valueOf(recordDTO.getId());
         if (!recordLogic.doesRecordExist(recordId)) {
-            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(), "", ""));
+            recordDao.createRecord(new Record(recordId, recordDTO.getTitle(), recordDTO.getThumb(), recordDTO.getArtists().get(0).getName(),"", ""));
         }
         if (!recordLogic.isRecordInUserLib(recordId, userId)) {
             recordDao.addRecordToUserLib(recordId, userId);
@@ -127,41 +127,14 @@ public class RecordController {
         }
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path = "/{recordId}/{tagName}")
+        public void removeTagFromRecord(@PathVariable String recordId, @PathVariable String tagName,  Principal principal ) {
+        int userId = userDao.findIdByUsername(principal.getName());
+
+        recordDao.removeTag(tagName, userId, recordId);
+
+    }
+
 }
 
-
-
-
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping(path = "/{collectionId}")
-//    public void addRecordToCollection(@Valid Principal principal,
-//                                      @RequestBody RecordDTO recordDTO,
-//                                      @PathVariable int collectionId) {
-//
-//        Record record = recordDTO.getRecord();
-//        int userId = userDao.findIdByUsername(principal.getName());
-//        if(!recordLogic.doesRecordExist(record)) {
-//            recordDao.createRecord(record);
-//        }
-//        if(!recordLogic.isRecordInUserLib(record, userId)){
-//            recordDao.addRecordToUserLib(record, userId);
-//        }
-//        collectionDao.addRecordToCollection(collectionId, record);
-//    }
-
-
-//
-//    @PostMapping(path = "/record")
-//    public String createNewRecord(Principal principal, RecordDTO recordDTO) {
-//        int userId = userDao.findIdByUsername(principal.getName());
-//        if(recordDTO.getRecord().getId() == null || recordDTO.getRecord().getId().equals("")) {
-//            recordDTOBuilder.addRecordToDb(recordDTO, String.valueOf(Objects.hash(recordDTO.getRecord(), recordDTO.getArtist())), userId );
-//        } else {
-//            recordDTOBuilder.addRecordToDb(recordDTO, userId);
-//        }
-//        Record newRecord = recordDTO.getRecord();
-//
-//        return newRecord.getId();
-//    }
-//
-//}

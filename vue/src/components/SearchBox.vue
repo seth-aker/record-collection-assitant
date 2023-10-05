@@ -79,7 +79,8 @@ export default {
     border-radius: 20px;
     cursor: pointer;
     font-size: 20px;
-     background: linear-gradient(180deg, rgba(239,241,63,1) 0%, rgba(64,197,164,1) 100%);
+    background: linear-gradient(180deg, rgba(239,241,63,0.7455357142857143) 37%, rgba(224,10,134,0.7231267507002801) 100%);
+
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
     -webkit-text-stroke:0.5px #E00A86;
 }

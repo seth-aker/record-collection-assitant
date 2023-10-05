@@ -30,7 +30,7 @@ public class JdbcRecordDao implements RecordDao {
 
     public Record getRecordById(String recordId) {
         Record record = null;
-        String sql = "SELECT record_title, record_id, record_image, record_artist " +
+        String sql = "SELECT record_id, record_title, record_image " +
                     "FROM records " +
                     "WHERE record_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, recordId);
@@ -48,7 +48,7 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public List<Record> getUserLibrary(int userId) {
-        String sql = "SELECT r.record_id, r.record_title, r.record_image, r.record_artist, ur.user_note, ur.record_condition " +
+        String sql = "SELECT r.record_id, r.record_title, r.record_image, ur.user_note, ur.record_condition " +
                     "FROM records as r " +
                     "JOIN user_record AS ur ON r.record_id = ur.record_id " +
                     "WHERE ur.user_id = ?";
@@ -140,7 +140,7 @@ public class JdbcRecordDao implements RecordDao {
     public boolean deleteTags(int userId, String recordId) {
         String sql = "DELETE FROM user_record_tag WHERE user_id = ? AND record_id = ?;";
         try {
-         return jdbcTemplate.update(sql, userId, recordId)==1;
+         return jdbcTemplate.update(sql, userId, recordId) == 1;
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (BadSqlGrammarException e) {
@@ -152,7 +152,19 @@ public class JdbcRecordDao implements RecordDao {
         }
         }
 
-
+    @Override
+    public boolean removeTag(String tagName, int userId, String recordId) {
+        String sql = "DELETE FROM user_record_tag WHERE tag_name = ? AND user_id = ? AND record_id = ?;";
+        try {
+            return jdbcTemplate.update(sql, tagName, userId, recordId) == 1;
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException e) {
+            throw new DaoException("Data integrity violation", e);
+        } catch (DataAccessException e) {
+            throw new DaoException("Failed to deleteTags", e);
+        }
+    }
 
 
     @Override
@@ -189,10 +201,10 @@ public class JdbcRecordDao implements RecordDao {
     }
 
     public boolean createRecord(Record record) {
-        String sql = "INSERT INTO records (record_id, record_title, record_image) " +
-                "VALUES (?, ?, ?) ";
+        String sql = "INSERT INTO records (record_id, record_title, record_image, record_artist) " +
+                "VALUES (?, ?, ?, ?) ";
         try {
-            return jdbcTemplate.update(sql, record.getId(), record.getTitle(), record.getThumb()) == 1;
+            return jdbcTemplate.update(sql, record.getId(), record.getTitle(), record.getThumb(), record.getArtist()) == 1;
 
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
@@ -249,7 +261,6 @@ public class JdbcRecordDao implements RecordDao {
         record.setId(rowSet.getString("record_id"));
         record.setTitle(rowSet.getString("record_title"));
         record.setThumb(rowSet.getString("record_image"));
-        record.setArtist(rowSet.getString("record_artist"));
 //        if(rowSet.getString("record_condition") != null) {
 //            record.setCondition(rowSet.getString("record_condition"));
 //        }
