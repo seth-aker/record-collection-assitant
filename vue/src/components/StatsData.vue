@@ -5,24 +5,12 @@
       {{ this.$store.getters.memberCount }}
     </div>
     <div>
-      <strong>Avg Records per Collection:</strong>
-      {{ this.$store.getters.avgRecordsInCollection }}
-    </div>
-    <div>
-      <strong>Most Active User:</strong>
-      {{ this.$store.getters.mostActiveUser }}
-    </div>
-    <div>
-      <strong>Premium User Count:</strong>
-      {{ this.$store.getters.premiumUserCount }}
-    </div>
-    <div>
-      <strong>Record Count:</strong>
+      <strong>Amount of Records we Have:</strong>
       {{ this.$store.getters.recordCount }}
     </div>
     <div>
-      <strong> Top Artists:</strong>
-      {{ this.$store.state.topTenArtists}}
+      <strong>Top Artists:</strong>
+      {{ this.$store.getters.topTenArtists }}
     </div>
   </div>
 </template>
@@ -41,8 +29,7 @@ export default {
     dataStats
       .getDataStats()
       .then((response) => {
-        this.$store.commit('SET_SITE_STATS', response.data);
-        this.$store.commit('SET_TOP_TEN_ARTISTS', response.data)
+        this.$store.commit('SET_DATA_STATS', response.data)
       })
       .catch((error) => {
         console.error("Error fetching data stats:", error);

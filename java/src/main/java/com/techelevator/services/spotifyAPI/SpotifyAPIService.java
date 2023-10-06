@@ -65,7 +65,7 @@ public class SpotifyAPIService implements APIService {
     }
 
     @Override
-    public SearchResponse getAlbumSearch(String query, int perPage, String type, int page) {
+    public SearchResponse getAlbumSearch(String query, int perPage, String type, int page, String genre) {
         List<RecordDTO> spotifyResponse = new ArrayList<>();
 
         //Checks if the access token for spotify has been updated within the last hour. If not, then updates the token.

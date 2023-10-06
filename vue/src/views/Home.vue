@@ -3,13 +3,13 @@
     <loading-icon v-show="isLoading" />
     <search-box />
     <slide-show :items="this.$store.state.trendingCollections" name="TRENDING COLLECTIONS" /> 
-   
+   <data-stats/>
 
     <slide-show :items="this.$store.state.topTenRecords" name="TOP 25 RECORDS"></slide-show>
 
     <TopGenreSlideshow></TopGenreSlideshow>
 
-    <PopularArtist></PopularArtist>
+    
     <div class="custom-content">
       <div class="genres">
         
@@ -20,7 +20,6 @@
 
 <script>
 import SearchBox from "@/components/SearchBox.vue";
-import PopularArtist from '../components/PopularArtist.vue';
 import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
@@ -33,10 +32,10 @@ export default {
   components: {
     SearchBox,
     TopGenreSlideshow,
-    PopularArtist,
+  
     LoadingIcon,
     SlideShow,
-   
+    dataStats,
   },
 
   created() {

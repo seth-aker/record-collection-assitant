@@ -129,6 +129,9 @@ export default new Vuex.Store({
     },
     collectionCount(state){
       return state.dataStats.collectionCount;
+    },
+    topTenArtists(state){
+      return state.dataStats.topTenArtists;
     }
   }
   

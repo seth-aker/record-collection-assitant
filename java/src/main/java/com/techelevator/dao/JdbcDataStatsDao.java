@@ -22,7 +22,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
 
     public JdbcDataStatsDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-
     }
 
 
@@ -62,7 +61,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
         return number;
     }
 
-
     @Override
     public Record getMostPopularRecord() {
         Record record = null;
@@ -85,7 +83,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
     }
 
 
-    // this is actually top 25
     @Override
     public List<Record> getTopTenRecords() {
         List<Record> topTen = new ArrayList<>();
@@ -202,12 +199,12 @@ public class JdbcDataStatsDao implements DataStatsDao {
         return mostPopularArtist;
     }
 
-
+    // top 25
     @Override
     public List<String> topTenArtists() {
         List<String> mostPopularArtist = new ArrayList<>();
         String sql = "SELECT record_artist, COUNT(*) AS record_count FROM records " +
-                "GROUP BY record_artist ORDER BY record_count DESC LIMIT 10;";
+                "GROUP BY record_artist ORDER BY record_count DESC LIMIT 25;";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         try {
             while (result.next()) {
@@ -220,6 +217,7 @@ public class JdbcDataStatsDao implements DataStatsDao {
         }
         return mostPopularArtist;
     }
+
 
     @Override
     public String getMostActiveUser() {
@@ -267,7 +265,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
                 "FROM records r\n" +
                 "JOIN user_record_tag urt ON r.record_id = urt.record_id\n" +
                 "WHERE urt.tag_name = ?;";
-
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, searchword);
         try {
             while (result.next()) {
@@ -280,7 +277,6 @@ public class JdbcDataStatsDao implements DataStatsDao {
         }
         return recordsWithTag;
     }
-
 
     @Override
     public List<Record> searchTagsThroughPersonalCollection(String searchword, int userId) {
@@ -305,6 +301,7 @@ public class JdbcDataStatsDao implements DataStatsDao {
         }
         return recordsWithTag;
     }
+
 
     @Override
     public Record mostPopularRecordByArtist(String artistName) {

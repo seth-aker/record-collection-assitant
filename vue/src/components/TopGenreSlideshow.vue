@@ -13,7 +13,7 @@
       <!-- Container for the slides -->
       <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
         <!-- Iterate through items to display each colored square with text -->
-        <div class="slide" v-for="(item, index) in items" :key="index">
+        <div class="slide" v-for="(item, index) in items" :key="index" @click="searchByGenre(item.title)">
           <!-- Display the colored square with text -->
           <div class="colored-square">
             <div class="square-text">{{ item.title }}</div>
@@ -80,6 +80,19 @@ export default {
         this.currentIndex = 0;
       }
     },
+    searchByGenre(genre) {
+      this.$state.commit('SET_GENRE_SEARCH', genre)
+      this.$router.push({name: 'search-page', query: {type: this.$store.state.sr.searchType,
+                                                      per_page: this.$store.state.sr.resultsPerPage,
+                                                      genre: this.$store.state.sr.genre}
+                        }).catch(error => {
+                            if (error.name !== 'NavigationDuplicated' &&
+                                !error.message.includes('Avoided redundant navigation to current location')
+                                ) {
+                                  console.log(error)
+                                }
+                            });
+    }
   },
 };
 </script>

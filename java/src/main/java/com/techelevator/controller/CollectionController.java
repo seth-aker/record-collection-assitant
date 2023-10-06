@@ -81,12 +81,13 @@ public class CollectionController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path = "/collections/{collectionId}/{recordId}")
-    public void removeRecordFromCollection(@PathVariable int collectionId, @PathVariable String recordId, Principal principal) {
+    public Collection removeRecordFromCollection(@PathVariable int collectionId, @PathVariable String recordId, Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
         Collection collection = collectionDao.getCollectionByCollectionId(collectionId);
 
         if(userId == collection.getUserId()) {
             recordDao.removeRecordFromCollection(collectionId, recordId);
+            return collectionDao.getSingleCollectionByUserId(userId, collectionId);
         } else {
             throw new AccessDeniedException("403 returned");
         }
