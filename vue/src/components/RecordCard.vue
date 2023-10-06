@@ -120,20 +120,20 @@ export default {
         })
     },
     removeRecordFromCollection() {
-      const collection = this.$store.getters.getCollectionById(this.collectionId);
-      const newCollection = collection.filter( record => {
-        record.id !== this.recordInfo.id;
-      });
-      this.$store.commit('REMOVE_RECORD_FROM_COLLECTION',newCollection);
+      CollectionService.removeRecordFromCollection(this.collectionId,this.recordInfo.id)
+        .then(resp => {
+          if(resp.status === 200 || resp.status === 204){
+
+            this.$store.commit('REMOVE_RECORD_FROM_COLLECTION',resp.data);
+          }
+        }).catch( () => {
+            alert("Oops! Something went wrong and the record was not removed from this colleciton")
+          })
+      
     }
   },
   computed: {
-    userCollecitons(){
-      const collLib = this.$store.getters.userColleciton.filter( coll => {
-        return coll.id !== this.collectionId;
-      });
-      return collLib;
-    },
+
     recordTitle() {
       const artistTitle = this.recordInfo.title.split(' - ');
       if (artistTitle[1] === undefined) {
