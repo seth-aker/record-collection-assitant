@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.lookup.DataSourceLookupFailureExcepti
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.nio.channels.ScatteringByteChannel;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -43,17 +44,15 @@ public class DataStatsController {
 
 
 
-    @GetMapping(path = "/data/search-tags/public")
-    public List<Record> searchPublicTags(@RequestParam(required = false) String searchword) {
+    @RequestMapping(path = "/data/searchsearchword=")
+    public List<Record> searchPublicTags(@RequestParam String searchword) {
         List<Record> addedRecords = new ArrayList<>();
-        DataStatsDTO searchResult = new DataStatsDTO();
-            return searchResult.getPublicSearchTags();
-
-
+         addedRecords = statsdao.searchTagsPublic(searchword);
+         return addedRecords;
     }
 
-        @GetMapping(path = "/data/search-tags/private")
-        public DataStatsDTO searchPersonalTags (@RequestParam(required = false) String searchword, Principal principal){
+        @RequestMapping(path = "/data/search-tags/private")
+        public DataStatsDTO searchPersonalTags (@RequestParam String searchword, Principal principal){
             DataStatsDTO selfSearch = new DataStatsDTO();
             int userId = userdao.findIdByUsername(principal.getName());
             if (this.statsdao.searchTagsThroughPersonalCollection(searchword, userId) != null) {
