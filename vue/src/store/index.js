@@ -95,6 +95,13 @@ export default new Vuex.Store({
     },
     SET_TOP_TEN_RECORDS(state, record){
       state.topTenRecords = record;
+    },
+    UPDATE_COLLECTION(state, collection) {
+      const newUserCollections = state.userCollections.filter( coll => {
+        return coll.id != collection.id;
+      });
+      newUserCollections.push(collection);
+      state.userCollections = newUserCollections;
     }
     
   },

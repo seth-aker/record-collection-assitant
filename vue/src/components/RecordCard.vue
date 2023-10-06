@@ -31,10 +31,16 @@
           <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
           v-show="recordAdded" />
         </button>
+        <div class="button" v-show="(isHome || !isCollection) && !isNotVis">
+          <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
+            <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
+            <span class="tooltiptextdelete">Remove this record from library</span>
+          </button>
+        </div>
         <div class="button" v-show="(isHome || isCollection) && !isNotVis">
           <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
-            <span class="tooltiptextdelete">Remove this record</span>
+            <span class="tooltiptextdelete">Remove record from collection</span>
           </button>
         </div>
       </div>
@@ -53,7 +59,7 @@ import CollectionService from '../services/CollectionService'
 
 export default {
   name: "recordInfo",
-  props: ['recordInfo','isHome','isCollection'], 
+  props: ['recordInfo','isHome','isCollection','collectionId'], 
   components: { AlbumArt, CollectionDropdown, CollectionDropdownContent, CollectionDropdownItem },
   data() {
     return {
@@ -110,6 +116,9 @@ export default {
             alert("Oops! Something went wrong and the record was not added to your library")
           })
         })
+    },
+    removeRecordFromCollection() {
+      return
     }
   },
   computed: {
