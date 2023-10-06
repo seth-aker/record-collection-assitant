@@ -3,7 +3,12 @@
     <loading-icon v-show="isLoading" />
     <search-box />
     <slide-show :items="this.$store.state.trendingCollections" name="TRENDING COLLECTIONS" /> 
+<<<<<<< HEAD
 
+=======
+   
+    
+>>>>>>> 90698009c92466f7b09dfb1f982310622e20ccbb
     <slide-show :items="this.$store.state.topTenRecords" name="TOP 25 RECORDS"></slide-show>
 
     <TopGenreSlideshow></TopGenreSlideshow>
@@ -33,6 +38,10 @@ export default {
     TopGenreSlideshow,
     LoadingIcon,
     SlideShow,
+<<<<<<< HEAD
+=======
+   
+>>>>>>> 90698009c92466f7b09dfb1f982310622e20ccbb
   },
 
   created() {

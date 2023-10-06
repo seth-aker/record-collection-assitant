@@ -199,12 +199,12 @@ public class JdbcDataStatsDao implements DataStatsDao {
         return mostPopularArtist;
     }
 
-    // top 25
+
     @Override
     public List<String> topTenArtists() {
         List<String> mostPopularArtist = new ArrayList<>();
         String sql = "SELECT record_artist, COUNT(*) AS record_count FROM records " +
-                "GROUP BY record_artist ORDER BY record_count DESC LIMIT 25;";
+                "GROUP BY record_artist ORDER BY record_count DESC LIMIT 10;";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
         try {
             while (result.next()) {
