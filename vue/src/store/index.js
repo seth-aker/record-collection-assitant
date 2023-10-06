@@ -130,8 +130,8 @@ export default new Vuex.Store({
     collectionCount(state){
       return state.dataStats.collectionCount;
     },
-    UserCollection: state => {
-    return state.UserCollection;
+    topTenArtists(state){
+      return state.dataStats.topTenArtists;
     }
   }
   

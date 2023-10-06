@@ -23,8 +23,9 @@
             >{{collection.name}}</collection-dropdown-item>
           </collection-dropdown-content>
         </collection-dropdown>
-        <button class="tooltipadd" id="add-record-btn" 
-        @click="addToLibrary" v-show="!isHome && !isCollection">
+        <div class="button">
+          <button class="tooltipadd" id="add-record-btn" 
+            @click="addToLibrary" v-show="!isHome && !isCollection">
           <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' 
           v-show="!recordAdded" />
           <span class="tooltiptextadd">Add this record to you library</span>
@@ -185,7 +186,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     
 }
 
@@ -217,11 +218,19 @@ export default {
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   color: #eff13f;
-
+  
 }
+
+.record-text a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #eff13f;
+}
+
+
 
 .record-artist {
   font-size: 1.1rem;
@@ -238,7 +247,7 @@ export default {
     border: none;
     cursor: pointer;
     font-size: 1.7em;
-    grid-area: button;
+   
 }
 
 .buttons {

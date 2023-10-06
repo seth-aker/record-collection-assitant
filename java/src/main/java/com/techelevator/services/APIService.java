@@ -9,7 +9,7 @@ public interface APIService {
 
     RecordDTO getRecordInformation(String recordId);
 
-    SearchResponse getAlbumSearch(String query, int perPage, String type, int page);
+    SearchResponse getAlbumSearch(String query, int perPage, String type, int page, String genre);
 
     SearchResponse getArtistSearch(String searchString);
 }
