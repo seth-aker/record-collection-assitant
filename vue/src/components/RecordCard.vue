@@ -239,7 +239,7 @@ export default {
     border: none;
     cursor: pointer;
     font-size: 1.7em;
-   
+    grid-area: button;
 }
 
 .buttons {

@@ -169,7 +169,7 @@ export default {
                        "form userInfo";
   border: #40c5a4f6 2px solid;
   margin-bottom: 25px;
-  background-color:#a7a7a7b6;
+  background-color:#dfdfdfbe;
   width: 95%;
 }
 

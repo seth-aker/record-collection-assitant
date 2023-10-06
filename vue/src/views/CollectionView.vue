@@ -1,9 +1,14 @@
 <template>
   <div class="record-collection">
-    <div class="container" v-for="record in records" :key="record.id" >
+    <h2>{{collectionDTO.name}}</h2>
+    <div class="collection-list">
+      <div class="container" v-for="record in records" :key="record.id" >
       <record-card :recordInfo="record" :isCollection="isCollection"
       :collectionId="collectionId"/>
     </div>
+
+    </div>
+    
     
   </div>
 </template>
@@ -57,18 +62,34 @@ export default {
   flex-wrap: wrap; /* Allow items to wrap to the next row if needed */
   justify-content: center; /* Center items horizontally within the container */
   gap: 20px; /* Add spacing between items */
-  margin-bottom: 300px;
-  margin-top: 50px;
-
+  width: 20%;
+  min-height: 420px;
 
 }
 .record-collection {
   display: flex;
+  flex-direction: column;
   justify-items: center;
   align-items: center;
-  
-  
-
+  flex-wrap: wrap;
 }
 
+.collection-list{
+  width: 85vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "KEEPT___", Arial, sans-serif;
+    font-size: 4rem;
+    -webkit-text-stroke: 1px #40c5a4;
+    color: #eff13f;
+    text-decoration: underline;
+}
 </style>
