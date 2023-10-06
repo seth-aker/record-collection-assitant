@@ -33,7 +33,7 @@ public class CollectionController {
     }
 
     @PreAuthorize("permitAll")
-    @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
+     @RequestMapping(path = "/collections/public", method = RequestMethod.GET)
     public List<Collection> viewPublicCollections() {
         return this.collectionDao.getPublicCollections();
     }

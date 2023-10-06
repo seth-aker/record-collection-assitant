@@ -38,7 +38,7 @@ CREATE TABLE records (
 	record_title varChar(200) NOT NULL,
 	record_artist varChar(50),
 	artist_genre varChar(50),
-	record_image varChar(200) NOT NULL,
+	record_image varChar(1000) NOT NULL,
 	CONSTRAINT PK_record_id PRIMARY KEY (record_id)
 );
 
