@@ -37,7 +37,7 @@
       </div>
       <div class="user-view-right">
         <record-list 
-        :records="$store.state.userLibrary" :isHome="this.isHome"/>
+        :records="$store.state.userLibrary" :isHome="isHome"/>
       </div>
     </div>
     <div class="custom-content">

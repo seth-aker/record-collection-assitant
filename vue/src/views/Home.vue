@@ -3,8 +3,6 @@
     <loading-icon v-show="isLoading" />
     <search-box />
     <slide-show :items="this.$store.state.trendingCollections" name="TRENDING COLLECTIONS" /> 
-   
-    
     <slide-show :items="this.$store.state.topTenRecords" name="TOP 25 RECORDS"></slide-show>
 
     <TopGenreSlideshow></TopGenreSlideshow>
@@ -32,10 +30,8 @@ export default {
   components: {
     SearchBox,
     TopGenreSlideshow,
-  
     LoadingIcon,
     SlideShow,
-   
   },
 
   created() {

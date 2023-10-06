@@ -5,7 +5,7 @@ const state = () => ({
     searchResultsRecords: [],
     resultsPerPage: 25,
     maxPages: 0,
-    genre: null
+    genre: ""
 })
 
 const getters = {
