@@ -39,7 +39,7 @@
          </tr>
          <tr>
            <th>Facts</th>
-           <td>| {{recordDTO.notes}}</td>
+           <td>| {{ notes }}</td>
          </tr>
        </table>
       </section>
@@ -102,7 +102,8 @@ export default {
           this.isLoading = false;
         })
         recordService.getUserLibrary().then(response => {
-          response.data.forEach(record => {
+          const records = response.data;
+          records.forEach(record => {
             if(record.id === recordId) {
               this.recordAdded = true;
             }
@@ -150,6 +151,16 @@ export default {
             this.recordDTO.tags.splice(tagIndex, 1);
           }
         })
+      }
+    },
+    computed: {
+      notes() {
+        const notesLength = this.recordDTO.notes.length;
+        if(notesLength < 251){
+          return this.recordDTO.notes;
+        } else {
+          return this.recordDTO.notes.substring(0, 251);
+        }
       }
     }
 }
