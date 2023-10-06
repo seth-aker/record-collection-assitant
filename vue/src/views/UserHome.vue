@@ -147,7 +147,7 @@ div .record-list {
 #add-collection-btn {
     display: flex;
     padding: 0, 0;
-    margin: 0;
+    margin: 0 0 0 15px;
     color: #eff13f;
     background-color: transparent;
     border: none;

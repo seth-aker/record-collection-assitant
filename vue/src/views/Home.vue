@@ -9,7 +9,7 @@
 
     <TopGenreSlideshow></TopGenreSlideshow>
 
-    <PopularArtist></PopularArtist>
+    
     <div class="custom-content">
       <div class="genres">
         
@@ -20,7 +20,6 @@
 
 <script>
 import SearchBox from "@/components/SearchBox.vue";
-import PopularArtist from '../components/PopularArtist.vue';
 import TopGenreSlideshow from '../components/TopGenreSlideshow.vue';
 import CollectionService from '../services/CollectionService';
 import RecordService from '../services/RecordService';
@@ -33,7 +32,7 @@ export default {
   components: {
     SearchBox,
     TopGenreSlideshow,
-    PopularArtist,
+  
     LoadingIcon,
     SlideShow,
    

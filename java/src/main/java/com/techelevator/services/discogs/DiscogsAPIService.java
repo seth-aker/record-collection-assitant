@@ -43,11 +43,11 @@ public class DiscogsAPIService implements APIService {
         }
 
     @Override
-    public SearchResponse getAlbumSearch(String query, int perPage, String type, int page) {
+    public SearchResponse getAlbumSearch(String query, int perPage, String type, int page, String genre) {
         SearchResponse response = new SearchResponse();
 
 
-        String searchUrl = API_BASE_URL + "/database/search?q=" + query + "&per_page=" + perPage + "&type=" + type + "&page=" + page;
+        String searchUrl = API_BASE_URL + "/database/search?q=" + query + "&per_page=" + perPage + "&type=" + type + "&page=" + page + "&genre=" + genre;
         HttpEntity<Void> entity = createDiscogsRequest();
         try {
             ResponseEntity<SearchResponse> responseEntity = restTemplate.exchange(searchUrl, HttpMethod.GET, entity, SearchResponse.class);
