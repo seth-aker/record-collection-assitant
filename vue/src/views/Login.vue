@@ -32,20 +32,15 @@
 <script>
 
 import authService from "../services/AuthService";
-<<<<<<< HEAD
 
-=======
-// import statsData from "../components/StatsData.vue"
->>>>>>> 9234baa7f5fa4e0095cc775caf59477f4aee22a2
+
 
 export default {
   name: "login",
   components: {
-<<<<<<< HEAD
+
    
-=======
-  //  statsData,
->>>>>>> 9234baa7f5fa4e0095cc775caf59477f4aee22a2
+
   },
   data() {
     return {
