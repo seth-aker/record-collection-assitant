@@ -16,7 +16,7 @@
         :recordAdded="recordAdded" :isCollection="isCollection"
         @toggle-isNotVis="receiveEmit"
         @away-toggle="awayToggle">
-          <template></template>
+         
           <collection-dropdown-content >
             <collection-dropdown-item v-for="collection in this.$store.state.userCollections" 
             :key="collection.id" :recordInfo="recordInfo" :collection="collection"
@@ -90,6 +90,7 @@ export default {
         
     },
     deleteRecord() {
+      if(confirm("Are you sure you want to delete this record from your library? \n\n(All custom information associated with this record will be lost)")) {
       recordService.deleteRecordFromUserLib(this.recordInfo.id)
         .then(rep => {
           if(rep.status === 200 || rep.status === 204){
@@ -100,6 +101,7 @@ export default {
         }).catch( () => {
             alert("Oops! Something went wrong and the record was not removed from your library")
           })
+      }
     },
     addToLibrary() {
       recordService.getRecordInfo(this.recordInfo.id)
@@ -151,21 +153,19 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding-top: 20px;
     margin: 10px;
     background-color: #40c5a4;
-    padding: 20px;
+    padding:5px;
     border-radius: 10px;
     border: solid #40c5a4 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);
+    background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgba(64,197,164,1) 100%);
 
     
 }
 
 .album-art {
-  width: 45%;
+  width: 95%;
 
   
 }
@@ -195,7 +195,7 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
 .record-info {
   display: flex;
   
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
   height: 100%;
    -webkit-text-stroke:0.5px #E00A86;
@@ -305,7 +305,6 @@ background: linear-gradient(180deg, rgba(239,241,63,0.7203256302521008) 37%, rgb
   color: #40c5a4;
   -webkit-text-stroke:1px #eff13f ;
   font-size: 1.1rem;
-  width: 400%;
   margin-top: 3px;
 }
 </style>

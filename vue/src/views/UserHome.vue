@@ -111,7 +111,7 @@ export default {
 div .record-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .user-heading-right {
