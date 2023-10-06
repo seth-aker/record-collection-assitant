@@ -32,12 +32,12 @@
 <script>
 
 import authService from "../services/AuthService";
-import statsData from "../components/StatsData.vue"
+
 
 export default {
   name: "login",
   components: {
-   statsData,
+   
   },
   data() {
     return {
