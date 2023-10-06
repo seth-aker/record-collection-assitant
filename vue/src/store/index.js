@@ -34,7 +34,10 @@ export default new Vuex.Store({
     dataStats:{},
     topTenRecords:{},
     topTenArtists:{},
- 
+    
+    collection:{
+      records: []
+    }
  
   },
 
@@ -132,7 +135,7 @@ export default new Vuex.Store({
     },
     topTenArtists(state){
       return state.dataStats.topTenArtists;
-    }
+    },
   }
   
   });

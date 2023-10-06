@@ -2,12 +2,12 @@
     <form @submit.prevent="createCollection">
         <div>
             <label for="name">Name:</label> <br>
-            <input v-model="collection.name" 
+            <input v-model="name" 
             type="text" name="name" id="name" 
             size="10" maxlength="50" required>
         </div>
         <div>
-            <input v-model="collection.isPublic" 
+            <input v-model="isPublic" 
             type="checkbox" id="checkbox"/>
             <label for="checkbox">Make Public</label>
         </div>
@@ -22,16 +22,18 @@ export default {
 name: 'add-collection-form',
 data() {
     return {
-        collection: {
-            name: '',
-            isPublic: false},
-
+        name: '',
+        isPublic: false,
+        collection: {}
     }
 },
 methods: {
 createCollection() {
-    
-    CollectionService.createNewCollection(this.collection)
+    const newCollection = {
+        name: this.name,
+        isPublic: this.isPublic
+    }
+    CollectionService.createNewCollection(newCollection, this.isPublic)
     .then(resp => {
     if(resp.status === 201){
         this.collection = resp.data;

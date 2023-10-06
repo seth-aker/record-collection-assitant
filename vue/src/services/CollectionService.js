@@ -26,8 +26,8 @@ export default {
         return axios.delete(`/collections/${collectionId}/${recordId}`)
     },
     
-    createNewCollection(collection) {
-        return axios.post('/collections/create',collection)
+    createNewCollection(collection, isPublic) {
+        return axios.post(`/collections/create/${isPublic}`, collection)
     },
 
     deleteCollection(collectionId) {

@@ -45,7 +45,7 @@ export default {
   position :relative;
   border: #eff13f solid 1px;
   border-radius: 5px;
-  right: 67%;
+  right: 90px;
   
   
   background-color: rgb(224, 10, 134); 

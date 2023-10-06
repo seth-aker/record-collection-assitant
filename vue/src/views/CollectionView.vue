@@ -41,14 +41,14 @@ export default {
     collectionService.getCollection(collectionId)
       .then(response => {
         this.collectionDTO = response.data
-        this.isLoading = false;
         this.recordIds = this.collectionDTO.recordIds;
         this.recordIds.forEach(recordId => {
           RecordService.getRecordInfo(recordId).then(resp => {
             resp.data.thumb = resp.data.images[0].uri;
             this.records.push(resp.data)
           })
-        })
+        }) 
+        this.isLoading = false;
       })
 
   }

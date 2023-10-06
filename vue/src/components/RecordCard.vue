@@ -121,11 +121,11 @@ export default {
         })
     },
     removeRecordFromCollection() {
-      CollectionService.removeRecordFromCollection(this.collectionId,this.recordInfo.id)
+      CollectionService.removeRecordFromCollection(this.collectionId, this.recordInfo.id)
         .then(resp => {
           if(resp.status === 200 || resp.status === 204){
+            this.$store.commit('REMOVE_RECORD_FROM_COLLECTION', resp.data);
 
-            this.$store.commit('REMOVE_RECORD_FROM_COLLECTION',resp.data);
           }
         }).catch( () => {
             alert("Oops! Something went wrong and the record was not removed from this colleciton")
