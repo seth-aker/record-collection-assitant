@@ -16,22 +16,22 @@
         :recordAdded="recordAdded" :isCollection="isCollection"
         @toggle-isNotVis="receiveEmit"
         @away-toggle="awayToggle">
-         
           <collection-dropdown-content >
             <collection-dropdown-item v-for="collection in this.$store.state.userCollections" 
             :key="collection.id" :recordInfo="recordInfo" :collection="collection"
             >{{collection.name}}</collection-dropdown-item>
           </collection-dropdown-content>
         </collection-dropdown>
+      </div>
         <div class="button">
           <button class="tooltipadd" id="add-record-btn" 
             @click="addToLibrary" v-show="!isHome && !isCollection">
-          <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' 
-          v-show="!recordAdded" />
-          <span class="tooltiptextadd">Add this record to you library</span>
-          <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
-          v-show="recordAdded" />
-        </button>
+            <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' 
+            v-show="!recordAdded" />
+            <span class="tooltiptextadd">Add this record to you library</span>
+            <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
+            v-show="recordAdded" />
+          </button>
         <div class="button" v-show="(isHome && !isCollection && !isSearch) && !isNotVis">
           <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
