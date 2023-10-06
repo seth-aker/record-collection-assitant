@@ -99,10 +99,17 @@ export default new Vuex.Store({
     SET_TOP_TEN_RECORDS(state, record){
       state.topTenRecords = record;
     },
-    SET_TOP_TEN_ARTISTS(state, topArtists){
+    UPDATE_COLLECTION(state, collection) {
+      const newUserCollections = state.userCollections.filter( coll => {
+        return coll.id != collection.id;
+      });
+      newUserCollections.push(collection);
+      state.userCollections = newUserCollections;
+    },
+
+    SET_TOP_TEN_ARTISTS(state, topArtists) {
       state.topTenArtists = topArtists;
     }
-
   },
   getters: {
     memberCount(state){
@@ -124,7 +131,6 @@ return state.dataStats.avgRecordPerCollection;
       return state.dataStats.collectionCount;
     }
     
-
   }
   
   });
