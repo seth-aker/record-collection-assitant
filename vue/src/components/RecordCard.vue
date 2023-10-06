@@ -31,14 +31,14 @@
           <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
           v-show="recordAdded" />
         </button>
-        <div class="button" v-show="(isHome || !isCollection) && !isNotVis">
+        <div class="button" v-show="(isHome && !isCollection && !isSearch) && !isNotVis">
           <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
             <span class="tooltiptextdelete">Remove this record from library</span>
           </button>
         </div>
-        <div class="button" v-show="(isHome || isCollection) && !isNotVis">
-          <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
+        <div class="button" v-show="(!isHome && isCollection && !isSearch) && !isNotVis">
+          <button class="tooltipdelete" id="delete-record-btn" @click="removeRecordFromCollection">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
             <span class="tooltiptextdelete">Remove record from collection</span>
           </button>
@@ -59,7 +59,7 @@ import CollectionService from '../services/CollectionService'
 
 export default {
   name: "recordInfo",
-  props: ['recordInfo','isHome','isCollection','collectionId'], 
+  props: ['recordInfo','isHome','isCollection','collectionId','isSearch','collectionDTO'], 
   components: { AlbumArt, CollectionDropdown, CollectionDropdownContent, CollectionDropdownItem },
   data() {
     return {
@@ -120,11 +120,20 @@ export default {
         })
     },
     removeRecordFromCollection() {
-      return
+      const collection = this.$store.getters.getCollectionById(this.collectionId);
+      const newCollection = collection.filter( record => {
+        record.id !== this.recordInfo.id;
+      });
+      this.$store.commit('REMOVE_RECORD_FROM_COLLECTION',newCollection);
     }
   },
   computed: {
-
+    userCollecitons(){
+      const collLib = this.$store.getters.userColleciton.filter( coll => {
+        return coll.id !== this.collectionId;
+      });
+      return collLib;
+    },
     recordTitle() {
       const artistTitle = this.recordInfo.title.split(' - ');
       if (artistTitle[1] === undefined) {
