@@ -69,7 +69,7 @@ export default {
 }
   .record-card {
     margin: 10px;
-    width: 20%;
+    width: 15%;
 
     
     

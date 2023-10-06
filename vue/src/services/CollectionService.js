@@ -21,6 +21,10 @@ export default {
     addRecordToUserCollection(collectionId, record){
         return axios.post(`/collections/${collectionId}`, record)
     },
+
+    removeRecordFromCollection(collectionId, recordId) {
+        return axios.delete(`/collections/${collectionId}/${recordId}`)
+    },
     
     createNewCollection(collection) {
         return axios.post('/collections/create',collection)
