@@ -4,7 +4,7 @@
     <div class="collection-list">
       <div class="container" v-for="record in records" :key="record.id" >
       <record-card :recordInfo="record" :isCollection="isCollection"
-      :collectionId="collectionId"/>
+      :collectionId="collectionId" :collection="collectionDTO"/>
     </div>
 
     </div>
