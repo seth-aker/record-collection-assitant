@@ -34,7 +34,10 @@ export default new Vuex.Store({
     dataStats:{},
     topTenRecords:{},
     topTenArtists:{},
- 
+    
+    collection:{
+      records: []
+    }
  
   },
 
@@ -99,7 +102,7 @@ export default new Vuex.Store({
     SET_TOP_TEN_RECORDS(state, record){
       state.topTenRecords = record;
     },
-    UPDATE_COLLECTION(state, collection) {
+    REMOVE_RECORD_FROM_COLLECTION(state, collection) {
       const newUserCollections = state.userCollections.filter( coll => {
         return coll.id != collection.id;
       });
@@ -122,15 +125,17 @@ export default new Vuex.Store({
       return state.dataStats.avgRecordPerCollection;
     },
     mostActiveUser(state){
-return state.dataStats.avgRecordPerCollection;
+    return state.dataStats.avgRecordPerCollection;
     },
     premiumCount(state){
       return state.dataStats.premiumCount;
     },
     collectionCount(state){
       return state.dataStats.collectionCount;
-    }
-    
+    },
+    topTenArtists(state){
+      return state.dataStats.topTenArtists;
+    },
   }
   
   });

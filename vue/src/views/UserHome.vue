@@ -37,7 +37,7 @@
       </div>
       <div class="user-view-right">
         <record-list 
-        :records="$store.state.userLibrary" :isHome="this.isHome"/>
+        :records="$store.state.userLibrary" :isHome="isHome"/>
       </div>
     </div>
     <div class="custom-content">
@@ -147,7 +147,7 @@ div .record-list {
 #add-collection-btn {
     display: flex;
     padding: 0, 0;
-    margin: 0;
+    margin: 0 0 0 15px;
     color: #eff13f;
     background-color: transparent;
     border: none;

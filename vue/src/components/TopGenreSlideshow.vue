@@ -13,9 +13,9 @@
       <!-- Container for the slides -->
       <div class="slides" :style="`transform: translateX(-${currentIndex * 20}%)`">
         <!-- Iterate through items to display each colored square with text -->
-        <div class="slide" v-for="(item, index) in items" :key="index">
+        <div class="slide" v-for="(item, index) in items" :key="index" >
           <!-- Display the colored square with text -->
-          <div class="colored-square">
+          <div class="colored-square" @click="searchByGenre(item.title)" >
             <div class="square-text">{{ item.title }}</div>
           </div>
         </div>
@@ -34,21 +34,16 @@ export default {
       // An array of objects representing items with titles
       items: [
         { title: 'ROCK' },
-        { title: 'ALTERNATIVE' },
-        { title: 'R&B' },
-        { title: 'METAL' },
+        
         { title: 'JAZZ' },
-        { title: 'RAP' },
         { title: 'CLASSICAL' },
         { title: 'BLUES' },
         { title: 'POP' },
         { title: 'COUNTRY' },
         { title: 'CLASSIC ROCK' },
         { title: 'WORLD' },
-        { title: 'INDE' },
-        
-        
-  
+        { title: 'INDIE' },
+        { title: 'ALTERNATIVE' },
         // Add more genre titles as needed
       ],
       // Current index to keep track of which genres are displayed
@@ -80,6 +75,20 @@ export default {
         this.currentIndex = 0;
       }
     },
+    searchByGenre(genre) {
+      this.$store.commit('SET_GENRE_SEARCH', genre)
+      this.$router.push({name: 'search-page', query: {q: this.$store.state.sr.search,
+                                                      type: this.$store.state.sr.searchType,
+                                                      per_page: this.$store.state.sr.resultsPerPage,
+                                                      genre: this.$store.state.sr.genre}
+                        }).catch(error => {
+                            if (error.name !== 'NavigationDuplicated' &&
+                                !error.message.includes('Avoided redundant navigation to current location')
+                                ) {
+                                  console.log(error)
+                                }
+                            });
+    }
   },
 };
 </script>
@@ -157,6 +166,7 @@ h2 {
   padding: 20px; /* Add padding for spacing */
   text-align: center; /* Center the text horizontally */
   opacity: 90%;
+  
 }
 
 .green-box h2 {
@@ -170,7 +180,7 @@ h2 {
 }
 .colored-square {
   /* Style for the colored square with text */
-  
+  cursor: pointer;
   box-sizing: border-box;
   text-align: center;
 

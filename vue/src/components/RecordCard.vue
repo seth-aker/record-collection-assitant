@@ -16,29 +16,30 @@
         :recordAdded="recordAdded" :isCollection="isCollection"
         @toggle-isNotVis="receiveEmit"
         @away-toggle="awayToggle">
-         
           <collection-dropdown-content >
             <collection-dropdown-item v-for="collection in this.$store.state.userCollections" 
             :key="collection.id" :recordInfo="recordInfo" :collection="collection"
             >{{collection.name}}</collection-dropdown-item>
           </collection-dropdown-content>
         </collection-dropdown>
-        <button class="tooltipadd" id="add-record-btn" 
-        @click="addToLibrary" v-show="!isHome && !isCollection">
-          <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' 
-          v-show="!recordAdded" />
-          <span class="tooltiptextadd">Add this record to you library</span>
-          <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
-          v-show="recordAdded" />
-        </button>
-        <div class="button" v-show="(isHome || !isCollection) && !isNotVis">
+      </div>
+        <div class="button">
+          <button class="tooltipadd" id="add-record-btn" 
+            @click="addToLibrary" v-show="!isHome && !isCollection">
+            <font-awesome-icon class="add-record-icon" icon='fa-regular fa-plus-square' 
+            v-show="!recordAdded" />
+            <span class="tooltiptextadd">Add this record to you library</span>
+            <font-awesome-icon class="record-added-icon" icon='fa-regular fa-circle-check' 
+            v-show="recordAdded" />
+          </button>
+        <div class="button" v-show="(isHome && !isCollection && !isSearch) && !isNotVis">
           <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
             <span class="tooltiptextdelete">Remove this record from library</span>
           </button>
         </div>
-        <div class="button" v-show="(isHome || isCollection) && !isNotVis">
-          <button class="tooltipdelete" id="delete-record-btn" @click="deleteRecord">
+        <div class="button" v-show="(!isHome && isCollection && !isSearch) && !isNotVis">
+          <button class="tooltipdelete" id="delete-record-btn" @click="removeRecordFromCollection">
             <font-awesome-icon class="delete-record-icon" icon="fa-regular fa-square-minus" />
             <span class="tooltiptextdelete">Remove record from collection</span>
           </button>
@@ -59,7 +60,7 @@ import CollectionService from '../services/CollectionService'
 
 export default {
   name: "recordInfo",
-  props: ['recordInfo','isHome','isCollection','collectionId'], 
+  props: ['recordInfo','isHome','isCollection','collectionId','isSearch','collectionDTO'], 
   components: { AlbumArt, CollectionDropdown, CollectionDropdownContent, CollectionDropdownItem },
   data() {
     return {
@@ -120,7 +121,16 @@ export default {
         })
     },
     removeRecordFromCollection() {
-      return
+      CollectionService.removeRecordFromCollection(this.collectionId, this.recordInfo.id)
+        .then(resp => {
+          if(resp.status === 200 || resp.status === 204){
+            this.$store.commit('REMOVE_RECORD_FROM_COLLECTION', resp.data);
+
+          }
+        }).catch( () => {
+            alert("Oops! Something went wrong and the record was not removed from this colleciton")
+          })
+      
     }
   },
   computed: {
@@ -176,7 +186,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     
 }
 
@@ -208,11 +218,19 @@ export default {
 .record-text {
   display: flex;
   flex-direction: column;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-family: 'KEEPT___', Verdana, Geneva, Tahoma, sans-serif;
   color: #eff13f;
-
+  
 }
+
+.record-text a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #eff13f;
+}
+
+
 
 .record-artist {
   font-size: 1.1rem;

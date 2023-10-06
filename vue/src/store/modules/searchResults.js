@@ -4,7 +4,8 @@ const state = () => ({
     searchType: 'release',
     searchResultsRecords: [],
     resultsPerPage: 25,
-    maxPages: 0
+    maxPages: 0,
+    genre: ""
 })
 
 const getters = {
@@ -12,6 +13,9 @@ const getters = {
         let q = `q=${state.search}&type=${state.searchType}&per_page=${state.resultsPerPage}`;
         if(state.curPage != 1) {
             q += `&page=${state.curPage}`;
+        }
+        if(state.genre != null) {
+            q += `&genre=${state.genre}`
         }
         return q;
     },
@@ -38,6 +42,9 @@ const mutations = {
     },
     SET_MAX_PAGES(state, maxPages) {
         state.maxPages = maxPages;
+    },
+    SET_GENRE_SEARCH(state, genre) {
+        state.genre = genre;
     }
 }
 

@@ -171,11 +171,13 @@ h2 {
   font-size: 60px;
   color: #eff13f;
   margin: 0; 
-  color: #eff13f;
   -webkit-text-stroke:0.8px #E00A86;
 }
 
-
+.album-title-text {
+  font-family: 'KEEPT___', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: #eff13f;
+}
 
 
 </style>

@@ -9,7 +9,9 @@
     
     <!-- <collection-list /> -->
     <div class="record-list" >
-     <record-card class="record-card" v-for="record in $store.state.sr.searchResultsRecords" :key="record.id" :recordInfo="record" :isHome="false" />
+     <record-card class="record-card" 
+     v-for="record in $store.state.sr.searchResultsRecords" 
+     :key="record.id" :recordInfo="record" :isSearch="isSearch" />
     </div>
 
     <item-pager :curPage="$store.state.sr.curPage" :maxPages="$store.state.sr.maxPages" @requestSearch='search'></item-pager>
@@ -31,7 +33,10 @@ export default {
   components: {  RecordCard, SearchBox, LoadingIcon , SearchFilters, ItemPager},
   data() {
     return {
-      isLoading: true
+      isLoading: true,
+      isSearch: true,
+      isHome: false,
+      isCollection: false
     }
   },
   created() {
@@ -69,7 +74,7 @@ export default {
 }
   .record-card {
     margin: 10px;
-    width: 20%;
+    width: 15%;
 
     
     
