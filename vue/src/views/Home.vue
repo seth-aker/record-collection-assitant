@@ -3,7 +3,7 @@
     <loading-icon v-show="isLoading" />
     <search-box />
     <slide-show :items="this.$store.state.trendingCollections" name="TRENDING COLLECTIONS" /> 
-   
+   <data-stats/>
 
     <slide-show :items="this.$store.state.topTenRecords" name="TOP 25 RECORDS"></slide-show>
 
@@ -36,7 +36,7 @@ export default {
     PopularArtist,
     LoadingIcon,
     SlideShow,
-   
+    dataStats,
   },
 
   created() {
