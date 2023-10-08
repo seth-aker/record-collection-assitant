@@ -47,7 +47,7 @@
 
 <h1 @click="goToHomePage">
       <font-awesome-icon class="record-icon" icon="fa-solid fa-record-vinyl" />
-      <span class="gradient-text2">SLEEVES</span>
+      <span class="gradient-text2">SLEEVS</span>
     </h1>
     
 

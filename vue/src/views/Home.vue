@@ -72,6 +72,9 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  display: flex;
+}
 
 .slideshow {
 margin-top: 100px;
