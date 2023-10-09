@@ -1,5 +1,3 @@
 # Final Capstone
 ​
-This directory contains all of the starter projects for the final capstone.
-​
-Each project contains instructions that provides information about the starting code and explains how to get started with the final capstone project.
+Final Capstone project to complete the full-stack Java development bootcamp through Tech Elevator. Collaborated with a team of bootcamp students to implement a full-stack, single page web application designed with Java, Vue.js, and a PostgreSQL database. The app consumes the Discogs API to allow for searching records and displaying album art and information. Users can add records to their collection, write custom notes and tags, post their collections publicly, search for records to add, and view other users’ collections.
