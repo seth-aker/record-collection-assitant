@@ -4,6 +4,8 @@ import com.techelevator.dao.CollectionDao;
 import com.techelevator.dao.RecordDao;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.*;
+import com.techelevator.model.Record;
+
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
